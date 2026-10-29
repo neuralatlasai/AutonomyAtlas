@@ -69,6 +69,43 @@ def uncomment(s: str) -> str:
     return "".join(out)
 
 
+def extract_author(layout_source: str) -> str:
+    """Read one explicit PDF-author literal; never infer authorship from prose."""
+    source = uncomment(layout_source)
+    authors: list[str] = []
+    for match in re.finditer(r"(?<!\\)\\hypersetup(?![A-Za-z@])\s*\{", source):
+        options, _ = group(source, match.end() - 1)
+        # Commas inside braced values do not introduce another PDF option.
+        entries: list[str] = []
+        start = pos = 0
+        while pos < len(options):
+            if options[pos] == "\\":
+                pos += 2
+            elif options[pos] == "{":
+                _, pos = group(options, pos)
+            elif options[pos] == ",":
+                entries.append(options[start:pos]); start = pos = pos + 1
+            else:
+                pos += 1
+        entries.append(options[start:])
+        for entry in entries:
+            if not re.match(r"^\s*pdfauthor\b", entry):
+                continue
+            assignment = re.match(r"^\s*pdfauthor\s*=\s*", entry)
+            if assignment is None:
+                raise ValueError("PDF author must be an explicit braced literal")
+            author, end = group(entry, assignment.end())
+            if entry[end:].strip() or any(c in author for c in "\\{}"):
+                raise ValueError("PDF author must be an explicit braced literal")
+            author = re.sub(r"\s+", " ", author).strip()
+            if not author:
+                raise ValueError("Accepted PDF author literal is empty")
+            authors.append(author)
+    if len(authors) != 1:
+        raise ValueError("Expected exactly one accepted PDF author literal")
+    return authors[0]
+
+
 def expand(path: Path, stack: tuple[Path, ...] = ()) -> tuple[str, list[str]]:
     path = path.resolve()
     if path in stack or not path.is_relative_to(ROOT):
@@ -342,8 +379,10 @@ def main() -> None:
     aux_text = (ROOT/args.aux).read_text(encoding="utf-8")
     bbl_text = (ROOT/args.bbl).read_text(encoding="utf-8")
     aux, bibnums = parse_aux(aux_text)
+    layout = read(ROOT / "config/book_layout.tex")
+    author = extract_author(layout)
     mathmacros = read(ROOT / "config/notation.tex") + "\n" + "\n".join(
-        x for x in read(ROOT / "config/book_layout.tex").splitlines()
+        x for x in layout.splitlines()
         if x.startswith("\\newcommand") and x.count("{")==x.count("}") and "\\@" not in x)
     sources: list[tuple[dict[str,Any],str,list[str]]] = []
     labels: dict[str,Any] = {}
@@ -450,8 +489,8 @@ def main() -> None:
     for key,value in expected.items():
         if metrics[key]!=value:raise ValueError(f"Accepted corpus changed: {key} {metrics[key]} != {value}")
     converter_sha=digest(Path(__file__).read_bytes())
-    data={"metadata":{"schemaVersion":"1.0.0","title":plan["title"],"subtitle":plan["subtitle"],"literatureCutoff":plan["literature_cutoff"],"latestSourceRetrieval":plan["literature_cutoff"],"editionType":"Technical Monograph","sourceDigest":source_digest,"acceptedPdfSha256":validation["pdf_sha256"],"converter":"bounded LaTeX/Pandoc content adapter","converterSha256":converter_sha,"pandocVersion":version,"metrics":metrics,"frontMatterHtml":front_html},"chapters":chapters,"references":references,"labels":labels}
-    manifest={"schemaVersion":"1.0.0","sourceDigest":source_digest,"files":file_records,"chapters":chapter_metrics,"assets":asset_manifest,"acceptedAux":{"path":args.aux,"sha256":digest((ROOT/args.aux).read_bytes()),"labels":aux,"citationNumbers":bibnums},"acceptedBbl":{"path":args.bbl,"sha256":digest((ROOT/args.bbl).read_bytes()),"entryKeys":[r["key"] for r in references]},"metrics":metrics,"diagnostics":{"converterSha256":converter_sha,"unknownRawTex":[],"ignoredPrintCommands":dict(IGNORED),"tableNormalization":"L wrapping columns become HTML left columns; seven exact repeated continuation headers removed","mathNormalization":"Original 217 display environments preserved in sourceTex; explicit accepted equation/align-row tags; labels become stable DOM anchors","sourceEdits":False}}
+    data={"metadata":{"schemaVersion":"1.0.0","title":plan["title"],"subtitle":plan["subtitle"],"author":author,"literatureCutoff":plan["literature_cutoff"],"latestSourceRetrieval":plan["literature_cutoff"],"editionType":"Technical Monograph","sourceDigest":source_digest,"acceptedPdfSha256":validation["pdf_sha256"],"converter":"bounded LaTeX/Pandoc content adapter","converterSha256":converter_sha,"pandocVersion":version,"metrics":metrics,"frontMatterHtml":front_html},"chapters":chapters,"references":references,"labels":labels}
+    manifest={"schemaVersion":"1.0.0","sourceDigest":source_digest,"files":file_records,"authorBinding":{"path":"config/book_layout.tex","sha256":FILES["config/book_layout.tex"],"command":"hypersetup","key":"pdfauthor","kind":"explicit braced literal","value":author},"chapters":chapter_metrics,"assets":asset_manifest,"acceptedAux":{"path":args.aux,"sha256":digest((ROOT/args.aux).read_bytes()),"labels":aux,"citationNumbers":bibnums},"acceptedBbl":{"path":args.bbl,"sha256":digest((ROOT/args.bbl).read_bytes()),"entryKeys":[r["key"] for r in references]},"metrics":metrics,"diagnostics":{"converterSha256":converter_sha,"unknownRawTex":[],"ignoredPrintCommands":dict(IGNORED),"tableNormalization":"L wrapping columns become HTML left columns; seven exact repeated continuation headers removed","mathNormalization":"Original 217 display environments preserved in sourceTex; explicit accepted equation/align-row tags; labels become stable DOM anchors","sourceEdits":False}}
     dest=ROOT/"website/src/generated/book.json";dest.parent.mkdir(parents=True,exist_ok=True)
     serialized=json.dumps(data,ensure_ascii=False,indent=2)+"\n"
     manifest["generatedBookSha256"]=digest(serialized.encode())

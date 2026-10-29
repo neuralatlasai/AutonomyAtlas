@@ -71,6 +71,7 @@ export interface Book {
     schemaVersion: '1.0.0';
     title: string;
     subtitle: string;
+    author: string;
     literatureCutoff: string;
     latestSourceRetrieval: string;
     editionType: string;

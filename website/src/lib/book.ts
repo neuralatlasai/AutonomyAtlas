@@ -4,7 +4,11 @@ import { renderMathHtml } from '../../tools/render-math.mjs';
 
 export const book = source as Book;
 export const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-export const href = (path = '') => base + path.replace(/^\//, '');
+export const href = (path = '') => {
+  const target=path.replace(/^\//,'');
+  const url=base+target;
+  return target.startsWith('downloads/') ? `${url}?v=${book.metadata.acceptedPdfSha256.slice(0,12)}` : url;
+};
 export const chapterHref = (slug: string) => href(`chapters/${slug}/`);
 export const renderContent = (html: string) => renderMathHtml(html)
   .replaceAll('__BOOK_BASE__', base)

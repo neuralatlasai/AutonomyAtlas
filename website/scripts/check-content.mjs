@@ -19,6 +19,76 @@ const norm = text => text.normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase()
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const count = (text, expression) => [...text.matchAll(expression)].length;
 const numericLiterals = text => [...text.matchAll(/[+\-\u2212]?\d+(?:,\d{3})*(?:\.\d+)?(?:[eE][+\-]?\d+)?%?/g)].map(m => m[0]);
+const confirmedAuthor = 'Hemanth Kandimalla';
+
+// Read the effective Info dictionary through the final classic cross-reference
+// table, rather than accepting an arbitrary /Author string elsewhere in a PDF.
+// This is deliberately bounded to the accepted pdfTeX output format; it fails
+// closed on unsupported PDF layouts and is not a general-purpose PDF validator.
+function pdfAuthorInfo(bytes) {
+  const text = bytes.toString('latin1');
+  const final = /startxref\s+(\d+)\s+%%EOF\s*$/.exec(text);
+  if (!final) throw new Error('Missing final PDF cross-reference pointer');
+  const xrefOffset = Number(final[1]);
+  if (text.slice(xrefOffset, xrefOffset + 4) !== 'xref') throw new Error('Unsupported non-classic PDF cross-reference table');
+  const trailerStart = text.indexOf('trailer', xrefOffset);
+  const trailer = text.slice(trailerStart, final.index);
+  const info = /\/Info\s+(\d+)\s+(\d+)\s+R\b/.exec(trailer);
+  if (!info || /\/Prev\b/.test(trailer)) throw new Error('Missing or unsupported incremental PDF Info reference');
+  const objectNumber = Number(info[1]), generation = Number(info[2]);
+  const lines = text.slice(xrefOffset + 4, trailerStart).trim().split(/\r?\n/);
+  let objectOffset;
+  for (let i = 0; i < lines.length;) {
+    const range = /^(\d+)\s+(\d+)$/.exec(lines[i++].trim());
+    if (!range) throw new Error('Unsupported PDF cross-reference subsection');
+    const first = Number(range[1]), length = Number(range[2]);
+    if (objectNumber >= first && objectNumber < first + length) {
+      const entry = /^(\d{10})\s+(\d{5})\s+([fn])\s*$/.exec(lines[i + objectNumber - first]);
+      if (!entry || entry[3] !== 'n' || Number(entry[2]) !== generation) throw new Error('Invalid PDF Info cross-reference entry');
+      objectOffset = Number(entry[1]);
+    }
+    i += length;
+  }
+  if (objectOffset === undefined) throw new Error('Unresolved PDF Info object');
+  const object = text.slice(objectOffset, text.indexOf('endobj', objectOffset));
+  if (!object.startsWith(`${objectNumber} ${generation} obj`)) throw new Error('PDF Info object offset does not match its reference');
+  const authorToken = /\/Author\b\s*/.exec(object);
+  if (!authorToken) throw new Error('Missing PDF Author metadata');
+  let at = authorToken.index + authorToken[0].length, raw;
+  if (object[at] === '<' && object[at + 1] !== '<') {
+    const end = object.indexOf('>', at + 1), hex = object.slice(at + 1, end).replace(/\s+/g, '');
+    if (end < 0 || !/^(?:[\da-f]{2})*$/i.test(hex)) throw new Error('Malformed PDF Author hexadecimal string');
+    raw = Buffer.from(hex, 'hex');
+  } else if (object[at] === '(') {
+    const output = []; let depth = 1; at++;
+    while (at < object.length && depth) {
+      let code = object.charCodeAt(at++);
+      if (code === 92) {
+        const escaped = object[at++];
+        if (escaped === '\r' || escaped === '\n') { if (escaped === '\r' && object[at] === '\n') at++; continue; }
+        if (/[0-7]/.test(escaped ?? '')) {
+          let octal = escaped;
+          while (octal.length < 3 && /[0-7]/.test(object[at] ?? '')) octal += object[at++];
+          code = parseInt(octal, 8);
+        } else code = ({ n: 10, r: 13, t: 9, b: 8, f: 12 })[escaped] ?? escaped?.charCodeAt(0);
+      } else if (code === 40) depth++;
+      else if (code === 41 && --depth === 0) break;
+      output.push(code);
+    }
+    if (depth) throw new Error('Unclosed PDF Author literal string');
+    raw = Buffer.from(output);
+  } else throw new Error('Unsupported PDF Author value');
+  let author;
+  if (raw[0] === 0xfe && raw[1] === 0xff) {
+    if (raw.length % 2) throw new Error('Malformed PDF Author UTF-16 string');
+    author = Buffer.from(raw.subarray(2)).swap16().toString('utf16le');
+  } else if (raw[0] === 0xff && raw[1] === 0xfe) author = raw.subarray(2).toString('utf16le');
+  else {
+    if ([...raw].some(b => b > 127)) throw new Error('Unsupported non-ASCII PDFDocEncoding Author string');
+    author = raw.toString('ascii');
+  }
+  return { author, infoObject: `${objectNumber} ${generation} R`, objectOffset };
+}
 
 function group(text, pos) {
   while (/\s/.test(text[pos] ?? '') && pos < text.length) pos++;
@@ -151,7 +221,12 @@ assert(converterHash === book.metadata.converterSha256 && converterHash === mani
 assert(book.metadata.title === plan.title && book.metadata.subtitle === plan.subtitle, 'Title/subtitle differs from accepted plan');
 assert(book.metadata.literatureCutoff === plan.literature_cutoff, 'Literature cutoff differs from accepted plan');
 assert(book.metadata.acceptedPdfSha256 === validation.pdf_sha256, 'Web data belongs to another accepted PDF');
-assert(hash(await readFile(resolve(root, 'output/pdf/agentic_state_monograph.pdf'))) === validation.pdf_sha256, 'Canonical PDF bytes do not match the accepted validation');
+const acceptedPdf = await readFile(resolve(root, 'output/pdf/agentic_state_monograph.pdf'));
+assert(hash(acceptedPdf) === validation.pdf_sha256, 'Canonical PDF bytes do not match the accepted validation');
+let pdfAuthor = null;
+try { pdfAuthor = pdfAuthorInfo(acceptedPdf); }
+catch (error) { failures.push(`Cannot independently read accepted PDF author: ${error.message}`); }
+assert(pdfAuthor?.author === confirmedAuthor, 'Accepted PDF Author metadata differs from the confirmed human author');
 assert(validation.validation_status === 'complete', 'Accepted PDF audit is incomplete');
 assert(same(book.metadata.metrics, manifest.metrics), 'JSON/manifest counters disagree');
 for (const [key, n] of Object.entries(expected)) assert(book.metadata.metrics[key] === n, `Accepted ${key}: expected ${n}, got ${book.metadata.metrics[key]}`);
@@ -164,7 +239,22 @@ for (const file of manifest.files) {
   catch { failures.push(`Missing accepted source input ${file.path}`); }
 }
 assert(!manifest.diagnostics.unknownRawTex.length && !manifest.diagnostics.sourceEdits, 'Converter diagnostics contain unsupported raw TeX or source edits');
+const authorSourcePath = 'config/book_layout.tex';
+const authorSourceBytes = await readFile(resolve(root, authorSourcePath));
+const authorDeclarations = [];
+for (const settings of commandArguments(uncomment(authorSourceBytes.toString('utf8')), 'hypersetup')) {
+  for (const match of settings.matchAll(/\bpdfauthor\s*=\s*\{/g)) authorDeclarations.push(group(settings, match.index + match[0].length - 1)[0]);
+}
+assert(authorDeclarations.length === 1 && authorDeclarations[0] === confirmedAuthor, 'Accepted layout must declare the single confirmed literal PDF author');
+assert(book.metadata.author === confirmedAuthor && book.metadata.author === authorDeclarations[0], 'Web author differs from the confirmed accepted source author');
+assert(manifest.authorBinding?.path === authorSourcePath && manifest.authorBinding?.sha256 === hash(authorSourceBytes)
+  && manifest.authorBinding?.command === 'hypersetup' && manifest.authorBinding?.key === 'pdfauthor'
+  && manifest.authorBinding?.kind === 'explicit braced literal' && manifest.authorBinding?.value === confirmedAuthor,
+  'Generated author binding does not identify the accepted literal and its source hash');
+assert(manifest.files.some(f => f.path === authorSourcePath && f.sha256 === hash(authorSourceBytes)), 'Accepted author source is not hash-bound in the input manifest');
 const frontSourceRaw = (await read('book/frontmatter.tex')).replace(/\r\n?/g, '\n');
+const titlePage = uncomment(frontSourceRaw.slice(0, frontSourceRaw.indexOf('\\end{titlepage}')));
+assert(titlePage.split(confirmedAuthor).length === 2, 'Accepted title page must display the confirmed author once');
 const frontSource = uncomment(frontSourceRaw.slice(frontSourceRaw.indexOf('\\chapter*{Abstract}')));
 const frontTree = htmlTree(book.metadata.frontMatterHtml), frontNodes = elements(frontTree);
 const frontProse = norm(textOf(frontTree, true));
@@ -308,8 +398,19 @@ async function filesUnder(path) {
 let publication = null;
 if (process.argv.includes('--dist')) {
   const dist = resolve(site, 'dist'), files = await filesUnder(dist), byPath = new Map(files.map(f => [relative(dist, f).split(sep).join('/'), f]));
+  // Unmodified ET Book files from edwardtufte/et-book revision
+  // 24d3a3bbfc880095d3df2b9e9d60d05819138e89. Admit exact files,
+  // rather than opening the publication allowlist to an entire font directory.
+  const pinnedPublicAssets = new Map([
+    ['fonts/et-book/et-book-roman-line-figures.woff', { bytes: 44016, sha256: 'be0f2c061cd8c57b38b5edd8c03dac72ca7d87fb5c3f7f5c32ed72dede39a601' }],
+    ['fonts/et-book/et-book-italic.woff', { bytes: 43780, sha256: 'e5bae09f1cb8391fcd35b903fefd306d5294456872af87674b376fa897ded416' }],
+    ['fonts/et-book/et-book-bold-line-figures.woff', { bytes: 45364, sha256: 'ea6efd96090dc2d0be0a826d1f2b79b07ca9af21f6483f2f96694b761d669ddc' }],
+    ['licenses/et-book.txt', { bytes: 1089, sha256: '5ce4d24bc1aeed06dd19a43588702f434392ea79df28111f3149bb809504fa26' }],
+  ]);
   const base = '/AutonomyAtlas/';
   const targets = new Map();
+  let htmlAuthorMetaChecked = 0;
+  let htmlBookAuthorSchemaChecked = 0;
   for (const [path, full] of byPath) if (path.endsWith('.html')) {
     const html = await readFile(full, 'utf8'), tree = htmlTree(html), nodes = elements(tree);
     targets.set(path, { tree, nodes });
@@ -318,9 +419,30 @@ if (process.argv.includes('--dist')) {
     assert(nodes.filter(n => n.attrs['data-tex']).every(n => n.attrs['data-rendered'] === 'katex' && elements(n).some(e => e.tag === 'math')), `Unrendered or inaccessible mathematics in published page ${path}`);
     assert(!html.includes('__BOOK_BASE__'), `Unresolved site-base token ${path}`);
     assert(!/(?:C:\\Users\\|file:\/\/)/i.test(html), `Private/local publication path ${path}`);
+    const authorMeta = nodes.filter(n => n.tag === 'meta' && n.attrs.name?.toLowerCase() === 'author');
+    assert(authorMeta.length === 1 && authorMeta[0].attrs.content === confirmedAuthor, `Missing/incorrect human-author metadata ${path}`);
+    if (authorMeta.length === 1 && authorMeta[0].attrs.content === confirmedAuthor) htmlAuthorMetaChecked++;
+    const schemas = [];
+    for (const node of nodes.filter(n => n.tag === 'script' && n.attrs.type === 'application/ld+json')) {
+      try {
+        const parsed = JSON.parse(textOf(node));
+        schemas.push(...(Array.isArray(parsed) ? parsed : [parsed]));
+      } catch { failures.push(`Malformed publication JSON-LD ${path}`); }
+    }
+    const bookSchemas = schemas.flatMap(s => s['@graph'] ?? [s]).filter(s => s['@type'] === 'Book' || (Array.isArray(s['@type']) && s['@type'].includes('Book')));
+    const validBookAuthor = bookSchemas.length === 1 && bookSchemas[0].name === book.metadata.title
+      && bookSchemas[0].author?.['@type'] === 'Person' && bookSchemas[0].author.name === confirmedAuthor;
+    assert(validBookAuthor, `Missing/incorrect human-author Book schema ${path}`);
+    if (validBookAuthor) htmlBookAuthorSchemaChecked++;
   }
   for (const chapter of book.chapters) assert(targets.has(`chapters/${chapter.slug}/index.html`), `Missing built chapter ${chapter.id}`);
   assert(targets.has('index.html') && targets.has('references/index.html'), 'Missing built book or references index');
+  for (const path of ['index.html', 'about/index.html']) {
+    const page = targets.get(path);
+    const credits = page?.nodes.filter(n => n.attrs['data-author-credit'] !== undefined) ?? [];
+    assert(credits.length === 1 && textOf(credits[0]).replace(/\s+/g, ' ').trim() === confirmedAuthor
+      && !Object.hasOwn(credits[0].attrs, 'hidden') && credits[0].attrs['aria-hidden'] !== 'true', `Missing/incorrect visible author byline ${path}`);
+  }
   for (const chapter of book.chapters) {
     const published = targets.get(`chapters/${chapter.slug}/index.html`);
     if (!published) continue;
@@ -393,15 +515,23 @@ if (process.argv.includes('--dist')) {
   }
   const allowedFigures = new Set(manifest.assets.map(a => a.source.split('/').at(-1)));
   const allowedHtml = new Set(['index.html', 'book/index.html', 'about/index.html', 'licenses/index.html', 'references/index.html', 'figures/index.html', 'reading-paths/index.html', '404.html', ...book.chapters.map(c => `chapters/${c.slug}/index.html`)]);
+  const allowedLicenses = new Set(['inter', 'source-serif-4', 'phosphor', 'katex', 'astro', 'preact', 'minisearch', 'et-book'].map(name => `licenses/${name}.txt`));
   const unexpected = [];
   for (const [path] of byPath) {
     const allowed = allowedHtml.has(path) || path.startsWith('_astro/') || path === '.nojekyll' || path === 'robots.txt' || path === 'search.json' || /^sitemap[^/]*\.xml$/.test(path)
-      || /^brand\/[^/]+\.(?:png|webp|svg)$/.test(path) || /^licenses\/[^/]+\.(?:txt|md|html)$/.test(path)
+      || /^brand\/[^/]+\.(?:png|webp|svg)$/.test(path) || allowedLicenses.has(path) || pinnedPublicAssets.has(path)
       || ['downloads/agentic-state.pdf', 'downloads/agentic-state-source.zip', 'downloads/validation.json', 'downloads/source-crosswalk.csv'].includes(path)
       || (path.startsWith('figures/') && allowedFigures.has(path.slice(8)));
     assert(allowed, `Unexpected published file ${path}`);
     if (!allowed) unexpected.push(path);
     assert(!/(?:^|\/)(?:context|internal|tmp|build|node_modules)(?:\/|$)|\.(?:tex|bib|aux|bbl|blg|py|ts|mjs|map)$/i.test(path), `Private/source/cache file published ${path}`);
+  }
+  for (const [path, expectedAsset] of pinnedPublicAssets) {
+    assert(byPath.has(path), `Missing pinned public asset ${path}`);
+    if (byPath.has(path)) {
+      const bytes = await readFile(byPath.get(path));
+      assert(bytes.length === expectedAsset.bytes && hash(bytes) === expectedAsset.sha256, `Modified pinned public asset ${path}`);
+    }
   }
   if (byPath.has('search.json')) {
     const records = JSON.parse(await readFile(byPath.get('search.json'), 'utf8'));
@@ -428,10 +558,12 @@ if (process.argv.includes('--dist')) {
   for (const [source, target] of [['output/pdf/agentic_state_monograph.pdf', 'downloads/agentic-state.pdf'], ['output/source/agentic_state_source.zip', 'downloads/agentic-state-source.zip'], ['book/validation_summary.json', 'downloads/validation.json'], ['book/current_source_review_20261029.csv', 'downloads/source-crosswalk.csv']]) {
     assert(byPath.has(target) && hash(await readFile(byPath.get(target))) === hash(await readFile(resolve(root, source))), `Stale/missing published download ${target}`);
   }
-  publication = { htmlPages: targets.size, files: files.length, localLinksChecked: localLinks, unexpectedPublishedFiles: unexpected };
+  publication = { htmlPages: targets.size, files: files.length, localLinksChecked: localLinks, pinnedPublicAssetsChecked: pinnedPublicAssets.size, htmlAuthorMetaChecked, htmlBookAuthorSchemaChecked, unexpectedPublishedFiles: unexpected };
 }
 
 const report = { status: failures.length ? 'failed' : 'passed', acceptedPdfSha256: book.metadata.acceptedPdfSha256,
+  authorBinding: { confirmedAuthor, source: authorSourcePath, pdfInfo: pdfAuthor, generatedAuthor: book.metadata.author ?? null,
+    scope: 'Human authorship credit and source/PDF/web identity binding; no claim of scientific endorsement or independent experimental reproduction.' },
   sourceDigest: manifest.sourceDigest, manifestedSourceFiles: manifest.files.length, chapters: chapterReports,
   frontMatter: { proseParagraphs: frontParagraphs.length, inlineMath: frontMath.length },
   counts: expected, publication, scope: 'Known-construct source and static-publication parity audit; no claim of independent scientific experimental reproduction.',

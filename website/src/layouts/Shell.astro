@@ -1,8 +1,6 @@
 ---
 import '../styles/global.css';
 import '@fontsource-variable/inter/index.css';
-import '@fontsource-variable/source-serif-4/index.css';
-import '@fontsource-variable/source-serif-4/wght-italic.css';
 import 'katex/dist/katex.min.css';
 import Search from '../components/Search';
 import Icon from '../components/Icon.astro';
@@ -10,6 +8,8 @@ import { book, base, href, chapterHref, groups } from '../lib/book';
 interface Props { title?: string; description?: string; active?: string; reader?: boolean; }
 const { title = 'Agentic State', description = 'Context, Memory, and Control in Adaptive AI. A complete technical monograph for researchers.', active = '', reader = false } = Astro.props;
 const nav = [{label:'The book',path:'book/',id:'book'}, {label:'Reading paths',path:'reading-paths/',id:'paths'}, {label:'Figures',path:'figures/',id:'figures'}, {label:'References',path:'references/',id:'references'}];
+const fontFaces=[['et-book-roman-line-figures.woff','normal',400],['et-book-italic.woff','italic',400],['et-book-bold-line-figures.woff','normal',700]].map(([file,style,weight])=>`@font-face{font-family:'ET Book';src:url('${href(`fonts/et-book/${file}`)}') format('woff');font-style:${style};font-weight:${weight};font-display:swap}`).join('');
+const bookSchema=JSON.stringify({'@context':'https://schema.org','@type':'Book',name:book.metadata.title,author:{'@type':'Person',name:book.metadata.author},inLanguage:'en',url:'https://neuralatlasai.github.io/AutonomyAtlas/',bookFormat:'https://schema.org/EBook'}).replace(/</g,'\\u003c');
 ---
 <!doctype html>
 <html lang="en">
@@ -17,42 +17,46 @@ const nav = [{label:'The book',path:'book/',id:'book'}, {label:'Reading paths',p
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#faf9f5" />
-    <link rel="icon" type="image/png" href={href('brand/agent-mark.png')} />
+    <meta name="author" content={book.metadata.author} />
+    <script type="application/ld+json" set:html={bookSchema}></script>
+    <meta name="theme-color" content="#fffff8" />
+    <link rel="preload" href={href('fonts/et-book/et-book-roman-line-figures.woff')} as="font" type="font/woff" crossorigin />
+    <style is:inline set:html={fontFaces}></style>
+    <link rel="icon" type="image/png" href={href('brand/agentic-monogram-v2.png')} />
     <link rel="canonical" href={new URL(Astro.url.pathname, 'https://neuralatlasai.github.io')} />
     <meta property="og:title" content={`${title} — Agentic State`} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <title>{title === 'Agentic State' ? 'Agentic State — Context, Memory, and Control' : `${title} — Agentic State`}</title>
     <script is:inline>
-      try { document.documentElement.dataset.theme = localStorage.getItem('agentic-theme') || 'light'; } catch {}
+      try { document.documentElement.dataset.theme = localStorage.getItem('agentic-theme') || 'light';const size=localStorage.getItem('agentic-reading-size');if(size&&['small','medium','large'].includes(size))document.documentElement.dataset.readingSize=size; } catch {}
     </script>
   </head>
-  <body class:list={{'is-reader': reader}}>
+  <body class:list={{'is-reader': reader}} data-edition="2026-10-29-editorial-02">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <a class="brand" href={base} aria-label="Agentic State home">
-        <img src={href('brand/agent-mark.png')} width="46" height="46" alt="" />
-        <span>Agentic <em>State</em><small>AUTONOMY ATLAS</small></span>
+        <span class="brand-imprint">Autonomy Atlas</span>
+        <span class="brand-wordmark">Agentic State<span class="brand-period">.</span></span>
       </a>
       <nav class="primary-nav" aria-label="Main navigation">
         {nav.map(item => <a href={href(item.path)} aria-current={active === item.id ? 'page' : undefined}>{item.label}</a>)}
       </nav>
       <div class="header-actions">
-        <button class="search-trigger" data-open-search aria-label="Search the book"><Icon name="search" /><span>Search</span><kbd>Ctrl K</kbd></button>
+        <button class="search-trigger" data-open-search aria-label="Search the book"><Icon name="search" /><span>Search</span></button>
         <button class="icon-button theme-toggle" aria-label="Switch color theme" title="Switch color theme"><Icon name="moon" /></button>
         <button class="icon-button contents-trigger" data-open-contents aria-label="Open book contents"><Icon name="menu" /></button>
       </div>
     </header>
     <slot />
     <footer class="site-footer">
-      <div><a class="footer-title" href={base}>Agentic State</a><p>Context, Memory, and Control in Adaptive AI</p></div>
+      <div><a class="footer-title" href={base}>Agentic State</a><p>Context, Memory, and Control in Adaptive AI</p><p class="footer-author">By <a href={href('about/')+'#authorship'} rel="author">{book.metadata.author}</a></p></div>
       <nav aria-label="Publication links">
         <a href={href('about/')}>About this edition</a>
         <a href={href('downloads/agentic-state.pdf')}>Download PDF <Icon name="download" size={16} /></a>
         <a href="https://github.com/neuralatlasai/AutonomyAtlas">Source repository <Icon name="arrow" size={16} /></a>
       </nav>
-      <div class="footer-bottom"><span>29 OCTOBER 2026 EDITION</span><span>34 chapters · 356 references</span><a href="#top">Back to top</a></div>
+      <div class="footer-bottom"><span>ONLINE EDITION 02 · 29 OCTOBER 2026</span><span>34 chapters · 356 references</span><a href="#top">Back to top</a></div>
     </footer>
     <dialog class="contents-dialog" aria-labelledby="contents-title">
       <div class="contents-dialog-head"><span class="eyebrow">THE COMPLETE MONOGRAPH</span><button class="icon-button" data-close-contents aria-label="Close contents"><Icon name="close" /></button></div>
@@ -61,6 +65,7 @@ const nav = [{label:'The book',path:'book/',id:'book'}, {label:'Reading paths',p
       <nav class="drawer-links" aria-label="Publication navigation">{nav.map(item => <a href={href(item.path)}>{item.label}</a>)}</nav>
       <nav aria-label="All chapters">{groups.map(group => <section><h3>{group.name}</h3><ol>{book.chapters.filter(c => c.number >= group.range[0] && c.number <= group.range[1]).map(c => <li><a href={chapterHref(c.slug)}><span>{String(c.number).padStart(2,'0')}</span>{c.title}</a></li>)}</ol></section>)}</nav>
     </dialog>
+    <noscript><nav class="no-script-navigation" aria-label="Publication navigation">{nav.map(item=><a href={href(item.path)}>{item.label}</a>)}</nav><style is:inline>.contract-panel[hidden]{display:block!important}.contract-tabs{display:none!important}</style></noscript>
     <Search base={base} client:load />
     <script>
       const dialog = document.querySelector<HTMLDialogElement>('.contents-dialog');
@@ -74,12 +79,15 @@ const nav = [{label:'The book',path:'book/',id:'book'}, {label:'Reading paths',p
       const labelTheme=()=>themeButton?.setAttribute('aria-label',`Switch to ${document.documentElement.dataset.theme==='dark'?'light':'dark'} theme`);
       labelTheme();
       themeButton?.addEventListener('click', () => { const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = theme;labelTheme(); try {localStorage.setItem('agentic-theme',theme);} catch {} });
-      const tocLinks = document.querySelectorAll<HTMLAnchorElement>('.on-this-page a');
+      const tocLinks = document.querySelectorAll<HTMLAnchorElement>('[data-section-nav] a');
       const headings = Array.from(tocLinks).map(a=>document.getElementById(decodeURIComponent(a.hash.slice(1)))).filter((h):h is HTMLElement=>h!==null);
-      const observer = new IntersectionObserver(entries => { for(const entry of entries){if(entry.isIntersecting){tocLinks.forEach(a=>a.classList.toggle('is-current',decodeURIComponent(a.hash.slice(1))===entry.target.id));}} }, {rootMargin:'-10% 0px -75% 0px'});
+      const observer = new IntersectionObserver(entries => { for(const entry of entries){if(entry.isIntersecting){tocLinks.forEach(a=>{const current=decodeURIComponent(a.hash.slice(1))===entry.target.id;a.classList.toggle('is-current',current);if(current)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});const indicator=document.querySelector('[data-current-section]');if(indicator)indicator.textContent=entry.target.textContent;}} }, {rootMargin:'-20% 0px -65% 0px'});
       headings.forEach(h=>observer.observe(h));
       const progress=document.querySelector<HTMLElement>('.reading-progress');
       if(progress){const update=()=>{const height=document.documentElement.scrollHeight-innerHeight;progress.style.width=`${height>0?Math.min(100,scrollY/height*100):0}%`;};addEventListener('scroll',update,{passive:true});update();}
+      document.querySelectorAll<HTMLButtonElement>('[data-text-size]').forEach(button=>{button.setAttribute('aria-pressed',String(button.dataset.textSize===(document.documentElement.dataset.readingSize||'medium')));button.addEventListener('click',()=>{const size=button.dataset.textSize||'medium';document.documentElement.dataset.readingSize=size;try{localStorage.setItem('agentic-reading-size',size);}catch{}document.querySelectorAll('[data-text-size]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));});});
+      const contractTabs=Array.from(document.querySelectorAll<HTMLButtonElement>('[data-contract]'));
+      contractTabs.forEach((button,index)=>{button.tabIndex=index===0?0:-1;button.addEventListener('click',()=>{contractTabs.forEach(b=>{b.setAttribute('aria-selected',String(b===button));b.tabIndex=b===button?0:-1;});document.querySelectorAll<HTMLElement>('[data-contract-panel]').forEach(panel=>panel.hidden=panel.dataset.contractPanel!==button.dataset.contract);});button.addEventListener('keydown',event=>{let next=index;if(event.key==='ArrowRight')next=(index+1)%contractTabs.length;else if(event.key==='ArrowLeft')next=(index+contractTabs.length-1)%contractTabs.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=contractTabs.length-1;else return;event.preventDefault();contractTabs[next].click();contractTabs[next].focus();});});
     </script>
   </body>
 </html>

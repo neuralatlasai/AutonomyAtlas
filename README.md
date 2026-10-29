@@ -2,6 +2,8 @@
 
 **Context, Memory, and Control in Adaptive AI**
 
+By **Hemanth Kandimalla**.
+
 Technical monograph reviewed through **29 October 2026**: 34 chapters, 482 main-text pages, 266 sections, 39 subsections, 35 original generated figures and 356 cited references. The PDF has 536 physical pages; the main-text count excludes front matter and references.
 
 **[Read the complete online book](https://neuralatlasai.github.io/AutonomyAtlas/)** — a new research publication interface with full-text search, mathematical typesetting, reading paths, linked references and the original illustrations. [Website development and deployment](website/README.md).

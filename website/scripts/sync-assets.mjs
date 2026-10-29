@@ -16,6 +16,7 @@ await copyFile(resolve(root, 'book/validation_summary.json'), resolve(output, 'd
 await copyFile(resolve(root, 'book/current_source_review_20261029.csv'), resolve(output, 'downloads/source-crosswalk.csv'));
 await writeFile(resolve(output, '.nojekyll'), '');
 await mkdir(resolve(output, 'licenses'), { recursive: true });
+await copyFile(resolve(root, 'website/brand-source/et-book-LICENSE.txt'), resolve(output, 'licenses/et-book.txt'));
 for (const [pkg,name,license] of [
   ['@fontsource-variable/inter','inter','LICENSE'],
   ['@fontsource-variable/source-serif-4','source-serif-4','LICENSE'],

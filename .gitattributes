@@ -5,6 +5,8 @@ bibliography/** -text
 monograph.tex -text
 website/tools/compile_book.py -text
 website/src/generated/book.json -text
+website/brand-source/et-book-LICENSE.txt -text
+*.woff binary
 *.png binary
 *.pdf binary
 *.zip binary

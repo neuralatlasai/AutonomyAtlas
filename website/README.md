@@ -3,6 +3,8 @@
 The complete technical monograph, presented as a static research publication at
 https://neuralatlasai.github.io/AutonomyAtlas/.
 
+By **Hemanth Kandimalla**.
+
 The interface is an original Astro and TypeScript implementation with a small
 Preact search island. It provides chapter navigation, full-text search, reading
 paths, an illustrated index, linked numeric references, light and dark themes,
@@ -59,9 +61,9 @@ bytes required by `.gitattributes` when regenerating the export.
 
 ## Attribution
 
-Source Serif 4 and Inter are self-hosted under their font licenses; Phosphor
+ET Book and Inter are self-hosted under their font licenses; Phosphor
 supplies interface icons and KaTeX renders mathematics with MathML. Their
 license notices are copied into the publication. Scientific PNG illustrations
-and the original agent mark were produced with an image-generation tool whose
+and the original monogram and editorial artwork were produced with an image-generation tool whose
 exact model identifier was unavailable. Reference websites informed broad
 editorial direction; their interface code and scientific content were not used.

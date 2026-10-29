@@ -1,9 +1,9 @@
 {
   "validation_status": "complete",
-  "edition": "29 October 2026 cumulative technical review edition",
+  "edition": "29 October 2026 cumulative technical review edition; author-credit update",
   "literature_cutoff": "2026-10-29",
   "pdf": "output/pdf/agentic_state_monograph.pdf",
-  "pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+  "pdf_sha256": "377e3269f65fa7bfe7c36ba01de53573c3574febb7821993dfcf9a7042b74e09",
   "physical_pages": 536,
   "frontmatter_pages": 15,
   "body_pages": 482,
@@ -186,7 +186,7 @@
       "printed_page": "241",
       "wordcount": 95,
       "last_content_y": 194.71392822265625,
-      "text": "Agentic State\nChapter 16\nMATM\u2019s state keys address procedural matching, and MemCalib addresses\nuse after evidence is supplied. Combining them is a design hypothesis, not\nan established composite result.\nThe original synthesis is to view retrieval as a controlled transition from\nstored evidence to active decision state. The transition must preserve\nsource identity, role, time, and access scope as well as content. Its success\nis measured by justified behavior under bounded cost, not by the number\nof records returned. Chapter 17 places this transition within a unified\nconsistency model linking the stored history, assembled context, policy,\ntools, and environment.\n241\n"
+      "text": "Agentic State\nChapter 16\nMATM’s state keys address procedural matching, and MemCalib addresses\nuse after evidence is supplied. Combining them is a design hypothesis, not\nan established composite result.\nThe original synthesis is to view retrieval as a controlled transition from\nstored evidence to active decision state. The transition must preserve\nsource identity, role, time, and access scope as well as content. Its success\nis measured by justified behavior under bounded cost, not by the number\nof records returned. Chapter 17 places this transition within a unified\nconsistency model linking the stored history, assembled context, policy,\ntools, and environment.\n241\n"
     },
     {
       "physical_page": 270,
@@ -236,7 +236,8 @@
     "all_35_figure_placements_individually_inspected": true,
     "method": "AI-assisted contact-sheet overview plus individual 180-dpi figures, tables, dense equations, short tails and changed pages; immutable review transfers checked with exact 150-dpi content crops. Not a word-by-word reread of every PDF page.",
     "extraction_note": "Nine null character mappings in extensible math delimiters render correctly; text extraction has this limitation.",
-    "physical_paper_proof": false
+    "physical_paper_proof": false,
+    "author_credit_titlepage_individually_inspected_dpi": 180
   },
   "mechanical_warning_adjudication": {
     "repository_or_mutable_document_publication_year": "Twenty-five raw input records omit publication year rather than inventing it; pinned revisions/access dates remain.",
@@ -246,7 +247,13 @@
   },
   "source_rebuild": {
     "status": "passed",
-    "scope": "Clean extracted archive; exact labels, text geometry and all page rasters at150dpi compared with this PDF.",
+    "scope": "Clean extracted public source kit; exact page labels, bookmarks, word geometry and all536 page rasters at150dpi compared with this PDF. Final archive build inputs are byte-identical to tested inputs.",
+    "physical_pages_compared": 536,
+    "raster_comparison_dpi": 150,
+    "changed_raster_pages": 0,
+    "changed_word_geometry_pages": 0,
+    "rebuilt_pdf_sha256": "a3acd78750ea958fcf9a2b81201a569acbc6ef2b1e65957fb870ffb6fec99c77",
+    "byte_identical_pdf": false,
     "independent_experimental_reproduction": false
   },
   "evidence_limits": [
@@ -254,6 +261,22 @@
     "Current source crosswalk retains explicit chapter-specific review limits.",
     "No human principal-scientist endorsement or venue acceptance is claimed.",
     "The image tool did not expose its model identifier.",
-    "A venue-specific submission and human authorship metadata are separate from this complete monograph."
-  ]
+    "Author credit records the user-confirmed name; no affiliation, email, human reviewer endorsement or venue acceptance is implied."
+  ],
+  "author": "Hemanth Kandimalla",
+  "author_credit_release": {
+    "author": "Hemanth Kandimalla",
+    "baseline_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+    "titlepage_individually_inspected_dpi": 180,
+    "non_title_pages_compared": 535,
+    "non_title_raster_comparison_dpi": 150,
+    "changed_non_title_raster_pages": 0,
+    "changed_non_title_word_geometry_pages": 0,
+    "chapter_source_files_unchanged": 308,
+    "pdf_author_metadata_exact": true,
+    "affiliation_or_email_added": false,
+    "fresh_mechanical_checks_passed": true,
+    "new_mechanical_errors": 0,
+    "prior_non_title_visual_review_transferred_by_exact_raster_and_word_geometry_equivalence": true
+  }
 }

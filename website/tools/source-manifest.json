@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "sourceDigest": "80bbd48518d9ce41e4411bf598102991afbf482bd5e3556bcde54fc286e6f3f5",
+  "sourceDigest": "58c71d25faffed7c1237c7ccacac81062043c4286de797bd3e3d20b067eda83e",
   "files": [
     {
       "path": "bibliography/references.bib",
@@ -1304,7 +1304,7 @@
     },
     {
       "path": "book/frontmatter.tex",
-      "sha256": "a8612c6bdb6dfc8c04ee64836112ebd535b78314f00d9342c4e6a813b4276f43"
+      "sha256": "987992cc35d38fcc786b5e1829870b734885597d578d7380aa95a2b203a513d0"
     },
     {
       "path": "book/plan.json",
@@ -1316,11 +1316,11 @@
     },
     {
       "path": "book/validation_summary.json",
-      "sha256": "4d11a053ef9985476d24fca0f9460e383f5fe06fce31b8861adb11904b961dcc"
+      "sha256": "23cfb7c4720a02e96bcb2839a07a56beb98db42b606ad15b294f06335e1f8071"
     },
     {
       "path": "config/book_layout.tex",
-      "sha256": "ea1a8955ef4cc26aff69c4b7b1daaa54b1524b646e6b13156a6f26cf1ac07443"
+      "sha256": "da3ac72bb95e952b88458dcfdf1744052a8e7cb7f85cac735e65cb1cd6643b7f"
     },
     {
       "path": "config/notation.tex",
@@ -1332,9 +1332,17 @@
     },
     {
       "path": "website/tools/compile_book.py",
-      "sha256": "8d35d168b49e8edea93c69f7570c8f1e9f55fe1806e3439182a343fbf7a12e51"
+      "sha256": "d8968c53fea829dcb5872962fe6bceb1d9931ff3ef23ec3f17993f157bac0dbd"
     }
   ],
+  "authorBinding": {
+    "path": "config/book_layout.tex",
+    "sha256": "da3ac72bb95e952b88458dcfdf1744052a8e7cb7f85cac735e65cb1cd6643b7f",
+    "command": "hypersetup",
+    "key": "pdfauthor",
+    "kind": "explicit braced literal",
+    "value": "Hemanth Kandimalla"
+  },
   "chapters": {
     "C01": {
       "counts": {
@@ -14638,8 +14646,8 @@
     }
   ],
   "acceptedAux": {
-    "path": "build/book/monograph.aux",
-    "sha256": "576575b2d9b5774403dee6086529ada010ef83752233537d1d640f03c5ffc751",
+    "path": "build/ch01-34/ch01-34_review.aux",
+    "sha256": "f115fd274386ea5d156c9d5840b91669bc732c798810017473ba0f1e19ade535",
     "labels": {
       "book:main:start": {
         "number": "",
@@ -17810,7 +17818,7 @@
     }
   },
   "acceptedBbl": {
-    "path": "build/book/monograph.bbl",
+    "path": "build/ch01-34/ch01-34_review.bbl",
     "sha256": "8585816e89688268a968b887fc13132f099a203cca7f849ee4c99d4c578bae29",
     "entryKeys": [
       "yao2022react",
@@ -18189,7 +18197,7 @@
     "labelRecords": 468
   },
   "diagnostics": {
-    "converterSha256": "8d35d168b49e8edea93c69f7570c8f1e9f55fe1806e3439182a343fbf7a12e51",
+    "converterSha256": "d8968c53fea829dcb5872962fe6bceb1d9931ff3ef23ec3f17993f157bac0dbd",
     "unknownRawTex": [],
     "ignoredPrintCommands": {
       "\\centering": 65,
@@ -18204,5 +18212,5 @@
     "mathNormalization": "Original 217 display environments preserved in sourceTex; explicit accepted equation/align-row tags; labels become stable DOM anchors",
     "sourceEdits": false
   },
-  "generatedBookSha256": "8dea4cbfa89625052e900dc4b0d9847c2294b52ed36942a03b652f76fdf214b5"
+  "generatedBookSha256": "fa2fedf90a32d0ba8fcd91b3b582b2c9ac5486f3b874608b9bf8f3610af00ace"
 }
