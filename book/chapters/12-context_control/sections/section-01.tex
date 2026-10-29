@@ -1,0 +1,24 @@
+\section{The working view as a controlled variable}\label{sec:C12:control}
+Context engineering is the construction of the actual conditional input on which a policy selects its next action. It includes the selection of instructions, evidence, tool descriptions, intermediate results, and unresolved commitments. Compaction is one intervention within that broader process. An agent can compact history while preserving raw storage, evict a cache without editing text, or edit its visible history without deleting a persistent record. These operations affect different state variables and should have different names in an implementation.
+
+Let $H_t$ denote the append-only interaction evidence, $M_t$ the persistent memory, and $\mathcal C_t$ the model's working context. A context controller chooses an editing action $u_t$ before the task policy chooses an environment action $a_t$:
+\begin{align}
+ \mathcal C_t&=g(H_t,M_t,u_t),\\
+ a_t&\sim\pi_\theta(\cdot\mid\mathcal C_t),\\
+ u_t&\sim\mu_\psi(\cdot\mid H_t,M_t,B_t).
+\end{align}
+Here $B_t$ is the remaining resource budget. The decomposition can be implemented by separate models, one model with distinct action types, or deterministic harness logic. It is a functional distinction, not a claim that a separate context model is always beneficial. Access to $H_t$ is not free: the total account must charge the controller's scans, retrieval, model calls, and storage operations as well as the task policy's input.
+
+The context controller faces an unusual delayed-control problem. Removing a record can make the next request cheaper but create a failure many steps later. Its reward is mediated by another policy and by the environment. A controller trained only to reduce input size may learn aggressive deletion that looks efficient until a deferred constraint becomes decisive. Conversely, penalizing every retrieval call can encourage a policy to retain large amounts of irrelevant content. The objective must include task outcome and complete lifecycle cost.
+
+A useful constrained formulation uses a total resource cost $C_{\mathrm{total}}$, a terminal success indicator $Y_s\in\{0,1\}$, and an indicator $Y_u\in\{0,1\}$ that at least one unauthorized effect occurred. For fixed task and environment distributions, define
+\begin{equation}
+ \min_{\mu,\pi}\mathbb E[C_{\mathrm{total}}]
+ \quad\text{subject to}\quad
+ P_{\mu,\pi}(Y_s=1)\geq\tau,
+ \quad P_{\mu,\pi}(Y_u=1)\leq\delta.
+\end{equation}
+The thresholds $\tau,\delta\in[0,1]$ are workload-specific requirements. They are not established constants, and success estimation must retain failures and timeouts. A Lagrangian objective can aid optimization, but it does not prove that the constraints hold after training. Authorization should generally be enforced outside a stochastic controller rather than represented only as a reward penalty.
+
+The central design question is which distinctions the working view must preserve. A context assembled for code editing needs current files, interface constraints, test outcomes, and rejected hypotheses. A literature agent needs claims, supporting passages, conflicting evidence, and unresolved source identities. Applying the same generic summary template to both workloads can remove the information that makes their next actions valid. State fields should follow decision requirements, with prose used where a schema would erase necessary nuance.
+

@@ -1,0 +1,27 @@
+\section{A stateful formulation of execution}\label{sec:C01:02}
+Let $H_t$ be the ordered interaction records available at decision time $t$. History is not necessarily complete: a logging failure can omit an externally visible effect. Let $M_t$ denote persistent memory, $C_t$ the working context, $E_t$ the environment state, and $\nu_t$ the versioned compatibility manifest. Current authority is indexed separately by epoch $\alpha_t$. The trusted observation map $\mathcal O_A$ reads authorization-relevant state; it need not reveal that privileged information to the model. With resource budget $b_t$, an agent step factors as
+\begin{equation}
+\begin{aligned}
+ C_t&=g_\eta(H_t,M_t,b_t;\nu_t),\\
+ a_t&\sim\pi_{\theta,\delta}(\cdot\mid C_t,\mathcal T_t;\nu_t),\\
+ z_t^A&=\mathcal O_A(E_t;\alpha_t),\qquad
+ d_t=A(a_t,z_t^A;\alpha_t),\\
+ (E_{t+1},o_{t+1})&\sim P(\cdot\mid E_t,a_t,d_t),\\
+ e_t&=(a_t,d_t,o_{t+1},\nu_t,\alpha_t,\kappa_t),\\
+ H_{t+1}&=\mathcal L(H_t,e_t),\\
+ M_{t+1}&=U(M_t,H_{t+1};\nu_t),\qquad H_{t+1}\ne\bot.
+\end{aligned}
+ \label{eq:c01:step}
+\end{equation}
+The decision $d_t\in\{0,1\}$ gates dispatch; denial does not prevent unrelated actors from changing $E_t$. The locator $\kappa_t$ binds the actual model input and decoding configuration to retained evidence. A locator or digest alone does not recover unavailable content. The partial journal operator $\mathcal L$ returns the acknowledged append $H_t\oplus e_t$ or the unresolved marker $\bot$; the displayed memory update is defined only on its successful branch. An effect may precede a failed journal write, so recovery must reconcile it before claiming continuity. Current authority must remain valid at dispatch under the service's concurrency contract. Neither the notation nor a local append establishes an atomic transaction with an external service.
+
+The parameters and component implementations in $\Xi$ are fixed within the stated comparison epoch. Persistent-memory updates occur through $U$; changing model weights, prompt templates, executable skill implementations, or harness code changes the versioned configuration and requires an explicit outer transition. This distinction prevents a purported memory ablation from silently becoming a policy or runtime rewrite. Compatibility metadata and authority have different clocks: a restored model manifest cannot restore an expired external grant.
+
+Editing a working context or selecting an already versioned skill can remain a state transition under a fixed implementation. The outer transition concerns a change to the governing component or artifact version, not every change to its runtime inputs. Whether a learned procedure is treated as memory data or executable code must be declared before comparing adaptation mechanisms.
+
+The state visible to the policy is usually not Markov. A summarized conversation may omit a pending asynchronous job, an already consumed credential, or a revoked approval. The full execution system can nevertheless maintain those facts in privileged state. Mixing privileged state into free-form prompts as the only enforcement mechanism sacrifices a useful separation: text is evidence to a stochastic policy, whereas authorization and commit status require explicit operational semantics. Chapter~\ref{ch:C17} develops compatibility across these representations.
+
+A simple counterexample shows why context length alone cannot measure continuity. Consider two histories with identical retained text: both say that a report should be uploaded. In one history the upload has already committed; in the other, the request timed out before any effect. A policy conditioned only on retained text cannot distinguish the states. Retrying is appropriate in one case and may duplicate an external effect in the other. Increasing the context window helps only if the distinguishing event is recorded, retained, interpretable, and consulted. A durable operation identifier and a reconciliation endpoint can resolve the ambiguity without increasing the model window.
+
+For scientific comparison, the intervention unit should therefore be the configuration $\Xi$ and its state initialization, not merely the model identifier. An experiment that compares two agents while silently changing the tool registry, memory contents, retry policy, or execution environment cannot attribute its outcome to one named mechanism. The configuration should include release or commit identities, and the trajectory should preserve enough information to reconstruct the actual observations that conditioned each action. Reconstruction is not assumed possible when tool outputs or eviction histories were never stored.
+

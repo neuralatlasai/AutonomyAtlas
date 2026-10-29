@@ -1,0 +1,812 @@
+{
+  "figures": [
+    {
+      "id": "C01-contracts",
+      "asset": "book/figures/assets/F01v4.png",
+      "prompt": "book/figures/prompts/F01v4.txt",
+      "caption": "Three separate state contracts. (a) An illustrative history--context--policy path under fixed parameters and decoding; memory and other constructor inputs are omitted. (b) Current grants at authority epoch $\\alpha$ gate permitted actions and no dispatch. (c) With $\\lambda=\\lambda_s$ and $\\lambda'=\\lambda_{\\Gamma s}$, a pure representation transformation preserves operation identities and recorded status, including unknown outcomes. Reconciliation with new service evidence is a different transition. The schematic does not establish task correctness.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "8c7394b76c347306531248e23f1d2a700d5db07d16f6b68cbe55c2d08bf9d17f",
+      "method": "Original built-in image-generation output; no plotting, diagram or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "reference_use": "User-supplied examples informed visual hierarchy and restraint; composition and content are original; no branding copied.",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "generation_kind": "Image-generation edit of an original generated input",
+      "referenced_assets": [
+        "book/figures/assets/F01v3.png"
+      ],
+      "referenced_prompts": [
+        "book/figures/prompts/F01v3.txt"
+      ],
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C01-comparisons",
+      "asset": "book/figures/assets/F01bv2.png",
+      "prompt": "book/figures/prompts/F01bv2.txt",
+      "caption": "Two different harness-comparison protocols. (a) $J_{ij}=J(\\theta_i,h_j)$ exposes all four fixed-policy cells needed for the interaction in Equation~\\ref{eq:C01:interaction}, under common tasks and evaluation limits. Entries are symbolic outcomes, not measurements. (b) Each $\\theta_i'$ is obtained from the same $\\theta_{\\mathrm{init}}$ with matched training budgets before evaluation in $h_i$ on common held-out tasks. Primes denote adapted checkpoints frozen for evaluation, not certified optima. Compatible tasks, grading, and leakage checks remain necessary.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "241e31109dd9545c3d0719b94e538b05229b8737ed10be4f0466bcf9532cab4e",
+      "method": "Original built-in image-generation output; no plotting, diagram or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "reference_use": "User-supplied examples informed visual hierarchy and restraint; composition and content are original; no branding copied.",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C02-aliasing",
+      "asset": "book/figures/assets/F02v2.png",
+      "prompt": "book/figures/prompts/F02v2.txt",
+      "caption": "Representation aliasing is target-dependent. Distinct histories $h_0,h_1$ satisfy $\\varphi(h_0)=\\varphi(h_1)=z$, so a deterministic rule using only $z$ returns the same $a=d(z)$. Under a declared loss with different unique conditional optimal actions $a_0^*,a_1^*$, that action cannot be optimal for both histories. This analytical construction contains no measurements; it does not quantify a population risk gap or exclude policies acquiring additional evidence.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "e1b65ebe5e7b25168c5af708eaa3e654f6c15474b13361451270aad4e31c4280",
+      "method": "Original built-in image-generation output and refinement; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "referenced_assets": [
+        "book/figures/assets/F02v1.png"
+      ],
+      "referenced_prompts": [
+        "book/figures/prompts/F02v1.txt"
+      ],
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Analytical aliasing construction without numerical measurements",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C03-review",
+      "asset": "book/figures/assets/F03review.png",
+      "prompt": "book/figures/prompts/F03review.txt",
+      "caption": "Two algebraically equivalent content-score paths, $s_{ij}^C=q_i^\\top(W_Kc_j)=(W_K^\\top q_i)^\\top c_j$, with transformed query $\\widetilde q_i=W_K^\\top q_i$. Moving the linear projection permits a compatible implementation to score retained latents without storing expanded content keys. The positional score and value path are omitted; finite-precision implementations require numerical comparison. No measured performance result is depicted.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "1700d8acdb655fe027d73af120ea5411cb72c4cd1357d28e107010b98ac1721f",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C04-overview",
+      "asset": "book/figures/assets/F04review.png",
+      "prompt": "book/figures/prompts/F04review.txt",
+      "caption": "Tiled reduction and paged allocation preserve different objects. Top: query, key and value tiles update the running maximum $m$, normalizer $\\ell$ and weighted-value sum $u$; normalization forms $O=u/\\ell$ for a nonempty visible row. Bottom: block tables can share a complete eligible prefix while mapping divergent continuations to different physical storage. The lower arrows are allocation mappings, not attention edges. No performance measurements are depicted.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "1294e81ac8695956cba2d0e2cd803c089f893c1c711034a91b7eae8f6bb105d6",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C05-overview",
+      "asset": "book/figures/assets/F05review.png",
+      "prompt": "book/figures/prompts/F05review.txt",
+      "caption": "Predictive representation training and control test different properties. The context branch uses positions $C$; the target branch processes the complete observation, selects positions $B$, and blocks loss gradients through $\\mathrm{sg}$. An EMA parameter update is separate from gradient flow. The declared loss must match the selected JEPA variant. A downstream controller requires independent environment-outcome evaluation; small prediction loss does not establish action sufficiency.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "a273ae849a2869c0e215fb748cfe796a4711228f6ed688a19ad39f085146f996",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C14-overview",
+      "asset": "book/figures/assets/F14review.png",
+      "prompt": "book/figures/prompts/F14review.txt",
+      "caption": "Typed retention and invalidation. Evidence $h$ from history $H$ is admitted into a bank $M$ of episodic, propositional and procedural objects. Selection supplies working context $c$; an invalidated dependent object $m$ is blocked pending its specified revalidation. Publication status and provenance remain part of each object record. Current authorization is a separate boundary omitted here. Arrows show lifecycle dependencies, not guaranteed truth or universal conversion between classes. Here $C$ names the working-context component and $c$ its constructed content.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "310b6a7e52cc2366d3efb70f58002b59f87283b9532a255436b2ca7146605b56",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "referenced_assets": [
+        "book/figures/assets/F14review_input.png"
+      ],
+      "referenced_prompts": [
+        "book/figures/prompts/F14review_input.txt"
+      ],
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C24-scientificloop",
+      "asset": "book/figures/assets/F24review.png",
+      "prompt": "book/figures/prompts/F24review.txt",
+      "caption": "Only records already accepted by the declared verifier enter the current-source validity and publication-authority gates. A released surrogate or replay finding retains its backend and recording provenance; it is not fresh physical evidence. Closing either loop does not identify a causal improvement or establish unrestricted laboratory autonomy.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "cbcbed1213fb7646a6524e0e2f47932e79999b5d42de77ff931acceff2de97a2",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C25-review",
+      "asset": "book/figures/assets/F25review.png",
+      "prompt": "book/figures/prompts/F25review.txt",
+      "caption": "Verification depends on evidence and inference. The upper $Y$ is a specified latent property; the lower $Y(x,I)$ is a declared intervention score. Additional queries can change observability. Only $q_t$ samples $I$; both densities are evaluated at that sample to form $w=\\Pi(I)/q_t(I)$. Target support and bounded predictable weights are assumptions. An interval for the resulting estimand does not establish mechanistic truth.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "af550a945e45745e3348f2f986d920e667c65b0316ae46bae87c243af09936dc",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C13-review",
+      "asset": "book/figures/assets/F13review.png",
+      "prompt": "book/figures/prompts/F13review.txt",
+      "caption": "An illustrative committed-but-unacknowledged operation. Confirmed intent precedes dispatch; a lost receipt after remote commit leaves the local outcome unknown. A status query obtains additional service evidence for the local record. Without conclusive evidence, that record remains unknown. The pre-call possible-dispatch mark and other admission checks are omitted. Historical replay and fresh dispatch have different authorization requirements. No global transaction or exactly-once guarantee is implied.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "fd09d25ec757909a686784aa0f0a1a482ab88bcfe71ba76373b0860170da43b7",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "referenced_assets": [
+        "book/figures/assets/F13review_input.png"
+      ],
+      "referenced_prompts": [
+        "book/figures/prompts/F13review_input.txt"
+      ],
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C15-review",
+      "asset": "book/figures/assets/F15review.png",
+      "prompt": "book/figures/prompts/F15review.txt",
+      "caption": "An illustrative incidence representation: $e_i$ denote episodes, $u_i$ subtasks, and $s_i$ reusable skills. Undirected lines retain membership, not execution order. A retrieved skill remains a procedural hypothesis; compatibility and the proposed operation's current dispatch authority are separate checks. Neither membership nor compatible metadata proves procedural correctness. Maintenance uses additional evidence outside this schematic. Right-hand connectors show dependencies among checks and labelled conditional outcomes.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "404dfbf6455089788258677169ebc39d0e352880793033990a82f19ae589a4c1",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C16-review",
+      "asset": "book/figures/assets/F16review.png",
+      "prompt": "book/figures/prompts/F16review.txt",
+      "caption": "A decisive-evidence path with separate failure boundaries. Authorized source availability, candidate selection, qualified packing and appropriate use are nested events for this specified path. Conditional stage probabilities multiply without an independence assumption. Alternative valid evidence paths may still solve the task. A return to search is a policy choice with cost; it does not establish evidence sufficiency.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "de4a288c44d26fd1c85f84a79aa6c3eb2537a1d5f9fc750a7a982fd1542fec1e",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C26-overview",
+      "asset": "book/figures/assets/F26review.png",
+      "prompt": "book/figures/prompts/F26review.txt",
+      "caption": "Two evaluation protocols with distinct feedback boundaries. Fresh sealed confirmation returns a report outside selection. Restricted reuse exposes only promotion decisions to the proposer; validity additionally requires the source protocol's initial evaluation independence and history-wide error allocation. The feedback restriction alone is not an error-control proof. No experimental outcomes are depicted.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "19bd179161b2de275c0be55d9abfc400a0cbf3be0b7f9ebbe6ded91f84c6fbac",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C06-review",
+      "asset": "book/figures/assets/F06review.png",
+      "prompt": "book/figures/prompts/F06review.txt",
+      "caption": "Model-generated futures and observed interaction have different evidential types. Candidate rollouts and scores guide selection; the actual attempted-action/response record updates $H_{t+1}^o$ and the belief derived from it. The tool boundary checks current authority and can return denial without dispatch. An observed response can still leave an external effect uncertain. No experiment is reported. The denial note names one possible actual return, not a separate evidential history.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "25d017971bfd9d786b38329988267586917e9c476d71b5b0c9f1acda42feae6b",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C29-review",
+      "asset": "book/figures/assets/F29review.png",
+      "prompt": "book/figures/prompts/F29review.txt",
+      "caption": "Technical review supplies evidence, while an authorized principal grants a specific operation envelope. A current check must bind the principal, arguments, object versions, epoch and expiry. If validation and remote commitment are separate, the service contract must address the remaining race; an earlier approval does not prove current authority or technical correctness.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "c897a81e25cfc20118831f6e8af2e72e53e1fcab4d4ba0fd3f6b43f3f360cb29",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C27-review",
+      "asset": "book/figures/assets/F27review.png",
+      "prompt": "book/figures/prompts/F27review.txt",
+      "caption": "Memory policies $\\pi^A,\\pi^B$ share an initial fixture $(M_0,E)$ but can produce different rerun observations $O^A,O^B$. Observation-changing counterfactuals require valid reruns, not substituted answers on one fixed log. Completion $S$, declared failure $F$ and unresolved budget stops $U$ are distinct protocol outcomes; interpreting a stop as censoring requires additional assumptions. The figure-local S/F/U labels name outcome categories, not stopping times.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "ce4aebbab2bf9b065303efaff3b3e2574ceeb0151b12eae341f717f768fd6915",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C18-review",
+      "asset": "book/figures/assets/F18review.png",
+      "prompt": "book/figures/prompts/F18review.txt",
+      "caption": "A normative admitted tool path: schema, domain and current-authority checks precede dispatch. Here $\\alpha$ denotes the authority epoch. Actual service evidence $\\eta$, including unresolved outcomes, is recorded separately from a task check $Y$. This schematic does not claim that framework defaults enforce every boundary, that admission and remote commit are atomic, or that a receipt proves task correctness. Figure-local $\\sigma$ names the schema, $\\varphi(u)$ a domain predicate, $k$ the logical operation identifier, and $s_k$ its servicing endpoint.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "b6dccb32a1005965b787c11585394e276ad1e838b042598c8273704adbeba6c1",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C30-overview",
+      "asset": "book/figures/assets/F30review.png",
+      "prompt": "book/figures/prompts/F30review.txt",
+      "caption": "Executor utility $J$ and the expected gain $K$ of the complete improvement procedure are different estimands. Here $x_i$ labels the incumbent executor configuration, $y^\\prime$ a proposal, and $\\omega$ the improver. Adoption also depends on evidence, authority and compatibility. Independent outer-loop runs and complete search costs are needed to assess improvement; a selected executor score cannot substitute for that assessment.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "a8190e1325189b1599a316b44930c6f0d683c698d36e83ee092921f8ceda7419",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C17-overview",
+      "asset": "book/figures/assets/F17review.png",
+      "prompt": "book/figures/prompts/F17review.txt",
+      "caption": "Different deterministic views of common permitted recorded history $H$ can induce different action laws $p,q$ under one fixed deployment. Model/tokenizer, decoder, parser and decision interface are held fixed. The behavioral bound concerns outcomes $Y$ on the common trajectory; random private editor state requires conditional marginalization. Two sampled prompts do not establish that premise. Current authority and effect evidence remain independent checks.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "32bf8477eafd5d7d42b78d4aa12ebf1fbe38524ddb7ec7a8fab723d80344e6eb",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "referenced_assets": [
+        "book/figures/assets/F17review_input.png"
+      ],
+      "referenced_prompts": [
+        "book/figures/prompts/F17review_input.txt"
+      ],
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C28-overview",
+      "asset": "book/figures/assets/F28review.png",
+      "prompt": "book/figures/prompts/F28review.txt",
+      "caption": "Untrusted content can persist through derived memory or skills after the original input disappears. Application-controlled quarantine excludes a retained record from later retrieval; current authorization constrains dispatch. The first-session decision does not authorize a later operation: fresh authorization is required before its dispatch, which is not depicted. An allowed operation may still be factually wrong, and these controls do not undo committed effects.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "4b9855a8665fefeecc8a2d63bb734e355d7cd5150cf9afb935dcccfe8c07121c",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "referenced_assets": [
+        "book/figures/assets/F28review_input.png",
+        "book/figures/assets/F28review_layout_input.png"
+      ],
+      "referenced_prompts": [
+        "book/figures/prompts/F28review_input.txt",
+        "book/figures/prompts/F28review_layout_input.txt"
+      ],
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C07-review",
+      "asset": "book/figures/assets/F07review.png",
+      "prompt": "book/figures/prompts/F07review.txt",
+      "caption": "Token-weighted accumulation requires one global normalization. At a common parameter snapshot, rank $j$ contributes token-loss numerator $N_j$ and supervised-token count $B_j$. For $B=\\sum_jB_j>0$, scaling by $n/B$ and an averaging collective yields $\\nabla[(\\sum_jN_j)/B]$. Counts are fixed batch metadata; the snapshot condition applies to every rank gradient. Locally normalized means generally define a different objective. No training measurement is depicted.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "d1b0e490241547e3ee8fae98526b7576eaa1d4b86e700ca70ff48078abd1ce1e",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C19-overview",
+      "asset": "book/figures/assets/F19review.png",
+      "prompt": "book/figures/prompts/F19review.txt",
+      "caption": "Protocol identifiers bind different objects. MCP RPC identifiers correlate individual exchanges; an optional Tasks-extension handle can relate requests to durable work. A2A context identifiers group interactions, while task identifiers bind units of work. A terminal task is not restarted; a later follow-up can create a new task in the same context. Returned artifacts still need local validation. No automatic cross-protocol identity or authority mapping is implied.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "781ca811e8e58e3d6a7addce88e914fecbe8248c6b3f4e8d98195a3802c7c504",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C31-overview",
+      "asset": "book/figures/assets/F31review.png",
+      "prompt": "book/figures/prompts/F31review.txt",
+      "caption": "Tier placement, computational compatibility and permission to read are separate cache questions. The figure-local $C$ is a computational-match predicate. The listed identity inputs are illustrative; a valid key covers every dependency in the declared forward pass. Descriptor lookup is namespace-scoped, and reuse requires current access authorization. A storage hit does not establish a latency benefit; mismatches need valid recomputation.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "22b05d97fd69f72a4a8f6be7571febbaa5fe5f4b4a4a2dba290c00dc14d5ea3b",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C08-review",
+      "asset": "book/figures/assets/F08review.png",
+      "prompt": "book/figures/prompts/F08review.txt",
+      "caption": "A single rollout $u$ can contain multiple action-time contexts. Each segment retains context $c^{(i)}$, sampled tokens $x^{(i)}$, behavior probabilities $\\mu^{(i)}$ and learning mask $m^{(i)}$. Terminal outcome $R$ may weight later learning terms; it is not an additional conditioning argument of the displayed action likelihood. The lower circles denote learning computations, not behavior calls. This schematic omits the full post-training objective and correction factors.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "964551f75e441bb02a5a6987866240cd1f8660710b7ff89df158efd6414a3a1e",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "referenced_assets": [
+        "book/figures/assets/F08review_input.png"
+      ],
+      "referenced_prompts": [
+        "book/figures/prompts/F08review_input.txt"
+      ],
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C20-review",
+      "asset": "book/figures/assets/F20review.png",
+      "prompt": "book/figures/prompts/F20review.txt",
+      "caption": "A hard-budget invariant accounts for settled spend and bounded outstanding commitments. Admission reserves an upper cost before dispatch. Keyed idempotent settlement atomically records the actual charge and releases only the unused reservation in the same linearizable ledger used for admission. Unresolved operations retain commitments until remaining charges are bounded; cancellation alone does not release them.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "418544ae5ba15f8a63c25e98ada96e3e6809e6a1fc3cd0223332e1e3fc7d132c",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C09-review",
+      "asset": "book/figures/assets/F09review.png",
+      "prompt": "book/figures/prompts/F09review.txt",
+      "caption": "Search-time scores and report-only acceptance labels serve different roles. Under one fixed acceptance map $f$, the displayed indicators satisfy $A\\le C$ when $\\widehat y\\in\\mathcal{Y}$. The probability notation abbreviates $\\Pr(A=1)$ and $\\Pr(C=1)$; the decomposition requires $\\Pr(C=1)>0$. A fallible checker measures its declared acceptance criterion. Pruning attribution additionally requires stage-labelled candidate records; the selected artifact alone is insufficient.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "db153fcc73214c7ac2ce0e043b6cbbf1626e89bd85a05ead18fdba61a6c3fea5",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "referenced_assets": [
+        "book/figures/assets/F09review_input.png"
+      ],
+      "referenced_prompts": [
+        "book/figures/prompts/F09review_input.txt"
+      ],
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C21-review",
+      "asset": "book/figures/assets/F21review.png",
+      "prompt": "book/figures/prompts/F21review.txt",
+      "caption": "Workers can read one versioned snapshot while retaining candidate interpretations privately. Only the promotion path publishes accepted candidates into a new shared view; unresolved candidates remain separate. Provenance, conflict and applicability checks retain an auditable decision boundary. The gate does not establish semantic truth, current effect authority, or a performance improvement.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "2c7e3f9a4c62b627b1243d56bc6186b0aaf0f964a4867b7790dc29e4bc96b9f8",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C33-review",
+      "asset": "book/figures/assets/F33review.png",
+      "prompt": "book/figures/prompts/F33review.txt",
+      "caption": "The constructed workflows require different witnesses: protected behavior checks, source-level review, or held-out evaluation. Each claim record binds the delivered artifact to its versioned state, current authority and actual witness scope. A passing local check does not certify the complete workflow.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "99789cffd8af87f65b5d473a13edf0475d9b9f468cc3dbe12c31f5964c3547f9",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C10-review",
+      "asset": "book/figures/assets/F10review.png",
+      "prompt": "book/figures/prompts/F10review.txt",
+      "caption": "An observation-time precondition can become stale before execution. Here an intervening update changes version $v$ to $v+1$, so a service-supported atomic expected-version check rejects the proposed write. The planner must refresh or reconcile. This original mechanism example does not attribute atomicity to an ordinary client-side check.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "40286c4d1b8b7eb03823d2bbdbdb0fb83d9c95e4d2fd1306797be1dfbfdb0a97",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "referenced_assets": [
+        "book/figures/assets/F10review_input.png"
+      ],
+      "referenced_prompts": [
+        "book/figures/prompts/F10review_input.txt"
+      ],
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C11-review",
+      "asset": "book/figures/assets/F11review.png",
+      "prompt": "book/figures/prompts/F11review.txt",
+      "caption": "Deterministic retention restricts the available decision rules, so $R^*(H)\\leq R^*(Z)$ under the stated Bayes-risk assumptions. A fixed model can nevertheless perform better on a compressed view because computation, distraction and serialization affect its realized behavior. The right-hand risks have no universal ordering. This original schematic contains no empirical comparison.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "a64789a0daf593043288e193a3aef7d2f246bf804e54db39585324152780d521",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C22-review",
+      "asset": "book/figures/assets/F22review.png",
+      "prompt": "book/figures/prompts/F22review.txt",
+      "caption": "A deterministic migration criterion compares the two paths through corresponding fixture states. On an admitted transition-closed domain, migration must commute with the state transition and preserve the declared observable events. Finite fixtures test reached states; they do not prove the universal identities or establish remote-effect uniqueness.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "095beb7e9b8912c6af6947b5895d846255a06a9bfc9b0d3f93879d71c219b78b",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C34-review",
+      "asset": "book/figures/assets/F34review.png",
+      "prompt": "book/figures/prompts/F34review.txt",
+      "caption": "State continuity separates the information used by a policy, current dispatch authority and evidence of external effects. Permission does not establish source truth, and an authorized dispatch can leave the effect ledger unknown. Compatibility and independent evaluation are obligations for updates, rather than guarantees inherited from one component score.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "8a465264481eb919428e78d42f79964a746975e4d855c76716ad059f409c54b9",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C23-review",
+      "asset": "book/figures/assets/F23review.png",
+      "prompt": "book/figures/prompts/F23review.txt",
+      "caption": "The same execution record is checked against two artifact revisions. It binds to the tested artifact in the left panel; the illustrated edit changes the digest and invalidates that binding in the right panel. Matching provenance identifies the object tested, while requirement coverage, the declared environment and current authority need their own checks.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "33f8f441d371b7d0842f55ab0932e02440359b9b29224febd6b80cb36800ed24",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C32-review",
+      "asset": "book/figures/assets/F32review.png",
+      "prompt": "book/figures/prompts/F32review.txt",
+      "caption": "Recovery retains operation identity and distinguishes submission from commitment evidence. A missing receipt does not prove absence. Only the service contract can justify a confirmed effect or a final negative outcome; otherwise the ledger stays unresolved. Configuration rollback does not reverse an external effect.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "df4c6b90d2e29643dd7f9ea76bcbb2a0e718d800811db09fd278b74a36498d44",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "referenced_assets": [
+        "book/figures/assets/F32review_input.png"
+      ],
+      "referenced_prompts": [
+        "book/figures/prompts/F32review_input.txt"
+      ],
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    },
+    {
+      "id": "C12-review",
+      "asset": "book/figures/assets/F12review.png",
+      "prompt": "book/figures/prompts/F12review.txt",
+      "caption": "A paired continuation diagnostic changes the working view while restoring the same external boundary state and holding the continuation policy fixed. Disabling later compression isolates the current replacement. Outcome hazard $H=\\mathbb E[R^-]-\\mathbb E[R^+]$ and interaction burden $B=\\mathbb E[L^+]-\\mathbb E[L^-]$ quantify different consequences. Estimation requires validated restoration and repeated continuations; no outcomes are depicted. Original schematic informed by PAIR~\\cite{min2026pair}.",
+      "pixel_dimensions": [
+        1536,
+        1024
+      ],
+      "sha256": "3b6a49818de102ca32441015a11c54c584a68bf71f135b6ea34cb1637aa70328",
+      "method": "Original built-in image-generation tool; no plotting or code-to-image authoring",
+      "model_identifier": "Not exposed by tool",
+      "source_figure_copied": false,
+      "print_width_mm": 124,
+      "effective_dpi": 314.6,
+      "status": "Accepted in complete cumulative technical review edition",
+      "scope": "Conceptual mechanism or analytical construction; no generated empirical results",
+      "referenced_assets": [
+        "book/figures/assets/F12review_input.png",
+        "book/figures/assets/F12review_layout_input.png"
+      ],
+      "referenced_prompts": [
+        "book/figures/prompts/F12review_input.txt",
+        "book/figures/prompts/F12review_layout_input.txt"
+      ],
+      "validation_pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+      "label_and_arrow_review": "Native labels, symbols, arrows and caption scope checked; actual cumulative PDF placement inspected individually at180dpi.",
+      "print_proof_scope": "Screen-raster review; physical paper proof not performed"
+    }
+  ],
+  "visual_language": "Chapter1: flat charcoal/white linework, restrained functional orange, aligned panels, monoline symbols, defined arrows, short print-readable labels. Other existing figures retain their prior grammar pending chapter review.",
+  "numerical_results_in_images": false
+}

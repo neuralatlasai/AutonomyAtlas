@@ -1,0 +1,29 @@
+\section{A complete capacity calculation}\label{sec:C31:02}
+For a homogeneous attention model, a BF16 KV cache requires
+\begin{equation}
+ M_{\rm KV}=2Lh_{\rm KV}d_hb\sum_{i=1}^{B}T_i.
+ \label{eq:c31:capacity}
+\end{equation}
+The dimensions are layers $L$, KV heads $h_{\rm KV}$, head dimension $d_h$, element bytes $b$, and retained tokens $T_i$ per active sequence. The factor two counts keys and values. GQA reduces $h_{\rm KV}$ without reducing the number of query heads by the same factor. Quantization adds scale and packing overhead. Replication, copy-on-write pages, speculative tokens, and allocator slack require additional terms. PagedAttention changes allocation and sharing; it does not remove linear growth in the tokens actually retained~\cite{kwon2023pagedattention}.
+
+Consider a hypothetical dense model with $P=8\times10^9$ parameters, $L=32$, hidden size $d=4096$, $h_{\rm KV}=8$, $d_h=128$, and two-byte weights and KV elements. Assume a device exposes 80 GiB usable memory and reserve 6 GiB for workspaces and other runtime allocations. This is an analytical configuration, not a claim about a named commercial accelerator. Weight storage is $16\times10^9$ bytes, approximately 14.90 GiB. KV storage per retained token is $131{,}072$ bytes, or 128 KiB. A sequence retaining $32{,}768$ tokens therefore consumes 4 GiB of KV state.
+
+Ignoring page slack, fourteen such sequences require $56+14.90+6=76.90$ GiB and fit the assumed capacity. Fifteen require 80.90 GiB and do not. The result is a capacity bound under the stated dimensions, not a measured sustainable concurrency. Admission must leave headroom for new generated tokens and transient buffers. If each of fourteen sessions can generate another 4,096 tokens before releasing memory, their additional KV demand is 7 GiB, exceeding the remaining headroom. A scheduler that admits only on current allocation can fail midway through otherwise valid requests.
+
+\begin{table}[!htbp]
+\centering
+\caption{Calculated capacity under the hypothetical dense-model workload.}\label{tab:C31:capacity}
+\begin{tabular}{L{0.35\linewidth}L{0.25\linewidth}L{0.24\linewidth}}
+
+\toprule Calculated quantity & Hypothetical value & Interpretation\\\midrule
+Weight bytes & $16\times10^9$ & BF16 parameter storage only.\\
+KV bytes per token & $131{,}072$ & Global unsharded homogeneous cache.\\
+KV per 32,768-token sequence & 4 GiB & Before allocator and metadata overhead.\\
+Fourteen sequences plus reserve & 76.90 GiB & Fits current-state capacity assumption.\\
+Fourteen 4,096-token continuations & Additional 7 GiB & Requires admission reserve or eviction.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Hybrid models require a layer-group accounting model rather than multiplying one retention length by every layer. The inspected October 2026 vLLM snapshot distinguishes full-attention retention from sliding-window retention and groups compatible layers in a common allocation scheme. Its design document warns that some descriptions originate at an earlier implementation revision; current code and cache specifications must resolve discrepancies~\cite{repo_vllm}. For analysis, write $M=\sum_g M_g$ with each group defined by its state shape, retention rule, precision, and checkpoint policy. A recurrent state may have constant active size per sequence while its reusable historical checkpoints still consume storage. Constant active state is not equivalent to cost-free prefix reuse.
+

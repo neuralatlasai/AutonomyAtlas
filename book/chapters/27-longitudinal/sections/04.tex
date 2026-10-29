@@ -1,0 +1,11 @@
+\section{Task order adaptation and hidden curricula}\label{sec:C27:order}
+An evolving memory makes task order part of the treatment. Early episodes determine which procedures and mistakes enter the bank; later episodes determine whether those records are useful. A default dataset order may contain an implicit curriculum, grouping related tasks or increasing difficulty. Improvement along that sequence does not establish order-robust learning.
+
+The fragility study reevaluates memory-based self-improving agents across multiple runs and shuffled orders, identifying substantial sensitivity to variance, order, and underspecification~\cite{ye2026fragility}. Its findings apply to the tested methods and environments, not every possible self-improvement architecture. The methodological implication is strong: one cumulative curve under one order is insufficient evidence for a stable improvement mechanism.
+
+Use several independently constructed memory trajectories for each experimental condition. Within a trajectory, tasks share an evolving bank and are dependent. Across trajectories, randomize order and model sampling as declared. If a common initial bank is used, treat its construction as another factor rather than assume it is representative. Report variation across banks and orders, not only average task accuracy pooled over all calls.
+
+Curriculum effects can be studied directly. Compare random order, grouped order, reversed order, and an explicitly designed curriculum while holding the task multiset fixed. A curriculum that improves performance is a legitimate result if named as such. The error is presenting that conditional benefit as spontaneous general improvement. Also test new task families that do not share the procedures learned early in the sequence.
+
+Underspecified tasks can contaminate memory with misleading lessons. If a failure arose from an ambiguous objective or unavailable tool, the agent may store an incorrect procedural correction. Later reuse then amplifies the original ambiguity. Memory construction should record failure attribution and uncertainty, and evaluations should distinguish environment failure from policy failure. Additional rubrics can improve specification while also giving the learner more supervision; that information difference belongs in the treatment description.
+

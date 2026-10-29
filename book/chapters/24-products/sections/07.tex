@@ -1,0 +1,41 @@
+\section{A reproducible evidence-review transaction}\label{sec:C24:transaction}
+A research agent can implement evidence review as a transaction over claim records. New sources enter a staging area, identity resolution determines lineage and version, extraction proposes claims, and validation checks support and conflicts. Only then are accepted claims available for synthesis. Rejected or unresolved claims remain auditable without becoming authoritative memory. This separates acquisition success from evidential acceptance.
+
+Let $s$ be a source and $q$ the research question. Version resolution $\mathcal I$, location-preserving extraction $\mathcal X$, and claim proposal $\mathcal G$ define
+\begin{equation}
+\begin{aligned}
+ \eta&=\mathcal I(s),\qquad
+ \mathcal E=\mathcal X(s;\eta),\\
+ (c_1,\ldots,c_m)&=\mathcal G(\mathcal E,q).
+\end{aligned}
+\label{eq:C24:evidence_candidates}
+\end{equation}
+The identity $\eta$ binds the source lineage and inspected version; every observation in $\mathcal E$ retains its location. Each $c_i$ records a proposition, applicable population, evidence class, source version, locator, assumptions, and unresolved limitations. Proposal does not imply support. Let $\mathcal A(\mathcal E,\eta)$ be the candidate domain satisfying the declared scope and evidence-class requirements. Let $\mathcal B_0$ be the declared prior staging ledger and $\mathcal B_i$ its append-only extension after candidate $i$. Let $\mathcal K$ be the declared, versioned evidence corpus accessible under current research authorization; it may include relevant sources beyond the current extraction and staged records. For $i=1,\ldots,m$,
+\begin{equation}
+\begin{aligned}
+ N_i&=\mathcal N(c_i;\mathcal K,\mathcal E,\mathcal B_{i-1}),\\
+ (v_i,\zeta_i)&=
+ \begin{cases}
+  \mathcal V(c_i,N_i,\mathcal E),&c_i\in\mathcal A(\mathcal E,\eta),\\
+  (-1,\zeta_i^{\perp}),&c_i\notin\mathcal A(\mathcal E,\eta),
+ \end{cases}\\
+ r_i&=(\eta,c_i,N_i,v_i,\zeta_i),\\
+ \mathcal B_i&=\mathcal B_{i-1}\mathbin{\Vert}\langle r_i\rangle.
+\end{aligned}
+\label{eq:C24:staged_evidence_audit}
+\end{equation}
+The operator $\mathcal N$ retrieves relevant disagreements from $\mathcal K$, the current located evidence, and prior staged records, retaining source identities and locators. The audit $\mathcal V$ returns a verdict $v_i\in\{-1,0,1\}$ and its evidence $\zeta_i$; the values denote rejected, unresolved, and accepted. The record $\zeta_i^{\perp}$ states which scope or evidence-class check failed. The append operator $\Vert$ preserves each review occurrence, including rejected and unresolved records, without silently deduplicating their audit history.
+
+Acceptance is versioned evidence, not a permanent property of a proposition. Let $\kappa_t(r)\in\{0,1\}$ indicate that record $r$ has no unresolved invalidation under the current source versions, declared research scope, and review procedure. A corrected source or a newly discovered contradiction can set $\kappa_t(r)=0$ without rewriting the historical verdict. For current publication authority $A$, let $\chi_A(r)\in\{0,1\}$ indicate whether a staged record may be released. The available synthesis view is
+\begin{equation}
+ \mathcal P_A(\mathcal B_m)=
+ \{r\in\mathcal B_m:v(r)=1\ \land\ \kappa_t(r)=1
+ \ \land\ \chi_A(r)=1\}.
+\label{eq:C24:authorized_evidence_view}
+\end{equation}
+Here $v(r)$ extracts the recorded verdict, not an assertion of objective truth; the subscript $t$ on $\kappa_t$ makes the view time-dependent even when the append-only ledger is unchanged. The complete ledger remains available to authorized audit even when a record is absent from the synthesis view. A failed freshness check quarantines the dependent inference until re-review; it need not erase the observation that originally supported it. No candidate becomes authoritative merely because extraction or proposal succeeded.
+The audit function is not assumed infallible. It can combine deterministic checks, independent model review, and human adjudication, each with measured error characteristics. A deterministic check can verify that a cited page exists, but not that it supports an inference. A second model can detect some mismatches while sharing the first model's biases. Human review can resolve ambiguity but introduces cost and variation. The implementation should record which evidence supported acceptance.
+
+This transaction is particularly valuable when the research output becomes enterprise memory. Without staging, a speculative conclusion can be consolidated into a reusable skill and later appear as established policy. Requiring an evidence class and validity scope makes that promotion visible. Subsequent corrections can invalidate dependent records and trigger reevaluation of artifacts that used them. The system still needs a retention policy for sensitive source material and an authorization check before reuse.
+
+Evaluation should seed incorrect citations, outdated versions, incompatible populations, and plausible unsupported conclusions. Also include valid minority findings that conflict with a popular narrative. Measure support precision, coverage of decisive evidence, conflict retention, abstention, and revision correctness. These metrics prevent the system from optimizing citation count or agreement at the expense of scientific accuracy. They also provide a concrete basis for comparing research products whose internal architecture is unavailable.

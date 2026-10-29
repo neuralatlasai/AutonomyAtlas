@@ -1,0 +1,259 @@
+{
+  "validation_status": "complete",
+  "edition": "29 October 2026 cumulative technical review edition",
+  "literature_cutoff": "2026-10-29",
+  "pdf": "output/pdf/agentic_state_monograph.pdf",
+  "pdf_sha256": "fd03ac45e6700a4dc4cf9ead84a3206407c6ee60388fe4c1519ca686989c9d0b",
+  "physical_pages": 536,
+  "frontmatter_pages": 15,
+  "body_pages": 482,
+  "reference_pages": 39,
+  "main_text_physical_range_inclusive": [
+    16,
+    497
+  ],
+  "chapter_printed_ranges": {
+    "C01": [
+      1,
+      19
+    ],
+    "C02": [
+      20,
+      34
+    ],
+    "C03": [
+      35,
+      50
+    ],
+    "C04": [
+      51,
+      66
+    ],
+    "C05": [
+      67,
+      83
+    ],
+    "C06": [
+      84,
+      100
+    ],
+    "C07": [
+      101,
+      115
+    ],
+    "C08": [
+      116,
+      131
+    ],
+    "C09": [
+      132,
+      144
+    ],
+    "C10": [
+      145,
+      157
+    ],
+    "C11": [
+      158,
+      170
+    ],
+    "C12": [
+      171,
+      185
+    ],
+    "C13": [
+      186,
+      199
+    ],
+    "C14": [
+      200,
+      214
+    ],
+    "C15": [
+      215,
+      227
+    ],
+    "C16": [
+      228,
+      241
+    ],
+    "C17": [
+      242,
+      255
+    ],
+    "C18": [
+      256,
+      267
+    ],
+    "C19": [
+      268,
+      280
+    ],
+    "C20": [
+      281,
+      294
+    ],
+    "C21": [
+      295,
+      309
+    ],
+    "C22": [
+      310,
+      325
+    ],
+    "C23": [
+      326,
+      340
+    ],
+    "C24": [
+      341,
+      357
+    ],
+    "C25": [
+      358,
+      371
+    ],
+    "C26": [
+      372,
+      384
+    ],
+    "C27": [
+      385,
+      397
+    ],
+    "C28": [
+      398,
+      413
+    ],
+    "C29": [
+      414,
+      427
+    ],
+    "C30": [
+      428,
+      439
+    ],
+    "C31": [
+      440,
+      450
+    ],
+    "C32": [
+      451,
+      462
+    ],
+    "C33": [
+      463,
+      473
+    ],
+    "C34": [
+      474,
+      482
+    ]
+  },
+  "minimum_substantive_pages": 360,
+  "blank_or_title_only_body_pages": 0,
+  "short_no_image_tail_pages": [
+    {
+      "physical_page": 34,
+      "printed_page": "19",
+      "wordcount": 36,
+      "last_content_y": 111.42593383789062,
+      "text": "Agentic State\nChapter 1\npermissions, and unobserved external effects connect systems engineering\ndirectly to model behavior. Reliable autonomy is an end-to-end property of\nthis coupled process. The subsequent chapters develop the mathematical,\ncomputational, and empirical machinery needed to test it.\n19\n"
+    },
+    {
+      "physical_page": 65,
+      "printed_page": "50",
+      "wordcount": 48,
+      "last_content_y": 124.97494506835938,
+      "text": "Agentic State\nChapter 3\nso that a default action cannot obtain a misleadingly high score through\nprior frequency. The test measures a particular lost distinction; it cannot\nestablish that every important distinction survives. Nevertheless, it is\nmore diagnostic than averaging many easy tasks whose correct action is\nunchanged by the omitted history.\n50\n"
+    },
+    {
+      "physical_page": 81,
+      "printed_page": "66",
+      "wordcount": 32,
+      "last_content_y": 97.86595916748047,
+      "text": "Agentic State\nChapter 4\nmemory, policy conditioning, and deletion semantics. It also explains why\nthe durable event log, the visible context, and the retained cache must be\ninspected as separate state objects when diagnosing long-session behavior.\n66\n"
+    },
+    {
+      "physical_page": 98,
+      "printed_page": "83",
+      "wordcount": 81,
+      "last_content_y": 165.62295532226562,
+      "text": "Agentic State\nChapter 5\nfrom one channel. A high image-text similarity, an OCR confidence, and\na language-model token probability refer to different events and sample\nspaces. Multiplying them assumes a probabilistic model and dependence\nstructure that usually has not been established. A decision-level calibrator\ncan instead be trained and assessed against verified target selection or task\noutcomes, with separate evaluation under appearance and temporal shifts.\nCalibration then supports an explicit refresh or abstention policy rather\nthan decorating an uncertain action with an unjustified numerical score.\n83\n"
+    },
+    {
+      "physical_page": 256,
+      "printed_page": "241",
+      "wordcount": 95,
+      "last_content_y": 194.71392822265625,
+      "text": "Agentic State\nChapter 16\nMATM\u2019s state keys address procedural matching, and MemCalib addresses\nuse after evidence is supplied. Combining them is a design hypothesis, not\nan established composite result.\nThe original synthesis is to view retrieval as a controlled transition from\nstored evidence to active decision state. The transition must preserve\nsource identity, role, time, and access scope as well as content. Its success\nis measured by justified behavior under bounded cost, not by the number\nof records returned. Chapter 17 places this transition within a unified\nconsistency model linking the stored history, assembled context, policy,\ntools, and environment.\n241\n"
+    },
+    {
+      "physical_page": 270,
+      "printed_page": "255",
+      "wordcount": 84,
+      "last_content_y": 181.16494750976562,
+      "text": "Agentic State\nChapter 17\nstate which transitions are exact, which are approximate, which depend on\nmodel judgment, and which are unknown.\nThe cross-layer conclusion is that context, memory, and policy must\nevolve under compatible contracts. More storage does not repair wrong\nconditioning; correct transactions do not make a false abstraction true; a\ncurrent model does not make old skills compatible; and a well-formed tool\ncall does not establish authorization. Treating these distinctions together\nprovides a technical basis for reliable stateful execution without claiming a\ngeneral solution to intelligence.\n255\n"
+    },
+    {
+      "physical_page": 465,
+      "printed_page": "450",
+      "wordcount": 48,
+      "last_content_y": 124.97494506835938,
+      "text": "Agentic State\nChapter 31\nprove aggregate throughput while delaying critical tool actions; compressed\nKV may preserve average language quality while corrupting rare arguments.\nThe deployment decision follows from the joint quality, latency, cost, and\nreliability envelope. Peak throughput is one coordinate of that envelope,\nnot a sufficient description of an agent-serving system.\n450\n"
+    }
+  ],
+  "conservative_pages_excluding_every_short_no_image_tail": 475,
+  "page_count_limit": "Body-range count excludes front matter and references. Removing all seven no-image tails below100 body words still leaves475 pages. This density screen is conservative and is not independent certification of scientific merit.",
+  "chapters": 34,
+  "sections": 266,
+  "subsections": 39,
+  "original_generated_figures": 35,
+  "cited_references": 356,
+  "master_input_bibliographic_records": 378,
+  "source_crosswalk_rows": 479,
+  "build": {
+    "references_stable": true,
+    "latex_passes": 3,
+    "undefined_references_or_citations": false,
+    "missing_glyphs": false,
+    "overfull_boxes": 0
+  },
+  "global_checks": {
+    "all_physical_pages_geometry_scanned": true,
+    "offpage_nonwhitespace_glyphs": 0,
+    "invisible_text_runs": 0,
+    "unresolved_source_refs": 0,
+    "citation_and_bibliography_numbers_contiguous": true,
+    "all_body_reference_footers_match_page_labels": true,
+    "chapter_section_bookmarks_correct": true,
+    "subsections_intentionally_not_bookmarked": 39,
+    "all_subsection_titles_present": true,
+    "private_process_paths_in_pdf": 0
+  },
+  "visual_review": {
+    "all_pages_layout_screened": true,
+    "all_35_figure_placements_individually_inspected": true,
+    "method": "AI-assisted contact-sheet overview plus individual 180-dpi figures, tables, dense equations, short tails and changed pages; immutable review transfers checked with exact 150-dpi content crops. Not a word-by-word reread of every PDF page.",
+    "extraction_note": "Nine null character mappings in extensible math delimiters render correctly; text extraction has this limitation.",
+    "physical_paper_proof": false
+  },
+  "mechanical_warning_adjudication": {
+    "repository_or_mutable_document_publication_year": "Twenty-five raw input records omit publication year rather than inventing it; pinned revisions/access dates remain.",
+    "raw_input_identifier_aliases": "Five old/current version pairs in the master input collection; cited output selects only one version per paper.",
+    "underfull_boxes": "32 line/box spacing warnings screened in rendered review; no blocking clipping or overlap.",
+    "margin_candidates": "Ten font bounding-box protrusions remain inside the physical page; reviewed layout has no clipped content."
+  },
+  "source_rebuild": {
+    "status": "passed",
+    "scope": "Clean extracted archive; exact labels, text geometry and all page rasters at150dpi compared with this PDF.",
+    "independent_experimental_reproduction": false
+  },
+  "evidence_limits": [
+    "Source inspection is not experimental reproduction.",
+    "Current source crosswalk retains explicit chapter-specific review limits.",
+    "No human principal-scientist endorsement or venue acceptance is claimed.",
+    "The image tool did not expose its model identifier.",
+    "A venue-specific submission and human authorship metadata are separate from this complete monograph."
+  ]
+}

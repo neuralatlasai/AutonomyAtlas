@@ -1,0 +1,26 @@
+\section{Self-correction can also damage correct work}
+\label{sec:C10:correction}
+Self-correction is a transition from an existing candidate to a revised candidate based on feedback. Its value depends on both repair and corruption. Let the original candidate be correct with probability $p$, let $r$ be the probability of repairing an incorrect candidate, and let $c$ be the probability of corrupting a correct one. Under these aggregate conditional definitions, revised correctness is $p(1-c)+(1-p)r$, so the gain is $(1-p)r-pc$. Correction helps only when repair benefit exceeds damage to already correct work. A high repair rate alone is insufficient evidence of a useful correction system.
+
+With hypothetical $p=0.9$, $r=0.3$, and $c=0.05$, revised correctness is $0.885$, a decrease of 1.5 percentage points despite repairing 30 percent of initial errors. These are calculated probabilities, not experimental results. The example explains why evaluation should include initially correct cases and preserve their outputs before revision. A benchmark restricted to known failures can measure repair ability while missing the full system's regression rate. A correction gate that accepts only independently validated improvements can reduce corruption, but inherits the validator's own false-acceptance and coverage limits.
+
+Reflexion uses verbal feedback and episodic reflection to influence later attempts without treating that textual update as a weight update~\cite{shinn2023reflexion}. This is a useful mechanism for memory-mediated adaptation. Its success depends on informative feedback, appropriate retrieval, and a policy that interprets the reflection correctly. A reflection can overgeneralize from one failure, blame the wrong component, or become stale after a tool change. Store the supporting case and applicability conditions rather than promoting every reflection into an unconditional rule.
+
+{\small\setlength{\tabcolsep}{3pt}
+\begin{table}[!htbp]
+\centering
+\caption{Calculated correction behavior and required controls.}\label{tab:C10:correction}
+\begin{tabular}{L{29mm}L{37mm}L{40mm}}
+
+\toprule Quantity & Hypothetical value & Interpretation\\\midrule
+Initial correctness $p$ & 0.90 & Most candidates already correct.\\
+Repair rate $r$ & 0.30 & Conditional on an initial error.\\
+Corruption rate $c$ & 0.05 & Conditional on initial correctness.\\
+Revised correctness & 0.885 & Net effect includes both transitions.\\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+
+Multiple correction rounds can amplify shared errors. If the same model supplies the candidate, critique, and acceptance judgment, agreement need not indicate independent confirmation. A stronger experimental design crosses candidate generator, feedback source, and acceptance checker, retaining a common task set. Include no-feedback resampling to distinguish genuine feedback use from another chance to sample. Include misleading but plausible feedback to test whether the policy can reject unsupported corrections. The desired behavior is evidence-sensitive revision, not unconditional obedience to the latest criticism.
+

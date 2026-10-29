@@ -1,0 +1,16 @@
+\section{A tool call is a typed state transition}\label{sec:C18:contract}
+A tool exposes a capability through an interface that an agent can invoke. Its scientific description should include input and output types, preconditions, side effects, failure states, authority requirements, and version identity. A natural-language name and argument schema provide only part of that contract. Two tools with identical JSON shapes can have different resource scopes or effect semantics. A model can produce a syntactically valid call that is operationally wrong.
+
+For environment state space $\mathcal X$, argument space $\mathcal U_j$, observation space $\mathcal O_j$ and receipt space $\mathcal E_j$, represent tool $j$ by a transition kernel
+\begin{equation}
+ \mathcal T_j(dx',do,d\eta\mid x,u,A),
+ \quad u\in\mathcal U_j.
+\end{equation}
+Here $A$ is current trusted authority, $o\in\mathcal O_j$ an observation and $\eta\in\mathcal E_j$ a typed receipt or uncertainty state. Rejection, timeout and partial completion need explicit outcomes; a partially observed kernel does not give the model access to $x$ or to privileged authorization state. A successful HTTP response is not necessarily proof that the intended business effect occurred; a timeout is not proof that it did not. Chapter~\ref{ch:C13} analyzes the resulting recovery ambiguity.
+
+The model's tool-use decision has at least three stages: select a capability, construct its arguments, and decide how to interpret its result. Toolformer and ReAct are foundational examples of learning or prompting tool-augmented behavior~\cite{schick2023toolformer,yao2022react}. They should not be treated as descriptions of every current runtime. Contemporary systems add discovery, typed schemas, external enforcement, code-based composition, and durable execution. Each addition changes the effective policy and its failure surface.
+
+A contract should identify which fields are exact. Resource identifiers, operation keys, and authority scopes should not be reconstructed from a vague summary when exact values are available. Free-text queries can remain flexible. Output records should separate authoritative data from tool-generated explanations and untrusted external content. Returning a page that contains instructions does not grant those instructions authority over the agent. The wrapper must preserve that distinction when the result enters active context.
+
+For evaluation, define success at the tool boundary and at the task boundary. A schema-valid call can fail a tool precondition. A tool-successful call can be irrelevant to the task. A task can appear solved while the agent produces an unauthorized side effect. These outcomes need separate labels. A single ``tool accuracy'' number is ambiguous unless it specifies whether it measures tool selection, argument validity, execution, or complete justified behavior.
+

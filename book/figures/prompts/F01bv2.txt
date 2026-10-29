@@ -1,0 +1,15 @@
+Use case: scientific-educational.
+Create a NEW original expert-research schematic, landscape3:2, paper-flat white background, crisp thin charcoal lines, restrained regular-weight sans-serif typography, large readable mathematical labels, careful alignment and whitespace. Match a sophisticated engineering publication: no canvas border, no enclosing panel frames, no huge bold banner text; just one very light gray separator between two horizontal panels. Headings about40px, body labels about34–36px, annotations at least32px on a1536px canvas. Orange may outline training process nodes only. No gradients, shadows,3D, textures, clipart, folded documents for numeric outputs, padlocks, logos or watermark. This is an original symbolic experimental-design figure, not observed data.
+
+TOP PANEL heading exactly "(a) Model × harness intervention".
+Show a clean two-by-two experimental design. Two column headers "Harness h₀" and "Harness h₁", two row labels "Frozen policy θ₀" and "Frozen policy θ₁". The four outlined cells contain, respectively:
+upper-left J₀₀
+upper-right J₀₁
+lower-left J₁₀
+lower-right J₁₁
+These are pure mathematical outcome symbols, not measured numbers or rankings. Use ample space around every subscript. Above the grid a modest shared annotation reads "Same tasks · Same evaluation budget". Below the grid the exact annotation "Jᵢⱼ = J(θᵢ, hⱼ)" defines indexing. No heatmap colors, empirical scores, stars or winner marks. Keep grid rules thin; no heavy table scaffolding.
+
+BOTTOM PANEL heading exactly "(b) Matched adaptation".
+Use two parallel left-to-right branches from one shared initial model state. At left an unfilled circle containing θ with small subscript "init", labeled "Same initialization". It branches to two orange-outline process rectangles: upper "Train in h₀", lower "Train in h₁". Each connects to its own plain model-state rectangle containing respectively θ₀′ and θ₁′; label above this column "Freeze for evaluation". From each frozen-state rectangle an arrow leads to its own unfilled evaluation process rectangle: "Evaluate in h₀" / "Evaluate in h₁". Above training nodes a shared annotation reads "Matched training budget"; above evaluation nodes a shared annotation reads "Common held-out tasks".
+Use ordinary thin solid arrows for configured computation, branching only at the shared initial state. The two evaluation branches stay separate. No feedback path from evaluation to training. No security lock icons: frozen means fixed model weights, not permission. Primes indicate adapted checkpoints, never certified optima; do NOT use stars.
+Every label and every Greek symbol/subscript must be correct. All symbols are analytical placeholders with no numeric performance evidence. Do not add text beyond these labels, illustrative benchmark values, diagrams of brains or corporate branding. Prioritize optical balance, print readability at124mm width and precise distinction between the two experimental questions.

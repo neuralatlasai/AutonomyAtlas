@@ -1,0 +1,15 @@
+\chapter{Alignment, Authorization, and Constrained Autonomy}\label{ch:C29}
+OpenAI Agents Python v0.24.0's October change to defer automatic compaction during pending approvals exposes an alignment problem with a concrete runtime boundary~\cite{executionrelease02}. A review request, the evidence it refers to, and the proposed effect must remain interpretable until a decision is applied. The release note establishes an implementation change, not universal approval correctness. Combined with Progent's distinction between policy narrowing and expansion, it motivates treating objectives, evidence, authority, and dispatched effects as separate versioned commitments~\cite{corpus250411703}.
+
+Alignment concerns how system behavior relates to intended objectives, preferences and constraints. Authority concerns who may define or change those objectives and which effects the system may cause. The distinction is essential for agents. A model can correctly infer a user's preference while lacking permission to act on it; an application can enforce permissions while optimizing an inappropriate proxy. Reliable autonomy requires both a useful policy and a current, enforceable account of authority.
+
+This chapter connects training objectives to operational control, human review, privacy, memory and deployment decisions. It treats approvals, monitors and evaluators as fallible components. No finite evaluation establishes universal alignment, and no role label or persistent identity establishes that a system understands organizational intent. The practical question is which constraints can be enforced, which judgments can be measured, and which uncertainties remain material to deployment.
+
+\input{book/chapters/29-alignment/sections/01.tex}
+\input{book/chapters/29-alignment/sections/02.tex}
+\input{book/chapters/29-alignment/sections/03.tex}
+\input{book/chapters/29-alignment/sections/04.tex}
+\input{book/chapters/29-alignment/sections/05.tex}
+\input{book/chapters/29-alignment/sections/06.tex}
+\input{book/chapters/29-alignment/sections/07.tex}
+\input{book/chapters/29-alignment/sections/08.tex}

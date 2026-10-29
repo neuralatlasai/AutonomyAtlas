@@ -1,0 +1,28 @@
+\section{A bounded behavior-preservation proposition}\label{sec:C17:bound}
+Consider two finite-horizon agent variants on a common observation/action/environment trajectory space. Let $h_t$ be its history immediately before action $t$, excluding variant-private context, memory and editor metadata. Both variants have the same initial law and the same nonpolicy observation/environment kernels conditional on this history and action, and use a common complete action alphabet including failure or termination outcomes. The horizon is $T\in\mathbb N_{>0}$; terminated runs are padded by the same absorbing outcome. The laws $p_t(\cdot\mid h_t)$ and $q_t(\cdot\mid h_t)$ are the actual action distributions conditional on this common history. For deterministic context constructors they are obtained by applying each constructor and the deployed decoder to $h_t$. With random private editor state, they must instead marginalize its conditional law; a model distribution at one sampled prompt does not establish this premise. At every matched reachable history, assume $\operatorname{TV}(p_t,q_t)\leq\varepsilon_t$, where $0\leq\varepsilon_t\leq1$. Couple initial states identically and couple actions maximally while the common histories agree. Conditional on no earlier divergence, agreement at step $t$ has probability at least $1-\varepsilon_t$. Therefore, for the same $[0,1]$-valued functional $Y$ measurable on this common trajectory space,
+\begin{equation}
+ |\mathbb EY_{\rm orig}-\mathbb EY_{\rm edit}|
+ \leq1-\prod_{t=0}^{T-1}(1-\varepsilon_t)
+ \leq\min\!\left(1,\sum_{t=0}^{T-1}\varepsilon_t\right).
+ \label{eq:C17:coupling}
+\end{equation}
+The first bound follows because identical trajectories have identical $Y$, while its difference is at most one after divergence. No independence of stepwise errors is assumed. For uniform $\varepsilon_t=\varepsilon$, the bound becomes $1-(1-\varepsilon)^T\leq\min(1,T\varepsilon)$. This is a standard coupling deduction under explicit hypotheses, not a measured guarantee for a context editor.
+
+A KL premise permits a sharper horizon dependence than applying Pinsker separately at every step. Let $P$ and $Q$ be the laws of the common trajectory projection just defined, and require $P\ll Q$. With common nonpolicy factors, the chain rule gives
+\begin{equation}
+ \operatorname{KL}(P\Vert Q)=
+ \sum_{t=0}^{T-1}\mathbb E_{h_t\sim P}
+ \operatorname{KL}\{p_t(\cdot\mid h_t)\Vert q_t(\cdot\mid h_t)\}.
+\end{equation}
+Thus, if this sum is at most a finite $K_T\geq0$, the bounded-functional variational inequality and Pinsker's inequality yield
+\begin{equation}
+ |\mathbb EY_{\rm orig}-\mathbb EY_{\rm edit}|
+ \leq\min(1,\sqrt{K_T/2}).
+\end{equation}
+Natural logarithms and $\operatorname{TV}=\sup_B|P(B)-Q(B)|$ are used~\cite{ch02_reid2011}. A uniform conditional KL bound $\eta$ implies $K_T\leq T\eta$, giving $\min(1,\sqrt{T\eta/2})$. The stronger population premise can also hold as an expectation under the original trajectory distribution without being uniform. A finite average over unrelated ordinary prompts establishes neither premise. Estimating the relevant expectation still needs the sampling and uncertainty controls of Chapter~\ref{ch:C02}; rare missing obligations can remain untested.
+
+The histories in these comparisons are matched common histories, even though each variant constructs a different model-visible view from them. The result bounds observable task outcomes on this projection. It does not bound functionals of private memory, context strings or internal metadata: those can differ even when every action agrees. Enlarging the trajectory to include such variables requires their transition kernels in the likelihood ratio and coupling. Changing environment dynamics, tool effects or authorization kernels likewise invalidates cancellation unless those changes are modeled. Once coupled trajectories diverge, later inputs may differ arbitrarily; the coupling bound does not assume they remain close. A cumulative reward requires its own bounded range rather than silently reusing the terminal $[0,1]$ scale.
+
+There is a separate exact enforcement property. If a trusted monitor admits only actions in its current allowed set and mediates every consequential effect, a context edit cannot dispatch an outside action through that monitor. The property depends on correct interpretation, current authority and complete mediation; it still permits allowed but wrong actions. It does not establish effect-ledger truth or task correctness. This keeps the proposal, authority and recorded-effect contracts separate.
+
+For a falsifiable experiment, freeze the decoder, parser, tools, environment fixture and current authority, then compare next-action laws at matched pre-edit states. Report the worst observed cases, missing support, and the workload sampling distribution. Neither an empirical maximum nor a few repeated continuations establishes a global supremum over histories. The derivations identify what must be bounded; they do not supply the required evidence by themselves.

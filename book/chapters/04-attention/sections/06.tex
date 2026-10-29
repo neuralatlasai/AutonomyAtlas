@@ -1,0 +1,47 @@
+\section{Approximate caches and a bounded perturbation argument}
+\label{sec:C04:approximation}
+Quantization and eviction change the attention input, whereas tiled exact kernels primarily change evaluation order. Consider a single query $q$, original keys $k_j$, and approximations $\widetilde k_j$ with $\|\widetilde k_j-k_j\|_2\leq\epsilon_K$. Cauchy--Schwarz gives a logit perturbation at most $\epsilon=\|q\|_2\epsilon_K/\sqrt{d_h}$. If every logit changes by at most $\epsilon$, then the ratio between corresponding softmax probabilities lies between $e^{-2\epsilon}$ and $e^{2\epsilon}$. The numerator changes by at most $e^{\pm\epsilon}$ and the normalization by the same factor, which proves the ratio bound directly.
+
+Let $p,\widetilde p$ be the two probability vectors. The ratio bound yields the conservative estimate
+\begin{equation}
+ \operatorname{TV}(p,\widetilde p)
+ \leq \min\{1,(e^{2\epsilon}-1)/2\}.
+\end{equation}
+If original values have norm at most $B_V$ and every value perturbation has norm at most $\epsilon_V$, the output difference satisfies
+\begin{equation}
+ \|\widetilde O-O\|_2
+ \leq2B_V\operatorname{TV}(p,\widetilde p)+\epsilon_V.
+\end{equation}
+The proof adds and subtracts $\sum_j\widetilde p_jv_j$, then applies the triangle inequality. These are elementary deductions under explicit per-vector error bounds. They do not assert a useful end-to-end task guarantee: query norms, downstream amplification, and proximity to action decision boundaries can make a small tensor error consequential.
+
+Eviction requires a different argument because removed positions need not have small key perturbations. If an evicted set has total original attention mass $\alpha<1$, renormalizing the nonempty retained set changes the output by at most $2\alpha B_V$ when all values have norm at most $B_V$. This follows by writing the original output as the mixture of retained and removed conditional outputs. When $\alpha=1$, retained-set renormalization is undefined and an explicit fallback is required. The bound is informative only when $\alpha$ is known or controlled for the actual query. Historical average attention mass is not a guarantee for a future query about an old rare fact. An agent that suddenly revisits an early constraint can violate the heuristic's premise.
+
+A local tensor bound reaches a discrete decision only through an additional stability condition. Let output logits $\ell$ change by at most $\eta$ in maximum norm, and let $v^*$ be their unique maximizer. Greedy selection is unchanged if
+\begin{equation}
+ \ell_{v^*}-\max_{v\ne v^*}\ell_v>2\eta.
+\end{equation}
+The inequality follows by subtracting the worst perturbation from the leading logit and adding it to its strongest competitor. Extending it through an autoregressive action requires the margin condition at every shared-prefix step, not only at the first token. Stochastic sampling needs a distributional or coupling analysis instead. Consequently, an attention-output tolerance alone does not certify preservation of a tool name, an identifier, or a permission-sensitive argument. Numerical tests should retain action-margin failures alongside mean tensor error.
+
+These distinctions define appropriate ablations. Compare exact attention, reduced precision without eviction, eviction without quantization, and their combination. Measure tensor discrepancies, next-token distribution changes, action validity, and complete task outcomes. Include queries that make an old low-frequency constraint suddenly relevant. A cache method can maintain language-model perplexity while damaging stateful decision reliability. The converse can also occur when a task never uses the affected information. The experiment should identify that dependence rather than presenting one aggregate quality number as a universal cache-safety certificate.
+
+\subsection{Compression phase is a distinct positional variable}
+\label{sec:C04:phase}
+The September 2026 study of periodic weak spots reports retrieval sensitivity to a fact's position within chunked compression windows, including effects that persist without RoPE and with uniform compression weights~\cite{rewrite_kvphase2026}. This is a different mechanism from a generic average cache-error bound. Let windows begin at indices $b+kS$, with stride $S\geq1$, width $W$, and origin $b$. The source position $i$ has phase
+\begin{equation}
+ \phi_b(i)=(i-b)\bmod S.
+\end{equation}
+For compressed states $c_k=F(h_{b+kS},\ldots,h_{b+kS+W-1})$, shifting content while keeping $b$ fixed can change which vectors share a compression entry and their within-window roles. It need not preserve the information available to a future query, even when relative distances among the task's relevant tokens stay unchanged.
+
+This should not be confused with exact rotary-position algebra. For fixed unrotated query and key vectors and an orthogonal rotation family satisfying $R_i^\top R_j=R_{j-i}$, a common position shift gives
+\begin{equation}
+ (R_{i+\Delta}q)^\top(R_{j+\Delta}k)
+ =q^\top R_{j-i}k.
+\end{equation}
+The identity assumes unchanged vectors and visibility. Inserting an actual prefix can change hidden states and is not simply renumbering positions. Chunk compression additionally changes grouping when its boundary origin stays fixed. Therefore a phase-dependent retrieval failure cannot automatically be diagnosed as a faulty RoPE implementation, nor does exact RoPE algebra certify invariance of a complete compressed model.
+
+Approximate arithmetic introduces another, separable interaction. A quantizer $Q$ need not commute with rotation: $Q(R_\Delta k)\neq R_\Delta Q(k)$. As a calculated two-dimensional counterexample, take nearest-integer coordinate quantization, $k=(1,0)$, and a rotation by 45 degrees. Quantizing after rotation gives $(1,1)$, while rotating the quantized vector gives $(1/\sqrt2,1/\sqrt2)$. This is a mathematical counterexample, not a measured error of a particular cache. It shows why precision, scale grouping, and the order of rotation and quantization belong in a reproducible approximation specification.
+
+A discriminating experiment crosses source phase, window origin, stride, width, and query location while holding the relevant fact and answer fixed. Use both pure positional renumbering on fixed tensors and actual prefix edits, because they test different invariants. Include exact attention, an uncompressed reduced-precision control, and each compressed variant. Report the complete phase profile, its worst phase, and the difference between best and worst phases, not only the mean. Repeating the test without rotary embeddings can distinguish a compression-grouping effect from a rotary-specific one. A test with uniform compression weights can further separate learned gate specialization from information mixing at boundaries.
+
+For agents, a changed tool description, a harmless comment, or a memory summary can shift a decisive old constraint to a different phase. The compression policy should therefore be evaluated under realistic serialization changes and rare action-changing facts. A fixed benchmark placement can accidentally favor a strong phase. Random placement helps estimate average behavior, but worst-phase evaluation remains necessary when a constraint must survive independently of incidental token offsets. The source paper's bounded retrieval evidence motivates this mechanism test; it does not establish a universal deployment failure rate.
+

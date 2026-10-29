@@ -1,0 +1,15 @@
+\section{Case two: a persistent enterprise research assistant}\label{sec:C33:04}
+Consider a system that answers questions and prepares reports from a changing collection of internal records. It has multiple sessions per user, shared organizational evidence, role-dependent permissions, and a persistent memory of prior work. Its central problem is not simply document retrieval. The same claim can be true at one time, superseded later, restricted to one audience, or derived from a source whose access has been revoked.
+
+Use a typed assertion record
+\begin{equation}
+ m=(u,p,v_{\rm from},v_{\rm to},t_{\rm record},s,a,\rho),
+\end{equation}
+where $u$ identifies the subject, $p$ the proposition, the $v$ fields its asserted validity interval, $t_{\rm record}$ the recording time, $s$ the evidence source, $a$ its access scope, and $\rho$ its derivation lineage. Valid time and record time differ: a correction recorded today can say that yesterday's claim was wrong. A retrieval system that sorts only by ingestion time can answer a historical question incorrectly, while one that ignores corrections can repeat superseded information.
+
+The answer pipeline first determines the question's temporal and authority scope, then retrieves permitted source records, resolves relevant conflicts, constructs working context, generates an attributed answer, and verifies citations and requested output constraints. Derived memory may accelerate this process, but raw evidence remains necessary for contested or high-consequence claims. A retrieved summary is a claim about evidence, not a replacement for the evidence's provenance.
+
+The following constructed sequence exposes a cross-session failure. Session A reads that a project owner is Maya and stores a semantic memory. Later an authoritative update names Ravi, and a deletion policy removes the old personnel record from active use. Session B retrieves an old summary that still names Maya. A semantically similar answer can be fluent and well cited to an obsolete derived artifact. Correct handling requires propagation of the update or revocation through summaries, indexes, caches, and procedural assumptions, together with an access-time validity check.
+
+This is not solved by globally replacing every occurrence of Maya. The name may be correct in historical reports or unrelated projects. Deletion and correction semantics need subject and lineage identity. A tombstone can block future reads while physical cleanup proceeds, but the system should state whether backups, cached prompts, and downstream artifacts remain. A restored old checkpoint must not erase the authoritative revocation epoch. Chapter~\ref{ch:C32} explains why rollback and authority restoration must be separated.
+

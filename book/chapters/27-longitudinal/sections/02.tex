@@ -1,0 +1,11 @@
+\section{Factor the memory pipeline}\label{sec:C27:pipeline}
+A memory pipeline writes records, organizes them, retrieves candidates, selects evidence, interprets it, and influences an action. Failure at one stage can look like failure at another. If a fact was never stored, improving the reader is irrelevant. If it is stored and retrieved but ignored, improving the embedding may not help. If it is applied too strongly after becoming stale, higher recall can worsen the result.
+
+Use staged oracle controls. Supply the original record directly to test the reader's ability to use it. Supply an oracle retrieval set to test selection and interpretation. Replace learned writing with complete raw logs to estimate extraction loss. Preserve the same action task and resource accounting. Oracle controls are diagnostic and may exceed deployable budgets, so their scores should not be presented as operational performance.
+
+The evaluation should include negative transfer. A no-memory baseline reveals whether irrelevant or incorrect records reduce task quality. A shuffled-memory condition tests whether apparent benefit comes from generic additional text or task-specific information. A stale-memory condition tests conflict resolution. A revoked-memory condition tests authorization. These are different interventions and should not be combined into one noisy-memory score without retaining their separate outcomes.
+
+Storage and retrieval metrics remain useful intermediate observations. Measure record coverage, provenance completeness, retrieval recall, rank quality, temporal filtering, and evidence packing. But none alone establishes useful behavior. A perfectly retrieved false record can harm the task, and a low-ranked record may be irrelevant to the action. Relate intermediate metrics to task-level outcomes through explicit ablations rather than assuming monotonic improvement.
+
+Construction and maintenance cost belong inside the experiment. Include extraction calls, embeddings, graph updates, consolidation, deduplication, deletion, and reindexing. Report amortized cost over different reuse counts. A system that is efficient after extensive preconstruction may be unsuitable for cold-start users; another may have low initial cost but unbounded storage growth. The appropriate operating point depends on the actual longitudinal workload.
+

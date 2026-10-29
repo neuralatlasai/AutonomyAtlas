@@ -1,0 +1,27 @@
+\section{Observability must reconstruct decisions and effects}\label{sec:C32:02}
+A trace suitable for diagnosing an agent must connect a decision to the observations that conditioned it and to the effects it actually caused. A useful event envelope contains run, session, branch, model-call, tool-call, operation, and parent identifiers; timestamps with clock-domain information; the release manifest; context and memory versions; authorization decisions; result status; and links to evidence artifacts. Content may be redacted or retained separately, but the links must preserve the ability to distinguish absent evidence from inaccessible evidence.
+
+Wall-clock order alone is insufficient in a distributed system. Two workers can observe different memory versions and log events with skewed clocks. Use causal identifiers and explicit read/write versions to reconstruct which state each worker consumed. A trace that records only the latest memory snapshot cannot establish whether a stale record influenced an earlier action. Similarly, a final tool success log cannot reveal whether the model first attempted several invalid operations that were blocked by policy.
+
+Separate four event states: proposed, authorized, submitted, and reconciled. Proposed means the model or deterministic planner produced an action. Authorized means a policy accepted the operation under a specific authority epoch. Submitted means the request crossed the execution boundary. Reconciled means the system has evidence about the external outcome. A timeout between submission and reconciliation must remain an unknown outcome, rather than being relabeled as failure and retried blindly.
+
+\begin{table}[!htbp]
+\centering
+\caption{Operational observations and the claims they can support.}\label{tab:C32:observations}
+\begin{tabular}{L{0.24\linewidth}L{0.62\linewidth}}
+
+\toprule Observation & What it can establish\\\midrule
+Model completion & A token sequence was generated under recorded conditioning; no external effect is implied.\\
+Parser acceptance & An output matches an invocation grammar; correctness and authority remain separate.\\
+Authorization acceptance & The operation was allowed under one recorded policy state; later revocation may change executability.\\
+Transport acknowledgment & A request reached a declared boundary; durable application effect depends on service semantics.\\
+Reconciliation evidence & The operation's externally visible state was checked using its identity and the service contract.\\
+Validator verdict & A specified property was tested; untested requirements remain unresolved.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Monitoring every prompt verbatim is neither necessary nor sufficient for observability. Raw content can contain credentials, personal information, proprietary documents, or malicious instructions. A design can retain hashes, typed state transitions, retrieval identifiers, and separately protected evidence while exposing only the minimum content needed for diagnosis. Redaction must preserve semantic distinctions important to a failure: removing every destination string, for example, can make an authorization bug impossible to reconstruct. The retention policy therefore belongs in the threat and debugging model rather than being an afterthought.
+
+Sampling also changes what can be inferred. If traces are sampled only for successful requests, incident analysis will miss failure paths. If rare violations are oversampled for diagnosis, their raw frequency in the sample is not a deployment rate. Record selection probabilities or maintain a separate denominator stream so that operational metrics can be interpreted correctly. A dashboard without a defined observation process can produce precise-looking but misleading numbers.
+

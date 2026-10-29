@@ -1,0 +1,35 @@
+\section{Compounding error and a finite-horizon bound}
+\label{sec:C06:bound}
+The effect of model error grows with the horizon over which imagined outcomes influence selection. Consider a finite-horizon Markov system, a common initial-state distribution, a fixed policy, and true and modeled reward functions taking values in $[0,R]$. Suppose one-step transition total variation is uniformly at most $\epsilon_P$ and reward error at most $\epsilon_r$ on the union of state-action supports reachable under true and modeled dynamics. Couple true and modeled transitions so that, while their states agree, their actions agree and the next states disagree with probability at most $\epsilon_P$. By a union bound, the probability of divergence before step $t$ is at most $t\epsilon_P$, capped at one.
+
+Before divergence, rewards differ by at most $\epsilon_r$; after divergence their difference is at most $R$ because both functions are bounded. Summing a conservative bound across $H$ steps yields
+\begin{equation}
+ |J_P(\pi)-J_{\widehat P}(\pi)|
+ \leq H\epsilon_r+
+ R\epsilon_P\frac{H(H-1)}2.
+\end{equation}
+This is an elementary simulation argument under uniform error and bounded rewards, presented as a deduction rather than a new theorem. The quadratic term explains why a small one-step error need not justify long open-loop plans. The bound can be loose, and its assumptions are often harder to establish than a low average prediction loss.
+
+The uniformity condition is the critical practical limit. A model can have excellent average error on logged behavior while being inaccurate on the unusual action sequences selected by optimization. Search actively seeks trajectories with high predicted value, which can concentrate on precisely those unsupported regions. This is model exploitation. Increasing search breadth can therefore reduce real performance even when it improves the planner's predicted objective. The relevant evaluation distribution includes states and actions induced by the planner, not only a random held-out subset of the original transition dataset.
+
+If the return discrepancy is uniformly bounded by $\epsilon_J$ for every candidate policy and the model-based optimizer is at most $\eta$ below its model optimum, its true-policy regret is at most $2\epsilon_J+\eta$. To prove this, add and subtract the modeled returns of the true optimum and selected policy. The two true-to-model discrepancies each contribute at most $\epsilon_J$, and modeled suboptimality contributes at most $\eta$. This reduction makes the requirement explicit: improving search reduces $\eta$, but does not reduce model error. Once model error dominates, more precise optimization of the same inaccurate simulator need not improve real performance. The result requires a common feasible policy class and a discrepancy bound over that class; a bound for one fixed logged policy is insufficient after selection.
+
+Receding-horizon control reduces the interval over which the controller relies on uncorrected predictions. It plans for a horizon, executes a short prefix, observes the real outcome, and replans. This does not remove model error, but it can prevent an early mistake from propagating through an entire unobserved trajectory. The benefit must be balanced against observation cost, action latency, and irreversible effects. In a coding agent, running a cheap local test can correct a model of program behavior. In a payment workflow, an irreversible action may require stronger preconditions than replanning afterward can provide.
+
+{\small\setlength{\tabcolsep}{3pt}
+\begin{table}[!htbp]
+\centering
+\caption{World-model errors require distinct evaluations.}\label{tab:C06:errors}
+\begin{tabular}{L{29mm}L{37mm}L{40mm}}
+
+\toprule Error source & Misleading proxy & Better diagnostic\\\midrule
+Representation aliasing & Low latent prediction loss & Paired states with different required actions.\\
+Transition mismatch & Plausible next image & Verified action-conditioned state changes.\\
+Reward exploitation & High imagined return & Real return after planner-selected actions.\\
+Unseen interventions & Held-out logged transitions & Evaluation under changed action sequences.\\
+Stale environment & Accurate past prediction & Freshness and precondition checks.\\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+

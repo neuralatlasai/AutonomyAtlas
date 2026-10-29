@@ -1,0 +1,32 @@
+% Shared scientific typography; layout lives in each document driver.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs,longtable,array}
+\usepackage{etoolbox}
+% Local compatibility backport for old distributions; matches upstream finite
+% shrink fix in longtable v4.25 (latex3/latex2e issue 1907).
+% https://github.com/latex3/latex2e/issues/1907
+\makeatletter
+\@ifpackagelater{longtable}{2025/12/22}{}{%
+  \patchcmd{\LT@output}{\vss}{\vskip\z@\@plus1fil\@minus\normalbaselineskip}{}%
+    {\PackageError{atlas}{Longtable compatibility patch failed}{Update the LaTeX tools bundle.}}%
+  \patchcmd{\LT@output}{\vss}{\vskip\z@\@plus1fil\@minus\normalbaselineskip}{}%
+    {\PackageError{atlas}{Second longtable compatibility patch failed}{Update the LaTeX tools bundle.}}%
+}
+\makeatother
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue,
+ pdfauthor={},pdftitle={Agentic Intelligence Toward Generality}}
+\urlstyle{same}
+\AtBeginEnvironment{thebibliography}{\raggedright\emergencystretch=5em\relax}
+\setlength{\emergencystretch}{2em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}

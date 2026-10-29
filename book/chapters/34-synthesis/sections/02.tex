@@ -1,0 +1,15 @@
+\section{Decision-preserving memory as an experimental target}\label{sec:C34:02}
+A central research target is to minimize retained computation while preserving decisions that matter. The wrong objective is an unqualified maximize recall: some records should expire, some should never influence a given user, and some are irrelevant to the current task. The testable target is a constrained tradeoff between useful information, authority, cost, and loss.
+
+Let $U$ be a memory/context mechanism, $\mathcal D$ a declared task-stream distribution, $C(U)$ its complete cost, and $L(U)$ a vector of task and constraint losses. Let $\mathcal U_{\rm adm}$ contain mechanisms satisfying the declared access and lifecycle constraints. Their feasible set is
+\begin{equation}
+ \mathcal Q=\{(C(U),L(U)):U\in\mathcal U_{\rm adm}\}.
+\end{equation}
+The Pareto frontier is the nondominated subset of $\mathcal Q$: no other feasible point has no greater cost and no greater loss on every coordinate, with a strict improvement on at least one coordinate. Empirical dominance requires uncertainty to be assessed jointly rather than inferred from favorable point estimates alone. A method that saves tokens while increasing violations is not unconditionally more efficient. A method that retains everything but requires unaffordable reconstruction is not a useful memory optimum.
+
+One discriminating experiment uses paired histories that differ in a rare action-changing qualifier. Examples include a revoked permission, a temporal exception, a requirement about side-effect ordering, or a procedure valid only under one tool version. Compare raw history, fixed summarization, selective retrieval, typed memory, and learned editing at matched complete budgets. Hold the downstream policy fixed initially, then repeat after a controlled policy update. The estimands are the action-distribution change, constraint loss, task utility, and cost, not only a recall score.
+
+The competing explanations are explicit. If a method succeeds only when the qualifier is repeated in the current prompt, it has not solved persistent retrieval or implicit relevance. If it retrieves the qualifier but fails to act on it, access is not the bottleneck. If it applies obsolete qualifiers, influence calibration or temporal validity is wrong. If success disappears after changing the model while retaining the same memory bank, the representation may encode policy-specific workarounds. These outcomes identify different next interventions.
+
+An improved benchmark should expose the same latent facts through several surface forms and several future decision contexts. It should include irrelevant and contradictory memories, not only supportive ones. Evaluation queries must not update the frozen memory used by subsequent paired tests. The unit of uncertainty should include independent histories and task streams. This design can falsify broad claims of memory usefulness while preserving the cases in which a simple store or raw log is sufficient.
+

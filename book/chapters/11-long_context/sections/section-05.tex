@@ -1,0 +1,22 @@
+\section{Computation and memory over an interaction horizon}\label{sec:C11:resources}
+Assume a decoder with $n_\ell$ layers, hidden width $d$, $h_{kv}$ key-value heads, equal key and value head dimension $d_h$, and $b$ bytes per cached scalar. Assume the same cache shape at every layer and full residency of every visible token; latent caches and layer-specific or sliding-window caches require their own accounting. Ignoring allocator overhead, the cache for one sequence of $L$ tokens occupies
+\begin{equation}
+ M_{KV}=2n_\ell Lh_{kv}d_h b.
+ \label{eq:C11:kv}
+\end{equation}
+The factor two accounts for keys and values. This expression excludes model weights, activations, page metadata, workspace, and fragmentation. Grouped-query attention changes $h_{kv}$; changing the total query-head count without specifying key-value sharing is insufficient for memory accounting~\cite{ainslie2023gqa}. Cache paging changes allocation behavior rather than the semantic amount of remembered evidence~\cite{kwon2023pagedattention}.
+
+For dense attention, an incremental decode step reads a growing cache and performs attention against the visible prefix. A simplified traffic model is $B_t\simeq\kappa M_{KV}(L_t)$, with $\kappa$ representing actual cache access, reuse, and implementation overhead. The bandwidth lower bound $B_t/\beta$ assumes an effective bandwidth $\beta$ and cannot predict observed latency without accounting for compute, synchronization, batching, and competing traffic. Peak device bandwidth is not sustained application bandwidth.
+
+The interaction horizon introduces cumulative costs. If each tool turn contributes $u$ input tokens and the system repeatedly reconstructs the full history, the total input volume over $T$ turns scales as
+\begin{equation}
+ \sum_{t=1}^{T}ut=uT(T+1)/2.
+\end{equation}
+This is an analytic count under equal-sized turns and no reusable prefix accounting. Prefix caching can reduce repeated computation, while billing rules may count tokens differently. The expression therefore diagnoses a growth pattern rather than an invoice. A bounded working context of size $W$ changes the repeated-input term toward $O(TW)$ but introduces storage, retrieval, editing, and error-recovery costs.
+
+Long-context serving also creates capacity competition. A scheduler holding a large inactive session can reduce concurrency for short requests. Evicting that session's cache saves device memory but may incur a costly prefill when it resumes. The correct objective depends on the workload mixture and service-level constraints: minimize mean cost, maximize throughput, or control tail latency. A policy optimized for average token throughput can be undesirable when a few latency-sensitive tool decisions gate an entire workflow.
+
+Latency should be decomposed into queueing, context construction, prefill, generation, tool execution, and validation. These components are not independent. Large contexts can increase queueing through resource contention; additional retrieval can reduce prefill but add a network round trip; compression can reduce the next call yet increase retries after information loss. Report distributions over complete tasks and retain timeouts. Measuring only successful completions introduces survivorship bias into both latency and cost estimates.
+
+The practical design question is consequently when additional retained context produces enough decision value to justify its full systems cost. That tradeoff depends on the probability that distant evidence becomes decisive, the cost of reacquiring it, and the consequences of forgetting it. Uniform retention and uniform eviction are both coarse approximations to this decision problem.
+

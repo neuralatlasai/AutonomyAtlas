@@ -1,0 +1,33 @@
+{
+  "name": "agentic-state-online",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "node scripts/sync-assets.mjs && astro build",
+    "preview": "astro preview",
+    "check": "astro check && tsc --noEmit",
+    "check:content": "node scripts/check-content.mjs",
+    "check:links": "node scripts/check-links.mjs"
+  },
+  "dependencies": {
+    "@astrojs/preact": "6.0.5",
+    "@fontsource-variable/inter": "5.3.0",
+    "@fontsource-variable/source-serif-4": "5.3.1",
+    "@phosphor-icons/core": "2.1.1",
+    "astro": "7.3.4",
+    "katex": "0.18.7",
+    "minisearch": "7.2.0",
+    "preact": "10.29.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@types/katex": "0.16.8",
+    "parse5": "8.0.1",
+    "typescript": "6.0.3"
+  }
+}

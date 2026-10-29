@@ -1,0 +1,32 @@
+\section{The model distribution and the executed policy}
+\label{sec:C03:policy}
+A foundation model supplies conditional token probabilities; the deployed decoder determines the distribution actually sampled. An agent system constructs the input, interprets sampled outputs, and controls their external effects. Let $H_t$ denote recorded interaction history, $M_t$ external memory, and $C_t=g(H_t,M_t)$ the context presented at decision time. Write $Q_{\theta,\delta}(y\mid C_t)$ for the sequence law induced by a checkpoint and decoding procedure $\delta$, including temperature, grammar masks, truncation, and stopping. The declared output space includes length-limit and incomplete-generation outcomes; a finite-output probability law must not silently discard their mass. For a deterministic interpreter $d$, the proposal distribution is
+\begin{equation}
+ \pi^{\mathrm{prop}}_{\theta,\delta}(a\mid C_t)
+ =\sum_{y:d(y)=a}Q_{\theta,\delta}(y\mid C_t).
+\end{equation}
+Ordinary ancestral sampling without extra transforms gives $Q_{\theta,\delta}=p_\theta$; greedy decoding generally does not. The sum includes multiple serializations of the same operation and a rejection outcome for malformed outputs. A randomized repair or interpreter instead requires a kernel $D(a\mid y,C_t)$ and the sum $\sum_y Q_{\theta,\delta}(y\mid C_t)D(a\mid y,C_t)$. Thus a repaired operation cannot be assigned the raw probability of one convenient serialization.
+
+Authorization is a second transformation. For a gate that rejects an infeasible proposal without resampling, let $F_\alpha(S_t)$ be the feasible-action set under current authority epoch $\alpha$ and $\bot$ the no-execution outcome. Then, for $a\ne\bot$,
+\begin{equation}
+ \pi^{\mathrm{exec}}(a\mid S_t)
+ =\pi^{\mathrm{prop}}_{\theta,\delta}(a\mid C_t)
+ \mathbf1\{a\in F_\alpha(S_t)\}.
+\end{equation}
+For a countable proposal space, the remaining mass is explicit:
+\begin{equation}
+ \pi^{\mathrm{exec}}(\bot\mid S_t)
+ =\pi^{\mathrm{prop}}(\bot\mid C_t)
+ +\sum_{a\ne\bot:\,a\notin F_\alpha(S_t)}
+   \pi^{\mathrm{prop}}(a\mid C_t).
+\end{equation}
+The proposal and execution distributions are normalized only when invalid, denied, and terminated-without-operation outcomes remain represented. This distribution is not obtained by renormalizing over feasible actions unless the executor actually resamples until acceptance under the corresponding assumptions. Proposal quality, refusal behavior, and executed-action quality therefore require separate denominators. This distinction connects the model boundary to the authority contract in Chapter~\ref{ch:C29}.
+
+The context constructor, decoding rule, and interpreter are therefore part of the deployed policy. Temperature changes the distribution before interpretation. A grammar mask removes sequences. A retry loop conditions the eventual output on previous failures. A tool router can remap a nominal operation to a different implementation. Comparing two checkpoints while changing these mechanisms does not isolate a model effect. Conversely, a harness can improve end-to-end reliability without changing any model parameter. The agent-computer interface studied in SWE-agent is a concrete demonstration that the interface deserves independent analysis, although its reported task results do not imply a universal interface advantage~\cite{yang2024sweagent}.
+
+The state exposed to the model need not be the complete execution state. A scheduler may retain locks, transactions, budgets, or authorization decisions outside $C_t$. Denote complete system state by $S_t=(H_t,C_t,M_t,E_t,V_t)$, where $E_t$ is environment state and $V_t$ collects compatible versions. The implemented transition has the form $S_{t+1}=F(S_t,a_t,o_{t+1})$. A language model only parameterizes one conditional component. Statements that the model remembers, plans, or recovers should specify which information and transitions are supplied by the surrounding system. Otherwise a property of durable storage can be incorrectly attributed to model weights.
+
+An important consequence concerns evaluation units. A successful sampled completion is evidence about the composition of model and decoder under one context. A successful completed task is evidence about a trajectory through a particular harness and environment. A successful resumed task additionally tests state reconstruction. These events have different denominators. A model that emits more valid JSON may still perform fewer useful operations if the schema encourages an incorrect decomposition. A smaller model can outperform a larger one when its tool arguments are calibrated to the available interface. Neither observation establishes a general ranking without matched tasks and resources.
+
+For implementation, the policy boundary should expose the exact serialized request, model and tokenizer identities, decoding settings, selected tool schema, raw output, parsed output, and execution outcome. Sensitive fields can be redacted in an audit representation, but their existence and transformations must remain identifiable. Logging only the final natural-language answer destroys evidence needed to distinguish a model error from parser repair or tool failure. This is particularly damaging during post-training: the gradient must be associated with the conditions under which an action was actually generated, rather than a convenient reconstruction assembled after the task.
+

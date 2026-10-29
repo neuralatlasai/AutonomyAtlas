@@ -1,0 +1,14 @@
+\section{Scheduling disaggregation and queueing}\label{sec:C31:07}
+Continuous batching admits and retires sequences between decode steps, reducing the waste of static batches with heterogeneous lengths. Prefill and decode can nevertheless interfere because they stress different resources and have different service times. Chunked prefill limits how much a long prompt delays interactive decode. Disaggregation places prefill and decode on different workers, trading interference against KV transfer, coordination, and potentially duplicated state.
+
+For a request with prefill time $P$, decode time $D$, transfer time $X$, and scheduling delays $W_p,W_d$, disaggregation improves latency only if the reduction in interference and queueing exceeds $X$ and added coordination. It can improve throughput while worsening a short request's latency. An experiment must compare offered load and quality, not merely the best isolated run on each architecture. SGLang's structured execution and prefix-sharing design provides another implementation perspective on serving programs with related prompts~\cite{zheng2023sglang}.
+
+Little's law relates stable long-run averages: $N=\lambda T$ for average population $N$, admitted throughput $\lambda$, and mean residence time $T$ under the corresponding boundary. It does not require exponential service, but it does require consistent accounting and a stable system. A more restrictive M/G/1 model with Poisson arrivals, identically distributed independent service times $S$ independent of those arrivals, finite $\mathbb E[S^2]$, and first-come-first-served scheduling gives
+\begin{equation}
+ \mathbb E[W]=\frac{\lambda\mathbb E[S^2]}{2(1-\rho)},
+ \qquad \rho=\lambda\mathbb E[S]<1.
+\end{equation}
+The second moment makes service variability important. The model is a diagnostic approximation for isolated stages; continuous-batching GPU service does not literally satisfy its assumptions~\cite{root_harchol2013}.
+
+Retries can increase offered load precisely when service is degraded. If every attempt independently succeeds with probability $p\in(0,1]$ and retries have no cap, expected attempts are $1/p$. With a cap of $K\geq1$ attempts, the expected count is $[1-(1-p)^K]/p$; at $p=0$ the capped count is $K$ and an uncapped process never succeeds. These are counts, not latency formulas when attempt durations depend on outcomes. When timeouts depend on congestion, independence fails and the feedback can be worse: queueing causes timeouts, which cause retries, which increase queueing. Idempotency prevents duplicate effects but does not eliminate duplicate compute. Retry budgets, jitter, admission control, and reconciliation should be evaluated as part of the serving policy.
+

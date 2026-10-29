@@ -1,0 +1,27 @@
+\section{Patch encoders and the cost of visual detail}
+\label{sec:C05:vision}
+A Vision Transformer converts an image into patch embeddings and processes their sequence with attention~\cite{dosovitskiy2020vit}. For image dimensions $H\times W$ and nonoverlapping square patches of side $p$, the patch count is approximately $N=HW/p^2$ when dimensions divide evenly. Reducing $p$ increases spatial sampling density and sequence length. In dense attention, the corresponding pairwise term grows as $N^2$, while projection and feed-forward terms grow linearly in $N$. The choice of patch size is consequently both a perception decision and a systems decision for agents that must read detailed interfaces.
+
+As a calculated example, a 1024 by 1024 image yields 4096 patches at side 16 and 1024 patches at side 32. The patch count changes by four and the dense pairwise attention term by sixteen, before architectural details and implementation. These numbers do not predict a sixteen-fold latency difference: other operations, preprocessing, and memory effects remain. They do explain why uniformly increasing screenshot resolution can be expensive. An agent can instead request a local crop, use an accessibility tree, or extract text through a separate channel. Each strategy changes the evidence interface and can introduce its own omissions.
+
+Small text illustrates a failure that semantic benchmarks can hide. A button label, decimal point, or negative sign may occupy a small fraction of the image but determine the correct action. Resizing can make that feature unrecoverable before the encoder sees it. No amount of later language reasoning can reconstruct the actual character reliably from an information-destroying preprocessing step. A model may guess correctly from context, which makes aggregate success deceptively reassuring. Tests should include counterfactual pairs whose large-scale layout is identical and whose correct action depends on the small feature.
+
+Coordinates require an explicit transform. If the model receives a resized crop, a predicted point must be mapped back through scale, crop offset, display scaling, and possibly scrolling. A correct semantic target can become an incorrect click through a geometric conversion error. Record the image dimensions and transform alongside the observation, rather than reconstructing them from an assumed default. For browser agents, an element identifier from a structured interface can avoid some coordinate ambiguity, but the identifier must remain valid at execution time. A page mutation between observation and action can invalidate both geometric and structural references.
+
+{\small\setlength{\tabcolsep}{3pt}
+\begin{table}[!htbp]
+\centering
+\caption{Observation channels expose different information and failure modes.}\label{tab:C05:channels}
+\begin{tabular}{L{29mm}L{37mm}L{40mm}}
+
+\toprule Channel & Useful evidence & Distinct limitation\\\midrule
+Screenshot patches & Layout, appearance, visual state & Resolution loss and coordinate transforms.\\
+OCR transcript & Exact visible text when recognized & Reading order and recognition errors.\\
+Accessibility tree & Roles, names, structured targets & Missing or inaccurate accessibility metadata.\\
+DOM or API state & Programmatic properties & Hidden state may differ from visible affordances.\\
+Video sequence & Temporal changes and motion & Frame sampling and stale observations.\\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+

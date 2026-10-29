@@ -1,0 +1,15 @@
+\chapter{Repository, Terminal, and Computer-Use Agents}\label{ch:C23}
+TestJack's October 2026 audit constructs prompt-grounded witness tests against candidates that passed existing coding evaluators; AgentHorizon separately examines computer-use evaluation with task instructions and execution trajectories~\cite{yao2026testjack,corpus261011050}. Both cases challenge the inference from a favorable grader response to completed work. They expose different observation gaps: a test suite may omit a stated requirement, while an interface snapshot may omit the action history needed to interpret the final state. Neither audit provides an infallible judge.
+
+Coding agents operate on artifacts whose correctness is partly executable, but executable does not mean fully specified. A patch can satisfy the visible tests while violating a stated requirement that those tests omit, introducing a security regression, or modifying the tests themselves. An underspecified requirement instead needs adjudication before disagreement can refute the patch. Computer-use agents add another observation problem: a screenshot can show a plausible final state without proving that the requested object, recipient, or permission was selected. The shared objective is to connect task interpretation, environment interaction, and independently checkable evidence.
+
+The central comparison is between complete configured systems. Model, harness, repository context, tool interface, execution environment, evaluator, and budget all influence results. Product names are insufficient experimental identifiers. This chapter analyzes these boundaries, gives concrete implementation and benchmark anchors, and distinguishes inspectable mechanisms from undocumented hosted behavior.
+
+\input{book/chapters/23-coding/sections/01.tex}
+\input{book/chapters/23-coding/sections/02.tex}
+\input{book/chapters/23-coding/sections/03.tex}
+\input{book/chapters/23-coding/sections/04.tex}
+\input{book/chapters/23-coding/sections/05.tex}
+\input{book/chapters/23-coding/sections/06.tex}
+\input{book/chapters/23-coding/sections/07.tex}
+\input{book/chapters/23-coding/sections/08.tex}

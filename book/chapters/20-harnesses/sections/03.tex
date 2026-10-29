@@ -1,0 +1,51 @@
+\section{Crash consistency and uncertain effects}\label{sec:C20:crashes}
+Consider a request to create an external issue. A crash can occur before intent persistence, after persistence but before dispatch, after remote creation but before response receipt, or after receipt but before local commitment. These windows require different recovery actions. Before dispatch, replay can safely issue the request. After uncertain dispatch, recovery must first determine whether the remote creation occurred. After a committed receipt, replay should return the recorded outcome rather than create a second object.
+
+An idempotency key helps only if the remote service gives it the required semantics. Reusing an application-generated string does not by itself make an API idempotent. The service must scope the key appropriately, retain its association long enough, reject incompatible reuse, and return a stable result. A short retention period can make an old replay unsafe. Idempotency may also apply only to one endpoint, leaving downstream notifications or billing outside the guarantee.
+
+An execution protocol can be specified as a branch-dependent state transition. Let $i$ be the intent, $J$ the journal in $S$, $\alpha$ current authority, and $\nu$ the recorded release version. Define $v(i)\in\{0,1\}$ by intent-schema validation. Let $a_J(i,J,\alpha)$ govern access to the corresponding journal records and $a_D(i,\alpha)$ govern new external dispatch. Read access to a historical receipt is distinct from permission to repeat its effect; either denied check produces its own non-effect outcome. For a valid intent, $k=\eta(i)$ is its stable logical-operation identifier. The lookup $\sigma_J(k)\in\{0,1,2,3\}$ distinguishes absence, persisted intent, marked dispatch without a terminal verdict, and committed terminal verdict. Define $\gamma(i,S)=1$ exactly when $v(i)=1$, $a_J(i,J,\alpha)=1$, and either $\sigma_J(k)=0$ or the recorded logical intent identity and exact payload match $i$; otherwise $\gamma(i,S)=0$. This binding and record-access check precedes replay and reconciliation as well as fresh dispatch; revoking write authority need not revoke legitimate access to a past receipt. For a recorded operation, $\rho_J(k)$ returns its recorded outcome, or $\upsilon$ when terminal evidence remains unresolved. The top-level transition is
+\begin{equation}
+ \Phi(i,S)=
+ \begin{cases}
+  (J,\bot),&\gamma(i,S)=0,\\
+  (J,\rho_J(k)),&\gamma(i,S)=1,\ \sigma_J(k)=3,\\
+  \Phi_R(i,S;k),&\gamma(i,S)=1,\ \sigma_J(k)=2,\\
+  \Phi_0(i,S;k),&\gamma(i,S)=1,\ \sigma_J(k)\in\{0,1\}.
+ \end{cases}
+\label{eq:C20:execution_branches}
+\end{equation}
+For $a_D(i,\alpha)=0$, $\Phi_0(i,S;k)=(J,\bot_A)$ without dispatch. Otherwise the following fresh-dispatch equations describe the acknowledged-write branch:
+\begin{equation}
+\begin{aligned}
+ J_1&=\mathcal I(J;k,i,\nu),\\
+ J_2&=\mathcal D(J_1;k),\\
+ o&\sim\mathcal T(\,\cdot\mid i,k),\qquad J_2\ne\bot_J,\\
+ J_3&=\mathcal O(J_2;k,o),\qquad g=\mathcal V(i,o),\\
+ J_4&=\mathcal C(J_3;k,o,g),\\
+ \Phi_0(i,S;k)&=(J_4,\rho_{J_4}(k)).
+\end{aligned}
+\label{eq:C20:fresh_dispatch_transition}
+\end{equation}
+Each journal operator returns an acknowledged journal or $\bot_J$; the next line is evaluated only on an acknowledged branch. Branch selection and the dispatch-marker transition require a serialized dispatcher per key or an equivalent atomic, fenced claim. A read followed by unconditional writes is insufficient under concurrent recovery. A storage failure returns the last acknowledged journal and a storage-error outcome, without inventing a new external status. In particular, intent or dispatch-marker failure prevents a new call, whereas receipt-write failure after a call can require reconciliation. Here $\mathcal I$ persists the versioned intent, $\mathcal D$ durably marks dispatch, $\mathcal T$ invokes the external tool under key $k$, $\mathcal O$ persists the returned observation, and $\mathcal V$ evaluates the effect evidence. The operator $\mathcal C$ persists its verdict $g\in\{-1,0,1\}$, denoting negative, unresolved, and positive. Only a terminal verdict justified by adequate evidence yields $\sigma=3$; $g=0$ preserves $\sigma=2$ and $\rho=\upsilon$. An unresolved first-call result therefore remains explicitly unresolved rather than acquiring certainty from the name of a commit routine. Reuse of an existing intent requires equality of its payload and declared identity; a key collision cannot authorize substitution.
+
+For a previously marked dispatch, let $\widehat o=\mathcal R(i,J;k)$ denote evidence obtained by an independently authorized status/reconciliation operation, with $\upsilon$ denoting an unresolved observation. If no permitted reconciliation path exists, $\mathcal R$ returns $\upsilon$ without issuing a query. Define
+\begin{equation}
+\begin{aligned}
+ \widehat J&=\mathcal C\bigl(J;k,\widehat o,
+                         \mathcal V(i,\widehat o)\bigr),\\
+ \Phi_R(i,S;k)&=
+ \begin{cases}
+  (J,\upsilon),&\widehat o=\upsilon,\\
+  (J,\bot_J),&\widehat o\ne\upsilon,\ \widehat J=\bot_J,\\
+  (\widehat J,\rho_{\widehat J}(k)),&\widehat o\ne\upsilon,\ \widehat J\ne\bot_J.
+ \end{cases}
+\end{aligned}
+\label{eq:C20:reconciliation_transition}
+\end{equation}
+The definition of $\widehat J$ is evaluated only when $\widehat o\ne\upsilon$; a failed reconciliation write returns the last acknowledged journal and a storage error rather than applying a lookup to $\bot_J$. Neither the unknown branch nor replay of a terminal record invokes $\mathcal T$. The journal-access policy is checked before branch selection; a reconciliation query needs its own applicable permission. New dispatch always checks current effect authority under the remote service's concurrency contract. Neither reading a receipt nor reconciling status grants permission to repeat the original write. These relations specify required ordering and evidence semantics; they do not prove that a particular runtime or remote service implements them.
+Persisting a dispatch marker before calling introduces a conservative ambiguity: the marker may exist even if the request never left the process. Marking it after the call introduces the opposite ambiguity: an effect can exist without a marker. No local ordering removes both without cooperation from the remote system. This is the fundamental reason a journal cannot alone provide exactly-once external effects.
+
+Compensation is a separate operation. Closing an erroneously created issue does not erase notifications already sent. Reverting a file does not retract information copied by another process. A compensating operation can restore an application invariant while leaving residual effects. Therefore recovery reports should distinguish restored local state, reconciled external state, and irrecoverable consequences. This classification supports meaningful incident analysis and prevents rollback metrics from becoming cosmetic.
+
+Fault-injection experiments should target these exact windows. Kill the worker after remote acceptance but before local receipt persistence; interrupt between verification and commit; corrupt one journal entry; delay a response beyond the retry threshold. Compare stateless retry, checkpoint replay, and journal-based reconciliation under identical fixtures. Measure duplicate effects, unresolved operations, recovery latency, and task completion. These are proposed experiments; no failure rate is inferred from the protocol's appearance.
+

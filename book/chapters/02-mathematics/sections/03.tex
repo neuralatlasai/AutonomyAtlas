@@ -1,0 +1,37 @@
+\section{Partial observability and beliefs}\label{sec:C02:03}
+A finite POMDP consists of latent states $\mathcal X$, actions $\mathcal A$, observations $\mathcal O$, transition probabilities $P(x'\mid x,a)$, observation probabilities $Z(o\mid x',a)$, a reward function, and an initial distribution. A belief $b_t(x)=P(X_t=x\mid H_t)$ is a sufficient statistic for optimal control when the model is correct and the complete history is available. The Bayesian filter is
+\begin{equation}
+ b_{t+1}(x')=
+ \frac{Z(o_{t+1}\mid x',a_t)
+ \sum_xP(x'\mid x,a_t)b_t(x)}
+ {\sum_{\bar x}Z(o_{t+1}\mid\bar x,a_t)
+ \sum_xP(\bar x\mid x,a_t)b_t(x)}.
+\end{equation}
+The denominator must be positive. An observed event assigned zero predictive probability signals model or support mismatch, not a defined posterior update. Zero-probability observations contribute nothing to a model expectation but cannot be silently normalized when actually encountered. Belief sufficiency assumes a correct closed Markov model; changing tool versions, budgets, or permissions require an augmented state~\cite{ch02_pomdp1998}. Tool environments rarely provide such a model explicitly. The belief-state formulation nevertheless clarifies what uncertainty remains after a tool response. An HTTP timeout can mean that a request never arrived, that it committed but its response was lost, or that it is still running. A belief over these states is more accurate than automatically labeling the action failed. A reconciliation query can have high value because it changes which retry decisions are safe.
+
+The value of a belief under discount $0\leq\gamma<1$ satisfies
+\begin{equation}
+ V^*(b)=\max_a\left[r(b,a)+
+ \gamma\sum_oP(o\mid b,a)V^*(\tau(b,a,o))\right],
+\end{equation}
+where $\tau$ denotes belief updating. The maximization includes information-gathering actions. A policy that greedily chooses the action with the highest immediate completion probability can be inferior to one that first checks state. This is especially important when a cheap query prevents an irreversible mistake.
+
+Actions have different durations. A fixed per-action discount can favor one hour-long operation over several short checks even when their physical-time consequences differ. Semi-Markov temporal abstraction discounts over holding time~\cite{ch02_options1999}; a continuous-time service model must also declare when rewards accrue. Let decision times be $T_k$, durations $\Delta_k=T_{k+1}-T_k$, utility rate $r_k(u)$, and completion reward $g_k$. For $\beta>0$ in reciprocal time units, define
+\begin{equation}
+ G_k^\beta=\int_0^{\Delta_k}e^{-\beta u}r_k(u)\,du
+          +e^{-\beta\Delta_k}g_k.
+\end{equation}
+Let $\xi_k$ augment a sufficient belief with trusted authorization observations, governing versions, remaining budgets, and clock state whenever those affect the transition law. For nonterminal states with a nonempty feasible set, the corresponding equation is
+\begin{equation}
+\begin{aligned}
+ V^*(\xi)=\sup_{a\in F_\alpha(\xi)}
+ \mathbb E[&G_k^\beta+e^{-\beta\Delta_k}V^*(\xi_{k+1})
+ \mid \xi_k=\xi,a_k=a].
+\end{aligned}
+\end{equation}
+A state with no authorized continuation has a declared bounded terminal value; allowing further deliberation instead requires an explicit no-dispatch transition. The feasible set is supplied by current trusted authority, rather than inferred from a model's belief. Duration itself can be informative and belongs in the joint observation kernel. Bounded returns and nonexplosion conditions must be explicit: positive individual durations do not exclude infinitely many decisions in finite time. A continuing-time requirement is $\sum_k\Delta_k=\infty$ almost surely; on the bounded-value function space with uniformly bounded one-decision expected absolute returns, a uniform lower bound $\Delta_k\geq\Delta_{\min}>0$ gives contraction factor $e^{-\beta\Delta_{\min}}<1$. Finite horizons provide another well-defined setting. A linear latency penalty is a different modeling choice from exponential elapsed-time discount. Expected penalties also do not implement a hard authorization constraint.
+
+For a tiny discrete environment, exact belief filtering and dynamic programming can provide an oracle baseline. In a real repository, browser, or enterprise system the state space is combinatorial and the transition model changes. Approximate filters, structured event records, and conservative uncertainty handling become implementation choices. The formal model should guide which approximations are tested rather than imply that exact POMDP planning is tractable.
+
+
+The HRP source offers a bounded oracle baseline, not a general belief solver. In \path{environment/hrp_miniwob/oracle.py}, \path{solve} and \path{evaluate} operate on an ordered, fully observed deterministic state--action graph. The validator requires finite rewards, a strictly positive normalized reference policy, discount below one, and positive regularization temperature; dynamic programming computes regularized values and occupancies in floating-point arithmetic~\cite{ch01_hrp_code2026}. This does not implement the observation filter above. Partial observability requires a separate observation model and belief-state construction.

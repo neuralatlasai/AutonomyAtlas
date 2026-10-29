@@ -1,0 +1,14 @@
+\section{A research program for reliable improvement}\label{sec:C34:06}
+Recursive self-improvement should be evaluated through independent outer-loop runs, held-out task populations, and complete resource accounting. RRSI, Harness\textsuperscript{2}, AIDE\textsuperscript{2}, MASS, Self-HPO, and skill-memory methods vary in update target, feedback, and persistence. Their results are informative precisely when those differences remain visible. A single label such as self-evolving agent does not define a comparable algorithmic class~\cite{rrsi2026,corpus261014224,root_aide2026,root_mass2026,root_selfhpo2026,xu2026hyperskill}.
+
+The first hypothesis is that improvement of an executor transfers to improvement of an improver. Fix an initial executor, an outer-loop resource budget, and an independently measured task-utility functional $Q$. For improver $I$, define
+\begin{equation}
+ g(I)=\mathbb E\!\left[Q(A_{\rm final}^{I})-Q(A_0)\right],
+ \qquad \Delta=g(I_1)-g(I_0),
+\end{equation}
+where the expectation includes independent search runs and their declared task sampling, and all proposal and selection costs fall within the fixed budget. Prespecify a meaningful advantage $\epsilon\geq0$ and a confidence interval for $\Delta$ valid under that search and evaluation design. A lower endpoint above $\epsilon$ supports that advantage; an upper endpoint at or below $\epsilon$ rules it out at the interval's stated coverage. An interval crossing $\epsilon$ is inconclusive. Failure to demonstrate improvement is not proof of its absence. AIDE\textsuperscript{2}'s inconclusive ignition test shows why executor transfer is insufficient. The second hypothesis is that jointly evolving policy and harness yields robust interaction gains. Test cross-pairings, multiple update rounds, task-order variation, and held-out environments; a gain tied to one checkpoint pair is a narrower result.
+
+The third hypothesis is that co-evolving feedback improves alignment with the intended task rather than merely agreement between executor and evaluator. Evaluate the pair with an independent, fixed external audit and adversarial fault families. The fourth is that persistent procedural experience improves future adaptation without accumulating invalid assumptions. Test memory removal, shuffled evidence, stale schemas, model migration, and revocation. Each hypothesis has a different unit of intervention and should not be inferred from the same final leaderboard score.
+
+Complete accounting includes failed proposals, discarded trajectories, evaluator calls, environment setup, memory construction, training, serving, and human review when used. Report the distribution across improvement runs and the regressions of selected artifacts. A method that produces one exceptional artifact after a large search can still be useful, but its scientific claim is search efficiency under that budget, not reliable autonomous acceleration.
+

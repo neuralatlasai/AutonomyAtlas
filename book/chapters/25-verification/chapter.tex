@@ -1,0 +1,15 @@
+\chapter{Model Inspection, Executable Verification, and Evaluator Reliability}\label{ch:C25}
+An executable evaluator can be wrong about what it certifies. TestJack's October 2026 witness construction targets candidates that pass existing tests while violating prompt-grounded requirements~\cite{yao2026testjack}. The resulting conflict is between an operational gate and a task property; it is not resolved by declaring either a test or a language-model reviewer an oracle. This current case motivates the chapter's separation of internal interventions, executable verification, evaluator classification error, and release evidence.
+
+Inspection asks what a model or execution system is doing. Verification asks whether a specified property holds under declared assumptions. The two can support one another, but neither subsumes the other. An interpretable activation pattern does not prove that a tool action is authorized. A passing test does not reveal the complete internal mechanism that produced the artifact. A reliable technical account must identify the property, observation boundary, intervention, and residual uncertainty for each claim.
+
+This chapter connects internal model interventions to executable task validators and evidence-based quality gates. It emphasizes false acceptance, evaluator dependence, and specification gaps because these are the points where apparent assurance can exceed actual support. Every proposed test remains a proposed experiment unless execution evidence is available.
+
+\input{book/chapters/25-verification/sections/01.tex}
+\input{book/chapters/25-verification/sections/02.tex}
+\input{book/chapters/25-verification/sections/03.tex}
+\input{book/chapters/25-verification/sections/04.tex}
+\input{book/chapters/25-verification/sections/05.tex}
+\input{book/chapters/25-verification/sections/06.tex}
+\input{book/chapters/25-verification/sections/07.tex}
+\input{book/chapters/25-verification/sections/08.tex}

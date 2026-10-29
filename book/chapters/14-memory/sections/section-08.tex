@@ -1,0 +1,20 @@
+\section{Memory transactions and a reference test suite}\label{sec:C14:transactions}
+Memory construction often spans several writes: raw evidence, embeddings, an episode, semantic propositions, and provenance links. A partial failure can leave these layers inconsistent. The central transaction question is which combinations constitute a valid published memory state. If the semantic record references an episode that never committed, retrieval can return an unsupported assertion. If the raw item is removed before the episode becomes durable, recovery can lose both evidence and abstraction.
+
+A proposed two-stage publication process first writes candidate derivatives with explicit source references and pending status. Validation checks schemas, provenance existence, ownership, and any required exact fields. A commit then makes the derivatives retrievable and records whether raw evidence may be removed under retention rules. Failed candidates remain unavailable to the answer policy. This is an implementation pattern, not an established universal memory algorithm. Semantic validity still requires stronger checks than database atomicity.
+
+For a conservative publication gate, let $D(m)$ be the recorded transitive dependencies of candidate $m$, $c(m)$ its committed-status bit, and $a_{\alpha,t}(m)$ its current access-and-validity check. A strictly source-bound view can expose
+\begin{equation}
+ M_{\alpha,t}^{\rm vis}=
+ \{m:c(m)=1,\ a_{\alpha,t}(m)=1,
+        \ a_{\alpha,t}(x)=1\ \forall x\in D(m)\}.
+\end{equation}
+This is a proposed policy, not a necessary rule for every legitimate aggregate. It assumes complete dependency recording and current checks; missing lineage requires unresolved status or a broader quarantine. It certifies publication structure and scope, not the semantic truth of $m$. A correction can revoke reusable status without falsifying the historical event that an old version was used. Effect receipts and current grants therefore retain their typed control semantics instead of becoming ordinary similarity-ranked facts.
+
+The state can maintain separate read and write versions so that an ongoing task sees a coherent memory snapshot. A new correction can trigger explicit refresh rather than silently changing the evidence beneath a multi-step plan. For high-consequence obligations, refresh may need to occur immediately before tool execution. For ordinary background facts, snapshot consistency may be adequate. The choice follows workload consequences and should be specified per memory class.
+
+The proposed test suite includes extraction failures, duplicate writes, interrupted consolidation, stale embeddings after a correction, conflicting user scopes, and a summary whose source has expired. Each case has a deterministic structural oracle where possible and a separately evaluated semantic outcome. Compare a raw-log baseline, a flat fact store, a layered store, and a structured obligation profile under the same backbone and complete cost boundary. Report task order and repeat runs because the store evolves during evaluation.
+
+For RecMem-like recurrence policies, vary the frequency of decisive facts independently of their importance. This tests whether recurrence is a useful cost proxy without making frequency and utility identical by benchmark construction. For semantic merging, create near-duplicate records with different temporal scope or authority. For retrieval-use failures, retain the InMind-style paired controls. For deletion, test derived artifacts and cross-session behavior rather than only a missing database row. These are proposed experiments, not new results.
+
+The resulting engineering standard is precise but bounded. A memory system should say what it stores, when it consolidates, how it retrieves, which authority its records carry, how it handles corrections, and what its transaction protects. It should not claim lifelong continuity from successful direct recall, or parametric learning from external storage growth. Procedural consolidation in Chapter~\ref{ch:C15} extends this analysis to reusable skills whose errors can influence many later tasks.

@@ -1,0 +1,45 @@
+\section{Testing the improver rather than its selected artifact}\label{sec:C30:06}
+An improver evaluation starts multiple independent improvement runs from the same initial executor. It varies only the improver, allocates the same search budget, and evaluates resulting executors on untouched external tasks. The outcomes include final held-out quality, quality as a function of consumed resources, regression severity, diversity of changes, and the frequency of invalid or unsafe proposals. A single successful search trajectory cannot estimate the distribution of improver performance.
+
+AIDE\textsuperscript{2} explicitly distinguishes this issue through its ignition test. Its discovered research agent is used as an outer-loop improver and compared with a human-engineered improver, holding the initial inner-loop agent fixed. The paper reports three seeds per arm and concludes that the evidence is inconclusive about superior self-improvement efficiency. This limitation is central: improved research execution does not by itself show that improvement will accelerate when the agent becomes its own optimizer~\cite{root_aide2026}.
+
+An original discriminating protocol is the following. Pre-register two improvers, fixed executor initialization, a search task stream, independent validation tasks, and a sealed final evaluation population. Randomize search seeds and task orders. Count proposal generation, failed executions, verifier calls, environment setup, memory maintenance, and selection cost. At predetermined resource checkpoints, freeze the incumbent executor and evaluate it without feeding results back into search. Compare complete cost-quality curves rather than only each run's selected maximum.
+
+Let $\Omega$ be the finite predeclared set of improvers, let $m,K$ be positive integers, let $s\in\{1,\ldots,m\}$ index independent search replicates within each arm, and let $(b_k)_{k=0}^{K-1}$ be the fixed allocation schedule. The initializer $\iota_s$ creates the same executor and memory fixture for paired improvers. The manifest $\nu_k$ fixes the versioned sandbox and validation contract. For each $(\omega,s)$, suppressing these superscripts after initialization gives
+\begin{equation}
+\label{eq:C30:improver-search}
+\begin{aligned}
+ \xi_0^{\omega,s}&=\iota_s(\xi_0),\qquad D_0^{\omega,s}=D_{\mathrm s},\\
+ \mathcal P_k&\sim Q_\omega(\,\cdot\mid\xi_k,D_k;b_k),\\
+ (\mathcal Q_k,Z_k)&=\mathcal V(\mathcal P_k,D_{\mathrm v};\nu_k),\\
+ \xi_{k+1}&=\mathcal S_\omega
+       ((\xi_k)\oplus\mathcal Q_k;D_k,Z_k),\\
+ D_{k+1}&=D_k\oplus Z_k,\qquad k=0,\ldots,K-1.
+\end{aligned}
+\end{equation}
+The distribution $Q_\omega$ proposes a finite indexed family of candidate configurations $\mathcal P_k$. The sandbox and validation operator $\mathcal V$ returns its admissible subfamily $\mathcal Q_k$ and an evidence journal $Z_k$ containing all probe outcomes, including rejection and failure. Trial identifiers distinguish repeated proposals with identical configurations. The selector $\mathcal S_\omega$ follows the recorded adoption rule and retains the incumbent when no candidate is adopted. The symbol $\oplus$ denotes ordered concatenation of indexed families or journal append, preserving multiplicity and identity. Search evidence $D_{\mathrm s}$ and selection-validation tasks $D_{\mathrm v}$ are distinct from the audit and final populations below.
+
+An immutable snapshot map $\mathcal F$, report-only evaluator $\mathcal E_{\mathrm a}$, and componentwise resource accounting give
+\begin{equation}
+\label{eq:C30:improver-audit}
+\begin{aligned}
+ \bar\xi_{k+1}&=\mathcal F(\xi_{k+1}),\\
+ e_{k+1}&=\mathcal E_{\mathrm a}
+          (\bar\xi_{k+1};D_{\mathrm a},\nu_{\mathrm a}),\\
+ \mathbf c_{k+1}&=\mathbf c_k+
+       \mathbf c(\mathcal P_k,Z_k,e_{k+1}),\qquad\mathbf c_0=\mathbf0.
+\end{aligned}
+\end{equation}
+The snapshot includes model, harness, memory, and their versioned dependencies. Each coordinate of $\mathbf c$ uses one declared resource unit; proposal, failed execution, validation, maintenance, and audit costs remain visible. The origin $\mathbf c_0=\mathbf0$ starts accounting after the common initialization; any separately measured initial-executor baseline must report its setup and evaluation costs. The allocation $b_k$ constrains search only through an explicitly enforced budget policy. Audit outputs $e_{k+1}$ enter a separate sealed journal and are absent from $D_k$, $Q_\omega$, and $\mathcal S_\omega$; merely omitting them from an equation does not enforce that access boundary.
+
+After all search runs are sealed, the complete snapshot collection and final evaluation are
+\begin{equation}
+\label{eq:C30:improver-final}
+\begin{aligned}
+ \mathcal X&=(\bar\xi_k^{\omega,s})_{
+       \omega\in\Omega,\ 1\leq s\leq m,\ 1\leq k\leq K},\\
+ E_{\mathrm f}&=\mathcal E_{\mathrm f}(\mathcal X;D_{\mathrm f},\nu_{\mathrm f}).
+\end{aligned}
+\end{equation}
+This indexed family retains distinct run and checkpoint identities even when their executor snapshots are equal. The formulation separates selection feedback from assessment of the improver. In practice, evaluator isolation requires access control and logging. If an agent can inspect hidden tests, final benchmark files, or previous final-evaluation outputs through a shared workspace, the separation has failed. Improving a scoring script can be legitimate when the script is wrong, but that intervention must be reported and evaluated as a change in the measurement system.
+

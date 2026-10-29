@@ -1,0 +1,11 @@
+\section{Judging long multimodal trajectories}\label{sec:C25:judges}
+Long computer-use trajectories challenge evaluators through observation volume, hidden state, and instruction-specific constraints. A judge may accept a visually convincing outcome while missing a wrong recipient, incorrect folder, or unrequested side effect. Conversely, it may reject a valid trajectory because the decisive evidence lies in an intermediate application state rather than the final image.
+
+AgentHorizon uses paired instruction-trajectory relationships to probe these distinctions~\cite{corpus261011050}. Its design motivates evaluating false acceptance and false rejection separately rather than relying on a single agreement rate. A judge that accepts almost every plausible workflow can appear competent on a positive-heavy dataset. Balanced metrics help, but they do not replace a clear definition of the underlying positive and negative populations.
+
+Evidence access should be controlled experimentally. Compare final-state observation, full trajectory, searchable artifact logs, and authoritative application queries. These conditions test different capabilities. Giving one judge an interactive tool harness and another only a fixed image sequence confounds model quality with evidence access. Tool-enabled judging also incurs latency and cost, and tools can fail or expose misleading state.
+
+A useful implementation separates evidence retrieval from verdict generation. The judge identifies required predicates, retrieves supporting observations, and links each verdict to the corresponding evidence. This improves auditability but does not guarantee correctness. Evaluate whether cited observations actually establish the predicate and whether omitted constraints were checked. A verbose explanation can otherwise hide a shallow verdict behind extensive irrelevant evidence.
+
+Trajectory compression is another treatment. Summaries can reduce evaluator cost while deleting the rare event that distinguishes success from failure. Compare compression methods on matched task families and include perturbations that move decisive evidence earlier or later in the history. Report the cost of reconstructing original observations. If the judge needs raw evidence after every difficult case, the summary's apparent savings may not survive end-to-end accounting.
+

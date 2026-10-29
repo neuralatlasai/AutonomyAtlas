@@ -1,0 +1,17 @@
+\section{Conditioning under joint adaptation}\label{sec:C34:03}
+Context editing, memory maintenance, and policy training can create incompatible conditional distributions. The failure is structural: an action generated under one information set is later trained as though it had been generated under another. Better final-answer supervision does not restore the missing behavior history. MemoryWalker supplies concrete exact and approximate corrections, while the broader system question is how to retain the evidence required to apply or validate those corrections~\cite{j2026memorywalker}.
+
+A falsifiable hypothesis is that recording and respecting transform lineage improves deployment behavior after compaction beyond what can be explained by additional training compute. Test exact rollout-history conditioning where feasible, a naive flattened reconstruction, and an approximation with matched update budgets. Include a no-compaction control, vary the number and location of edits, and measure behavior log-probability diagnostics alongside held-out task outcomes. An approximation should not be called equivalent merely because its average reward is close on one suite.
+
+Joint updates require another factorial test. Train or evolve context policies and memory banks separately and together, then evaluate all cross-pairings with frozen policy checkpoints. Estimate interaction terms and migration failures under independent task streams. If joint gains disappear when component combinations are crossed, the system may have learned a useful but narrow compatibility relation. That is valuable engineering evidence, but it differs from a portable improvement to memory or reasoning.
+
+Frozen cross-pairings measure compatibility of the resulting artifacts. They do not by themselves identify the causal benefit of joint training: separately trained checkpoints can differ in task exposure, optimization, or selection. That claim requires controlled training interventions with matched resources and independent training runs, followed by the same protected evaluation. More test trajectories for one trained checkpoint reduce evaluation uncertainty but do not create additional independent training runs.
+
+Compatibility validation also has a resource constraint. Let $A_t$ be the amount of new compatibility work introduced by releases and derived-state changes during interval $t$, and $R_t$ the work actually validated. A simple backlog identity is
+\begin{equation}
+ B_{t+1}=\max\{0,B_t+A_t-R_t\}.
+\end{equation}
+If long-run required work exceeds validation capacity and no sound compositional shortcut is available, unresolved compatibility obligations accumulate. This is an accounting deduction, not a stochastic performance theorem. Possible responses include slower promotion, version-pinned sessions, narrower update scopes, or stronger contracts that reduce what must be retested. Silently assuming that old memories remain valid does not remove the obligation.
+
+The research opportunity is to discover contracts that are both checkable and behaviorally meaningful. Syntactic schemas are easy to validate but weak about semantics. Full behavioral equivalence is generally intractable for open-ended stochastic agents. Intermediate invariants, such as provenance preservation, authority monotonicity, exact cache dependency identity, and restricted procedure applicability, can reduce risk without pretending to solve all semantic compatibility.
+

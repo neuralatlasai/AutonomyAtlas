@@ -1,0 +1,26 @@
+\section{A resource model at the policy boundary}
+\label{sec:C03:resources}
+Let a decoder have $L$ layers, model width $d$, feed-forward width $m$, and retained sequence length $n$. Ignoring biases, normalization parameters, and architectural variations, a dense layer with four $d$ by $d$ attention projections and two feed-forward matrices has approximately $4d^2+2dm$ parameters. A gated feed-forward layer generally adds another $dm$ matrix. These expressions are accounting identities for the stated components, not universal model-size formulas. They help identify which assumptions change when comparing architectures. Embeddings, experts, vision modules, and output heads must be added rather than hidden in a single parameter multiplier.
+
+For a full sequence pass, dense projection work scales approximately as $n d^2$ and $n d m$, whereas attention score and value products scale as $n^2d$. Constants depend on causal masking, multiply-add conventions, and implementation. During autoregressive decoding, the new query interacts with all retained keys, giving attention work proportional to $nd$ per generated token and layer. Caching avoids recomputing old projections but introduces persistent tensors whose size grows with the session. The detailed memory and bandwidth analysis follows in Chapter~\ref{ch:C04}; here the consequence is that an agent's historical input and output lengths jointly determine its resource footprint.
+
+A hypothetical calculation makes tokenizer interaction explicit. Suppose two tokenizers encode the same complete interaction in 100,000 and 125,000 tokens. Under otherwise identical dense prefill assumptions, the quadratic attention term has ratio $(1.25)^2=1.5625$, while a linear projection term has ratio $1.25$. The total compute ratio lies between these values when both components have positive cost and all other terms are unchanged. This is a deduction about a simplified accounting model, not a measured speedup or a realistic claim that two different models differ only in tokenization. Actual kernels, padding, caching, and data movement can change wall-clock behavior substantially.
+
+At the action level, the expected cost also includes failed serializations. If one independent attempt costs $c$ and has probability $q$ of passing a syntactic validator, unbounded retries have expected attempt count $1/q$ when $q>0$. This calculation says nothing about semantic correctness. A parser can accept a dangerous or irrelevant action. With at most $k$ attempts, the success probability under the same independence assumption is $1-(1-q)^k$, and the expected number of attempts is $\sum_{i=0}^{k-1}(1-q)^i$. Correlated errors, state changes between attempts, or adaptive repair invalidate the simple model and must be measured rather than assumed away.
+
+An agent comparison should therefore report valid-action rate, task success, input and output bytes, model-specific token counts, actual calls, tool expenditure, and wall-clock distribution. A price per million output tokens is not a task cost when one system repeatedly replays a long history or performs more retries. A faster kernel can free a budget that the harness then spends on additional search. Whether that improves reliability is an empirical question. Resource savings should be measured at both the model-call boundary and the complete task boundary to avoid converting an implementation improvement into an unsupported capability claim.
+
+{\small\setlength{\tabcolsep}{3pt}
+\begin{table}[!htbp]
+\centering
+\caption{Calculated effects under deliberately simplified assumptions.}\label{tab:C03:arithmetic}
+\begin{tabular}{L{31mm}L{34mm}L{41mm}}
+
+\toprule Change & Calculation & Interpretation\\\midrule
+Length multiplied by $1.25$ & Linear term $1.25$; quadratic term $1.5625$ & Compute components only; no latency claim.\\
+Independent parse acceptance $q=0.8$ & Mean unbounded attempts $1.25$ & Syntax acceptance is not task success.\\
+Three parse attempts, $q=0.8$ & Acceptance $1-0.2^3=0.992$ & Assumes identical independent trials.\\
+\bottomrule
+\end{tabular}
+\end{table}
+}

@@ -1,0 +1,16 @@
+\section{Task-local recursion and reusable improvement memory}\label{sec:C30:03}
+Harness\textsuperscript{2} separates refinement for the current task from adaptation of the mechanism that guides future refinement. The model weights remain frozen. The execution harness exposes eight component classes, including prompts, guardrails, memory, skills, tool guidance, scripts, subagents, and middleware. Each task begins from a common execution harness, while an improvement library supplies reusable components and evidence from earlier tasks~\cite{corpus261014224}.
+
+Its Propose--Probe--Compose mechanism is technically important because it does not assume a ground-truth task verifier. A reference execution exposes behavior. Invariant and domain-specific edits are proposed, candidate harnesses execute under matched configurations, and a composer selects or combines changes based on behavioral contrasts. Those contrasts can reveal that a change caused a missing file to be read or a repeated error to be avoided. They do not by themselves establish that the final deliverable is correct. Shared model bias, stochastic executions, and incomplete observations remain.
+
+The update can be represented as
+\begin{align}
+ (h'_t,z'_t,\zeta_t)&=\Phi(q_t,h_0,r_t;B_t),\\
+ r_{t+1}&=\Psi(r_t,h_t^{\rm adopt},D_t),
+\end{align}
+where $q_t$ is the current task, $h_0$ the common initial harness, $r_t$ the improvement library, and $B_t$ the allocated refinement budget. The operator $\Phi$ returns a candidate harness $h'_t$, execution record $z'_t$, and proposal/composition evidence $\zeta_t$. After adoption, $\Psi$ maintains the library from the adopted harness and recorded evidence $D_t$, including unsuccessful probes where retained. This is an abstraction of the mechanism, not a claim that the implementation exposes these mathematical function names. The adopted harness is not denoted optimal: adoption is a decision under limited evidence. The library changes the distribution of future proposals and compositions, making it procedural meta-memory.
+
+Two causal questions must be distinguished. Does additional task-local search improve the current result? Does experience from that search improve future refinement at a fixed future budget? The second cannot be inferred from the first. A library built with wider search contains more information and incurred more cost. A comparison that ignores library-construction cost or evaluates only familiar task patterns can overstate improvement of the improver. Appropriate controls include an empty library, a shuffled library, a library with the same entries but no evidence annotations, and a cost-matched independent-search baseline.
+
+The mechanism also creates a compatibility problem. A successful edit may depend on a particular model's failure mode or an old tool schema. Reusing the edit after a model upgrade can add unnecessary instructions or conflicting procedures. Each entry should retain the applicable model and environment versions, the observed deficiency, the exact intervention, counterevidence, and an expiry or revalidation condition. A library of conclusions without the conditions under which they held can accumulate brittle folklore rather than transferable knowledge.
+

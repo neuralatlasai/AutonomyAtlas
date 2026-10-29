@@ -1,0 +1,17 @@
+\section{Exact reuse, partial reuse, and cache identity}\label{sec:C31:04}
+Cache reuse requires a compatibility predicate. At minimum, relevant tokens, model and adapter weights, positions, attention masks, architecture mode, and numerical representation must agree with the cached computation. The causal dependency graph matters: editing an earlier token changes later hidden states, so suffix KV values are not generally reusable merely because their token strings are unchanged. A semantic embedding similarity score cannot certify equality of those tensors.
+
+For a sequence of causal transformer layers, the invalidation rule follows by induction. A changed input embedding at position $k$ changes that position's hidden state. At the next attention layer, every later position whose receptive field includes $k$ may change. Those changes propagate through residual and feed-forward transformations and into later-layer keys and values. Local or sliding-window attention can bound some dependency paths, but hybrid full-attention layers may restore long-range dependence. Exact invalidation must use the actual architecture, not the visual location of a changed text span.
+
+The inspected vLLM V1 module \path{vllm/v1/core/kv_cache_manager.py} exposes distinct methods for computed-block lookup, slot allocation, cache reset, and computed-block truncation. Those control points make it possible to audit whether a context transform invalidates the dependent state before reuse. They are implementation interfaces, not a proof that a particular deployment invokes them correctly~\cite{repo_vllm}. A cache test should alter one dependency at a time: adapter identity, position offset, prefix token, mask, or tool-result serialization, then compare with a fresh computation within declared precision tolerances.
+
+A reusable key should identify computation, tenancy, and policy constraints. Hashing only token content risks collisions across incompatible adapters or security domains. Tenant isolation can require separate namespaces even when two prompts contain identical public text. A deletion request may also require removal from derived cache tiers, or at least prevention of future reads according to the declared policy. The mathematical possibility of reuse does not imply permission to reuse.
+
+The September 2026 tiered-offloading design places host memory between accelerator storage and secondary tiers such as filesystems, object stores, and remote peers. Reload and offload have different allocation and synchronization costs~\cite{root_vllm2026tiers}. A useful admission criterion compares reuse probability and avoided recomputation with transfer and occupancy costs:
+\begin{equation}
+ p_{\rm reuse}\,C_{\rm recompute}
+ > C_{\rm write}+p_{\rm reuse}C_{\rm read}
+ +C_{\rm occupancy}+C_{\rm coordination}.
+\end{equation}
+Every term must use consistent units, such as dollars or time-weighted utility. A byte hit rate alone cannot establish net benefit when lookup delays block a critical request or when retained state displaces more valuable work.
+

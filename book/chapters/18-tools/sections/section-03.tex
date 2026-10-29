@@ -1,0 +1,34 @@
+\section{Routing as constrained resource allocation}\label{sec:C18:routing}
+A router chooses among direct answering, tool execution, retrieval, specialized models, and delegated workers. Its objective should combine task value, latency, cost, and authority rather than maximizing a tool-use rate. Calling a tool unnecessarily can introduce expense and risk; refusing a necessary tool can create an unsupported answer. Tool abstention and tool invocation are both decisions requiring calibration.
+
+Let $j$ index a finite catalog of admissible routes and let $Q_j(s)$ estimate expected task utility in state $s$. Let $C_j(s)$ and $L_j(s)$ estimate resource cost and latency, with nonnegative conversion weights $\lambda_c$ and $\lambda_l$. A proposed decision rule is
+\begin{equation}
+ \widehat j(s)\in\arg\max_{j\in\mathcal J_A(s)}
+ \{Q_j(s)-\lambda_c C_j(s)-\lambda_l L_j(s)\},
+\end{equation}
+where $\mathcal J_A(s)$ contains the authority-permitted routes and an explicit no-effect route $j=0$. The latter permits abstention or a request for missing information, so the maximization remains defined when no effectful route is allowed. Ties require a declared selection rule. The estimates depend on model version, tool reliability, queueing, and remaining budget. Optimizing a router on static average prices can be inappropriate when latency or tool availability changes. Constraints should be enforced before ranking, rather than represented only as a large penalty that the model may trade away.
+
+The estimated objective also needs an uncertainty boundary. Write $v_j$ for the true expected net utility under one fixed configuration and $\widehat v_j$ for the estimate used by the router. If simultaneous bounds $|\widehat v_j-v_j|\leq b_j$ hold for every feasible route, then, for $j^\star\in\arg\max_jv_j$ and $\widehat j\in\arg\max_j\widehat v_j$,
+\begin{equation}
+ v_{j^\star}-v_{\widehat j}
+ \leq b_{j^\star}+b_{\widehat j}
+ \leq2\max_j b_j.
+\end{equation}
+Insert and subtract the two estimates; the estimated-utility difference is nonpositive by selection. This conditional deduction needs simultaneous coverage, not a separate nominal interval interpreted after inspecting every route. It also assumes a correct current feasible set. Smaller utility uncertainty cannot repair a stale grant, an unmodeled side effect, or support missing from the route logs. Reusing estimates after a model, memory bank or worker interface changes requires a new compatibility argument.
+
+If $L_j$ is mean latency, this rule does not enforce a deadline guarantee. For random completion time $D_j$ and deadline $d$, a tail-aware feasible set can additionally require
+\begin{equation}
+ \mathcal J_{A,d,\alpha}(s)=
+ \{j\in\mathcal J_A(s):P(D_j>d\mid s)\leq\alpha\},
+ \qquad \alpha\in[0,1].
+\end{equation}
+The probability must include queueing, tool retries, and validation under the intended offered load. Two routes can have identical means and different deadline-miss probabilities. Estimating a low-probability tail from a small successful-call sample is insufficient, and timed-out calls remain in the distribution. If every useful route violates the constraint, the system must expose infeasibility or choose a declared degraded mode; replacing the empty set with an unqualified fast answer would change the requirement.
+
+Uno-Orchestra jointly emits task decomposition and admissible model-primitive assignments rather than using an independent decomposition stage followed by a fixed dispatcher~\cite{cui2026unoorchestra}. Its training uses verified worker interactions and a multi-turn objective with intermediate feedback. This is a learned orchestration policy, not evidence that every tool should be delegated. Its benchmark aggregation, worker pool, verifier, and cost boundary determine the meaning of its reported efficiency.
+
+A router's confidence should be evaluated against route-specific outcomes. A model can be confident that a tool is relevant while being uncertain whether its argument values are correct. A worker can solve a subtask but return evidence in an unusable format. Treat route selection, execution, and integration as separate stages. A failed integrated result should not automatically label the route itself wrong if the downstream merger discarded a valid answer.
+
+Training data for routing can be censored. Logs contain outcomes only for routes actually chosen; the unchosen alternative's success is unknown. Supervised imitation of historical routes can reproduce a prior system's biases. Counterfactual evaluation requires randomized exploration where appropriate, controlled replay, or justified off-policy assumptions. Chapter~\ref{ch:C17} explains why missing support and changed conditioning limit importance-weight interpretations.
+
+The proposed baseline set includes a strong single route, a deterministic rule router, a cost-only router, and a learned utility router. Match complete budgets and retain unsuccessful calls. A router that improves average success by using more expensive workers has a useful capability result but has not established equal-budget efficiency. A Pareto comparison is often more informative than a single weighted score.
+

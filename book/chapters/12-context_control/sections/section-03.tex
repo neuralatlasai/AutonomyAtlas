@@ -1,0 +1,55 @@
+\section{Reversible offload and explicit context actions}\label{sec:C12:offload}
+ACM makes context management an explicit part of agent behavior through a summarization action and retrieval of earlier raw interaction history~\cite{corpus260723809}. Its distinction between a bounded active view and preserved external history is technically important. Offloaded text can remain intact while the working context becomes lossy. The agent still has to recognize when it needs an omitted detail, issue a suitable retrieval request, and interpret the returned record correctly. Storage reversibility and behavioral reversibility are different properties.
+
+The paper's mechanism can be understood as a state transition with a retained suffix, a compacted prefix, and access to raw evidence. The resulting policy is more flexible than mandatory truncation at a fixed threshold because it can choose when to summarize. That flexibility creates a larger action space and additional credit-assignment demands. The context-management decision can be correct locally but harmful to a later step, so evaluating only the immediate post-summary answer is insufficient.
+
+Context Language Models go further by making the live context directly editable and studying serving support for such edits~\cite{shao2026context}. Their reported FLOP accounting should not be equated with measured latency or service expenditure. The generalizable distinction is between a fixed set of harness editing operations and a model-controlled editing program. The latter expands expressivity but also expands the space of invalid or semantically damaging edits.
+
+A conservative editing interface can represent operations as typed transformations: retain, summarize, externalize, restore, annotate, and invalidate. Each operation has preconditions and a provenance record. ``Invalidate'' should preserve the reason a fact became obsolete; it should not silently erase the record needed to understand a past decision. ``Restore'' should recover source roles and timestamps together with text. A raw paragraph returned without its original authority can change its meaning.
+
+The proposed construction below is an implementation contract, not a reproduction of ACM's code. Let $R=\mathcal P(S)$ pin obligations and authority-bearing records from state $S$, $D=\mathcal L(H,S)$ locate a finite set of currently readable candidate evidence in history $H$, and $N=\mathcal N(H,S)$ retain recent events. The token-cost map $\ell$ measures the variable serialization charge against residual capacity $W$; fixed material already reserved in $W$ is not charged again. When $\ell(R)\leq W$, a declared selector $\sigma$ chooses from
+\begin{equation}
+\begin{aligned}
+ \mathfrak E_W
+   &=\left\{E\subseteq D:
+      \ell(R)+\sum_{r\in E}\ell(r)\leq W\right\},\\
+ E_W&=\sigma(\mathfrak E_W;H,S),\\
+ z_W&=\mathcal S(E_W),\qquad
+ c_W=\Sigma(R,z_W,N).
+\end{aligned}
+\label{eq:C12:context-construction}
+\end{equation}
+Here $\mathcal S$ summarizes with source identifiers and $\Sigma$ serializes the pinned records, summary, and recent events. No optimality of $\sigma$ or semantic sufficiency of $\mathcal S$ is assumed. Let $v(R,c_W)\in\{0,1\}$ test structural preservation of the pinned records in the completed serialization. A conservative admissibility rule returns either the completed context, an infeasible-budget marker $\bot_B$, or a failed-preservation marker $\bot_V$:
+\begin{equation}
+ \widehat C_W=
+ \begin{cases}
+ \bot_V,&v(R,c_W)=0,\\
+ \bot_B,&v(R,c_W)=1,\ \ell(c_W)>W,\\
+ c_W,&v(R,c_W)=1,\ \ell(c_W)\leq W.
+ \end{cases}
+\label{eq:C12:context-admissibility}
+\end{equation}
+This inner construction is defined only when $\ell(R)\leq W$. The complete budget guard is
+\begin{equation}
+ C_W=
+ \begin{cases}
+ \bot_B,&\ell(R)>W,\\
+ \widehat C_W,&\ell(R)\leq W.
+ \end{cases}
+\label{eq:C12:context-budget-guard}
+\end{equation}
+An infeasible result requires replanning or a larger admissible budget, rather than deletion of a pinned obligation. The final length test is an explicit admissibility requirement: a raw-evidence selection bound alone does not constrain summary expansion or the cost of adding recent events. It is a conservative completion of the construction, not an assertion that the cited implementation already enforces this gate.
+
+Let $J$ be the edit journal, $\mu(R,E_W,z_W,N,c_W)$ the manifest linking the complete candidate view to its pinned records, selected sources, recent events, roles, timestamps, and transformation, and $\oplus$ append a durable record. Persistence is conditional on admission:
+\begin{equation}
+ J^+=
+ \begin{cases}
+ J\oplus\mu(R,E_W,z_W,N,c_W),&C_W\notin\{\bot_B,\bot_V\},\\
+ J,&C_W\in\{\bot_B,\bot_V\}.
+ \end{cases}
+\label{eq:C12:context-manifest}
+\end{equation}
+The preservation test is only as strong as its validator. A deterministic check can confirm that an identifier or typed obligation survives, but it cannot generally establish semantic sufficiency of a prose summary. Structural preservation and budget admission remain useful invariants, not a complete proof that future decisions will remain correct. Returning $C_W$ as an installed view additionally requires successful manifest persistence; a failed journal write is an unresolved transition, not a completed edit.
+
+The budget $W$ is residual capacity after fixed instructions, selected schemas, fixed serialization overhead, and any reserved output allowance. If pinned requirements exceed that residual, the feasible selection set is empty. Silently dropping a prohibition to make the request fit changes the task rather than solving the allocation problem. Replanning can reduce execution granularity, move validated control fields outside model-visible prose, or acquire a larger admissible input; it must preserve the dispatch monitor's current authority. A tool or protocol revision can change schema overhead and thus invalidate an otherwise unchanged compaction schedule.
+

@@ -1,0 +1,50 @@
+\subsection{Online normalization and tiled exact attention}
+\label{sec:C04:online}
+Consider one query row with logits $s_j$. For a block $B$, define its maximum $m_B$, unnormalized mass $\ell_B=\sum_{j\in B}\exp(s_j-m_B)$, and weighted sum $u_B=\sum_{j\in B}\exp(s_j-m_B)v_j$. The normalized output is $u_B/\ell_B$. Two disjoint blocks can be merged without storing their individual probabilities. Let $m=\max(m_B,m_D)$. Then
+\begin{equation}
+\begin{aligned}
+ \ell&=e^{m_B-m}\ell_B+e^{m_D-m}\ell_D,\\
+ u&=e^{m_B-m}u_B+e^{m_D-m}u_D.
+\end{aligned}
+\end{equation}
+The final output is $u/\ell$. These equations follow by factoring the same global maximum out of the exponential sums. They explain how a streaming reduction can reproduce the dense softmax result in exact arithmetic while keeping only running statistics and an output accumulator.
+
+The numerical role of the maximum is essential. Exponentiating arbitrary logits directly can overflow even when the normalized result is well defined. Subtracting the current maximum keeps exponentials at most one. When a later tile contains a larger maximum, previous accumulated sums are rescaled. The procedure must also handle rows whose positions are entirely masked: a naive subtraction of two negative infinities yields an undefined quantity. Implementations need explicit semantics for empty rows and must test them. A finite sentinel used in place of negative infinity can accidentally assign probability to forbidden positions if not treated consistently.
+
+FlashAttention uses this reduction with tiles that fit in on-chip memory, minimizing transfers of large intermediate matrices between device memory and the processor. Its backward pass recomputes selected quantities rather than storing the full probability matrix~\cite{dao2022flashattention}. Recomputation exchanges arithmetic for reduced memory traffic. That trade can be favorable because arithmetic capacity and memory bandwidth do not grow in the same proportion. It is nevertheless conditional on tile dimensions, head sizes, register pressure, shared-memory capacity, and compiler scheduling. The asymptotic I/O analysis explains a mechanism; it does not replace measurement on the deployed accelerator.
+
+FlashAttention-2 changes work partitioning and reduces non-matrix-multiplication work. FlashAttention-3 uses Hopper-specific asynchronous execution and low-precision techniques~\cite{dao2023flashattention2,shah2024flashattention3}. Their author-reported speedups refer to specified GPUs and configurations. It is incorrect to transfer one of those multipliers to arbitrary inference traffic or to multiply it by an unrelated serving speedup as though the gains were independent. Both techniques may remove the same bottleneck, or one can expose another. End-to-end agent latency additionally includes communication, parsing, tools, queueing, and verification.
+
+For one query, let $\mathcal J$ contain its unmasked positions, assume $s_j\in\mathbb R$ for every $j\in\mathcal J$, and partition $\mathcal J$ into ordered nonempty tiles $B_1,\ldots,B_R$. Nonfinite unmasked logits violate this input contract rather than being silently discarded. For tile $r$, write $\mathbf s_r=(s_j)_{j\in B_r}$ and let $V_r\in\mathbb R^{|B_r|\times d_v}$ have rows $v_j^\top$. With componentwise exponentiation and a matching all-ones vector $\mathbf1$, the complete streaming recurrence is
+\begin{equation}
+\label{eq:C04:streaming}
+\begin{aligned}
+ (m_0,\ell_0,u_0)&=(-\infty,0,\mathbf0),\\
+ b_r&=\max_{j\in B_r}s_j,\\
+ m_r&=\max\{m_{r-1},b_r\},\\
+ \alpha_r&=\exp(m_{r-1}-m_r),\\
+ \mathbf w_r&=\exp(\mathbf s_r-m_r\mathbf1),\\
+ \ell_r&=\alpha_r\ell_{r-1}+\mathbf1^\top\mathbf w_r,\\
+ u_r&=\alpha_r u_{r-1}+V_r^\top\mathbf w_r,
+ \qquad r=1,\ldots,R.
+\end{aligned}
+\end{equation}
+The nonempty-tile restriction makes every $m_r$ finite, so the first rescaling uses $e^{-\infty}=0$ without subtracting two negative infinities. Writing $\mathcal J_r=\bigcup_{i=1}^rB_i$, induction gives the invariant
+\begin{equation}
+\label{eq:C04:streaming-invariant}
+\begin{aligned}
+ m_r&=\max_{j\in\mathcal J_r}s_j,\\
+ \ell_r&=\sum_{j\in\mathcal J_r}e^{s_j-m_r},\\
+ u_r&=\sum_{j\in\mathcal J_r}e^{s_j-m_r}v_j.
+\end{aligned}
+\end{equation}
+Thus the normalized result has the partial specification
+\begin{equation}
+\label{eq:C04:streaming-output}
+ o=\begin{cases}
+ u_R/\ell_R,&\mathcal J\ne\varnothing,\\
+ \bot,&\mathcal J=\varnothing.
+ \end{cases}
+\end{equation}
+Here $\bot$ marks an empty-row outcome requiring a declared implementation contract; it is not a numerical tensor or permission to divide by zero. In exact arithmetic, the nonempty-row result equals the dense masked-attention output. Vectorization, dropout, parallel reduction order, and floating-point error remain separate implementation obligations.
+

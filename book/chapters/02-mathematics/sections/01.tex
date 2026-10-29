@@ -1,0 +1,51 @@
+\section{Conditional prediction and observable information}\label{sec:C02:01}
+Agent mathematics distinguishes the world, the system's recorded information, and the inputs actually exposed to a decision rule. Let $X_t$ be latent environment state, $O_t$ an observation, and $(\mathcal F_t)$ the filtration of recorded system observations and preceding actions before action $A_t$. Let $\mathcal G_t\subseteq\mathcal F_t$ describe the information exposed to the proposal policy. Unlike the accumulated record, these exposed information sets need not be nested after compaction. A realizable stochastic policy is a $\mathcal G_t$-measurable probability kernel; sampling from it uses fresh randomization. Requiring the sampled action itself to be measurable before that randomization would exclude stochastic policies. Neither the kernel nor its input constructor may use tomorrow's observations or hidden evaluation answers. This distinction identifies leakage without pretending that the agent observes the latent world.
+
+For an autoregressive model with serialized input $c$ and output tokens $y_{1:n}$,
+\begin{equation}
+ p_\theta(y_{1:n}\mid c)=\prod_{i=1}^{n}
+ p_\theta(y_i\mid c,y_{<i}).
+\end{equation}
+The factorization gives the likelihood of a specified finite token prefix under the raw model and conditioning set. It says nothing by itself about whether token probabilities are calibrated, whether a decoded tool call is valid, or whether the resulting action is authorized. If a harness deterministically parses output into an operation, the action probability is the probability mass of all token strings that parse to that operation, including any decoder constraints. It is generally not the probability of one canonical JSON string.
+
+Let $q_{\theta,\delta}(v\mid c,y_{<i})$ be the normalized next-token law of the deployed decoder, including temperature, masks and truncation. This need not equal the raw model law $p_\theta$. Let $N\in\mathbb N_0\cup\{\infty\}$ be the stopping time of one generation call and
+\begin{equation}
+ q_{\theta,\delta}(y,n\mid c)
+ =\Pr_{\theta,\delta}\{Y_{1:n}=y,N=n\mid c\}.
+\end{equation}
+The event includes the stopping rule; a product for a finite prefix alone is not a normalized distribution on completed strings. Let $\phi$ map stopped records to actions or a distinguished invalid outcome $a_{\rm inv}$. For $a\in\mathcal A\cup\{a_{\rm inv}\}$, the finite-stop contribution is
+\begin{equation}
+\begin{aligned}
+ \pi_{\theta,\delta}(a\mid c)
+ &=\sum_{n\geq0}\sum_{y:\phi(y,n)=a}q_{\theta,\delta}(y,n\mid c),\\
+ \pi_{\theta,\delta}(a_{\infty}\mid c)
+ &=\Pr_{\theta,\delta}(N=\infty\mid c).
+\end{aligned}
+\end{equation}
+The outcome $a_{\infty}$ records nontermination and is distinct from an invalid parsed output. A hard token cap makes $N$ finite in generation steps, but budget exhaustion still needs an explicit parser outcome. Wall-clock nonreturn requires a separately declared deadline outcome. Conditioning the reported law on successful parsing discards failure mass and describes a different policy.
+
+For illustration only, suppose calls finish, $\sum_a p_a+q=1$, and repeated calls have the same context, are independent, and yield a valid action $a$ with probability $p_a$ or an invalid output with probability $q$. With at most $R\geq1$ calls,
+\begin{equation}
+ \Pr(A=a)=p_a\sum_{j=0}^{R-1}q^j,
+ \qquad \Pr(A=a_{\rm exhausted})=q^R.
+\end{equation}
+An unbounded retry loop terminates almost surely only if $q<1$ under these assumptions; then the valid-action law is $p_a/(1-q)$. When retries edit the context, this geometric calculation is inapplicable: the complete retry state and its transition law must be modeled. These are harness-level probability laws, not measurements.
+
+These are proposal distributions. Authorization and dispatch introduce another transition, including denial and no-dispatch outcomes; successful parsing is not evidence of either permission or an external effect. If a mask leaves no legal next token, the implementation must return a specified failure outcome rather than silently divide by zero. Tool-use learning must identify which of these laws its objective estimates~\cite{schick2023toolformer,yao2022react}.
+
+OpenAI Agents Python's \path{prepare_input_with_session} in \path{src/agents/run_internal/session_persistence.py} retrieves history under a configurable limit, merges history with new input, and returns prepared input separately from items eligible for persistence~\cite{ch01_openai_sdk_20261029}. A stored conversation cannot substitute for the conditioning input in a likelihood calculation. Instrumentation must retain the final model request after subsequent filters; comparing the store with this preparation stage alone would miss later edits.
+
+
+Bayesian conditioning provides a useful abstraction for uncertain observations. Given a prior $p(x)$ and observation likelihood $p(o\mid x)$,
+\begin{equation}
+ p(x\mid o)=\frac{p(o\mid x)p(x)}{\sum_{x'}p(o\mid x')p(x')}.
+\end{equation}
+The displayed sum is for discrete or countable states and requires positive predictive probability for the observation. A zero denominator identifies no posterior under this model; it calls for a declared model-recovery or conservative fallback rule, not a zero vector or an arbitrary normalization. Continuous states require the corresponding integrals and regular conditional distributions. A retrieved statement should not automatically be treated as a noiseless observation of $x$. Its reliability depends on source identity, timestamp, provenance, and the possibility of adversarial manipulation. Multiple retrieved passages may share a common origin and therefore fail to provide independent evidence. Multiplying their likelihoods as though they were independent can create extreme but unjustified confidence. The implementation analogue is to retain provenance links and deduplicate evidence lineages, rather than counting repeated text as corroboration.
+
+A constructed timeout example makes the distinction operational. Let $X=1$ mean that a submitted operation committed, and $O$ denote a timeout. Under hypothetical assumptions $P(X=1)=0.9$, $P(O\mid X=1)=0.1$, and $P(O\mid X=0)=0.8$, Bayes' rule gives
+\begin{equation}
+ P(X=1\mid O)=\frac{0.1\cdot0.9}{0.1\cdot0.9+0.8\cdot0.1}
+ =\frac9{17}.
+\end{equation}
+These values are analytical inputs, not measured service rates. The timeout does not identify the effect as absent; even a calibrated posterior does not itself authorize a retry. Reconciliation and the duplicate-effect loss belong to the subsequent decision problem. Chapters~\ref{ch:C13} and~\ref{ch:C32} connect this information restriction to recoverable execution.
+

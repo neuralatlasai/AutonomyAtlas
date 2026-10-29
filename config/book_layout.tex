@@ -1,0 +1,51 @@
+% Fixed book geometry established before substantive page measurement.
+\setlength{\parindent}{1.1em}
+\setlength{\parskip}{2pt plus .5pt}
+\setlength{\headheight}{14pt}
+\setlength{\headsep}{6mm}
+\setlength{\footskip}{10mm}
+\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{2}
+\renewcommand{\topfraction}{.9}
+\renewcommand{\bottomfraction}{.85}
+\renewcommand{\textfraction}{.08}
+\renewcommand{\floatpagefraction}{.8}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Agentic State}
+\fancyhead[R]{\small\nouppercase{\leftmark}}
+\renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter}{}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{.3pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\thepage}\renewcommand{\headrulewidth}{0pt}}
+\makeatletter
+% IEEE bibliography controls are auxiliary instructions, not cited references.
+\newcommand{\bstctlcite}[1]{\@bsphack
+ \if@filesw\immediate\write\@auxout{\string\citation{#1}}\fi\@esphack}
+\renewcommand{\@pnumwidth}{2.8em}
+\renewcommand{\@tocrmarg}{3.8em}
+\newcommand{\bookneedspace}[1]{%
+ \par\begingroup\dimen@=\pagegoal\advance\dimen@ by -\pagetotal
+ \ifdim\dimen@<#1\newpage\fi\endgroup}
+\newenvironment{conceptfigure}{%
+ \par\addvspace{\intextsep}\noindent\begin{minipage}{\linewidth}%
+ \def\@captype{figure}\centering
+}{\end{minipage}\par\addvspace{\intextsep}}
+\def\@makechapterhead#1{%
+  \vspace*{10pt}%
+  {\parindent\z@\raggedright\normalfont
+   {\large\scshape Chapter \thechapter\par}\nobreak\vskip8pt
+   {\huge\bfseries #1\par}\nobreak\vskip18pt}}
+\makeatother
+\hypersetup{pdftitle={Agentic State: Context Memory and Control in Adaptive AI},pdfsubject={Conditioning Tool Execution Verification and Self-Improvement},pdfauthor={}}
+\newcommand{\argmax}{\operatorname*{arg\,max}}
+\newcommand{\argmin}{\operatorname*{arg\,min}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\tr}{\operatorname{tr}}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{theorem}[proposition]{Theorem}
+\newenvironment{proof}{\par\noindent\textit{Proof.}\ }{\hfill$\square$\par}

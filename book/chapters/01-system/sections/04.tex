@@ -1,0 +1,30 @@
+\section{An ontology of models and connecting components}\label{sec:C01:04}
+The distinction between component classes is functional. A tool is an invocation interface to an operation. A skill is procedural information, possibly including executable resources, that conditions how operations are chosen and composed. A protocol specifies exchanges and lifecycle semantics between participants. A session identifies and manages a sequence of interactions. A memory system determines how information is retained, revised, accessed, and forgotten. An SDK supplies construction interfaces; a managed platform operates selected mechanisms behind a service boundary. A product integrates them for a workload and user interface. One package may fulfill several roles with distinct contracts.
+
+\begin{table}[!htbp]
+\centering
+\caption{Component boundaries and independently testable mechanisms.}\label{tab:C01:components}
+\begin{tabular}{L{0.24\linewidth}L{0.62\linewidth}}
+
+\toprule Component & Mechanism that requires independent evidence\\\midrule
+Model and tokenizer & Conditional prediction, representational interface, precision, and actual accessible context.\\
+Context constructor & Evidence selection, compaction, ordering, provenance, and behavior after editing.\\
+Session service & Identity, checkpoint scope, concurrency, interruption, resumption, and retention.\\
+Memory service & Write policy, temporal validity, retrieval, conflict resolution, deletion, and access control.\\
+Skill mechanism & Applicability, procedural composition, resource loading, compatibility, and trusted execution.\\
+Tool runtime & Argument validation, side effects, idempotency, timeouts, and execution isolation.\\
+Protocol & Capability advertisement, message semantics, version compatibility, transport, and authorization hooks.\\
+Evaluation harness & Environment identity, grading rules, missing outcomes, leakage controls, and trace integrity.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+These distinctions prevent common category errors. A checkpoint can preserve a graph state without maintaining a correct semantic account of a user's changing preferences. A vector store can retain records without teaching a policy when those records should influence action. A protocol-compliant server can return false information. A skill can be syntactically valid but obsolete after a tool-schema change. A large model can interpret all of these artifacts while still acting on stale authority. The mechanism required for each property must be tested at its own boundary.
+
+\subsection{Current implementation and training boundaries}\label{sec:C01:implementations}
+The inspected October 2026 source revisions instantiate different persistence objects. OpenAI Agents Python defines conversational item persistence through \texttt{Session}; \path{prepare_input_with_session} separately prepares the model input and the new items eligible for persistence. LangGraph separates thread checkpoint/channel state from its cross-thread \texttt{BaseStore}. Google ADK separates a \texttt{Session}'s application, user, session identity, event history, and state from \texttt{BaseMemoryService} ingestion and search~\cite{ch01_openai_sdk_20261029,ch01_langgraph_20261029,ch01_adk_20261029}. These are inspected interfaces, not interchangeable semantic-memory guarantees. The retained object, the actual model request, and the authority to reuse an item require separate evidence.
+
+Agent Lightning v1.0 makes the training boundary equally concrete: a deployment harness supplies interaction while captured model calls become training data~\cite{ch01_lightning2026}. In the inspected source, \path{ProxyRouter.prepare_body} requests token identifiers and \path{forward_request} captures exchanges. In trajectory aggregation mode, \path{RolloutAdapter.get_train_data_batch} in \path{agentlightning/verl/rollout_adapter.py} merges compatible token prefixes and masks inserted observations. When enabled, \path{compute_rollout_level_advantage} groups captured samples by rollout identity and checks their shared task and reward~\cite{ch01_lightning_code2026}. This supplies an implementation path for examining conditioning and credit assignment, not proof that every supported configuration reproduces the paper. The source was inspected rather than trained. A session trace becomes suitable policy-training evidence only after its action tokens, behavior inputs, probability semantics, and grouping survive the conversion.
+
+The brain analogy is useful only at this functional level. Working context resembles a limited active information workspace; episodic records preserve aspects of past interaction; semantic records organize claims; procedural memory stores reusable action guidance. Model weights, KV tensors, event logs, and databases implement these functions through very different update and access rules. A KV cache is a set of computation-dependent tensors, not a faithful semantic archive. External record deletion does not erase parametric associations. The analogy provides a vocabulary for timescales and access, not evidence of neurological equivalence. Memory surveys organize this landscape through different axes, including agent versus model memory, active versus inactive representations, and resource--distortion tradeoffs; the component ontology here complements those taxonomies rather than claiming to replace them~\cite{corpus251213564,gou2026selective,colaco2026ratedistortion}.
+

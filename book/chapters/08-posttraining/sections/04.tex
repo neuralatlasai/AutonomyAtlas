@@ -1,0 +1,15 @@
+\section{Group-relative advantages and sparse outcomes}
+\label{sec:C08:grpo}
+Group-relative policy optimization uses multiple responses for the same prompt to construct relative learning signals without a separate value model in its basic formulation. DeepSeekMath introduced an influential version of this approach~\cite{rewrite_grpo}. If rewards are $R_1,\ldots,R_G$, a common normalized advantage is $(R_i-\bar R)/(s_R+\delta)$, with $G\geq2$, group mean $\bar R$, standard deviation $s_R$, and stabilizer $\delta>0$. The normalization compares candidates within a prompt rather than estimating an absolute value function across all states. Current implementations contain variants whose exact loss and normalization must be identified rather than collapsed into one method name.
+
+There is a useful bias calculation even before standard-deviation normalization. Suppose $G$ responses are independent given the prompt and $g_i=\nabla\log\pi(a_i\mid x)$. Then $\mathbb E[g_i]=0$. With a group mean including the same sample,
+\begin{equation}
+ \mathbb E[(R_i-\bar R)g_i]
+ =\left(1-\frac1G\right)\mathbb E[R_i g_i].
+\end{equation}
+All other samples' reward terms vanish by independence; the self term removes $1/G$ of the signal. A leave-one-out baseline restores the unscaled identity under these assumptions. Dividing by a random group standard deviation creates additional dependence and generally changes the estimator again. This deduction explains why group size and normalization are algorithmic choices, not harmless reporting details.
+
+Sparse binary rewards can create groups with no contrast. If every candidate fails, centered rewards vanish; if every candidate passes a weak validator, they also vanish. Increasing the number of candidates can help discover contrast while increasing generation cost. A reward that grades formatting more densely can improve syntax but dominate task correctness if its scale is poorly chosen. Record the fraction of zero-variance groups, reward components, response lengths, and successful trajectories. An average reward curve can hide that most prompts supply no useful comparative signal.
+
+For agents, candidates can interact with a shared environment or memory unless isolated deliberately. Then conditional independence fails, and one candidate can change the state encountered by another. Resetting only the prompt does not reset external files or persistent memory. Evaluation and training environments should specify snapshot, reset, and tenant-isolation semantics. If a method intentionally shares discovered information across candidates, it should be analyzed as coordinated exploration with a different data distribution, not as independent response sampling.
+

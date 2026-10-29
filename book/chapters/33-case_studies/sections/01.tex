@@ -1,0 +1,13 @@
+\section{Composition changes the claim being tested}\label{sec:C33:01}
+A component-level improvement can disappear when composed with the rest of an agent. A retriever can return more relevant material while increasing prompt length enough to force a harmful compaction. A model can generate more valid tool calls while increasing the fraction that target stale objects. A faster serving backend can change which parallel branch finishes first and therefore which artifact a selector adopts. Cross-layer analysis asks whether the composed system preserves the assumptions under which each mechanism was evaluated.
+
+The cases in this chapter are worked analytical designs, not reported deployments or newly measured experiments. They combine mechanisms examined in earlier chapters into explicit state transitions, resource calculations, and falsification tests. Each case specifies the observation and authority boundaries, the information that must persist, the role of model inference, and the evidence required before an external effect or scientific conclusion is accepted. Their purpose is to make interaction failures concrete.
+
+Let a workflow be a directed graph $G=(V,E)$ whose vertices are model decisions, retrievals, tool operations, state commits, or verification steps. Edges represent causal prerequisites, not merely visual order. Each vertex has an execution contract $K_i$, resource cost $c_i$, duration $t_i$, and possible failure events $F_i$. The global task requirement $K_G$ follows from local contracts only if the contracts include all relevant coupling conditions:
+\begin{equation}
+ \bigwedge_i K_i\ \land\ K_{\rm coupling}\quad\Longrightarrow\quad K_G.
+\end{equation}
+A collection of passing local tests does not establish the antecedent if $K_{\rm coupling}$ omits state-version consistency, authority, or external effects. This is the formal reason that integration testing cannot be replaced by component leaderboards.
+
+If violation of $K_G$ implies at least one enumerated failure event, a union bound gives $P(\neg K_G)\leq\sum_iP(F_i)$. Independence is not required. The premise is strong: unenumerated failure modes and invalid coupling assumptions destroy the guarantee. Multiplying apparent component accuracies is even less defensible when all components rely on the same model-generated interpretation. Shared uncertainty does not become independent evidence because it passes through several boxes.
+

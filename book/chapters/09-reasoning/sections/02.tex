@@ -1,0 +1,29 @@
+\section{Sampling coverage and repeated reliability}
+\label{sec:C09:sampling}
+Suppose independent attempts on one fixed task succeed with probability $p$. The probability of at least one success among $k$ attempts is $1-(1-p)^k$, while the probability that all $k$ succeed is $p^k$. These quantities answer different questions. With hypothetical $p=0.8$ and $k=3$, they are 0.992 and 0.512. The first describes solution coverage when an oracle can identify success; the second describes repeated-run consistency. Neither is the success probability of a practical selector unless the selector's behavior is specified. Reporting pass-at-$k$ as dependable autonomous performance confuses these events.
+
+Given $n$ recorded attempts with $c$ successes on a task, the conditional coverage of a uniformly chosen subset of $k\leq n$ attempts is exactly $1-\binom{n-c}{k}/\binom nk$, with the numerator zero when fewer than $k$ failures exist. Under independent identically distributed sampling, this statistic is also an unbiased estimator of population pass-at-$k$~\cite{chen2021codeeval}. The first statement is combinatorial; the second additionally depends on the sampling model. It estimates a sampling property of the candidate set; it does not account for the cost of finding and verifying those candidates. Tasks with different $p$ values should be aggregated at the task level rather than inserting a global average $p$ into the formula, because the nonlinear transformation changes the result.
+
+Independence is often unrealistic. Samples share the same model, prompt, retrieved evidence, and training-induced misconceptions. Let correctness indicators have common mean $0<p<1$, variance $p(1-p)$, and pairwise correlation $\rho$. Then
+\begin{equation}
+ \operatorname{Var}\!\left(\frac1k\sum_iY_i\right)
+ =\frac{p(1-p)}k[1+(k-1)\rho].
+\end{equation}
+This follows by summing variances and covariances. For an admissible correlation with $1+(k-1)\rho>0$, the corresponding variance-based effective sample size is $k/[1+(k-1)\rho]$. At zero denominator the sample mean has zero variance under this model, rather than a defined finite effective count. It is a diagnostic under the stated exchangeability assumptions, not a universal replacement for the full joint distribution. A hundred correlated attempts can carry much less independent evidence than their count suggests.
+
+{\small\setlength{\tabcolsep}{3pt}
+\begin{table}[!htbp]
+\centering
+\caption{Calculated sampling quantities under explicit hypothetical assumptions.}\label{tab:C09:sampling}
+\begin{tabular}{L{31mm}L{34mm}L{41mm}}
+
+\toprule Assumption & Calculation & Meaning\\\midrule
+$p=0.8$, three independent trials & $1-0.2^3=0.992$ & At least one successful candidate.\\
+Same trials & $0.8^3=0.512$ & Every trial succeeds.\\
+$k=20$, pair correlation $0.1$ & $20/2.9\approx6.90$ & Variance-based effective count.\\
+$k=100$, pair correlation $0.1$ & $100/10.9\approx9.17$ & Correlation limits averaging benefit.\\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+

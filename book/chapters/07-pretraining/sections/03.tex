@@ -1,0 +1,26 @@
+\section{Optimizer state and distributed memory accounting}
+\label{sec:C07:memory}
+Training memory contains model states, activations, temporary workspaces, and communication buffers. Under one explicit mixed-precision Adam convention, each parameter has a two-byte working weight, a two-byte gradient, a four-byte master weight, and two four-byte moment estimates, totaling 16 bytes before other allocations. Different implementations can use FP32 gradients, compressed states, or no separate master copy, so the convention must accompany the number. For a hypothetical seven-billion-parameter model, this layout requires 112 decimal GB, approximately 104.3 GiB, for these persistent states alone.
+
+ZeRO partitions optimizer states, gradients, and parameters in progressively more extensive configurations~\cite{rajbhandari2019zero}. Let the data-parallel degree be $n$ and let the working-weight, gradient, and optimizer-state bytes per parameter be $b_w,b_g,b_o$. Idealized per-rank persistent storage is $(b_w+b_g+b_o/n)N$ for optimizer partitioning, $(b_w+(b_g+b_o)/n)N$ when gradients are also partitioned, and $(b_w+b_g+b_o)N/n$ when all three are partitioned. These expressions omit padding, replicated metadata, transient gathers, activations, and memory fragmentation. They are lower-level accounting expressions, not capacity guarantees for a real run.
+
+{\small\setlength{\tabcolsep}{3pt}
+\begin{table}[!htbp]
+\centering
+\caption{Calculated persistent state per rank for a hypothetical 7B model and eight ranks.}\label{tab:C07:states}
+\begin{tabular}{L{31mm}L{35mm}L{40mm}}
+
+\toprule Partitioning & Assumed layout & Decimal GB per rank\\\midrule
+Replicated & $2+2+12$ bytes/parameter & 112.0\\
+Optimizer only & $2+2+12/8$ & 38.5\\
+Optimizer and gradient & $2+(2+12)/8$ & 26.25\\
+All model states & $(2+2+12)/8$ & 14.0\\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+
+The largest transient allocation can determine feasibility even when the persistent-state table looks comfortable. A parameter shard may be gathered before its layer executes, retained for backward, or prefetched while another layer runs. Larger buckets improve communication efficiency but increase peak memory. Activation checkpointing reduces retained intermediates by recomputing them during backward, adding arithmetic and potentially changing kernel schedules. Offloading moves state to host memory or storage, introducing link bandwidth and latency constraints. A complete capacity estimate must include the overlap policy, not merely sum ideal sharded tensors.
+
+The implementation connection is concrete. The class \texttt{DeepSpeed\allowbreak ZeroOptimizer\allowbreak\_Stage3} belongs to the pinned module \path{deepspeed/runtime/zero/stage3.py}, alongside gradient-partitioning logic and checkpoint-state methods~\cite{repo_deepspeed}. Its later implementation has features beyond the original ZeRO paper, so reproduction should trace the configured path rather than attribute every current feature to that paper. A falsifiable memory experiment records peak allocated and reserved memory during forward, backward, optimizer step, and checkpoint save, then compares those observations with the state accounting. Unexplained peaks should be diagnosed before increasing the nominal model size.
+

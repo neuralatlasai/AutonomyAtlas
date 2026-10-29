@@ -1,0 +1,23 @@
+\section{Computer use grounding and hidden state}\label{sec:C23:computeruse}
+Computer-use agents act through visual observations and input events. The policy must connect screen coordinates or semantic targets to application state, often across scrolling, asynchronous updates, and multiple windows. A click can be delivered successfully to the wrong object. Therefore transport acknowledgment and task correctness are especially far apart. The environment should record both intended target and observed result where the interface permits it.
+
+Coordinate systems require explicit transformations. Let $x_m\in\mathbb R^2$ be a point in the image presented to the model, $p$ its letterbox offset, $w,h>0$ the rendered content dimensions, and $w_c,h_c>0$ the corresponding crop dimensions in physical screenshot pixels. If $c$ is the crop offset inside a screenshot whose desktop origin is $o$, the adapter must apply
+\begin{equation}
+ x_{\mathrm{desktop}}=o+c+
+ \operatorname{diag}(w_c/w,h_c/h)(x_m-p).
+\end{equation}
+The expression assumes axis-aligned resizing without rotation and one physical-pixel coordinate system; CSS coordinates or device-independent units require an additional declared transform. Points outside the content rectangle should be rejected rather than clamped onto an unintended control. A deterministic mapping defect can dominate performance while being misdiagnosed as poor visual reasoning. Tests should perturb resolution, crop, letterboxing, viewport and display scaling independently. Even a correct map becomes stale if the application moves the target between observation and dispatch, so the observation identity and permitted delay remain part of the action contract.
+
+There is a useful sufficient condition for geometric targeting, with deliberately limited scope. Let $A=\operatorname{diag}(w_c/w,h_c/h)$, suppose the model-space localization error is at most $\epsilon_m$, and bound the remaining calibration residual on the relevant image region by $\epsilon_c$. During delay $\Delta t$, assume the target region undergoes only a rigid translation of norm at most $v\Delta t$. If the intended desktop point has interior margin $r$ to the target's complement at observation time, then
+\begin{equation}
+ \|A\|_2\epsilon_m+\epsilon_c+v\Delta t<r
+ \label{eq:C23:target_margin}
+\end{equation}
+ensures the dispatched point remains inside the translated target region: the triangle inequality bounds its displacement relative to that region by the left-hand side. This is an analytical interface condition, not an estimated guarantee for a vision model. Reflow, disappearance, occlusion, disabled controls, focus changes and a wrong semantic target invalidate or fall outside the hypotheses. Even an inside-region click still requires outcome verification. The condition explains why timestamped observations, calibration tests and a new screenshot after layout changes can address distinct failure mechanisms.
+
+Screenshots are incomplete observations. They may omit hidden cells, collapsed panels, off-screen recipients, background downloads, or permission dialogs. A final screenshot showing a document title does not establish that the document contains the required data. Agents need application-specific verification or additional observations. When APIs are available, they can provide stronger state evidence, but the evaluation must declare whether the agent or only the evaluator can use them.
+
+AgentHorizon evaluates judges on instruction-trajectory pairs, including closely related instructions whose trajectories are not interchangeable~\cite{corpus261011050}. This paired design exposes a common failure: accepting a trajectory because it looks like successful work while missing a constraint that distinguishes the actual request. The result concerns judge reliability, not merely executor capability. It motivates storing sufficient history for verification while also testing whether a judge can locate the relevant evidence.
+
+An experiment should separate perception, target selection, action delivery, and outcome verification. Oracle target coordinates quantify perception headroom; replayed actions quantify environment determinism; authoritative state checks audit the final judge. The oracle conditions are diagnostic controls, not deployable capabilities. Report how much each stage contributes to failure and how those contributions change with task horizon. A single end-to-end score cannot identify which interface should be improved.
+

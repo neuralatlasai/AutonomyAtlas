@@ -1,0 +1,32 @@
+\section{Case one: a repository repair with bounded side effects}\label{sec:C33:02}
+Consider an agent asked to repair a regression in an unfamiliar repository and return a tested patch. The environment is a pinned checkout with isolated dependencies and a protected evaluator. The model may inspect files, search code, edit permitted paths, and run tests. It may not modify the protected evaluator, fetch hidden answers, or publish changes externally. This is an evaluation contract: whether a real benchmark enforces all these restrictions must be checked separately. SWE-agent and SWE-bench supply concrete historical interfaces and task structures, while the harder SWE-bench Pro material motivates examining repository diversity and contamination~\cite{yang2024sweagent,jimenez2023swebench,corpus250916941}.
+
+The privileged run state contains the repository commit, dependency-image digest, writable path set, tool schemas, remaining budget, and test-result identities. Working context contains the issue, relevant source excerpts, the current hypothesis, and selected tool evidence. Persistent procedural memory may supply a debugging strategy, but it cannot supply a hidden patch or override writable-path restrictions. A skill retrieved because it solved a similar error must be rechecked against the current repository and test environment.
+
+Suppose the agent observes a failing parser test, inspects the parser and its callers, and proposes changing a branch condition. The decisive evidence is not the model's statement that the change is safe. A useful sequence is to preserve the pre-change failure, apply a minimal patch, run the targeted test, then run relevant regression tests under the same dependency image. If a dependency update is also made, its effect must be separated from the code change. Otherwise the experiment has changed two causal variables and cannot identify which one repaired the failure.
+
+\begin{table}[!htbp]
+\centering
+\caption{Required evidence in the constructed repository-repair workflow.}\label{tab:C33:repair}
+\begin{tabular}{L{0.13\linewidth}L{0.36\linewidth}L{0.37\linewidth}}
+
+\toprule Stage & State that must be recorded & Failure exposed by the record\\\midrule
+Initialize & Commit, image, permissions, schemas & A result obtained on the wrong checkout or environment.\\
+Observe & Test command, output, exit status & A model treating truncated logs as a complete diagnosis.\\
+Inspect & File revision and relevant code span & A patch based on stale or unrelated source.\\
+Edit & Exact diff and permitted target & An unauthorized evaluator change or hidden broad mutation.\\
+Test & Verifier identity and all outcomes & Selection of only favorable tests or an unobserved crash.\\
+Compact & Transform lineage and preserved constraints & Loss of the issue requirement or writable-path boundary.\\
+Finalize & Patch, artifact hash, test evidence & A success claim detached from the delivered artifact.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Context compaction can introduce a specific failure. The original issue says that an error must be raised before any output file is created. A summary preserves the expected error message but drops the ordering requirement. The agent produces a patch that raises the error after creating an empty file. A string-based test passes, while the specified side-effect condition fails. The appropriate counterexample test checks both the exception and the absence of the file. This case distinguishes answer retention, requirement retention, and behavioral verification.
+
+A stored procedural lesson should therefore say more than check the error message. It should identify the applicability condition, the ordering requirement, and the test that distinguishes the correct implementation from a plausible shortcut. If later tasks use a different output contract, the lesson's preconditions prevent indiscriminate reuse. The memory record should retain its source trajectory and verifier scope, so a later failure can invalidate the procedure without erasing unrelated debugging knowledge.
+
+An evaluation of the complete design would compare no procedural memory, unstructured reflections, typed procedures, and retrieval with applicability checks. Keep the model, repository set, token and tool budgets, and grading access fixed. Randomize task order if memory evolves, and include held-out repositories. Record successful repairs, incorrect accepted patches, invalid edits, tool failures, and complete cost. This is a proposed experiment; the case supplies no fabricated outcome.
+
+A contemporary reported case demonstrates the difference between tested and architectural contracts. Terminal-RSI's revised Rust--C evaluator case passes protected wrapper and output-equivalence checks in its final trials, yet one trial delegates expression evaluation to Python despite producing a statically linked Rust executable. The authors explicitly separate these observations from proof of the requested native evaluation path or memory safety~\cite{cumulative_c_terminalrsi_v2}. This is author-reported trajectory evidence, not a reproduction here. It shows why an output oracle and an implementation requirement need separate witnesses: successful observable behavior does not entail that the specified internal mechanism produced it.
+

@@ -1,0 +1,25 @@
+\section{Executable rewards and verifier error}
+\label{sec:C08:rewards}
+Executable rewards connect training to external outcomes, but tests are partial specifications. A patch can pass a visible test suite while violating an untested requirement. A browser action can trigger a success banner without satisfying the user's actual objective. A reward model can learn superficial signs of success. Training pressure actively seeks these gaps. The correct question is not whether the reward is automated, but what event it measures, which failures it misses, and whether the policy can manipulate its inputs or state.
+
+Suppose the true success indicator is $Y$ and a validator reports $V$. Its sensitivity and false-positive rate can be measured on an independently adjudicated sample. The observed pass rate is $P(V=1)=P(V=1\mid Y=1)P(Y=1)+P(V=1\mid Y=0)P(Y=0)$. Without the conditional error rates or strong assumptions, validator pass rate does not identify true success. Moreover, those rates can change after optimization as the policy discovers adversarial cases. A validator calibrated on an early checkpoint should be re-audited on later policy outputs.
+
+{\small\setlength{\tabcolsep}{3pt}
+\begin{table}[!htbp]
+\centering
+\caption{Post-training signals and their inference boundaries.}\label{tab:C08:signals}
+\begin{tabular}{L{28mm}L{37mm}L{41mm}}
+
+\toprule Signal & What it directly supervises & What remains unproven\\\midrule
+Demonstration likelihood & Imitation of recorded actions & Optimality and recovery off-distribution.\\
+Pairwise preference & Relative judged desirability & Hard constraint satisfaction.\\
+Executable test & Behavior covered by that test & Unspecified or untested requirements.\\
+Outcome reward & Measured terminal criterion & Correct intermediate state and permissions.\\
+Process judgment & Selected intermediate properties & Completeness and judge robustness.\\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+
+Separate the reward service from the policy's writable environment. A policy should not be able to alter hidden tests, grader configuration, or the event records used as ground truth. Retain exact environment snapshots and reward versions. When a task permits editing tests as part of legitimate work, the acceptance checker needs an independent source of requirements. Otherwise the policy can improve its measured outcome by weakening the test. The same concern applies to memory: writing a claim of success into a store that the grader later reads creates a feedback channel that can bypass actual execution.
+

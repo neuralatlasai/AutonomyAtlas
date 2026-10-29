@@ -1,0 +1,29 @@
+\section{Admission as a constrained decision}\label{sec:C14:admission}
+Writing every observation is inexpensive only when storage, indexing, privacy, and later interference are ignored. Generated tool output can contain duplicate text, stale state, adversarial instructions, and transient failures. Admission decides which records enter a persistent store, at what level of abstraction, and with what provenance. It should distinguish retaining raw evidence for audit from promoting a proposition into reusable semantic memory.
+
+Let $\mathcal L(M)$ be expected future decision loss when the evaluated reader and retrieval policy use bank $M$. Define its decision value as $U(M)=\mathcal L(\varnothing)-\mathcal L(M)$. With $c_s(m)$ denoting storage and maintenance cost, $c_p(m)$ privacy or policy cost, and $r(m)$ estimated harmful-reuse risk, a proposed admission objective is
+\begin{align}
+ &\max_M\left\{U(M)-\sum_{m\in M}c_\lambda(m)\right\},\\
+ &c_\lambda(m)=\lambda_s c_s(m)+\lambda_p c_p(m)+\lambda_r r(m),
+\end{align}
+subject to access and retention constraints. The nonnegative weights put the penalty terms on the decision-loss scale; their additive form is an accounting approximation, not an assumption that decision value is additive. The value of admitting $m$ is conditional on the bank, $\Delta(m\mid M)=U(M\cup\{m\})-U(M)$. An identifier and its disambiguating scope can each be useless alone and decisive together. A stale instruction can instead make adding a record harmful. Neither monotonicity nor diminishing returns follows from the memory label. These quantities depend on future tasks and the consumer policy, so the objective specifies an estimand rather than a solved scorer. A one-time authority correction should remain a control constraint even when a learned utility estimate is low.
+
+Recurrence is one practical proxy for consolidation value. RecMem buffers interactions with embeddings and triggers more expensive episodic and semantic extraction around recurring related content~\cite{dai2026recmem}. Its semantic refinement revisits associated raw interactions to recover details omitted by an episodic abstraction. This trades eager extraction for a recurrence-conditioned pipeline. The paper evaluates conversational-memory tasks, not indefinite autonomous execution. Its heuristic thresholds and the possibility of rare but important information limit generalization from average recall results.
+
+The inspected implementation makes the gate concrete. In the \texttt{RecMem} class, \path{add_memory} first attempts an episodic merge. Otherwise it searches raw-memory neighbors, filters by a similarity threshold, and compares the resulting count plus the incoming item with a consolidation count. The non-triggered path inserts the raw message with a timestamp; the triggered path calls \path{_consolidate_memory}~\cite{repo_recmem2026}. Thus the decision depends on both existing episodic coverage and raw recurrence. Describing it only as ``three-layer memory'' would omit the mechanism that determines its construction cost.
+
+A deployment should add a separate pinning rule for information whose consequence is not well estimated by frequency. This is a design deduction, not a reported feature or result of RecMem. Examples include current authority, explicit user prohibitions, identifiers needed for reconciliation, and unresolved safety constraints. Such objects can remain in typed state even when ordinary conversational content follows recurrence-based consolidation. The resulting hybrid admits that one salience heuristic need not govern every memory class.
+
+Personalized admission has a further feedback asymmetry. The October 2026 gating study formulates storage decisions with delayed, one-sided feedback: subsequent use can label an admitted fact, whereas the corresponding evidence for a discarded fact is unavailable. Its Warm-Start UCB method transfers a prior from other profiles and adapts through confidence-based exploration; the analysis assumes a specified linear utility model and a sufficiently accurate prior region~\cite{ji2026gating}. Neither a missing retrieval hit nor a currently pending label proves uselessness. Moreover, retrieval-confirmed use is a proxy for utility, not an independent measurement of improved user outcomes. Logging the label deadline, retrieval policy, and admission propensity is necessary to distinguish feedback delay from selection bias and from genuine preference change.
+
+The reported LoCoMo comparison with GPT-4.1-mini is instructive because the full-context reference remains stronger in accuracy while requiring no memory-construction stage. Table~\ref{tab:C14:recmem} separates accuracy from construction tokens; the latter exclude the complete query-time and infrastructure boundary. The values are author-reported and not independently reproduced.
+\begin{table}[htbp]\centering\small
+\caption{RecMem's reported LoCoMo configuration~\cite{dai2026recmem}. Construction tokens are in thousands.}\label{tab:C14:recmem}
+\begin{tabular}{L{36mm}rr}\toprule
+Method & Accuracy (\%) & Construction tokens\\\midrule
+Full context & 84.18 & 0.00\\
+Mem0 & 62.92 & 1520.80\\
+RecMem & 81.10 & 193.20\\\bottomrule
+\end{tabular}
+\end{table}
+

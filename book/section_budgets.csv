@@ -1,0 +1,267 @@
+chapter,section,title,editorial_page_budget,budget_status
+C01,sec:C01:01,The agent is the unit of analysis,0.92,Editorial allocation only; actual PDF pages counted independently
+C01,sec:C01:02,A stateful formulation of execution,0.97,Editorial allocation only; actual PDF pages counted independently
+C01,sec:C01:03,Generality as a profile of conditional competence,1.22,Editorial allocation only; actual PDF pages counted independently
+C01,sec:C01:04,An ontology of models and connecting components,1.02,Editorial allocation only; actual PDF pages counted independently
+C01,sec:C01:evidence,What constitutes evidence in an evolving ecosystem,2.06,Editorial allocation only; actual PDF pages counted independently
+C01,sec:C01:contracts,Three consistency contracts and their non-implication,1.27,Editorial allocation only; actual PDF pages counted independently
+C01,sec:C01:07,Cross-layer questions that organize the analysis,0.54,Editorial allocation only; actual PDF pages counted independently
+C02,sec:C02:01,Conditional prediction and observable information,1.93,Editorial allocation only; actual PDF pages counted independently
+C02,sec:C02:02,Information loss and decision-relevant state,1.75,Editorial allocation only; actual PDF pages counted independently
+C02,sec:C02:03,Partial observability and beliefs,1.56,Editorial allocation only; actual PDF pages counted independently
+C02,sec:C02:04,Optimization and policy-gradient identities,1.35,Editorial allocation only; actual PDF pages counted independently
+C02,sec:C02:05,Risk calibration and constrained decisions,1.55,Editorial allocation only; actual PDF pages counted independently
+C02,sec:C02:06,Statistical comparison and adaptive selection,1.50,Editorial allocation only; actual PDF pages counted independently
+C02,sec:C02:07,From equations to falsifiable implementation claims,1.36,Editorial allocation only; actual PDF pages counted independently
+C03,sec:C03:frontier,DeepSeek V4.1 and architecture level prefill reuse,0.90,Editorial allocation only; actual PDF pages counted independently
+C03,sec:C03:policy,The model distribution and the executed policy,1.39,Editorial allocation only; actual PDF pages counted independently
+C03,sec:C03:tokens,Tokenization as a measurement and interface choice,1.45,Editorial allocation only; actual PDF pages counted independently
+C03,sec:C03:architectures,Architectural state and access to history,2.50,Editorial allocation only; actual PDF pages counted independently
+C03,sec:C03:resources,A resource model at the policy boundary,1.24,Editorial allocation only; actual PDF pages counted independently
+C03,sec:C03:interfaces,From model output to a typed operation,1.37,Editorial allocation only; actual PDF pages counted independently
+C03,sec:C03:experiments,Reproducible implementation and discriminating experiments,1.00,Editorial allocation only; actual PDF pages counted independently
+C03,sec:C03:implications,Implications for stateful agents,1.15,Editorial allocation only; actual PDF pages counted independently
+C04,sec:C04:frontier,FlashAttention 4 and asymmetric hardware scaling,1.29,Editorial allocation only; actual PDF pages counted independently
+C04,sec:C04:operator,The computation being optimized,0.97,Editorial allocation only; actual PDF pages counted independently
+C04,sec:C04:kv,KV growth and the difference between storage and knowledge,1.14,Editorial allocation only; actual PDF pages counted independently
+C04,sec:C04:paging,Paged allocation and shared prefixes,1.20,Editorial allocation only; actual PDF pages counted independently
+C04,sec:C04:bandwidth,Bandwidth limits and latency distributions,0.92,Editorial allocation only; actual PDF pages counted independently
+C04,sec:C04:approximation,Approximate caches and a bounded perturbation argument,2.51,Editorial allocation only; actual PDF pages counted independently
+C04,sec:C04:implementation,Implementation verification and workload design,1.58,Editorial allocation only; actual PDF pages counted independently
+C04,sec:C04:invalidation,When recomputation is mathematically necessary,1.39,Editorial allocation only; actual PDF pages counted independently
+C05,sec:C05:frontier,Dense predictive features and world action coupling in 2026,1.64,Editorial allocation only; actual PDF pages counted independently
+C05,sec:C05:sufficiency,Representation quality is relative to a decision,1.05,Editorial allocation only; actual PDF pages counted independently
+C05,sec:C05:vision,Patch encoders and the cost of visual detail,1.27,Editorial allocation only; actual PDF pages counted independently
+C05,sec:C05:contrastive,Contrastive alignment and what it identifies,0.96,Editorial allocation only; actual PDF pages counted independently
+C05,sec:C05:jepa,Joint embedding prediction and the collapse question,1.21,Editorial allocation only; actual PDF pages counted independently
+C05,sec:C05:fusion,Multimodal fusion and executable grounding,1.00,Editorial allocation only; actual PDF pages counted independently
+C05,sec:C05:time,Temporal sampling and observation freshness,0.93,Editorial allocation only; actual PDF pages counted independently
+C05,sec:C05:implementation,Implementation and controlled comparison,2.94,Editorial allocation only; actual PDF pages counted independently
+C06,sec:C06:frontier,LeFlow and amortized latent trajectory planning,0.62,Editorial allocation only; actual PDF pages counted independently
+C06,sec:C06:intervention,Prediction under intervention,0.92,Editorial allocation only; actual PDF pages counted independently
+C06,sec:C06:bound,Compounding error and a finite-horizon bound,1.42,Editorial allocation only; actual PDF pages counted independently
+C06,sec:C06:diffusion,Diffusion as a conditional generative mechanism,1.03,Editorial allocation only; actual PDF pages counted independently
+C06,sec:C06:flow,Flow matching and trajectory parameterization,0.83,Editorial allocation only; actual PDF pages counted independently
+C06,sec:C06:executable,Executable worlds for language-model agents,3.37,Editorial allocation only; actual PDF pages counted independently
+C06,sec:C06:experiments,Experiments that separate prediction from control,1.43,Editorial allocation only; actual PDF pages counted independently
+C06,sec:C06:limits,Practical limits of imagination,1.38,Editorial allocation only; actual PDF pages counted independently
+C07,sec:C07:frontier,DeepSeek V4 staged pretraining and distributed state,0.96,Editorial allocation only; actual PDF pages counted independently
+C07,sec:C07:objective,What pretraining supplies to an agent,0.99,Editorial allocation only; actual PDF pages counted independently
+C07,sec:C07:scaling,Scaling laws under an explicit compute model,0.96,Editorial allocation only; actual PDF pages counted independently
+C07,sec:C07:memory,Optimizer state and distributed memory accounting,1.06,Editorial allocation only; actual PDF pages counted independently
+C07,sec:C07:parallelism,Communication and parallel decomposition,0.95,Editorial allocation only; actual PDF pages counted independently
+C07,sec:C07:numerics,Numerical stability and reproducibility,2.86,Editorial allocation only; actual PDF pages counted independently
+C07,sec:C07:budget,A worked training-budget calculation,0.97,Editorial allocation only; actual PDF pages counted independently
+C07,sec:C07:experiments,Experiments linking infrastructure to behavior,2.25,Editorial allocation only; actual PDF pages counted independently
+C08,sec:C08:frontier,On policy distillation with precision matched rollout,2.84,Editorial allocation only; actual PDF pages counted independently
+C08,sec:C08:sft,Behavioral targets and trajectory supervision,0.93,Editorial allocation only; actual PDF pages counted independently
+C08,sec:C08:policygradient,Policy gradients and the likelihood-ratio contract,1.12,Editorial allocation only; actual PDF pages counted independently
+C08,sec:C08:grpo,Group-relative advantages and sparse outcomes,0.90,Editorial allocation only; actual PDF pages counted independently
+C08,sec:C08:rewards,Executable rewards and verifier error,0.87,Editorial allocation only; actual PDF pages counted independently
+C08,sec:C08:consistency,Context edits and post-training consistency,0.87,Editorial allocation only; actual PDF pages counted independently
+C08,sec:C08:implementation,Implementation paths and controlled training studies,2.58,Editorial allocation only; actual PDF pages counted independently
+C08,sec:C08:credit,Credit assignment across tools and memory,0.89,Editorial allocation only; actual PDF pages counted independently
+C09,sec:C09:meta2026,Meta reasoning controllers and artifact selection in 2026,1.04,Editorial allocation only; actual PDF pages counted independently
+C09,sec:C09:conditional,A conditional computation rather than a verbal certificate,1.04,Editorial allocation only; actual PDF pages counted independently
+C09,sec:C09:sampling,Sampling coverage and repeated reliability,0.89,Editorial allocation only; actual PDF pages counted independently
+C09,sec:C09:voting,Self-consistency and answer aggregation,0.95,Editorial allocation only; actual PDF pages counted independently
+C09,sec:C09:selection,Selection error grows with the search space,2.32,Editorial allocation only; actual PDF pages counted independently
+C09,sec:C09:search,Structured search and the granularity of a thought,0.93,Editorial allocation only; actual PDF pages counted independently
+C09,sec:C09:value,Value of computation and stopping,1.94,Editorial allocation only; actual PDF pages counted independently
+C09,sec:C09:experiments,Experiments and failure attribution,1.89,Editorial allocation only; actual PDF pages counted independently
+C10,sec:C10:worldevolver,WorldEvolver and memory conditioned foresight,1.31,Editorial allocation only; actual PDF pages counted independently
+C10,sec:C10:goals,Goals must refer to external state,1.03,Editorial allocation only; actual PDF pages counted independently
+C10,sec:C10:beliefs,Belief states and information-gathering actions,0.93,Editorial allocation only; actual PDF pages counted independently
+C10,sec:C10:contracts,Plan contracts and compositional verification,1.14,Editorial allocation only; actual PDF pages counted independently
+C10,sec:C10:feedback,Receding-horizon execution and grounded feedback,0.94,Editorial allocation only; actual PDF pages counted independently
+C10,sec:C10:correction,Self-correction can also damage correct work,1.11,Editorial allocation only; actual PDF pages counted independently
+C10,sec:C10:hierarchy,Hierarchical plans and reusable skills,0.93,Editorial allocation only; actual PDF pages counted independently
+C10,sec:C10:recovery,Partial effects and recovery planning,0.93,Editorial allocation only; actual PDF pages counted independently
+C10,sec:C10:evaluation,A reproducible planning evaluation,2.68,Editorial allocation only; actual PDF pages counted independently
+C11,sec:C11:capacity,Capacity is a constraint on an inference procedure,1.06,Editorial allocation only; actual PDF pages counted independently
+C11,sec:C11:sufficiency,A sufficiency criterion for retained state,1.59,Editorial allocation only; actual PDF pages counted independently
+C11,sec:C11:geometry,Position effects and compositional difficulty,1.23,Editorial allocation only; actual PDF pages counted independently
+C11,sec:C11:training,Training distributions and length generalization,1.16,Editorial allocation only; actual PDF pages counted independently
+C11,sec:C11:resources,Computation and memory over an interaction horizon,1.22,Editorial allocation only; actual PDF pages counted independently
+C11,sec:C11:experiments,Experimental designs that isolate context use,2.10,Editorial allocation only; actual PDF pages counted independently
+C11,sec:C11:worked,A worked capacity and decision example,1.45,Editorial allocation only; actual PDF pages counted independently
+C11,sec:C11:implications,Effective context as controlled state,1.19,Editorial allocation only; actual PDF pages counted independently
+C12,sec:C12:control,The working view as a controlled variable,1.03,Editorial allocation only; actual PDF pages counted independently
+C12,sec:C12:selection,Selection before abstraction,1.08,Editorial allocation only; actual PDF pages counted independently
+C12,sec:C12:offload,Reversible offload and explicit context actions,1.80,Editorial allocation only; actual PDF pages counted independently
+C12,sec:C12:triggers,Compaction triggers and delayed credit,1.20,Editorial allocation only; actual PDF pages counted independently
+C12,sec:C12:cache,Editing and cache validity,1.02,Editorial allocation only; actual PDF pages counted independently
+C12,sec:C12:worked,A worked decision-preservation analysis,1.13,Editorial allocation only; actual PDF pages counted independently
+C12,sec:C12:evidence,Evidence comparisons and causal boundaries,2.73,Editorial allocation only; actual PDF pages counted independently
+C12,sec:C12:recovery,Failure recovery and implementation discipline,1.01,Editorial allocation only; actual PDF pages counted independently
+C13,sec:C13:identity,Session identity is a semantic boundary,1.10,Editorial allocation only; actual PDF pages counted independently
+C13,sec:C13:events,Events as evidence rather than prose,1.27,Editorial allocation only; actual PDF pages counted independently
+C13,sec:C13:replay,Reducers checkpoints and replay,1.56,Editorial allocation only; actual PDF pages counted independently
+C13,sec:C13:effects,External effects and the ambiguous timeout,2.35,Editorial allocation only; actual PDF pages counted independently
+C13,sec:C13:concurrency,Concurrency ownership and session forks,1.22,Editorial allocation only; actual PDF pages counted independently
+C13,sec:C13:retention,Retention deletion and provenance boundaries,1.18,Editorial allocation only; actual PDF pages counted independently
+C13,sec:C13:evaluation,A failure-oriented evaluation protocol,1.18,Editorial allocation only; actual PDF pages counted independently
+C13,sec:C13:contract,A reference contract for continuity,1.14,Editorial allocation only; actual PDF pages counted independently
+C14,sec:C14:taxonomy,Memory functions and physical substrates,1.39,Editorial allocation only; actual PDF pages counted independently
+C14,sec:C14:admission,Admission as a constrained decision,1.95,Editorial allocation only; actual PDF pages counted independently
+C14,sec:C14:episodes,Episodic records and abstraction loss,1.40,Editorial allocation only; actual PDF pages counted independently
+C14,sec:C14:semantic,Semantic memory and the status of a proposition,1.27,Editorial allocation only; actual PDF pages counted independently
+C14,sec:C14:hierarchy,Hierarchy access and complete lifecycle cost,1.79,Editorial allocation only; actual PDF pages counted independently
+C14,sec:C14:validity,Temporal validity conflicts and forgetting,1.63,Editorial allocation only; actual PDF pages counted independently
+C14,sec:C14:use,Retrieval does not imply appropriate use,2.29,Editorial allocation only; actual PDF pages counted independently
+C14,sec:C14:transactions,Memory transactions and a reference test suite,1.28,Editorial allocation only; actual PDF pages counted independently
+C15,sec:C15:procedure,A procedure has preconditions and effects,1.13,Editorial allocation only; actual PDF pages counted independently
+C15,sec:C15:extraction,Extracting procedures from experience,1.63,Editorial allocation only; actual PDF pages counted independently
+C15,sec:C15:hypergraph,Hypergraphs preserve trajectory membership,1.13,Editorial allocation only; actual PDF pages counted independently
+C15,sec:C15:maintenance,Quality-guided maintenance and its assumptions,1.81,Editorial allocation only; actual PDF pages counted independently
+C15,sec:C15:trace,An inspectable execution trace,1.25,Editorial allocation only; actual PDF pages counted independently
+C15,sec:C15:results,Reported results and unresolved attribution,1.23,Editorial allocation only; actual PDF pages counted independently
+C15,sec:C15:compatibility,Compatibility authority and the skill supply chain,1.17,Editorial allocation only; actual PDF pages counted independently
+C15,sec:C15:synthesis,Consolidation as controlled hypothesis revision,1.65,Editorial allocation only; actual PDF pages counted independently
+C16,sec:C16:objective,Retrieval selects evidence for an action,1.50,Editorial allocation only; actual PDF pages counted independently
+C16,sec:C16:index,Index units and information boundaries,1.48,Editorial allocation only; actual PDF pages counted independently
+C16,sec:C16:adaptive,Query construction and adaptive access,1.90,Editorial allocation only; actual PDF pages counted independently
+C16,sec:C16:trajectories,State-conditioned procedural retrieval,1.12,Editorial allocation only; actual PDF pages counted independently
+C16,sec:C16:packing,Evidence packing attribution and influence,1.14,Editorial allocation only; actual PDF pages counted independently
+C16,sec:C16:worked,A worked multi-step evidence dependency,1.15,Editorial allocation only; actual PDF pages counted independently
+C16,sec:C16:evaluation,Evaluation contamination and uncertainty,1.48,Editorial allocation only; actual PDF pages counted independently
+C16,sec:C16:contract,An execution contract for grounded retrieval,1.23,Editorial allocation only; actual PDF pages counted independently
+C17,sec:C17:state,One decision depends on several versions,1.43,Editorial allocation only; actual PDF pages counted independently
+C17,sec:C17:conditioning,The conditioning record is part of the data,1.13,Editorial allocation only; actual PDF pages counted independently
+C17,sec:C17:likelihood,Likelihood ratios require support and the right history,2.33,Editorial allocation only; actual PDF pages counted independently
+C17,sec:C17:bound,A bounded behavior-preservation proposition,1.21,Editorial allocation only; actual PDF pages counted independently
+C17,sec:C17:transactions,Memory transactions and semantic validity,1.14,Editorial allocation only; actual PDF pages counted independently
+C17,sec:C17:migration,Model index and tool migration,1.57,Editorial allocation only; actual PDF pages counted independently
+C17,sec:C17:authority,Authority must survive every transformation,1.11,Editorial allocation only; actual PDF pages counted independently
+C17,sec:C17:audit,A consistency audit with causal counterexamples,1.08,Editorial allocation only; actual PDF pages counted independently
+C18,sec:C18:contract,A tool call is a typed state transition,1.07,Editorial allocation only; actual PDF pages counted independently
+C18,sec:C18:discovery,Discovery changes the action space,1.20,Editorial allocation only; actual PDF pages counted independently
+C18,sec:C18:routing,Routing as constrained resource allocation,1.65,Editorial allocation only; actual PDF pages counted independently
+C18,sec:C18:arguments,Argument construction and result validation,1.21,Editorial allocation only; actual PDF pages counted independently
+C18,sec:C18:granularity,Execution granularity and local programs,1.24,Editorial allocation only; actual PDF pages counted independently
+C18,sec:C18:pruning,Retry pruning and failure memory,1.21,Editorial allocation only; actual PDF pages counted independently
+C18,sec:C18:privilege,Privilege control at the dispatch boundary,2.23,Editorial allocation only; actual PDF pages counted independently
+C18,sec:C18:evaluation,A tool-use experiment that can falsify the mechanism,1.19,Editorial allocation only; actual PDF pages counted independently
+C19,sec:C19:scope,Protocol compatibility is not agent competence,1.12,Editorial allocation only; actual PDF pages counted independently
+C19,sec:C19:versioning,Modern MCP declares versions on every request,1.48,Editorial allocation only; actual PDF pages counted independently
+C19,sec:C19:primitives,Tools resources prompts and skills remain distinct,1.14,Editorial allocation only; actual PDF pages counted independently
+C19,sec:C19:transport,Transport statelessness and explicit durable work,1.11,Editorial allocation only; actual PDF pages counted independently
+C19,sec:C19:authorization,Authorization is separate from declared identity,1.10,Editorial allocation only; actual PDF pages counted independently
+C19,sec:C19:a2a,A2A tasks artifacts and delegated autonomy,1.28,Editorial allocation only; actual PDF pages counted independently
+C19,sec:C19:trace,A concrete cross-protocol execution trace,2.73,Editorial allocation only; actual PDF pages counted independently
+C19,sec:C19:evaluation,Conformance performance and residual uncertainty,1.04,Editorial allocation only; actual PDF pages counted independently
+C20,sec:C20:policy,The effective policy includes the harness,1.42,Editorial allocation only; actual PDF pages counted independently
+C20,sec:C20:state,Execution state and semantic commitments,1.18,Editorial allocation only; actual PDF pages counted independently
+C20,sec:C20:crashes,Crash consistency and uncertain effects,2.08,Editorial allocation only; actual PDF pages counted independently
+C20,sec:C20:context,Context construction is runtime scheduling,1.25,Editorial allocation only; actual PDF pages counted independently
+C20,sec:C20:budgets,Budgets cancellation and backpressure,1.26,Editorial allocation only; actual PDF pages counted independently
+C20,sec:C20:implementation,Implementation boundaries and evidence,1.17,Editorial allocation only; actual PDF pages counted independently
+C20,sec:C20:case,A worked analysis of a recoverable repository workflow,2.64,Editorial allocation only; actual PDF pages counted independently
+C21,sec:C21:decomposition,Task graphs and the value of decomposition,1.32,Editorial allocation only; actual PDF pages counted independently
+C21,sec:C21:dependence,Independence diversity and correlated error,1.01,Editorial allocation only; actual PDF pages counted independently
+C21,sec:C21:messages,Messages as evidence-bearing interfaces,2.73,Editorial allocation only; actual PDF pages counted independently
+C21,sec:C21:sharedmemory,Shared memory and conflicting writes,1.04,Editorial allocation only; actual PDF pages counted independently
+C21,sec:C21:ownership,Ownership cancellation and failure propagation,1.05,Editorial allocation only; actual PDF pages counted independently
+C21,sec:C21:experiments,Experiments that isolate coordination mechanisms,1.42,Editorial allocation only; actual PDF pages counted independently
+C21,sec:C21:integration,A bounded integration protocol,1.09,Editorial allocation only; actual PDF pages counted independently
+C21,sec:C21:isolation,When isolation is the stronger coordination mechanism,1.34,Editorial allocation only; actual PDF pages counted independently
+C22,sec:C22:axes,A semantic basis for framework comparison,1.24,Editorial allocation only; actual PDF pages counted independently
+C22,sec:C22:graphs,Graph runtimes and opinionated harnesses,1.24,Editorial allocation only; actual PDF pages counted independently
+C22,sec:C22:typed,Typed SDKs and model-owned loops,1.20,Editorial allocation only; actual PDF pages counted independently
+C22,sec:C22:adks,Development kits interoperability and language boundaries,1.13,Editorial allocation only; actual PDF pages counted independently
+C22,sec:C22:inventory,Role-specific framework and runtime inventory,0.80,Editorial allocation only; actual PDF pages counted independently
+C22,sec:C22:lifecycle,Licensing lifecycle and migration evidence,2.23,Editorial allocation only; actual PDF pages counted independently
+C22,sec:C22:conformance,A conformance suite before performance ranking,1.47,Editorial allocation only; actual PDF pages counted independently
+C22,sec:C22:codepaths,From public API to executable control path,1.69,Editorial allocation only; actual PDF pages counted independently
+C23,sec:C23:repository,Repository state as an executable environment,1.23,Editorial allocation only; actual PDF pages counted independently
+C23,sec:C23:specification,Specifications tests and evaluator blind spots,1.21,Editorial allocation only; actual PDF pages counted independently
+C23,sec:C23:terminal,Terminal trajectories and learned execution policies,1.56,Editorial allocation only; actual PDF pages counted independently
+C23,sec:C23:computeruse,Computer use grounding and hidden state,1.51,Editorial allocation only; actual PDF pages counted independently
+C23,sec:C23:catalog,Coding product families and observable tests,0.76,Editorial allocation only; actual PDF pages counted independently
+C23,sec:C23:experiments,A budget-matched evaluation protocol,1.16,Editorial allocation only; actual PDF pages counted independently
+C23,sec:C23:completion,Artifact authority and reviewable completion,1.30,Editorial allocation only; actual PDF pages counted independently
+C23,sec:C23:gradingcase,A concrete grading failure and its discriminating controls,2.27,Editorial allocation only; actual PDF pages counted independently
+C24,sec:C24:research,Research as evidence acquisition and revision,3.72,Editorial allocation only; actual PDF pages counted independently
+C24,sec:C24:enterprise,Enterprise grounding and permission propagation,0.87,Editorial allocation only; actual PDF pages counted independently
+C24,sec:C24:memoryproducts,Memory engines are distinct policy components,0.85,Editorial allocation only; actual PDF pages counted independently
+C24,sec:C24:catalog,Work-product and vertical-system inventory,0.47,Editorial allocation only; actual PDF pages counted independently
+C24,sec:C24:benefit,Causal evidence for organizational benefit,0.83,Editorial allocation only; actual PDF pages counted independently
+C24,sec:C24:professional,Professional benchmarks and economic interpretation,0.83,Editorial allocation only; actual PDF pages counted independently
+C24,sec:C24:transaction,A reproducible evidence-review transaction,1.49,Editorial allocation only; actual PDF pages counted independently
+C24,sec:C24:policycase,A changing-policy case in a shared knowledge workspace,1.94,Editorial allocation only; actual PDF pages counted independently
+C25,sec:C25:properties,Properties observations and assurance boundaries,1.30,Editorial allocation only; actual PDF pages counted independently
+C25,sec:C25:interventions,Causal interventions in model computation,0.96,Editorial allocation only; actual PDF pages counted independently
+C25,sec:C25:sparse,Sparse features and their evaluation,2.17,Editorial allocation only; actual PDF pages counted independently
+C25,sec:C25:gates,Quality gates as fallible classifiers,0.95,Editorial allocation only; actual PDF pages counted independently
+C25,sec:C25:testjack,Dynamic tests and requirement-grounded witnesses,0.92,Editorial allocation only; actual PDF pages counted independently
+C25,sec:C25:judges,Judging long multimodal trajectories,0.82,Editorial allocation only; actual PDF pages counted independently
+C25,sec:C25:experiments,Verification experiments and implementation traceability,0.87,Editorial allocation only; actual PDF pages counted independently
+C25,sec:C25:workedgate,A worked gate analysis with adaptive selection,3.01,Editorial allocation only; actual PDF pages counted independently
+C26,sec:C26:estimand,Define the estimand before the leaderboard,1.29,Editorial allocation only; actual PDF pages counted independently
+C26,sec:C26:construction,Harness construction and artifact identity,0.97,Editorial allocation only; actual PDF pages counted independently
+C26,sec:C26:attempts,Attempts reliability and selection,0.91,Editorial allocation only; actual PDF pages counted independently
+C26,sec:C26:contamination,Contamination information leakage and task lineage,1.47,Editorial allocation only; actual PDF pages counted independently
+C26,sec:C26:uncertainty,Uncertainty paired designs and dependence,0.92,Editorial allocation only; actual PDF pages counted independently
+C26,sec:C26:ablations,Ablations and causal mechanism claims,0.93,Editorial allocation only; actual PDF pages counted independently
+C26,sec:C26:audit,Evaluator audits and reproducible reporting,0.88,Editorial allocation only; actual PDF pages counted independently
+C26,sec:C26:pairedcase,A concrete audit of a paired repository comparison,3.63,Editorial allocation only; actual PDF pages counted independently
+C27,sec:C27:horizon,Define horizon and the unit of continuity,0.88,Editorial allocation only; actual PDF pages counted independently
+C27,sec:C27:pipeline,Factor the memory pipeline,0.91,Editorial allocation only; actual PDF pages counted independently
+C27,sec:C27:influence,Implicit relevance and appropriate influence,0.96,Editorial allocation only; actual PDF pages counted independently
+C27,sec:C27:order,Task order adaptation and hidden curricula,0.89,Editorial allocation only; actual PDF pages counted independently
+C27,sec:C27:change,Temporal change deletion and migration,0.89,Editorial allocation only; actual PDF pages counted independently
+C27,sec:C27:survival,Horizon-dependent reliability and survival,0.93,Editorial allocation only; actual PDF pages counted independently
+C27,sec:C27:implementation,A longitudinal implementation and reporting contract,1.53,Editorial allocation only; actual PDF pages counted independently
+C27,sec:C27:streamcase,A counterfactual session-stream experiment,4.01,Editorial allocation only; actual PDF pages counted independently
+C28,sec:C28:threatmodel,Threat models and attacker capabilities,0.90,Editorial allocation only; actual PDF pages counted independently
+C28,sec:C28:injection,Injection across context tools and persistent memory,1.21,Editorial allocation only; actual PDF pages counted independently
+C28,sec:C28:privilege,Least privilege and symbolic action controls,1.19,Editorial allocation only; actual PDF pages counted independently
+C28,sec:C28:platforms,Controlled red-team platforms and judge validity,1.74,Editorial allocation only; actual PDF pages counted independently
+C28,sec:C28:cybercapability,Cyber capability is not agent compromise,1.77,Editorial allocation only; actual PDF pages counted independently
+C28,sec:C28:blueteam,Blue-team detection containment and recovery,1.13,Editorial allocation only; actual PDF pages counted independently
+C28,sec:C28:metrics,Security metrics and evidence interpretation,0.71,Editorial allocation only; actual PDF pages counted independently
+C28,sec:C28:case,A bounded policy-expansion and memory-poisoning case,2.35,Editorial allocation only; actual PDF pages counted independently
+C29,sec:C29:objectives,Objectives proxies and constrained policies,1.06,Editorial allocation only; actual PDF pages counted independently
+C29,sec:C29:hierarchy,Instruction hierarchy and authority-bearing records,0.84,Editorial allocation only; actual PDF pages counted independently
+C29,sec:C29:training,Constitutional and preference-based alignment,2.04,Editorial allocation only; actual PDF pages counted independently
+C29,sec:C29:review,Human review and the semantics of approval,0.96,Editorial allocation only; actual PDF pages counted independently
+C29,sec:C29:privacy,Privacy purpose and the lifecycle of memory,0.94,Editorial allocation only; actual PDF pages counted independently
+C29,sec:C29:operations,Operational constraints and residual risk,0.88,Editorial allocation only; actual PDF pages counted independently
+C29,sec:C29:evaluation,Evaluation of authority and aligned behavior,0.85,Editorial allocation only; actual PDF pages counted independently
+C29,sec:C29:updatecase,A governed model-and-harness update,3.43,Editorial allocation only; actual PDF pages counted independently
+C30,sec:C30:01,What changes when an agent improves,1.82,Editorial allocation only; actual PDF pages counted independently
+C30,sec:C30:02,Selection pressure and finite-feedback overfitting,2.46,Editorial allocation only; actual PDF pages counted independently
+C30,sec:C30:03,Task-local recursion and reusable improvement memory,1.37,Editorial allocation only; actual PDF pages counted independently
+C30,sec:C30:04,Policy and harness co-adaptation,1.25,Editorial allocation only; actual PDF pages counted independently
+C30,sec:C30:05,Continual memory maintenance as controlled adaptation,1.32,Editorial allocation only; actual PDF pages counted independently
+C30,sec:C30:06,Testing the improver rather than its selected artifact,2.08,Editorial allocation only; actual PDF pages counted independently
+C30,sec:C30:07,Bounds on claims and conditions for deployment,0.70,Editorial allocation only; actual PDF pages counted independently
+C31,sec:C31:01,The workload is a sequence of interrupted computations,1.51,Editorial allocation only; actual PDF pages counted independently
+C31,sec:C31:02,A complete capacity calculation,1.68,Editorial allocation only; actual PDF pages counted independently
+C31,sec:C31:03,Bandwidth arithmetic and the decode bottleneck,1.36,Editorial allocation only; actual PDF pages counted independently
+C31,sec:C31:04,"Exact reuse, partial reuse, and cache identity",1.52,Editorial allocation only; actual PDF pages counted independently
+C31,sec:C31:05,Quantization speculation and structured action outputs,1.22,Editorial allocation only; actual PDF pages counted independently
+C31,sec:C31:memoryspeculation,Memory-conditioned speculation and exact verification,1.55,Editorial allocation only; actual PDF pages counted independently
+C31,sec:C31:07,Scheduling disaggregation and queueing,1.15,Editorial allocation only; actual PDF pages counted independently
+C31,sec:C31:08,A reproducible serving experiment,1.01,Editorial allocation only; actual PDF pages counted independently
+C32,sec:C32:01,A release is a state-compatible system configuration,1.32,Editorial allocation only; actual PDF pages counted independently
+C32,sec:C32:02,Observability must reconstruct decisions and effects,1.68,Editorial allocation only; actual PDF pages counted independently
+C32,sec:C32:03,Canaries with persistent state and delayed outcomes,1.45,Editorial allocation only; actual PDF pages counted independently
+C32,sec:C32:04,Rollback and compensation are different operations,1.74,Editorial allocation only; actual PDF pages counted independently
+C32,sec:C32:05,Failure detectors and bounded recovery policies,1.51,Editorial allocation only; actual PDF pages counted independently
+C32,sec:C32:06,Service objectives and incident learning,0.96,Editorial allocation only; actual PDF pages counted independently
+C32,sec:C32:07,A compatibility-first deployment procedure,2.34,Editorial allocation only; actual PDF pages counted independently
+C33,sec:C33:01,Composition changes the claim being tested,1.25,Editorial allocation only; actual PDF pages counted independently
+C33,sec:C33:02,Case one: a repository repair with bounded side effects,2.75,Editorial allocation only; actual PDF pages counted independently
+C33,sec:C33:03,Parallel repair branches and cache-aware orchestration,1.47,Editorial allocation only; actual PDF pages counted independently
+C33,sec:C33:04,Case two: a persistent enterprise research assistant,1.46,Editorial allocation only; actual PDF pages counted independently
+C33,sec:C33:05,Testing relevance and influence rather than retrieval alone,1.14,Editorial allocation only; actual PDF pages counted independently
+C33,sec:C33:06,Case three: an agent that modifies its own research harness,1.54,Editorial allocation only; actual PDF pages counted independently
+C33,sec:C33:07,A unified acceptance record and discriminating interventions,1.39,Editorial allocation only; actual PDF pages counted independently
+C34,sec:C34:01,What the October 2026 evidence supports,1.13,Editorial allocation only; actual PDF pages counted independently
+C34,sec:C34:02,Decision-preserving memory as an experimental target,1.52,Editorial allocation only; actual PDF pages counted independently
+C34,sec:C34:03,Conditioning under joint adaptation,1.36,Editorial allocation only; actual PDF pages counted independently
+C34,sec:C34:04,Verification whose errors are measured independently,0.96,Editorial allocation only; actual PDF pages counted independently
+C34,sec:C34:05,World models and representations must face action tests,1.07,Editorial allocation only; actual PDF pages counted independently
+C34,sec:C34:06,A research program for reliable improvement,1.02,Editorial allocation only; actual PDF pages counted independently
+C34,sec:C34:07,The remaining systems boundary,0.94,Editorial allocation only; actual PDF pages counted independently

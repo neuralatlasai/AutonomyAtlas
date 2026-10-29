@@ -1,0 +1,11 @@
+\section{Define horizon and the unit of continuity}\label{sec:C27:horizon}
+Horizon can mean model turns, tool actions, elapsed time, task count, or sessions. These quantities are correlated only under a workload model. A hundred short tool calls can be easier than a few actions separated by uncertain external events. An accelerated simulated clock can test temporal logic without establishing months-long deployment validity. Every study should declare which horizon is manipulated and which remains uncontrolled.
+
+Continuity also has multiple units. A session can retain conversation history, a task can span several sessions, a user can have many tasks, and an organization can share a skill bank across users. The memory reset boundary determines the treatment. A fresh model call with a persistent external store is not a no-memory condition. Conversely, carrying raw conversation text without cross-session storage is not evidence of durable personal memory.
+
+Represent a longitudinal unit by initial state, task sequence, environment-change schedule, model and harness versions, memory operations, and final outcomes. This record permits causal interventions on order, updates, and interruptions. It also exposes whether a claimed improvement is conditional on an implicit curriculum or on access to outcomes unavailable in deployment.
+
+The two cited memory surveys provide complementary taxonomies of memory forms, functions, substrates, subjects, and dynamics~\cite{corpus251213564,corpus260206052}. Their value here is conceptual organization and discovery of primary methods. A survey's broad coverage does not independently validate the experiments it summarizes. Quantitative conclusions should return to the original method, exact version, and evaluation protocol.
+
+The practical implication is to choose the unit of generalization before collecting runs. If the claim concerns new users, many episodes from one user do not suffice. If it concerns memory evolution, repeated calls against one fixed bank do not estimate variation in bank construction. If it concerns robustness after upgrades, a fixed-policy study cannot answer it. These distinctions determine both experimental cost and statistical uncertainty.
+

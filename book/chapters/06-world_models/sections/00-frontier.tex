@@ -1,0 +1,9 @@
+\section{LeFlow and amortized latent trajectory planning}
+\label{sec:C06:frontier}
+LeFlow's August 2026 method generates a latent path with rectified flow, decodes latent transitions into action chunks through inverse dynamics, and reranks candidates by rollout through a frozen world model. Its Section 3 separates these components and includes consistency between generated and realizable trajectories~\cite{rewrite_leflow2026}. This supplies a current counterpoint to solving an action-space optimization problem from scratch at every control step. The proposal distribution is learned offline, while verification still consumes online model computation.
+
+An analytical cost comparison should keep that offline investment visible. If training the planner costs $C_{\mathrm{train}}$, iterative planning costs $c_{\mathrm{iter}}$ per query, and amortized generation plus reranking costs $c_{\mathrm{amort}}$, the latter has lower total compute after more than $C_{\mathrm{train}}/(c_{\mathrm{iter}}-c_{\mathrm{amort}})$ queries when the denominator is positive and the compared quality constraint is satisfied. This is a break-even identity, not a claim about the paper's measured crossover. It fails as a deployment prediction when the learned prior becomes stale or must be retrained for changed dynamics.
+
+The distinction between a generated endpoint and a realizable endpoint is equally important. Conditioning a latent generator on the desired goal can force its proposed path to end there by construction. That does not establish that decoded actions produce the path under the dynamics. Scoring the generated endpoint alone would reward a tautology. A rollout-based score instead checks what the decoded controls actually induce in the model, while retaining the real-model discrepancy analyzed below. A strong evaluation reports both generated-path error and rollout endpoint error, followed by actual environment success under receding-horizon execution.
+
+

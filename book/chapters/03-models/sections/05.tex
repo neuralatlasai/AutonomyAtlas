@@ -1,0 +1,33 @@
+\section{From model output to a typed operation}
+\label{sec:C03:interfaces}
+A typed action interface should distinguish prediction, validation, authorization, execution, and observation. Prediction selects a candidate operation and arguments. Validation checks syntax and local invariants. Authorization checks whether the candidate is permitted in the current state. Execution applies the operation. Observation reports what actually happened, including partial completion. Combining these stages into a single model-generated sentence removes useful control points. It also makes failures difficult to attribute: a statement that a file was updated may describe intent rather than an observed state transition.
+
+Let $v(a,S_t)$ indicate structural validity and $u(a,S_t)$ indicate current authorization. A gated execution wrapper applies an operation only when both predicates hold. It should not assume that authorization inferred when constructing $C_t$ remains valid when the operation executes. Permissions can be revoked, resources can change, and another agent can acquire a lock. The model's description of permission is evidence about its belief, not the permission itself. The authoritative check belongs to the execution boundary. This remains true even if the model was trained extensively on compliant demonstrations.
+
+Schema-constrained decoding removes token sequences that cannot be extended into valid outputs. This can improve syntactic validity but changes the sampling distribution. If the unmasked probabilities are $p_i$ and the allowed set is $A$, the constrained distribution is $p_i/\sum_{j\in A}p_j$ for $i\in A$, assuming ordinary renormalization and positive allowed mass. If $\sum_{j\in A}p_j=0$, this formula is undefined; the implementation must return an explicit generation failure or a separately specified fallback, not divide by zero. Likewise an empty feasible grammar continuation and a length-truncated valid prefix need distinct outcomes. A likelihood computed without the same mask is not the likelihood of the deployed action generator. The distinction becomes consequential in policy optimization, calibration, and off-policy analysis. Grammar versions and tool schemas should therefore be versioned alongside the checkpoint and tokenizer.
+
+An abstract execution boundary can be specified as a composition with explicit rejection branches. Let $\Sigma_t$ be the selected tool schemas, $\nu_t$ their configuration record, and $\sigma$ the serialization map. With decoder $\delta$ and deterministic interpreter $d$ as defined in Section~\ref{sec:C03:policy},
+\begin{equation}
+\begin{aligned}
+ \zeta_t&=\sigma(C_t,\Sigma_t,\nu_t),\\
+ Y_t&\sim Q_{\theta,\delta}(\cdot\mid\zeta_t),\\
+ a_t&=d(Y_t),\qquad b_t=v(a_t,S_t).
+\end{aligned}
+\label{eq:C03:invocationproposal}
+\end{equation}
+The validity predicate assigns zero to the invalid symbol $\bot$ and to schema violations. It checks the selected interface rather than silently repairing its meaning. Only when $b_t=1$ does the runtime obtain a current authoritative read $\xi_t$, refresh its execution state as $\widetilde S_t=\mathcal R(S_t,\xi_t)$, and evaluate $\beta_t=u(a_t,\widetilde S_t)$. The read supplies current service state and the applicable authority epoch. Let $e_v$ and $e_u$ be distinct non-execution outcomes for invalidity and denial. Let $k_t$ identify the logical operation instance and its immutable arguments, with retries of that instance retaining the same identity. Let $\mathcal X_k$ execute an operation under identity $k$, with external randomness $\omega_t$, and let $\mathcal O_{\nu_t}$ record the returned evidence and configuration. The boundary returns
+\begin{equation}
+ e_t=
+ \begin{cases}
+ e_v,&b_t=0,\\
+ e_u,&b_t=1,\ \beta_t=0,\\
+ \mathcal O_{\nu_t}\!\left(
+ \mathcal X_{k_t}(a_t,\widetilde S_t;\omega_t)\right),
+ &b_t=\beta_t=1.
+ \end{cases}
+\label{eq:C03:invocationboundary}
+\end{equation}
+Execution appears only in the authorized branch. State refresh and authorization must be synchronized with dispatch under the service contract; writing this composition does not prove distributed atomicity. The observation record can contain failure, partial completion, or an unknown outcome; it does not turn a returned message into proof of a durable effect. These maps specify implementation obligations, not properties automatically supplied by an SDK. Duplicate-effect prevention additionally requires service-appropriate idempotency semantics for $k_t$; a random request identifier alone is insufficient.
+
+Tool descriptions are themselves inputs to the model. Their ordering, length, examples, and similarity can influence routing, even when every description is accurate. A model can also infer unavailable capabilities from familiar tool names. Robust interfaces return explicit unsupported-operation failures and avoid describing aspirational features as installed functionality. Toolformer studies learning to insert API calls under specific data and filtering conditions; its method is relevant to learning this interface, but it does not establish correctness for arbitrary tool inventories or changing enterprise permissions~\cite{schick2023toolformer}.
+

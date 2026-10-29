@@ -1,0 +1,46 @@
+\section{Selection pressure and finite-feedback overfitting}\label{sec:C30:02}
+Repeated harness evaluation creates adaptive pressure on the evaluator. Let $\widehat J_n(h)$ be the average bounded score of harness $h$ on $n$ tasks. For a fixed finite candidate class $\mathcal H$, independent tasks, and scores in $[0,1]$, Hoeffding's inequality and a union bound give
+\begin{equation}
+ P\left(\sup_{h\in\mathcal H}
+ |\widehat J_n(h)-J(h)|>\epsilon\right)
+ \leq2|\mathcal H|e^{-2n\epsilon^2}.
+\end{equation}
+Consequently, with probability at least $1-\delta$, the empirical maximizer $\widehat h$ satisfies
+\begin{equation}
+ J(h^*)-J(\widehat h)
+ \leq2\sqrt{\frac{\log(2|\mathcal H|/\delta)}{2n}},
+ \label{eq:c30:selectionbound}
+\end{equation}
+where $h^*$ maximizes true utility within the fixed class. The proof applies the uniform deviation bound once to $h^*$ and once to $\widehat h$, with the empirical optimization inequality between them. This is a standard finite-class deduction, not a guarantee for unrestricted harness evolution.
+
+The fixed-class assumption is decisive. If proposals are generated after inspecting detailed errors on the same tasks, the effective hypothesis class is data-dependent. Replacing $|\mathcal H|$ by the number of evaluated proposals can be invalid: each proposal may encode arbitrary information extracted from the evaluation set. A code-writing agent can insert task signatures, evaluator-specific branches, or special-case instructions. More rounds increase both useful exploration and the opportunity to fit selection noise. Fresh evaluation tasks, restricted information release, complexity control, and independent final tests address different parts of this problem.
+
+Regularization of proposals is not equivalent to regularization of outcomes. Limiting the number of edited components can improve inspectability and make causal attribution easier, but one short edit can still encode a benchmark-specific shortcut. A critic can reject obvious shortcuts but share the proposer's blind spots. Pruning a costly change can improve cost efficiency while removing a rare but important recovery mechanism. The scientific question is whether a regularizer changes transfer and failure distributions under matched resources, not whether it resembles a familiar statistical penalty.
+
+RRSI makes this issue concrete. Its frozen backbone is surrounded by editable harness components; proposal capacity is annealed, underexplored evolution directions receive attention, and a critic/pruner constrains which edits become permanent. Version 3's Table 1 reports JobBench scores of 36.0 and 40.7 for the base and evolved harness, a 4.7-point difference; its engineering result uses the different Frontier-Eng Medal metric and reports a 4.3-point difference. The abstract's undifferentiated ``up to 4.3'' out-of-distribution summary is inconsistent with the larger JobBench difference in the same revision. These are author-reported bounded comparisons, not measurements reproduced here, and their units should not be pooled. The evolution set, task suites, model, selection procedure, and cost definition constrain their interpretation. The method does not demonstrate unbounded acceleration or improvements to the model weights~\cite{rrsi2026}.
+
+The official repository makes this chain inspectable at a pinned revision committed on 23 September 2026 and inspected in October. The schedule is implemented by \path{rrsi/schedule.py:edit_budget}; proposal construction by \path{rrsi/propose.py:propose}; screening by \path{rrsi/critic.py:precheck} and \texttt{review}; and acceptance by \path{rrsi/selection.py:judge} and \path{select_round}. The loop exposes separate round, held-out, and reevaluation methods~\cite{rewrite_rrsi_repo}. Inspection of these functions establishes their code semantics, not reproduction of the paper's task measurements.
+
+For $T>0$, the edit-count schedule computes a ceiling of a cosine interpolation:
+\begin{equation}
+ b_t=\left\lceil b_{\min}+
+ \frac{b_{\max}-b_{\min}}2
+ \left(1+\cos\frac{\pi t}{T}\right)\right\rceil.
+\end{equation}
+Here $t\in\{0,\ldots,T-1\}$ is the zero-based proposal round, and the configured bounds satisfy $0\leq b_{\min}\leq b_{\max}$ with integer values. The quantity $b_t$ bounds the number of declared independent edits in one candidate. It does not bound the number of mechanisms accumulated by the harness over its history. The inspected table generator uses rounds zero through $T-1$, so the final sampled budget need not equal the interpolation's endpoint at $T$. For hypothetical $T=10$, minimum one, and maximum four, the final sampled value is two. This is calculated schedule behavior, not an observed evolution outcome. It is a useful boundary test for a reproduction that assumes the last round is necessarily a single-edit round.
+
+The selection code has two cost regimes. Let $\Delta S=S'-S_t$, $\Delta C=(C'-C_t)/C_t$ for positive incumbent cost, $\nu$ the implementation's novelty count, and $\delta$ its configured score tolerance. Its cost-admissibility indicator is
+\begin{equation}
+ a=\begin{cases}
+ \mathbf1_{\{\Delta C\leq\beta_0+\beta_1\Delta S\}},
+ &\Delta S>\delta,\\
+ \mathbf1_{\{w_s\Delta S-w_c\Delta C+w_n\nu>0\}},
+ &\Delta S\leq\delta.
+ \end{cases}
+\end{equation}
+The coefficients are configuration parameters; their values and the score/cost units determine the tradeoff. Additional admissibility requires $S'\geq S^\star-\delta$ and passing domain guards, where $S^\star$ is the best recorded score. The winner maximizes measured score among admissible candidates; no winner leaves the incumbent unchanged. These rules allow a bounded measured-score decrease relative to the best record and are not a monotonic guarantee for true held-out utility.
+
+The deterministic critic precheck and model review also have distinct scopes. Pattern checks detect configured forbidden content, while model review interprets the diff and declared edits. Neither proves absence of benchmark specialization or runtime failure. A discriminating test changes only one gate at a time, preserves rejected proposals and their reasons, and reruns the adopted artifact under the same evaluation manifest. The persistent artifact must identify its exact changed files and evidence. Otherwise a higher search log score can remain detached from the harness actually evaluated or released.
+
+Restricted-feedback inference supplies a different guarantee. REUSE controls simultaneous false promotions by accounting for every possible promotion history under an initially independent evaluation sample and decision-only feedback~\cite{ch02_reuse2026}. Its guarantee does not apply when an improver also reads benchmark traces or detailed error scores. Thus proposal regularization, operational permission to adopt, and statistical evidence of improvement are three separate admission conditions. None can replace the others merely because all return an accept decision.
+

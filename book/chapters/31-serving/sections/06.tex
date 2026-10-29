@@ -1,0 +1,24 @@
+\section{Memory-conditioned speculation and exact verification}
+\label{sec:C31:memoryspeculation}
+The 2026 Speculate with Memory method retains transition statistics, retrieved episodes, and recurring prediction errors in a speculator while leaving the actor's context unchanged. It predicts actions, observations, or chains during available computation windows and checks exact matches before reusing speculative work. Its prelaunch restriction excludes irreversible writes. The distinction from token-level speculative decoding is essential: a prediction can launch an environment query or an actor call, not merely propose the next token. Reported match accuracy and theoretical latency savings are not identical to end-to-end deployment speedups~\cite{root_specmemory2026}.
+
+Let $\ell_A$, $\ell_E$, and $\ell_S$ be actor, environment, and speculator latency, and let $H\in\{0,1\}$ indicate a correct, reusable prediction under the experiment's exact-match rule. With sufficient independent resources, an action prediction launched while the actor runs can hide at most
+\begin{equation}
+ \Delta_1=H\min\{\ell_E,(\ell_A-\ell_S)_+\},
+ \qquad (x)_+=\max\{x,0\}.
+\end{equation}
+Predicting an observation while the environment runs can hide at most
+\begin{equation}
+ \Delta_2=H\min\{\ell_A,(\ell_E-\ell_S)_+\}.
+\end{equation}
+These are overlap bounds, not measured speedups. Memory can increase $P(H=1)$ while also increasing $\ell_S$ through lookup. Shared accelerator contention, extra API requests, and coordination can further reduce the realized benefit. A memory ablation must therefore measure both match quality and the critical-path cost of obtaining that quality.
+
+Functional equivalence also requires more than identical action type and arguments. A read-only query issued early may observe a different version of a changing environment. Reusing its response later can alter the actor's context even though no irreversible write occurred. Exact trajectory preservation requires an appropriate snapshot, stable observation semantics, or freshness validation. Prelaunch can also consume rate limits or expose data to an additional service. The claim is consequently conditional on the workload's effect, time, authority, and resource contracts, not an unrestricted property of every operation labeled read-only.
+
+For contrast, token-level rejection sampling supplies a distributional exactness argument. Let $p(y\mid C)$ be the target distribution and $q(y\mid C,M)$ a normalized memory-conditioned draft. Suppress the conditioning for notation. Accept a draft token $y$ with probability $\alpha(y)=\min\{1,p(y)/q(y)\}$ wherever $q(y)>0$. On rejection, sample from
+\begin{equation}
+ r(y)=\frac{(p(y)-q(y))_+}{Z},\qquad
+ Z=\sum_y(p(y)-q(y))_+,
+\end{equation}
+when $Z>0$. Accepted mass is $\min\{p(y),q(y)\}$ and rejected replacement mass is $(p(y)-q(y))_+$, whose sum is $p(y)$. The mean acceptance is $1-\operatorname{TV}(p,q)$. Thus memory may change draft efficiency without changing the target distribution if the correct probabilities and replacement rule are available. This standard rejection-sampling deduction does not show that an action-level prelaunch system implements the same guarantee, nor that a stale or unauthorized cache is usable. The boundaries of exact verification differ between tokens, model calls, observations, and external effects.
+

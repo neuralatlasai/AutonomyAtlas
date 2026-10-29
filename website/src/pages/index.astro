@@ -1,0 +1,33 @@
+---
+import Shell from '../layouts/Shell.astro';
+import Icon from '../components/Icon.astro';
+import { book, href, chapterHref, groups, paths } from '../lib/book';
+---
+<Shell>
+  <main id="main" class="site-width">
+    <section class="hero" id="top">
+      <div>
+        <div class="edition-line eyebrow"><span></span> A TECHNICAL MONOGRAPH · OCTOBER 2026</div>
+        <h1>Agentic<br /><em>State.</em></h1>
+        <p class="hero-subtitle">Context, Memory, and Control<br />in Adaptive AI</p>
+        <p class="hero-description">Intelligence does not end at the model. Explore the architectures, information, memory, and execution systems that turn a policy into an agent.</p>
+        <div class="hero-actions"><a class="button" href={chapterHref(book.chapters[0].slug)}>Begin reading <Icon name="right" size={18} /></a><a class="button secondary" href={href('book/')}>Explore the contents <Icon name="book" size={18} /></a></div>
+      </div>
+      <div class="hero-visual">
+        <header><span>THE SYSTEM AROUND THE MODEL</span><span>01 / 34</span></header>
+        <figure>
+          <a href={chapterHref(book.chapters[0].slug)+'#sec:C01:contracts'} aria-label="Read about conditioning, authority, and effect-state contracts"><img src={href('figures/F01v4.png')} width="1536" height="1024" alt="Three separate state contracts: history and context condition a proposal; current grants gate dispatch; a representation transformation preserves operation records." fetchpriority="high" /></a>
+          <figcaption>Conditioning, authority, and effects are separate scientific obligations.</figcaption>
+        </figure>
+        <p>A model proposes. A system remembers, acts, and retains the evidence.</p>
+      </div>
+    </section>
+    <div class="book-facts" aria-label="Publication scope"><div><strong>34</strong><span>connected chapters</span></div><div><strong>482</strong><span>pages of main text</span></div><div><strong>35</strong><span>original illustrations</span></div><div><strong>356</strong><span>cited references</span></div></div>
+    <section aria-labelledby="contents-heading">
+      <header class="section-heading"><div><span class="eyebrow">AN INTEGRATED VIEW</span><h2 id="contents-heading">Follow the whole system.</h2><p>Mathematical foundations support the architecture, learning, memory, execution, and assurance layers.</p></div><a class="text-link" href={href('book/')}>All chapters <Icon name="right" size={18} /></a></header>
+      <div class="chapter-groups">{groups.map(group => <a class="chapter-group" href={href('book/')+`#group-${group.range[0]}`}><Icon name={group.icon} size={26} /><h3>{group.name}</h3><p>{group.subtitle}</p><span class="group-range">CHAPTERS {String(group.range[0]).padStart(2,'0')}—{group.range[1]} <Icon name="arrow" size={16} /></span></a>)}</div>
+    </section>
+    <section class="essay-intro"><div><span class="eyebrow">THE CENTRAL QUESTION</span><h2 style="margin-top:18px">What must remain consistent<br />as an agent changes?</h2></div><div><p>The book connects three independent boundaries: what information conditions a decision, what the agent is currently permitted to do, and what evidence survives an external effect.</p><p class="muted">The result is a cross-layer analysis of models and their surrounding systems, with mathematical formulations, identifiable implementations, evidence limits, and discriminating experiments.</p><a class="text-link" href={href('about/')}>Read the contribution and evidence boundary <Icon name="right" size={18} /></a></div></section>
+    <section aria-labelledby="paths-heading"><header class="section-heading"><div><span class="eyebrow">READ BY QUESTION</span><h2 id="paths-heading">Several routes into the book.</h2></div><a class="text-link" href={href('reading-paths/')}>Reading paths <Icon name="right" size={18} /></a></header><div class="path-grid">{paths.map(path => <article class="path-card"><h3>{path.title}</h3><p>{path.summary}</p><div class="path-steps">{path.chapters.map(n => <a href={chapterHref(book.chapters[n-1].slug)} title={book.chapters[n-1].title}>Chapter {n}</a>)}</div></article>)}</div></section>
+  </main>
+</Shell>

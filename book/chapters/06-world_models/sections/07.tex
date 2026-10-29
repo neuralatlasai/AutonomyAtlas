@@ -1,0 +1,36 @@
+\section{Experiments that separate prediction from control}
+\label{sec:C06:experiments}
+A useful evaluation has three layers. First measure one-step prediction under a held-out transition distribution, with explicit action and observation timing. Second measure multi-step prediction under fixed action sequences, distinguishing teacher-forced correction from free rollout. Third measure closed-loop task outcomes when a planner or learned actor uses the model. Improvement at one layer need not imply improvement at the next. The study should retain cases where a model predicts more accurately but induces worse decisions; these cases can reveal reward mismatch, uncertainty miscalibration, or search exploitation.
+
+Baselines should include a direct policy with the same action interface, a simple deterministic transition approximation where meaningful, a model-free memory of retrieved transitions, and an exact-transition simulator as a nondeployable diagnostic when available. An exact simulator does not make a fixed finite-budget planner optimal; removing model error can even remove a compensating bias in its heuristic. It is an upper bound only under a separately justified optimization and comparison contract. Match real environment interactions separately from model computation, and report both learning curves and resource curves.
+
+The transition distribution selected by the planner is part of the evidence boundary. Let $d_0$ be the validation distribution over state-action pairs, $d_\pi$ the planner-induced distribution, and $e\geq0$ a specified transition loss. If $d_\pi\ll d_0$ and $\mathrm d d_\pi/\mathrm d d_0\leq\kappa$ almost everywhere, then
+\begin{equation}
+ \mathbb E_{d_\pi}[e]
+ =\mathbb E_{d_0}\!\left[
+ \frac{\mathrm d d_\pi}{\mathrm d d_0}e\right]
+ \leq\kappa\,\mathbb E_{d_0}[e].
+\end{equation}
+This change-of-measure deduction requires a coverage bound; an ordinary held-out error estimate does not supply $\kappa$. When search selects transitions outside validation support, the displayed guarantee is unavailable. Evaluate the model on states selected by the actual planner, with selected examples excluded from fitting. Trace2Env's applicability gate and WorldEvolver's selective foresight address related exposure decisions through different mechanisms; neither should be interpreted as a proved density-ratio certificate~\cite{rewrite_trace2env2026,rewrite_worldevolver2026}.
+
+{\small\setlength{\tabcolsep}{3pt}
+\begin{table}[!htbp]
+\centering
+\caption{Controlled interventions for imagined interaction.}\label{tab:C06:experiments}
+\begin{tabular}{L{29mm}L{37mm}L{40mm}}
+
+\toprule Intervention & Fixed comparison element & Question answered\\\midrule
+Model versus no model & Policy and real data & Does prediction add useful information?\\
+Short versus long rollout & Sampling budget & When does compounding error dominate?\\
+More candidate plans & World model checkpoint & Does search exploit model error?\\
+Goal or tool change & Observation domain & Is the latent state reusable?\\
+Real versus imagined memory & Storage policy & Does synthetic evidence contaminate later decisions?\\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+
+Contamination controls should account for shared environments and generated data. Holding out task prompts while retaining the same transition templates can overstate generalization. Split by environment dynamics or tool implementation when the claim concerns new mechanisms. Evaluate rare failures and partial observations, not only successful demonstrations. Use paired seeds where appropriate and report uncertainty over environments as well as episodes. A large number of generated rollouts from one flawed world does not provide the same evidence as independent real-world episodes.
+
+Text, graph, and latent representations require a common access contract before comparison. Give each method the same permitted observation history, action schema, real-transition training set, external memory access, and total planning budget. Charge parsing and graph construction to the graph system, language generation and rereading to the text system, and encoding plus rollout to the latent system. Evaluate the same goal predicates, irreversible transitions, and permission changes. Textual plausibility, preservation of graph invariants, and latent prediction error are mechanism-specific diagnostics; verified reachability and execution success provide the shared behavioral comparison. If one representation receives hidden state, an oracle parser, or a larger simulator budget, report that advantage explicitly rather than attributing its effect to the representation format.
+

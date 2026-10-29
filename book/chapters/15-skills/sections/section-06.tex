@@ -1,0 +1,23 @@
+\section{Reported results and unresolved attribution}\label{sec:C15:results}
+HyperSkill evaluates multiple backbones on xBench, GAIA, and WebWalkerQA~\cite{xu2026hyperskill}. Table~\ref{tab:C15:hyperskill} records selected author-reported success rates. The improvements differ across backbones and tasks, and some comparisons tie another method. The paper's table should therefore not be paraphrased as strict dominance in every configuration. These values are not independently reproduced in this monograph.
+\begin{table}[htbp]\centering\small
+\caption{Selected HyperSkill success rates (\%), author-reported~\cite{xu2026hyperskill}.}\label{tab:C15:hyperskill}
+\begin{tabular}{L{38mm}rrr}\toprule
+Configuration & xBench & GAIA & WebWalkerQA\\\midrule
+Qwen3-30B-A3B, no memory & 46.00 & 32.12 & 39.41\\
+Qwen3-30B-A3B, HyperSkill & 52.00 & 36.97 & 50.59\\
+GPT-4o, no memory & 54.00 & 32.73 & 46.47\\
+GPT-4o, HyperSkill & 62.00 & 44.24 & 51.18\\\bottomrule
+\end{tabular}
+\end{table}
+
+Task success and step efficiency need separate interpretation. A skill can reduce steps by encouraging premature termination. It can increase tool calls while improving evidence coverage. The paper reports these quantities separately, and a reproduction should preserve them rather than declaring every shorter trajectory better. Extraction, planning, embedding, and maintenance costs are additional lifecycle components. Lower execution-step counts do not establish lower end-to-end expense.
+
+The main setting uses outcome feedback for memory updates, including gold outcome information in the relevant evaluation configuration. This is stronger feedback than many production agents receive. A method can learn useful procedural memory with such feedback while remaining limited when outcomes are ambiguous or delayed. If a model judge replaces gold labels, the judge's errors become part of the memory update loop and can persist into later tasks.
+
+The fixed task-order seed is another qualification. An evolving bank learns from earlier tasks, so order changes both available experience and estimated utility. Repeating model decoding under one order does not measure order robustness. A shuffled-order evaluation and an explicitly held-out transfer set would help distinguish a favorable curriculum from stable procedural transfer. The result should report variation across orders and initial banks, not only the final average.
+
+Component ablations can also be causally ambiguous. Removing a hypergraph component may simultaneously change candidate retrieval, context length, and abstraction content. A clean structure comparison preserves candidate text and token budget while varying only the membership information. A clean maintenance comparison preserves retrieval and evaluates before and after specific prune or merge operations. The paper provides useful mechanism evidence, while these further controls remain proposed experiments rather than additional reported results.
+
+The evidence supports studying structured experiential memory as an implementable mechanism. It does not establish that higher-order storage universally outperforms flat retrieval, that the learned procedures remain valid after a model upgrade, or that recursive improvement accelerates indefinitely. Those stronger conclusions require new controls and different horizons.
+

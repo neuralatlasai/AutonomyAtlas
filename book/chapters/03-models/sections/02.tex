@@ -1,0 +1,30 @@
+\section{Tokenization as a measurement and interface choice}
+\label{sec:C03:tokens}
+Let $b$ be a byte string and $T$ a canonical encoding into token indices $(x_1,\ldots,x_n)$. Its teacher-forced token likelihood factors as $\prod_i p_\theta(x_i\mid x_{<i})$, with termination handled under a declared convention. A per-token loss depends on $T$ and cannot directly rank byte-level predictive efficiency across tokenizers. For a fixed corpus of byte strings, a useful operational quantity is total negative log probability in base two divided by the total number of original bytes. Report normalization and boundary-token conventions with that code-length measure.
+
+Canonical-encoding likelihood is also distinct from the probability of a decoded byte string when several token sequences decode to it: the latter sums their sequence probabilities. A lossy normalizer can additionally map distinct original byte strings to the same encoding. These distinctions matter when assigning probabilities to exact tool arguments. BPE merges frequent adjacent units; SentencePiece supplies tokenization with explicit normalization choices. Neither mechanism alone establishes the optimal vocabulary for every language, codebase, or tool protocol~\cite{sennrich2015bpe,kudo2018sentencepiece}.
+
+An agent handles material with very different token statistics: prose, source code, URLs, paths, JSON, tables, OCR output, and arbitrary identifiers. A tokenizer that is economical on conversational English can fragment a long hexadecimal identifier into many pieces. That fragmentation increases context consumption and the number of predictions needed to reproduce an argument exactly. It can also alter where truncation occurs. A context limit expressed as a token count is consequently a capacity of a specific encoder, not a language-independent quantity of evidence. Cross-model memory comparisons should report the underlying content and its encoded length for each tokenizer.
+
+Normalization introduces a second issue. Unicode composition, whitespace treatment, casing, and byte fallback influence whether encoding and decoding preserve a tool argument exactly. Human-readable equivalence does not imply operational equivalence. A database key can distinguish two strings that render similarly; a shell interpreter can assign meaning to whitespace that a prose normalizer treats as redundant. The relevant invariant for an execution boundary is $D(T(b))=b$ for the supported domain, with the domain explicitly stated. If preprocessing intentionally changes $b$, the system should retain the original bytes and the transformation rather than describing the result as lossless tokenization.
+
+A tokenizer is not an authorization mechanism. Reserved role markers and tool delimiters can assist serialization, but the application must control which message fields can introduce them. An untrusted document containing the spelling of a privileged marker must remain document content. The parser and transport determine authority; the statistical model can still be influenced by a convincing imitation even when the actual privilege boundary is preserved. This distinction is central to prompt injection. Preventing a byte sequence from becoming a system message is necessary, while preventing every semantic influence from untrusted content is a separate learning and control problem.
+
+Vocabulary size creates an engineering tradeoff. With hidden width $d$ and vocabulary size $v$, an untied output projection has $dv$ parameters and computes a distribution over $v$ alternatives at each prediction. Tying input and output embeddings reduces stored parameters but does not remove the output computation. Increasing $v$ can shorten sequences while increasing projection cost and making rare units harder to estimate. The optimum depends on corpus composition, architecture, batch shape, and hardware. It cannot be selected solely by minimizing tokens per character. A multilingual agent should also examine whether equal task budgets allocate systematically different usable text across languages.
+
+{\small\setlength{\tabcolsep}{3pt}
+\begin{table}[!htbp]
+\centering
+\caption{Tokenizer properties and agent-level consequences.}\label{tab:C03:tokenizers}
+\begin{tabular}{L{25mm}L{39mm}L{42mm}}
+
+\toprule Property & Direct mechanism & Required check\\\midrule
+Segmentation & Changes sequence length and prediction units & Compare encoded lengths for actual tools and languages.\\
+Normalization & May alter bytes before inference & Test round trips on identifiers, code, and arguments.\\
+Special tokens & Distinguishes serialized message roles & Reject role escalation at the application boundary.\\
+Vocabulary size & Trades projection size against length & Measure total task compute, not token count alone.\\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+

@@ -1,0 +1,14 @@
+\chapter{Agent Harnesses: Control Flow, Isolation, and Durable Effects}\label{ch:C20}
+Harness$^2$ and RRSI make a current experimental boundary explicit: a frozen backbone can be surrounded by a changing execution procedure, and the resulting gains belong to the configured system rather than automatically to the checkpoint~\cite{corpus261014224,rrsi2026}. Harness$^2$ adds inference and model-based selection whose cost and evaluator dependence matter; RRSI limits repeated selection against a finite evolve set. These 2026 cases motivate the central question here: which state transitions changed, what evidence selected them, and can the claimed benefit survive independent tasks and runtime failures?
+
+A model supplies a conditional distribution over candidate actions. A harness decides which observations enter that conditional distribution, which candidates become executable operations, how their effects are recorded, and what happens when execution stops unexpectedly. Consequently, harness behavior changes the effective policy even when model parameters remain fixed. An evaluation that reports only a model identifier omits part of the system being evaluated. Conversely, an improved harness does not demonstrate that the underlying model learned a new capability.
+
+The engineering objective is controlled progress under incomplete observations and partial failures. Reliability requires separating three claims: the agent selected a sensible action, the runtime executed the intended operation, and the operation produced a state satisfying the task. A successful transport response proves none of the other two. This chapter derives an execution contract, examines its failure windows, and connects implementation choices to experiments. The discussion extends the state-consistency analysis of Chapter~\ref{ch:C17} and the interface constraints of Chapter~\ref{ch:C18}.
+
+\input{book/chapters/20-harnesses/sections/01.tex}
+\input{book/chapters/20-harnesses/sections/02.tex}
+\input{book/chapters/20-harnesses/sections/03.tex}
+\input{book/chapters/20-harnesses/sections/04.tex}
+\input{book/chapters/20-harnesses/sections/05.tex}
+\input{book/chapters/20-harnesses/sections/06.tex}
+\input{book/chapters/20-harnesses/sections/07.tex}

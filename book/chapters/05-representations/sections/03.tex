@@ -1,0 +1,16 @@
+\section{Contrastive alignment and what it identifies}
+\label{sec:C05:contrastive}
+CLIP learns image and text representations through a contrastive objective on paired data~\cite{radford2021clip}. Let normalized embeddings be $u_i$ and $v_j$ and temperature $\tau>0$. A directional batch loss is
+\begin{equation}
+ -\frac1B\sum_{i=1}^{B}\log
+ \frac{\exp(u_i^\top v_i/\tau)}
+ {\sum_{j=1}^{B}\exp(u_i^\top v_j/\tau)}.
+\end{equation}
+The symmetric objective also predicts images from texts. This trains compatibility between paired modalities relative to the negative set. It does not by itself supervise a state transition, a tool argument, or the consequences of an action. A representation that matches a screenshot to a caption can still confuse whether a visible operation has already occurred.
+
+Negative construction affects the learned distinctions. Two captions can both accurately describe an image while the batch treats only one as its paired positive. Conversely, dataset artifacts can make a pair identifiable without learning the causal structure relevant to control. These issues do not invalidate contrastive learning; they identify its objective. An agent evaluation should therefore test exact distinctions such as enabled versus disabled, before versus after, or selected versus merely visible. Generic image-text retrieval can be included as a diagnostic, but should not substitute for the closed-loop decision task.
+
+Temperature controls the sharpness of the softmax over similarities. A smaller temperature concentrates gradients on hard alternatives and can magnify calibration differences between domains. The similarity score is not a calibrated probability that a proposed tool action is correct. Thresholding it as though it were one can yield unstable rejection behavior after a change in image style, prompt wording, or candidate set. Calibration should be measured against an explicit event, such as whether a retrieved frame contains the target control, under the deployment candidate distribution.
+
+Cross-modal alignment also has a temporal dimension. A transcript can describe an earlier state while an image shows the current one. Combining them without timestamps can produce a fluent but internally inconsistent account. The representation pipeline should preserve modality, source, time, and transformation lineage. If an OCR engine and a vision-language model disagree, the agent needs a policy for seeking additional evidence rather than silently trusting whichever channel produces more confident language. Such disagreement is often an informative signal that the observation boundary needs another interaction.
+

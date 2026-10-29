@@ -1,0 +1,19 @@
+\section{DeepSeek V4 staged pretraining and distributed state}
+\label{sec:C07:frontier}
+The 2026 DeepSeek-V4 report's Section 4 describes agentic data during mid-training, sample-level pretraining masks, and progressive context extension from 4K toward one million tokens. Its infrastructure discussion includes tensor-level checkpointing and communication overlap; its optimizer setup combines Muon for most parameters with AdamW for selected modules~\cite{rewrite_deepseek4}. These are author-reported design choices, not independently reproduced implementation claims. They show why a contemporary account cannot reduce training to a single dense-model parameter count and a universal Adam memory multiplier.
+
+Memory accounting must be applied component by component. Partition parameters into optimizer classes $\mathcal P_1,\ldots,\mathcal P_k$, with bytes per state and sharding rules for each. Persistent memory is the sum of their actual resident states; transient memory depends on overlapping gathers and updates. A matrix-specific optimizer can have different state shape and communication from a vector-wise optimizer. Consequently, replacing the word Adam in a configuration does not justify reusing the same bytes-per-parameter estimate without inspection. The computation and stability implications also depend on how matrix updates are distributed.
+
+Progressive context training changes both the data distribution and the hardware workload. For a simplified dense-attention accounting model, let stage $j$ process $D_j$ tokens in causally independent segments of lengths $n_{jr}$, with $\sum_r n_{jr}=D_j$, $L_j$ layers, width $d_j$, and mean activated parameter count $N_j$. Then
+\begin{equation}
+ F_{\mathrm{train}}\approx
+ \sum_j\left[
+ \alpha_jN_jD_j+
+ \beta_jL_jd_j\sum_r n_{jr}^{\,2}\right]
+ +F_{\mathrm{extra}}.
+\end{equation}
+The declared coefficients encode the multiply-add and forward/backward conventions; $F_{\mathrm{extra}}$ includes separately counted recomputation and routing work. This is an analytical model, not the report's measured training bill. Sparse or compressed attention requires its own pair-count expression. A mask that forbids cross-document attention does not guarantee that a selected kernel skips every masked arithmetic tile.
+
+At fixed token count, the dense attention term depends on the token-weighted segment length, not merely the final maximum window. Charging all stages at that maximum can overestimate work; extrapolating early-stage throughput can underestimate it. Record stage token counts, actual sequence shapes, masks, precision, optimizer states, and kernel dispatch. This distinguishes long-context training from architectural compression even when both advertise the same maximum window, and connects training provenance to the inference accounting in Chapter~\ref{ch:C31}.
+
+

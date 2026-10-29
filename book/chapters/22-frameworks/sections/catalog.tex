@@ -1,0 +1,45 @@
+\begingroup\setlength{\tabcolsep}{3pt}\small
+\bookneedspace{.42\textheight}
+\begin{longtable}{L{25mm}L{35mm}L{48mm}}
+\caption{Framework and managed-runtime surfaces with discriminating checks.}\label{tab:C22:inventory}\\
+\toprule Product & Documented surface & Required test \\
+\midrule\endfirsthead
+\toprule Product & Documented surface & Required test \\
+\midrule\endhead
+LangGraph\cite{executionproduct001} & Graph checkpoints and stores & Crash after an effect; distinguish restored state from repeated dispatch. \\
+OpenAI Agents SDK\cite{executionproduct002} & Agent and Runner loop interfaces & Preserve rejected calls, handoff ownership and application side-effect receipts. \\
+Agent Development Kit — ADK\cite{executionproduct003} & Workflow and task delegation objects & Compare graph transitions under retry, human interruption and version mismatch. \\
+PydanticAI\cite{executionproduct004} & Typed loop and configurable harness & Inject validly typed but unauthorized arguments; separate types from permission checks. \\
+Deep Agents\cite{executionproduct006} & Filesystem offload and isolated subagents & Remove a rare constraint during compaction and test later recovery. \\
+Microsoft Agent Framework\cite{executionproduct007} & Multi-language agents and workflows & Round-trip state across language adapters; retain cancellation and error semantics. \\
+Agno / AgentOS\cite{executionproduct010} & Agent teams and runtime interfaces & Test whether shared memory commits conflict or silently overwrite one another. \\
+LlamaAgents / Agent Workflows\cite{executionproduct011} & Event-driven workflow composition & Duplicate an input event and inspect whether downstream effects repeat. \\
+Strands Agents / Harness SDK\cite{executionproduct012} & Composable harness control interfaces & Locate the actual agent-loop implementation after the source redirect; pin the adapter. \\
+OpenClaw\cite{executionproduct014} & Cross-channel agent gateway & Revoke one channel principal and test isolation of historical context. \\
+Mastra\cite{executionproduct019} & TypeScript agents and workflows & Interrupt a suspended workflow and verify that resumption preserves evidence identity. \\
+Claude Agent SDK\cite{executionproduct020} & Claude-oriented SDK execution surfaces & Identify application versus provider ownership of hooks, session state and tool effects. \\
+Haystack\cite{executionproduct026} & Retrieval pipelines and agent components & Replace retrieval with oracle evidence while holding generation and tool budgets fixed. \\
+NeMo Fabric\cite{executionproduct031} & Cross-harness execution and telemetry & Check whether adapter traces preserve truncation, delegated work and error provenance. \\
+smolagents\cite{executionproduct032} & Code-action agent loop & Inspect the generated-code execution boundary and sandbox mediation of effects. \\
+DeepSeek Harness\cite{executionproduct035} & Plugin-oriented harness interfaces & Disable one plugin and inspect transitive tool exposure and persisted assumptions. \\
+AgentScope\cite{executionproduct039} & Agent application and team abstractions & Test cancellation propagation and whether conversation identifiers imply durable storage. \\
+CrewAI\cite{executionproduct041} & Role-based crews and explicit flows & Compare identical role assignments with deterministic flow and model-selected delegation. \\
+Pi\cite{executionproduct049} & Terminal harness and extension interfaces & Load a minimal extension and audit which credentials and context it receives. \\
+DSPy\cite{executionproduct052} & Program optimization against evaluation & Keep an untouched holdout and count selection attempts as part of optimization cost. \\
+OGX, formerly Llama Stack\cite{executionproduct054} & Portable server-side agent interfaces & Follow the OGX lineage and verify old client schema compatibility explicitly. \\
+Qwen-Agent\cite{executionproduct056} & Qwen-oriented tools and retrieval & Match tool serialization and model settings before attributing benchmark differences. \\
+n8n\cite{executionproduct057} & Workflow automation with agent steps & Separate durable workflow state from model-visible memory and connector permissions. \\
+Langflow\cite{executionproduct062} & Visual Python agent composition & Export the executable graph and test whether visual and API paths agree. \\
+Dify\cite{executionproduct066} & Visual workflows and retrieval pipelines & Check which runtime and connector components are actually inspectable and licensed. \\
+Elastic Agent Builder\cite{executionproduct068} & Search-grounded agent construction & Change document permissions after indexing and test retrieval-time enforcement. \\
+CAMEL\cite{executionproduct071} & Collaborating agent framework & Compare communicating workers against equal-cost independent samples and one-agent controls. \\
+Coze Studio\cite{executionproduct082} & Self-hostable visual agent workflows & Inspect credential scoping, deployment dependencies and duplicate-event recovery. \\
+UiPath Maestro\cite{executionproduct018} & Business-process orchestration patterns & Interrupt a human approval chain; bind the resumed action to current authorization. \\
+Agent Bricks\cite{executionproduct042} & Custom-agent hosting and data integration & Verify workspace persistence and trace identity across a container restart. \\
+Bedrock AgentCore\cite{executionproduct043} & Composable runtime identity and memory services & Test service boundaries separately; a memory feature does not establish agent correctness. \\
+Gemini Enterprise Agent Platform\cite{executionproduct044} & Managed agent lifecycle services & Distinguish low-code, managed API and custom ADK deployment semantics. \\
+Agents API\cite{executionproduct060} & Managed sessions and execution harness & Compare saved turn history with actual external-effect reconciliation under failure. \\
+Claude Managed Agents\cite{executionproduct061} & Managed long-running agent sessions & Inspect environment persistence, permission policy and incomplete-turn outcomes independently. \\
+Agents \& Conversations API\cite{executionproduct089} & Agent configuration and conversation entries & Test history continuity separately from tool execution and external transaction guarantees. \\
+\bottomrule\end{longtable}
+\endgroup

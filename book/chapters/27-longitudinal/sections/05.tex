@@ -1,0 +1,11 @@
+\section{Temporal change deletion and migration}\label{sec:C27:change}
+A persistent memory must cope with facts becoming false, permissions changing, and representations drifting. Static recall benchmarks cannot test these transitions. A useful longitudinal suite includes explicit corrections, contradictory sources of unequal authority, expired preferences, deletion requests, user separation, and model or embedding upgrades. The required behavior is not always to retain more: sometimes it is to stop using a previously useful record.
+
+Define the validity interval of a fact separately from its observation timestamp. A record can remain historically true while becoming inapplicable to the current decision. Retrieval should expose this distinction, and the reader should not treat a recent ingestion time as evidence of recent event time. Inject delayed reports and backdated corrections to test whether the system confuses the two.
+
+Deletion tests must follow derivatives. Raw events can generate summaries, embeddings, graph edges, skills, caches, and copied subagent context. Removing one row does not establish complete erasure. A test should enumerate the lineage, verify retrieval exclusion, and check whether reconstruction can reintroduce deleted content. Physical deletion, logical exclusion, and retention under restricted audit policy are different outcomes.
+
+Migration changes memory meaning. A new embedding model can alter nearest neighbors; a new policy can interpret the same skill differently; a schema conversion can drop provenance or confidence. Compare pre- and post-migration behavior on held-out tasks and known conflict cases. A successful database migration does not establish behavioral compatibility. Retain the old representation where permitted so failures can be traced and rollback can be assessed.
+
+Authorization is particularly sensitive to restored state. A checkpoint can contain a historical grant, but a resumed session must consult current authority. The experiment should revoke access while the task is paused and then resume from the old checkpoint. Measure whether the forbidden record remains in model-visible context and whether new effects are blocked. This tests context-memory-policy consistency rather than storage persistence alone.
+

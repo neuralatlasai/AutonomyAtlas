@@ -1,0 +1,24 @@
+\section{Policy gradients and the likelihood-ratio contract}
+\label{sec:C08:policygradient}
+For a trajectory law $p_\theta(\tau)$ and a parameter-independent return $R(\tau)$, the score-function identity gives $\nabla_\theta J=\mathbb E[R(\tau)\nabla_\theta\log p_\theta(\tau)]$ under differentiation and integrability assumptions. Fixed environment-transition factors cancel from the score. All parameterized agent decisions remain, including memory writes, context edits, routing, or stopping when these are learned actions. Tool observations themselves are not policy-generated action tokens. A state-conditional baseline independent of the sampled action can reduce variance without changing the expected gradient; an action-dependent baseline requires correction.
+
+For example, let a writer sample memory updates from $\omega_\psi(m_{t+1}\mid H_t,M_t)$ and let a separate actor use $\pi_\theta(a_t\mid C_t)$, with context a deterministic function of the realized history and memory. Assume $\psi$ enters the trajectory law only through the writer. Then
+\begin{equation}
+ \nabla_\psi J=
+ \mathbb E\!\left[R(\tau)
+ \sum_t\nabla_\psi\log
+ \omega_\psi(m_{t+1}\mid H_t,M_t)\right].
+\end{equation}
+Training only the actor's action-token loss omits this writer gradient. It can still define a deliberate alternating or frozen-writer procedure, but is not joint optimization of both components. Shared parameters require adding every path through which they affect the sampling law; a differentiable parameter-dependent reward adds its direct derivative. This decomposition gives a concrete audit target for harness-native training and the co-adaptation analysis in Chapter~\ref{ch:C17}.
+
+PPO uses a surrogate based on the ratio $r_t(\theta)=\pi_\theta(a_t\mid C_t)/\pi_{\mathrm{old}}(a_t\mid C_t)$ and an advantage estimate $\widehat A_t$. Its clipped objective is
+\begin{equation}
+ \mathbb E\min\{r_t\widehat A_t,
+ \operatorname{clip}(r_t,1-\epsilon,1+\epsilon)\widehat A_t\}.
+\end{equation}
+The practical clipped method is not a universal monotonic-improvement guarantee. It relies on sampled data, estimated advantages, optimization choices, and an appropriate proximity regime~\cite{schulman2017ppo}. In long-horizon agents, sparse rewards, variable action lengths, and tool delays make advantage estimation and sample accounting especially consequential.
+
+The denominator must describe the behavior that generated the action under the same conditioning information. If a trace is later compacted and the numerator is evaluated on the final summary while the denominator comes from the live pre-compaction context, the ratio is not the intended conditional likelihood ratio. Likewise, a grammar mask or temperature used during sampling changes behavior probabilities. Storing base-model logits without the sampling transformation can produce an incorrect correction. The trace should retain the live context identity, sampled token probabilities after relevant transforms, and the exact action mask.
+
+A trajectory-level importance ratio is the product of conditional ratios over its sampled actions. Its variance can grow severely with horizon. Token-level or per-decision approximations can reduce variance while changing the estimator and its assumptions. Clipping further introduces bias deliberately. These are not reasons to reject the methods; they are reasons to state which expectation is being estimated. An agent result should distinguish an exact identity, a biased practical estimator, and an empirical observation that the estimator worked in the reported setting.
+

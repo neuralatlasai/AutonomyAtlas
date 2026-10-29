@@ -1,0 +1,5126 @@
+{
+  "title": "Agentic State: Context, Memory, and Control in Adaptive AI",
+  "subtitle": "A Technical Monograph on Conditioning, Tool Execution, Verification, and Self-Improvement",
+  "literature_cutoff": "2026-10-29",
+  "minimum_substantive_pages": 360,
+  "target_substantive_pages": 370,
+  "layout": "165mm by 241mm; 11pt body; 22mm inner and 19mm outer margins; 21mm top and 22mm bottom; fixed before drafting",
+  "chapters": [
+    {
+      "id": "C01",
+      "number": 1,
+      "title": "Agentic Computation: System Boundaries, Generality, and Evidence",
+      "slug": "system",
+      "path": "book/chapters/01-system/chapter.tex",
+      "directory": "book/chapters/01-system",
+      "target_pages": 8,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "HRP separates interface opportunity from policy mismatch; Agent Lightning, ASAP, TraceTrial-Bench, ALE and AgentHorizon expose distinct conditioning and measurement boundaries.",
+      "technical_output": "Versioned system boundary, model-harness interaction, three independent consistency contracts, and scoped diagnostic admission with separate effect and task evidence.",
+      "prerequisites": [],
+      "sections": [
+        {
+          "id": "C01.1",
+          "title": "The agent is the unit of analysis",
+          "path": "book/chapters/01-system/sections/01.tex",
+          "label": "sec:C01:01",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C01.2",
+          "title": "A stateful formulation of execution",
+          "path": "book/chapters/01-system/sections/02.tex",
+          "label": "sec:C01:02",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C01.3",
+          "title": "Generality as a profile of conditional competence",
+          "path": "book/chapters/01-system/sections/03.tex",
+          "label": "sec:C01:03",
+          "subsections": [
+            "Model--harness interaction and adaptation"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C01.3.1",
+              "title": "Model--harness interaction and adaptation",
+              "path": "book/chapters/01-system/sections/03.tex",
+              "label": "sec:C01:interaction",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C01.4",
+          "title": "An ontology of models and connecting components",
+          "path": "book/chapters/01-system/sections/04.tex",
+          "label": "sec:C01:04",
+          "subsections": [
+            "Current implementation and training boundaries"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C01.4.1",
+              "title": "Current implementation and training boundaries",
+              "path": "book/chapters/01-system/sections/04.tex",
+              "label": "sec:C01:implementations",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C01.5",
+          "title": "What constitutes evidence in an evolving ecosystem",
+          "path": "book/chapters/01-system/sections/05.tex",
+          "label": "sec:C01:evidence",
+          "subsections": [
+            "Search scope and inclusion rules",
+            "Contemporary measurements with distinct estimands",
+            "Provenance and population boundaries"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C01.5.1",
+              "title": "Search scope and inclusion rules",
+              "path": "book/chapters/01-system/sections/05.tex",
+              "label": "sec:C01:search",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            },
+            {
+              "id": "C01.5.2",
+              "title": "Contemporary measurements with distinct estimands",
+              "path": "book/chapters/01-system/sections/05.tex",
+              "label": "sec:C01:currentevidence",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            },
+            {
+              "id": "C01.5.3",
+              "title": "Provenance and population boundaries",
+              "path": "book/chapters/01-system/sections/05.tex",
+              "label": "sec:C01:provenance",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C01.6",
+          "title": "Three consistency contracts and their non-implication",
+          "path": "book/chapters/01-system/sections/06.tex",
+          "label": "sec:C01:contracts",
+          "subsections": [
+            "From preservation contracts to corrective evidence"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C01.6.1",
+              "title": "From preservation contracts to corrective evidence",
+              "path": "book/chapters/01-system/sections/06.tex",
+              "label": "sec:C01:operationalcontracts",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C01.7",
+          "title": "Cross-layer questions that organize the analysis",
+          "path": "book/chapters/01-system/sections/07.tex",
+          "label": "sec:C01:07",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "included_modules": [
+        {
+          "path": "book/chapters/01-system/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/01-system/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/01-system/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/01-system/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/01-system/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/01-system/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/01-system/sections/07.tex",
+          "role": "included_module"
+        }
+      ],
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C02",
+      "number": 2,
+      "title": "Probabilistic State, Decision Processes, and Statistical Identification",
+      "slug": "mathematics",
+      "path": "book/chapters/02-mathematics/chapter.tex",
+      "directory": "book/chapters/02-mathematics",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "MemoryWalker behavior conditioning, pinned Agent Lightning probability dataflow, and REUSE adaptive-promotion assumptions.",
+      "technical_output": "Stopped deployed action laws; bounded Bayes-risk compression gap; duration-aware control; finite and simultaneous evidence with explicit support conditions.",
+      "prerequisites": [
+        "C01"
+      ],
+      "sections": [
+        {
+          "id": "C02.1",
+          "title": "Conditional prediction and observable information",
+          "path": "book/chapters/02-mathematics/sections/01.tex",
+          "label": "sec:C02:01",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C02.2",
+          "title": "Information loss and decision-relevant state",
+          "path": "book/chapters/02-mathematics/sections/02.tex",
+          "label": "sec:C02:02",
+          "subsections": [
+            "A bounded decision-loss consequence"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C02.2.1",
+              "title": "A bounded decision-loss consequence",
+              "path": "book/chapters/02-mathematics/sections/02.tex",
+              "label": "sec:C02:riskbound",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C02.3",
+          "title": "Partial observability and beliefs",
+          "path": "book/chapters/02-mathematics/sections/03.tex",
+          "label": "sec:C02:03",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C02.4",
+          "title": "Optimization and policy-gradient identities",
+          "path": "book/chapters/02-mathematics/sections/04.tex",
+          "label": "sec:C02:04",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C02.5",
+          "title": "Risk calibration and constrained decisions",
+          "path": "book/chapters/02-mathematics/sections/05.tex",
+          "label": "sec:C02:05",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C02.6",
+          "title": "Statistical comparison and adaptive selection",
+          "path": "book/chapters/02-mathematics/sections/06.tex",
+          "label": "sec:C02:06",
+          "subsections": [
+            "Simultaneous evidence for fixed candidates"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C02.6.1",
+              "title": "Simultaneous evidence for fixed candidates",
+              "path": "book/chapters/02-mathematics/sections/06.tex",
+              "label": "sec:C02:simultaneous",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C02.7",
+          "title": "From equations to falsifiable implementation claims",
+          "path": "book/chapters/02-mathematics/sections/07.tex",
+          "label": "sec:C02:07",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "included_modules": [
+        {
+          "path": "book/chapters/02-mathematics/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/02-mathematics/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/02-mathematics/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/02-mathematics/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/02-mathematics/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/02-mathematics/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/02-mathematics/sections/07.tex",
+          "role": "included_module"
+        }
+      ],
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C03",
+      "number": 3,
+      "title": "Foundation Model Policies: Tokenization, Architectures, and Action Interfaces",
+      "slug": "models",
+      "path": "book/chapters/03-models/chapter.tex",
+      "directory": "book/chapters/03-models",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "DeepSeek V4.1 prefill reuse, looped shared-cache prediction, and DeepSeek V3 latent attention.",
+      "technical_output": "A stopped deployed action law, explicit rejection mass, and model-decoder-parser-executor boundaries.",
+      "prerequisites": [
+        "C01",
+        "C02"
+      ],
+      "sections": [
+        {
+          "id": "C03.1",
+          "title": "DeepSeek V4.1 and architecture level prefill reuse",
+          "path": "book/chapters/03-models/sections/00-frontier.tex",
+          "label": "sec:C03:frontier",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C03.2",
+          "title": "The model distribution and the executed policy",
+          "path": "book/chapters/03-models/sections/01.tex",
+          "label": "sec:C03:policy",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C03.3",
+          "title": "Tokenization as a measurement and interface choice",
+          "path": "book/chapters/03-models/sections/02.tex",
+          "label": "sec:C03:tokens",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C03.4",
+          "title": "Architectural state and access to history",
+          "path": "book/chapters/03-models/sections/03.tex",
+          "label": "sec:C03:architectures",
+          "subsections": [
+            "Shared computational state in looped Transformers"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C03.4.1",
+              "title": "Shared computational state in looped Transformers",
+              "path": "book/chapters/03-models/sections/03.tex",
+              "label": "sec:C03:looped",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C03.5",
+          "title": "A resource model at the policy boundary",
+          "path": "book/chapters/03-models/sections/04.tex",
+          "label": "sec:C03:resources",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C03.6",
+          "title": "From model output to a typed operation",
+          "path": "book/chapters/03-models/sections/05.tex",
+          "label": "sec:C03:interfaces",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C03.7",
+          "title": "Reproducible implementation and discriminating experiments",
+          "path": "book/chapters/03-models/sections/06.tex",
+          "label": "sec:C03:experiments",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C03.8",
+          "title": "Implications for stateful agents",
+          "path": "book/chapters/03-models/sections/07.tex",
+          "label": "sec:C03:implications",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/03-models/sections/00-frontier.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/03-models/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/03-models/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/03-models/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/03-models/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/03-models/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/03-models/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/03-models/sections/07.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C04",
+      "number": 4,
+      "title": "IO-Aware Attention Kernels and Computational State Allocation",
+      "slug": "attention",
+      "path": "book/chapters/04-attention/chapter.tex",
+      "directory": "book/chapters/04-attention",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "FlashAttention-4 kernel constraints, compressed-position phase effects, and pinned vLLM cache allocation.",
+      "technical_output": "Online normalization invariants, finite-precision obligations, and logical-to-physical cache ownership.",
+      "prerequisites": [
+        "C02",
+        "C03"
+      ],
+      "sections": [
+        {
+          "id": "C04.1",
+          "title": "FlashAttention 4 and asymmetric hardware scaling",
+          "path": "book/chapters/04-attention/sections/00-frontier.tex",
+          "label": "sec:C04:frontier",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C04.2",
+          "title": "The computation being optimized",
+          "path": "book/chapters/04-attention/sections/01.tex",
+          "label": "sec:C04:operator",
+          "subsections": [
+            "Online normalization and tiled exact attention"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C04.2.1",
+              "title": "Online normalization and tiled exact attention",
+              "path": "book/chapters/04-attention/sections/02.tex",
+              "label": "sec:C04:online",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C04.3",
+          "title": "KV growth and the difference between storage and knowledge",
+          "path": "book/chapters/04-attention/sections/03.tex",
+          "label": "sec:C04:kv",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C04.4",
+          "title": "Paged allocation and shared prefixes",
+          "path": "book/chapters/04-attention/sections/04.tex",
+          "label": "sec:C04:paging",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C04.5",
+          "title": "Bandwidth limits and latency distributions",
+          "path": "book/chapters/04-attention/sections/05.tex",
+          "label": "sec:C04:bandwidth",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C04.6",
+          "title": "Approximate caches and a bounded perturbation argument",
+          "path": "book/chapters/04-attention/sections/06.tex",
+          "label": "sec:C04:approximation",
+          "subsections": [
+            "Compression phase is a distinct positional variable"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C04.6.1",
+              "title": "Compression phase is a distinct positional variable",
+              "path": "book/chapters/04-attention/sections/06.tex",
+              "label": "sec:C04:phase",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C04.7",
+          "title": "Implementation verification and workload design",
+          "path": "book/chapters/04-attention/sections/07.tex",
+          "label": "sec:C04:implementation",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C04.8",
+          "title": "When recomputation is mathematically necessary",
+          "path": "book/chapters/04-attention/sections/08.tex",
+          "label": "sec:C04:invalidation",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/04-attention/sections/00-frontier.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/04-attention/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/04-attention/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/04-attention/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/04-attention/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/04-attention/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/04-attention/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/04-attention/sections/07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/04-attention/sections/08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C05",
+      "number": 5,
+      "title": "Predictive Representation Learning and Multimodal State Abstraction",
+      "slug": "representations",
+      "path": "book/chapters/05-representations/chapter.tex",
+      "directory": "book/chapters/05-representations",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "V-JEPA 2.1 dense supervision, V-JEPA Policy context-key coupling, and latent projection for control.",
+      "technical_output": "Representation-loss and downstream-control contracts, with predictive features distinguished from interventional evidence.",
+      "prerequisites": [
+        "C02",
+        "C03"
+      ],
+      "sections": [
+        {
+          "id": "C05.1",
+          "title": "Dense predictive features and world action coupling in 2026",
+          "path": "book/chapters/05-representations/sections/00-frontier.tex",
+          "label": "sec:C05:frontier",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C05.2",
+          "title": "Representation quality is relative to a decision",
+          "path": "book/chapters/05-representations/sections/01.tex",
+          "label": "sec:C05:sufficiency",
+          "subsections": [
+            "A decision-preservation test for learned abstraction",
+            "Directed progress and finite-budget reachability",
+            "Latent projection and the difference between predictability and control"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C05.2.1",
+              "title": "A decision-preservation test for learned abstraction",
+              "path": "book/chapters/05-representations/sections/08.tex",
+              "label": "sec:C05:decisiontest",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            },
+            {
+              "id": "C05.2.2",
+              "title": "Directed progress and finite-budget reachability",
+              "path": "book/chapters/05-representations/sections/08.tex",
+              "label": "sec:C05:plangeometry",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            },
+            {
+              "id": "C05.2.3",
+              "title": "Latent projection and the difference between predictability and control",
+              "path": "book/chapters/05-representations/sections/08.tex",
+              "label": "sec:C05:projection",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C05.3",
+          "title": "Patch encoders and the cost of visual detail",
+          "path": "book/chapters/05-representations/sections/02.tex",
+          "label": "sec:C05:vision",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C05.4",
+          "title": "Contrastive alignment and what it identifies",
+          "path": "book/chapters/05-representations/sections/03.tex",
+          "label": "sec:C05:contrastive",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C05.5",
+          "title": "Joint embedding prediction and the collapse question",
+          "path": "book/chapters/05-representations/sections/04.tex",
+          "label": "sec:C05:jepa",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C05.6",
+          "title": "Multimodal fusion and executable grounding",
+          "path": "book/chapters/05-representations/sections/05.tex",
+          "label": "sec:C05:fusion",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C05.7",
+          "title": "Temporal sampling and observation freshness",
+          "path": "book/chapters/05-representations/sections/06.tex",
+          "label": "sec:C05:time",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C05.8",
+          "title": "Implementation and controlled comparison",
+          "path": "book/chapters/05-representations/sections/07.tex",
+          "label": "sec:C05:implementation",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/05-representations/sections/00-frontier.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/05-representations/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/05-representations/sections/08.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/05-representations/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/05-representations/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/05-representations/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/05-representations/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/05-representations/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/05-representations/sections/07.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C06",
+      "number": 6,
+      "title": "Action-Conditioned World Models, Diffusion, and Model-Based Control",
+      "slug": "world_models",
+      "path": "book/chapters/06-world_models/chapter.tex",
+      "directory": "book/chapters/06-world_models",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "LeFlow and DualWM action coupling; Trace2Env, WildAWM and Qwen-AgentWorld distinguish reconstructed, executable and generated transitions.",
+      "technical_output": "Typed imagined-versus-observed rollouts, response-consistency checks, and action-conditioned implementation contracts.",
+      "prerequisites": [
+        "C02",
+        "C05"
+      ],
+      "sections": [
+        {
+          "id": "C06.1",
+          "title": "LeFlow and amortized latent trajectory planning",
+          "path": "book/chapters/06-world_models/sections/00-frontier.tex",
+          "label": "sec:C06:frontier",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C06.2",
+          "title": "Prediction under intervention",
+          "path": "book/chapters/06-world_models/sections/01.tex",
+          "label": "sec:C06:intervention",
+          "subsections": [
+            "Latent dynamics and learning objectives",
+            "Two temporal scales require an executable refinement interface"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C06.2.1",
+              "title": "Latent dynamics and learning objectives",
+              "path": "book/chapters/06-world_models/sections/02.tex",
+              "label": "sec:C06:latent",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            },
+            {
+              "id": "C06.2.2",
+              "title": "Two temporal scales require an executable refinement interface",
+              "path": "book/chapters/06-world_models/sections/02.tex",
+              "label": "sec:C06:dualscale",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C06.3",
+          "title": "Compounding error and a finite-horizon bound",
+          "path": "book/chapters/06-world_models/sections/03.tex",
+          "label": "sec:C06:bound",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C06.4",
+          "title": "Diffusion as a conditional generative mechanism",
+          "path": "book/chapters/06-world_models/sections/04.tex",
+          "label": "sec:C06:diffusion",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C06.5",
+          "title": "Flow matching and trajectory parameterization",
+          "path": "book/chapters/06-world_models/sections/05.tex",
+          "label": "sec:C06:flow",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C06.6",
+          "title": "Executable worlds for language-model agents",
+          "path": "book/chapters/06-world_models/sections/06.tex",
+          "label": "sec:C06:executable",
+          "subsections": [
+            "Current action conditioned implementations",
+            "Trace reconstruction and the scope of a simulated fact",
+            "Generated executable worlds and learned response simulators"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C06.6.1",
+              "title": "Current action conditioned implementations",
+              "path": "book/chapters/06-world_models/sections/06.tex",
+              "label": null,
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            },
+            {
+              "id": "C06.6.2",
+              "title": "Trace reconstruction and the scope of a simulated fact",
+              "path": "book/chapters/06-world_models/sections/06.tex",
+              "label": "sec:C06:traceworld",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            },
+            {
+              "id": "C06.6.3",
+              "title": "Generated executable worlds and learned response simulators",
+              "path": "book/chapters/06-world_models/sections/06.tex",
+              "label": "sec:C06:worldsynthesis",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C06.7",
+          "title": "Experiments that separate prediction from control",
+          "path": "book/chapters/06-world_models/sections/07.tex",
+          "label": "sec:C06:experiments",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C06.8",
+          "title": "Practical limits of imagination",
+          "path": "book/chapters/06-world_models/sections/08.tex",
+          "label": "sec:C06:limits",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/06-world_models/sections/00-frontier.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/06-world_models/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/06-world_models/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/06-world_models/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/06-world_models/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/06-world_models/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/06-world_models/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/06-world_models/sections/07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/06-world_models/sections/08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C07",
+      "number": 7,
+      "title": "Pretraining Objectives, Scaling, and Distributed Optimization",
+      "slug": "pretraining",
+      "path": "book/chapters/07-pretraining/chapter.tex",
+      "directory": "book/chapters/07-pretraining",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "DeepSeek V4 training stages, PaW predictive supervision, DGS support targets, and pinned distributed optimizer paths.",
+      "technical_output": "Global token-weighted gradients, partition-aware numerical checks, and reproducible model/data/optimizer state.",
+      "prerequisites": [
+        "C02",
+        "C03",
+        "C04"
+      ],
+      "sections": [
+        {
+          "id": "C07.1",
+          "title": "DeepSeek V4 staged pretraining and distributed state",
+          "path": "book/chapters/07-pretraining/sections/00-frontier.tex",
+          "label": "sec:C07:frontier",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C07.2",
+          "title": "What pretraining supplies to an agent",
+          "path": "book/chapters/07-pretraining/sections/01.tex",
+          "label": "sec:C07:objective",
+          "subsections": [
+            "Data integrity and causal trace construction"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C07.2.1",
+              "title": "Data integrity and causal trace construction",
+              "path": "book/chapters/07-pretraining/sections/05.tex",
+              "label": "sec:C07:data",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C07.3",
+          "title": "Scaling laws under an explicit compute model",
+          "path": "book/chapters/07-pretraining/sections/02.tex",
+          "label": "sec:C07:scaling",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C07.4",
+          "title": "Optimizer state and distributed memory accounting",
+          "path": "book/chapters/07-pretraining/sections/03.tex",
+          "label": "sec:C07:memory",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C07.5",
+          "title": "Communication and parallel decomposition",
+          "path": "book/chapters/07-pretraining/sections/04.tex",
+          "label": "sec:C07:parallelism",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C07.6",
+          "title": "Numerical stability and reproducibility",
+          "path": "book/chapters/07-pretraining/sections/06.tex",
+          "label": "sec:C07:numerics",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C07.7",
+          "title": "A worked training-budget calculation",
+          "path": "book/chapters/07-pretraining/sections/07.tex",
+          "label": "sec:C07:budget",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C07.8",
+          "title": "Experiments linking infrastructure to behavior",
+          "path": "book/chapters/07-pretraining/sections/08.tex",
+          "label": "sec:C07:experiments",
+          "subsections": [
+            "Predictive supervision inside policy optimization"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C07.8.1",
+              "title": "Predictive supervision inside policy optimization",
+              "path": "book/chapters/07-pretraining/sections/08.tex",
+              "label": "sec:C07:worldcotraining",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/07-pretraining/sections/00-frontier.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/07-pretraining/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/07-pretraining/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/07-pretraining/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/07-pretraining/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/07-pretraining/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/07-pretraining/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/07-pretraining/sections/07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/07-pretraining/sections/08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C08",
+      "number": 8,
+      "title": "Post-Training Objectives for Interactive and Tool-Using Policies",
+      "slug": "posttraining",
+      "path": "book/chapters/08-posttraining/chapter.tex",
+      "directory": "book/chapters/08-posttraining",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "Native-quantized policy distillation, OpenForge, MOLT, MemoryWalker, and pinned TRL loss reductions.",
+      "technical_output": "Behavior-conditioned likelihoods, explicit normalization, reference-score compatibility, and shared-outcome segmented trajectories.",
+      "prerequisites": [
+        "C02",
+        "C03",
+        "C07"
+      ],
+      "sections": [
+        {
+          "id": "C08.1",
+          "title": "On policy distillation with precision matched rollout",
+          "path": "book/chapters/08-posttraining/sections/00-frontier.tex",
+          "label": "sec:C08:frontier",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C08.2",
+          "title": "Behavioral targets and trajectory supervision",
+          "path": "book/chapters/08-posttraining/sections/01.tex",
+          "label": "sec:C08:sft",
+          "subsections": [
+            "KL-regularized control and preference optimization"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C08.2.1",
+              "title": "KL-regularized control and preference optimization",
+              "path": "book/chapters/08-posttraining/sections/02.tex",
+              "label": "sec:C08:dpo",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C08.3",
+          "title": "Policy gradients and the likelihood-ratio contract",
+          "path": "book/chapters/08-posttraining/sections/03.tex",
+          "label": "sec:C08:policygradient",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C08.4",
+          "title": "Group-relative advantages and sparse outcomes",
+          "path": "book/chapters/08-posttraining/sections/04.tex",
+          "label": "sec:C08:grpo",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C08.5",
+          "title": "Executable rewards and verifier error",
+          "path": "book/chapters/08-posttraining/sections/05.tex",
+          "label": "sec:C08:rewards",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C08.6",
+          "title": "Context edits and post-training consistency",
+          "path": "book/chapters/08-posttraining/sections/06.tex",
+          "label": "sec:C08:consistency",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C08.7",
+          "title": "Implementation paths and controlled training studies",
+          "path": "book/chapters/08-posttraining/sections/07.tex",
+          "label": "sec:C08:implementation",
+          "subsections": [
+            "Harness-native reinforcement learning and segmented behavior policies"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C08.7.1",
+              "title": "Harness-native reinforcement learning and segmented behavior policies",
+              "path": "book/chapters/08-posttraining/sections/07.tex",
+              "label": "sec:C08:harnessnative",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C08.8",
+          "title": "Credit assignment across tools and memory",
+          "path": "book/chapters/08-posttraining/sections/08.tex",
+          "label": "sec:C08:credit",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/08-posttraining/sections/00-frontier.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/08-posttraining/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/08-posttraining/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/08-posttraining/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/08-posttraining/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/08-posttraining/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/08-posttraining/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/08-posttraining/sections/07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/08-posttraining/sections/08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C09",
+      "number": 9,
+      "title": "Inference-Time Search, Verification, and Metareasoning",
+      "slug": "reasoning",
+      "path": "book/chapters/09-reasoning/chapter.tex",
+      "directory": "book/chapters/09-reasoning",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "MetaReason budget allocation, executable search baselines, and separate coverage and selection evidence.",
+      "technical_output": "A cost-bounded search and verifier design with coverage, correlation and selection assumptions made explicit.",
+      "prerequisites": [
+        "C03",
+        "C08"
+      ],
+      "sections": [
+        {
+          "id": "C09.1",
+          "title": "Meta reasoning controllers and artifact selection in 2026",
+          "path": "book/chapters/09-reasoning/sections/07.tex",
+          "label": "sec:C09:meta2026",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C09.2",
+          "title": "A conditional computation rather than a verbal certificate",
+          "path": "book/chapters/09-reasoning/sections/01.tex",
+          "label": "sec:C09:conditional",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C09.3",
+          "title": "Sampling coverage and repeated reliability",
+          "path": "book/chapters/09-reasoning/sections/02.tex",
+          "label": "sec:C09:sampling",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C09.4",
+          "title": "Self-consistency and answer aggregation",
+          "path": "book/chapters/09-reasoning/sections/03.tex",
+          "label": "sec:C09:voting",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C09.5",
+          "title": "Selection error grows with the search space",
+          "path": "book/chapters/09-reasoning/sections/04.tex",
+          "label": "sec:C09:selection",
+          "subsections": [
+            "A calculated selector with an imperfect validator"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C09.5.1",
+              "title": "A calculated selector with an imperfect validator",
+              "path": "book/chapters/09-reasoning/sections/04.tex",
+              "label": null,
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C09.6",
+          "title": "Structured search and the granularity of a thought",
+          "path": "book/chapters/09-reasoning/sections/05.tex",
+          "label": "sec:C09:search",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C09.7",
+          "title": "Value of computation and stopping",
+          "path": "book/chapters/09-reasoning/sections/06.tex",
+          "label": "sec:C09:value",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C09.8",
+          "title": "Experiments and failure attribution",
+          "path": "book/chapters/09-reasoning/sections/08.tex",
+          "label": "sec:C09:experiments",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/09-reasoning/sections/07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/09-reasoning/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/09-reasoning/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/09-reasoning/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/09-reasoning/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/09-reasoning/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/09-reasoning/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/09-reasoning/sections/08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C10",
+      "number": 10,
+      "title": "Closed-Loop Planning with Partial Observability and Fallible Feedback",
+      "slug": "planning",
+      "path": "book/chapters/10-planning/chapter.tex",
+      "directory": "book/chapters/10-planning",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "WorldEvolver v2 memory-conditioned foresight, per-call gate behavior, and adaptive-trial evaluation.",
+      "technical_output": "State-indexed planning, conditional trial hazards, and execution-time validation of observed preconditions.",
+      "prerequisites": [
+        "C02",
+        "C06",
+        "C09"
+      ],
+      "sections": [
+        {
+          "id": "C10.1",
+          "title": "WorldEvolver and memory conditioned foresight",
+          "path": "book/chapters/10-planning/sections/08.tex",
+          "label": "sec:C10:worldevolver",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C10.2",
+          "title": "Goals must refer to external state",
+          "path": "book/chapters/10-planning/sections/01.tex",
+          "label": "sec:C10:goals",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C10.3",
+          "title": "Belief states and information-gathering actions",
+          "path": "book/chapters/10-planning/sections/02.tex",
+          "label": "sec:C10:beliefs",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C10.4",
+          "title": "Plan contracts and compositional verification",
+          "path": "book/chapters/10-planning/sections/03.tex",
+          "label": "sec:C10:contracts",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C10.5",
+          "title": "Receding-horizon execution and grounded feedback",
+          "path": "book/chapters/10-planning/sections/04.tex",
+          "label": "sec:C10:feedback",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C10.6",
+          "title": "Self-correction can also damage correct work",
+          "path": "book/chapters/10-planning/sections/05.tex",
+          "label": "sec:C10:correction",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C10.7",
+          "title": "Hierarchical plans and reusable skills",
+          "path": "book/chapters/10-planning/sections/06.tex",
+          "label": "sec:C10:hierarchy",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C10.8",
+          "title": "Partial effects and recovery planning",
+          "path": "book/chapters/10-planning/sections/07.tex",
+          "label": "sec:C10:recovery",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        },
+        {
+          "id": "C10.9",
+          "title": "A reproducible planning evaluation",
+          "path": "book/chapters/10-planning/sections/09.tex",
+          "label": "sec:C10:evaluation",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 9
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/10-planning/sections/08.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/10-planning/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/10-planning/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/10-planning/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/10-planning/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/10-planning/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/10-planning/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/10-planning/sections/07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/10-planning/sections/09.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C11",
+      "number": 11,
+      "title": "Long-Context Capability and Decision-Relevant Information",
+      "slug": "long_context",
+      "path": "book/chapters/11-long_context/chapter.tex",
+      "directory": "book/chapters/11-long_context",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "The Compaction Cliff, pinned RULER generation/evaluation, and 2026 rate-distortion and selective-memory taxonomies.",
+      "technical_output": "Information sufficiency versus fixed-policy behavior, context accessibility diagnostics, and explicit KV/workload accounting.",
+      "prerequisites": [
+        "C03",
+        "C04",
+        "C09"
+      ],
+      "sections": [
+        {
+          "id": "C11.1",
+          "title": "Capacity is a constraint on an inference procedure",
+          "path": "book/chapters/11-long_context/sections/section-01.tex",
+          "label": "sec:C11:capacity",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C11.2",
+          "title": "A sufficiency criterion for retained state",
+          "path": "book/chapters/11-long_context/sections/section-02.tex",
+          "label": "sec:C11:sufficiency",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C11.3",
+          "title": "Position effects and compositional difficulty",
+          "path": "book/chapters/11-long_context/sections/section-03.tex",
+          "label": "sec:C11:geometry",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C11.4",
+          "title": "Training distributions and length generalization",
+          "path": "book/chapters/11-long_context/sections/section-04.tex",
+          "label": "sec:C11:training",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C11.5",
+          "title": "Computation and memory over an interaction horizon",
+          "path": "book/chapters/11-long_context/sections/section-05.tex",
+          "label": "sec:C11:resources",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C11.6",
+          "title": "Experimental designs that isolate context use",
+          "path": "book/chapters/11-long_context/sections/section-06.tex",
+          "label": "sec:C11:experiments",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C11.7",
+          "title": "A worked capacity and decision example",
+          "path": "book/chapters/11-long_context/sections/section-07.tex",
+          "label": "sec:C11:worked",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C11.8",
+          "title": "Effective context as controlled state",
+          "path": "book/chapters/11-long_context/sections/section-08.tex",
+          "label": "sec:C11:implications",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/11-long_context/sections/section-01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/11-long_context/sections/section-02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/11-long_context/sections/section-03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/11-long_context/sections/section-04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/11-long_context/sections/section-05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/11-long_context/sections/section-06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/11-long_context/sections/section-07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/11-long_context/sections/section-08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C12",
+      "number": 12,
+      "title": "Context Transformation: Selection, Compaction, and Policy-Controlled Editing",
+      "slug": "context_control",
+      "path": "book/chapters/12-context_control/chapter.tex",
+      "directory": "book/chapters/12-context_control",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "ContextPilot, CompactionRL v2, TRACE v2, PAIR, CLM and transparent compaction expose distinct editing and recovery boundaries.",
+      "technical_output": "A budget-admitted context transformation, complete edit lineage, action-time conditioning, and scoped cache-reuse approximation.",
+      "prerequisites": [
+        "C08",
+        "C11"
+      ],
+      "sections": [
+        {
+          "id": "C12.1",
+          "title": "The working view as a controlled variable",
+          "path": "book/chapters/12-context_control/sections/section-01.tex",
+          "label": "sec:C12:control",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C12.2",
+          "title": "Selection before abstraction",
+          "path": "book/chapters/12-context_control/sections/section-02.tex",
+          "label": "sec:C12:selection",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C12.3",
+          "title": "Reversible offload and explicit context actions",
+          "path": "book/chapters/12-context_control/sections/section-03.tex",
+          "label": "sec:C12:offload",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C12.4",
+          "title": "Compaction triggers and delayed credit",
+          "path": "book/chapters/12-context_control/sections/section-04.tex",
+          "label": "sec:C12:triggers",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C12.5",
+          "title": "Editing and cache validity",
+          "path": "book/chapters/12-context_control/sections/section-05.tex",
+          "label": "sec:C12:cache",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C12.6",
+          "title": "A worked decision-preservation analysis",
+          "path": "book/chapters/12-context_control/sections/section-06.tex",
+          "label": "sec:C12:worked",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C12.7",
+          "title": "Evidence comparisons and causal boundaries",
+          "path": "book/chapters/12-context_control/sections/section-07.tex",
+          "label": "sec:C12:evidence",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C12.8",
+          "title": "Failure recovery and implementation discipline",
+          "path": "book/chapters/12-context_control/sections/section-08.tex",
+          "label": "sec:C12:recovery",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/12-context_control/sections/section-01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/12-context_control/sections/section-02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/12-context_control/sections/section-03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/12-context_control/sections/section-04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/12-context_control/sections/section-05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/12-context_control/sections/section-06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/12-context_control/sections/section-07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/12-context_control/sections/section-08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C13",
+      "number": 13,
+      "title": "Session Semantics, Event Histories, and Recoverable Execution State",
+      "slug": "sessions",
+      "path": "book/chapters/13-sessions/chapter.tex",
+      "directory": "book/chapters/13-sessions",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "ACM snapshot/archive code paths and current durable-session contracts.",
+      "technical_output": "An event/effect history with defined resumption and concurrency semantics.",
+      "prerequisites": [
+        "C01",
+        "C12"
+      ],
+      "sections": [
+        {
+          "id": "C13.1",
+          "title": "Session identity is a semantic boundary",
+          "path": "book/chapters/13-sessions/sections/section-01.tex",
+          "label": "sec:C13:identity",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C13.2",
+          "title": "Events as evidence rather than prose",
+          "path": "book/chapters/13-sessions/sections/section-02.tex",
+          "label": "sec:C13:events",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C13.3",
+          "title": "Reducers checkpoints and replay",
+          "path": "book/chapters/13-sessions/sections/section-03.tex",
+          "label": "sec:C13:replay",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C13.4",
+          "title": "External effects and the ambiguous timeout",
+          "path": "book/chapters/13-sessions/sections/section-04.tex",
+          "label": "sec:C13:effects",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C13.5",
+          "title": "Concurrency ownership and session forks",
+          "path": "book/chapters/13-sessions/sections/section-05.tex",
+          "label": "sec:C13:concurrency",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C13.6",
+          "title": "Retention deletion and provenance boundaries",
+          "path": "book/chapters/13-sessions/sections/section-06.tex",
+          "label": "sec:C13:retention",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C13.7",
+          "title": "A failure-oriented evaluation protocol",
+          "path": "book/chapters/13-sessions/sections/section-07.tex",
+          "label": "sec:C13:evaluation",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C13.8",
+          "title": "A reference contract for continuity",
+          "path": "book/chapters/13-sessions/sections/section-08.tex",
+          "label": "sec:C13:contract",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/13-sessions/sections/section-01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/13-sessions/sections/section-02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/13-sessions/sections/section-03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/13-sessions/sections/section-04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/13-sessions/sections/section-05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/13-sessions/sections/section-06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/13-sessions/sections/section-07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/13-sessions/sections/section-08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C14",
+      "number": 14,
+      "title": "Persistent Memory: Writing, Consolidation, Validity, and Influence",
+      "slug": "memory",
+      "path": "book/chapters/14-memory/chapter.tex",
+      "directory": "book/chapters/14-memory",
+      "target_pages": 13,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "RecMem, InMind, Hy-Memory, and current prospective memory-use mechanisms.",
+      "technical_output": "Typed memory with provenance, temporal validity, permissions, and influence tests.",
+      "prerequisites": [
+        "C05",
+        "C11",
+        "C13"
+      ],
+      "sections": [
+        {
+          "id": "C14.1",
+          "title": "Memory functions and physical substrates",
+          "path": "book/chapters/14-memory/sections/section-01.tex",
+          "label": "sec:C14:taxonomy",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C14.2",
+          "title": "Admission as a constrained decision",
+          "path": "book/chapters/14-memory/sections/section-02.tex",
+          "label": "sec:C14:admission",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C14.3",
+          "title": "Episodic records and abstraction loss",
+          "path": "book/chapters/14-memory/sections/section-03.tex",
+          "label": "sec:C14:episodes",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C14.4",
+          "title": "Semantic memory and the status of a proposition",
+          "path": "book/chapters/14-memory/sections/section-04.tex",
+          "label": "sec:C14:semantic",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C14.5",
+          "title": "Hierarchy access and complete lifecycle cost",
+          "path": "book/chapters/14-memory/sections/section-05.tex",
+          "label": "sec:C14:hierarchy",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C14.6",
+          "title": "Temporal validity conflicts and forgetting",
+          "path": "book/chapters/14-memory/sections/section-06.tex",
+          "label": "sec:C14:validity",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C14.7",
+          "title": "Retrieval does not imply appropriate use",
+          "path": "book/chapters/14-memory/sections/section-07.tex",
+          "label": "sec:C14:use",
+          "subsections": [
+            "Identifying memory influence"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C14.7.1",
+              "title": "Identifying memory influence",
+              "path": "book/chapters/14-memory/sections/section-07.tex",
+              "label": null,
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C14.8",
+          "title": "Memory transactions and a reference test suite",
+          "path": "book/chapters/14-memory/sections/section-08.tex",
+          "label": "sec:C14:transactions",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/14-memory/sections/section-01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/14-memory/sections/section-02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/14-memory/sections/section-03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/14-memory/sections/section-04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/14-memory/sections/section-05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/14-memory/sections/section-06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/14-memory/sections/section-07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/14-memory/sections/section-08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C15",
+      "number": 15,
+      "title": "Procedural Memory and the Lifecycle of Executable Skills",
+      "slug": "skills",
+      "path": "book/chapters/15-skills/chapter.tex",
+      "directory": "book/chapters/15-skills",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "HyperSkill retrieval/maintenance code and portable skill contracts.",
+      "technical_output": "Versioned procedural hypotheses, applicability and authority checks, maintenance evidence, and conditional failure-composition bounds.",
+      "prerequisites": [
+        "C10",
+        "C14"
+      ],
+      "sections": [
+        {
+          "id": "C15.1",
+          "title": "A procedure has preconditions and effects",
+          "path": "book/chapters/15-skills/sections/section-01.tex",
+          "label": "sec:C15:procedure",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C15.2",
+          "title": "Extracting procedures from experience",
+          "path": "book/chapters/15-skills/sections/section-02.tex",
+          "label": "sec:C15:extraction",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C15.3",
+          "title": "Hypergraphs preserve trajectory membership",
+          "path": "book/chapters/15-skills/sections/section-03.tex",
+          "label": "sec:C15:hypergraph",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C15.4",
+          "title": "Quality-guided maintenance and its assumptions",
+          "path": "book/chapters/15-skills/sections/section-04.tex",
+          "label": "sec:C15:maintenance",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C15.5",
+          "title": "An inspectable execution trace",
+          "path": "book/chapters/15-skills/sections/section-05.tex",
+          "label": "sec:C15:trace",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C15.6",
+          "title": "Reported results and unresolved attribution",
+          "path": "book/chapters/15-skills/sections/section-06.tex",
+          "label": "sec:C15:results",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C15.7",
+          "title": "Compatibility authority and the skill supply chain",
+          "path": "book/chapters/15-skills/sections/section-07.tex",
+          "label": "sec:C15:compatibility",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C15.8",
+          "title": "Consolidation as controlled hypothesis revision",
+          "path": "book/chapters/15-skills/sections/section-08.tex",
+          "label": "sec:C15:synthesis",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/15-skills/sections/section-01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/15-skills/sections/section-02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/15-skills/sections/section-03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/15-skills/sections/section-04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/15-skills/sections/section-05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/15-skills/sections/section-06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/15-skills/sections/section-07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/15-skills/sections/section-08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C16",
+      "number": 16,
+      "title": "Retrieval Policies, Evidence Assembly, and Grounded Execution",
+      "slug": "retrieval",
+      "path": "book/chapters/16-retrieval/chapter.tex",
+      "directory": "book/chapters/16-retrieval",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "JAM, MRAgent, MATM, MemCalib, ReFind v2 and LGM v2 distinguish adaptive access from representation and reranking.",
+      "technical_output": "An auditable evidence path and finite-horizon query controller with sufficient state, explicit kernels and stopping reasons.",
+      "prerequisites": [
+        "C05",
+        "C14"
+      ],
+      "sections": [
+        {
+          "id": "C16.1",
+          "title": "Retrieval selects evidence for an action",
+          "path": "book/chapters/16-retrieval/sections/section-01.tex",
+          "label": "sec:C16:objective",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C16.2",
+          "title": "Index units and information boundaries",
+          "path": "book/chapters/16-retrieval/sections/section-02.tex",
+          "label": "sec:C16:index",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C16.3",
+          "title": "Query construction and adaptive access",
+          "path": "book/chapters/16-retrieval/sections/section-03.tex",
+          "label": "sec:C16:adaptive",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C16.4",
+          "title": "State-conditioned procedural retrieval",
+          "path": "book/chapters/16-retrieval/sections/section-04.tex",
+          "label": "sec:C16:trajectories",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C16.5",
+          "title": "Evidence packing attribution and influence",
+          "path": "book/chapters/16-retrieval/sections/section-05.tex",
+          "label": "sec:C16:packing",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C16.6",
+          "title": "A worked multi-step evidence dependency",
+          "path": "book/chapters/16-retrieval/sections/section-06.tex",
+          "label": "sec:C16:worked",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C16.7",
+          "title": "Evaluation contamination and uncertainty",
+          "path": "book/chapters/16-retrieval/sections/section-07.tex",
+          "label": "sec:C16:evaluation",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C16.8",
+          "title": "An execution contract for grounded retrieval",
+          "path": "book/chapters/16-retrieval/sections/section-08.tex",
+          "label": "sec:C16:contract",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/16-retrieval/sections/section-01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/16-retrieval/sections/section-02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/16-retrieval/sections/section-03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/16-retrieval/sections/section-04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/16-retrieval/sections/section-05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/16-retrieval/sections/section-06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/16-retrieval/sections/section-07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/16-retrieval/sections/section-08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C17",
+      "number": 17,
+      "title": "Conditioning Consistency across Context, Memory, and Policy Updates",
+      "slug": "consistency",
+      "path": "book/chapters/17-consistency/chapter.tex",
+      "directory": "book/chapters/17-consistency",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "MemoryWalker, CODA, and CLM state transformations.",
+      "technical_output": "Compatibility conditions for training, inference, memory, and context views.",
+      "prerequisites": [
+        "C08",
+        "C12",
+        "C13",
+        "C14",
+        "C15",
+        "C16"
+      ],
+      "sections": [
+        {
+          "id": "C17.1",
+          "title": "One decision depends on several versions",
+          "path": "book/chapters/17-consistency/sections/section-01.tex",
+          "label": "sec:C17:state",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C17.2",
+          "title": "The conditioning record is part of the data",
+          "path": "book/chapters/17-consistency/sections/section-02.tex",
+          "label": "sec:C17:conditioning",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C17.3",
+          "title": "Likelihood ratios require support and the right history",
+          "path": "book/chapters/17-consistency/sections/section-03.tex",
+          "label": "sec:C17:likelihood",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C17.4",
+          "title": "A bounded behavior-preservation proposition",
+          "path": "book/chapters/17-consistency/sections/section-04.tex",
+          "label": "sec:C17:bound",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C17.5",
+          "title": "Memory transactions and semantic validity",
+          "path": "book/chapters/17-consistency/sections/section-05.tex",
+          "label": "sec:C17:transactions",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C17.6",
+          "title": "Model index and tool migration",
+          "path": "book/chapters/17-consistency/sections/section-06.tex",
+          "label": "sec:C17:migration",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C17.7",
+          "title": "Authority must survive every transformation",
+          "path": "book/chapters/17-consistency/sections/section-07.tex",
+          "label": "sec:C17:authority",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C17.8",
+          "title": "A consistency audit with causal counterexamples",
+          "path": "book/chapters/17-consistency/sections/section-08.tex",
+          "label": "sec:C17:audit",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/17-consistency/sections/section-01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/17-consistency/sections/section-02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/17-consistency/sections/section-03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/17-consistency/sections/section-04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/17-consistency/sections/section-05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/17-consistency/sections/section-06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/17-consistency/sections/section-07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/17-consistency/sections/section-08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C18",
+      "number": 18,
+      "title": "Tool Discovery, Routing, and Typed Execution Contracts",
+      "slug": "tools",
+      "path": "book/chapters/18-tools/chapter.tex",
+      "directory": "book/chapters/18-tools",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "HyperTool, Uno-Orchestra, PruneTIR, and permission-aware tool routing.",
+      "technical_output": "Typed effect outcomes, current feasible routes, simultaneous-error regret bounds, and configured privilege enforcement.",
+      "prerequisites": [
+        "C03",
+        "C10",
+        "C17"
+      ],
+      "sections": [
+        {
+          "id": "C18.1",
+          "title": "A tool call is a typed state transition",
+          "path": "book/chapters/18-tools/sections/section-01.tex",
+          "label": "sec:C18:contract",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C18.2",
+          "title": "Discovery changes the action space",
+          "path": "book/chapters/18-tools/sections/section-02.tex",
+          "label": "sec:C18:discovery",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C18.3",
+          "title": "Routing as constrained resource allocation",
+          "path": "book/chapters/18-tools/sections/section-03.tex",
+          "label": "sec:C18:routing",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C18.4",
+          "title": "Argument construction and result validation",
+          "path": "book/chapters/18-tools/sections/section-04.tex",
+          "label": "sec:C18:arguments",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C18.5",
+          "title": "Execution granularity and local programs",
+          "path": "book/chapters/18-tools/sections/section-05.tex",
+          "label": "sec:C18:granularity",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C18.6",
+          "title": "Retry pruning and failure memory",
+          "path": "book/chapters/18-tools/sections/section-06.tex",
+          "label": "sec:C18:pruning",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C18.7",
+          "title": "Privilege control at the dispatch boundary",
+          "path": "book/chapters/18-tools/sections/section-07.tex",
+          "label": "sec:C18:privilege",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C18.8",
+          "title": "A tool-use experiment that can falsify the mechanism",
+          "path": "book/chapters/18-tools/sections/section-08.tex",
+          "label": "sec:C18:evaluation",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/18-tools/sections/section-01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/18-tools/sections/section-02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/18-tools/sections/section-03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/18-tools/sections/section-04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/18-tools/sections/section-05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/18-tools/sections/section-06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/18-tools/sections/section-07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/18-tools/sections/section-08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C19",
+      "number": 19,
+      "title": "Versioned Interoperability: MCP, A2A, and Protocol Boundaries",
+      "slug": "protocols",
+      "path": "book/chapters/19-protocols/chapter.tex",
+      "directory": "book/chapters/19-protocols",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "MCP 2026-07-28 normative semantics and current A2A lifecycle contracts.",
+      "technical_output": "A versioned exchange whose transport guarantees remain separate from truth and permission.",
+      "prerequisites": [
+        "C13",
+        "C18"
+      ],
+      "sections": [
+        {
+          "id": "C19.1",
+          "title": "Protocol compatibility is not agent competence",
+          "path": "book/chapters/19-protocols/sections/section-01.tex",
+          "label": "sec:C19:scope",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C19.2",
+          "title": "Modern MCP declares versions on every request",
+          "path": "book/chapters/19-protocols/sections/section-02.tex",
+          "label": "sec:C19:versioning",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C19.3",
+          "title": "Tools resources prompts and skills remain distinct",
+          "path": "book/chapters/19-protocols/sections/section-03.tex",
+          "label": "sec:C19:primitives",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C19.4",
+          "title": "Transport statelessness and explicit durable work",
+          "path": "book/chapters/19-protocols/sections/section-04.tex",
+          "label": "sec:C19:transport",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C19.5",
+          "title": "Authorization is separate from declared identity",
+          "path": "book/chapters/19-protocols/sections/section-05.tex",
+          "label": "sec:C19:authorization",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C19.6",
+          "title": "A2A tasks artifacts and delegated autonomy",
+          "path": "book/chapters/19-protocols/sections/section-06.tex",
+          "label": "sec:C19:a2a",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C19.7",
+          "title": "A concrete cross-protocol execution trace",
+          "path": "book/chapters/19-protocols/sections/section-07.tex",
+          "label": "sec:C19:trace",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C19.8",
+          "title": "Conformance performance and residual uncertainty",
+          "path": "book/chapters/19-protocols/sections/section-08.tex",
+          "label": "sec:C19:evaluation",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/19-protocols/sections/section-01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/19-protocols/sections/section-02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/19-protocols/sections/section-03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/19-protocols/sections/section-04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/19-protocols/sections/section-05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/19-protocols/sections/section-06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/19-protocols/sections/section-07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/19-protocols/sections/section-08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C20",
+      "number": 20,
+      "title": "Agent Harnesses: Control Flow, Isolation, and Durable Effects",
+      "slug": "harnesses",
+      "path": "book/chapters/20-harnesses/chapter.tex",
+      "directory": "book/chapters/20-harnesses",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "Harness^2 stage accounting, RRSI v3 selection controls, and current runtime/effect boundaries.",
+      "technical_output": "Acknowledged journal transitions, independently authorized reconciliation, and linearizable admission/settlement accounting.",
+      "prerequisites": [
+        "C10",
+        "C13",
+        "C17",
+        "C18",
+        "C19"
+      ],
+      "sections": [
+        {
+          "id": "C20.1",
+          "title": "The effective policy includes the harness",
+          "path": "book/chapters/20-harnesses/sections/01.tex",
+          "label": "sec:C20:policy",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C20.2",
+          "title": "Execution state and semantic commitments",
+          "path": "book/chapters/20-harnesses/sections/02.tex",
+          "label": "sec:C20:state",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C20.3",
+          "title": "Crash consistency and uncertain effects",
+          "path": "book/chapters/20-harnesses/sections/03.tex",
+          "label": "sec:C20:crashes",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C20.4",
+          "title": "Context construction is runtime scheduling",
+          "path": "book/chapters/20-harnesses/sections/04.tex",
+          "label": "sec:C20:context",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C20.5",
+          "title": "Budgets cancellation and backpressure",
+          "path": "book/chapters/20-harnesses/sections/05.tex",
+          "label": "sec:C20:budgets",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C20.6",
+          "title": "Implementation boundaries and evidence",
+          "path": "book/chapters/20-harnesses/sections/06.tex",
+          "label": "sec:C20:implementation",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C20.7",
+          "title": "A worked analysis of a recoverable repository workflow",
+          "path": "book/chapters/20-harnesses/sections/07.tex",
+          "label": "sec:C20:case",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/20-harnesses/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/20-harnesses/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/20-harnesses/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/20-harnesses/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/20-harnesses/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/20-harnesses/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/20-harnesses/sections/07.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C21",
+      "number": 21,
+      "title": "Multi-Agent Coordination, Information Routing, and Shared State",
+      "slug": "orchestration",
+      "path": "book/chapters/21-orchestration/chapter.tex",
+      "directory": "book/chapters/21-orchestration",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "LatComm and Interlat representation channels, coding-team stage allocation, and independent-sample controls.",
+      "technical_output": "Coordination traffic and latent-payload accounting, representation compatibility, and evidence-preserving shared-state interfaces.",
+      "prerequisites": [
+        "C09",
+        "C17",
+        "C20"
+      ],
+      "sections": [
+        {
+          "id": "C21.1",
+          "title": "Task graphs and the value of decomposition",
+          "path": "book/chapters/21-orchestration/sections/01.tex",
+          "label": "sec:C21:decomposition",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C21.2",
+          "title": "Independence diversity and correlated error",
+          "path": "book/chapters/21-orchestration/sections/02.tex",
+          "label": "sec:C21:dependence",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C21.3",
+          "title": "Messages as evidence-bearing interfaces",
+          "path": "book/chapters/21-orchestration/sections/03.tex",
+          "label": "sec:C21:messages",
+          "subsections": [
+            "Learned latent channels and representation compatibility"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C21.3.1",
+              "title": "Learned latent channels and representation compatibility",
+              "path": "book/chapters/21-orchestration/sections/03.tex",
+              "label": "sec:C21:latent",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C21.4",
+          "title": "Shared memory and conflicting writes",
+          "path": "book/chapters/21-orchestration/sections/04.tex",
+          "label": "sec:C21:sharedmemory",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C21.5",
+          "title": "Ownership cancellation and failure propagation",
+          "path": "book/chapters/21-orchestration/sections/05.tex",
+          "label": "sec:C21:ownership",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C21.6",
+          "title": "Experiments that isolate coordination mechanisms",
+          "path": "book/chapters/21-orchestration/sections/06.tex",
+          "label": "sec:C21:experiments",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C21.7",
+          "title": "A bounded integration protocol",
+          "path": "book/chapters/21-orchestration/sections/07.tex",
+          "label": "sec:C21:integration",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C21.8",
+          "title": "When isolation is the stronger coordination mechanism",
+          "path": "book/chapters/21-orchestration/sections/08.tex",
+          "label": "sec:C21:isolation",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/21-orchestration/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/21-orchestration/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/21-orchestration/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/21-orchestration/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/21-orchestration/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/21-orchestration/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/21-orchestration/sections/07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/21-orchestration/sections/08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C22",
+      "number": 22,
+      "title": "Agent Development Frameworks, SDKs, and Managed Runtimes",
+      "slug": "frameworks",
+      "path": "book/chapters/22-frameworks/chapter.tex",
+      "directory": "book/chapters/22-frameworks",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "October 2026 release snapshots and exact runtime/persistence interfaces.",
+      "technical_output": "Version-specific SDK and runtime contracts, deterministic migration criteria, and conformance before performance ranking.",
+      "prerequisites": [
+        "C19",
+        "C20",
+        "C21"
+      ],
+      "sections": [
+        {
+          "id": "C22.1",
+          "title": "A semantic basis for framework comparison",
+          "path": "book/chapters/22-frameworks/sections/01.tex",
+          "label": "sec:C22:axes",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C22.2",
+          "title": "Graph runtimes and opinionated harnesses",
+          "path": "book/chapters/22-frameworks/sections/02.tex",
+          "label": "sec:C22:graphs",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C22.3",
+          "title": "Typed SDKs and model-owned loops",
+          "path": "book/chapters/22-frameworks/sections/03.tex",
+          "label": "sec:C22:typed",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C22.4",
+          "title": "Development kits interoperability and language boundaries",
+          "path": "book/chapters/22-frameworks/sections/04.tex",
+          "label": "sec:C22:adks",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C22.5",
+          "title": "Role-specific framework and runtime inventory",
+          "path": "book/chapters/22-frameworks/sections/05.tex",
+          "label": "sec:C22:inventory",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C22.6",
+          "title": "Licensing lifecycle and migration evidence",
+          "path": "book/chapters/22-frameworks/sections/06.tex",
+          "label": "sec:C22:lifecycle",
+          "subsections": [
+            "Release-specific evidence at the October cutoff"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C22.6.1",
+              "title": "Release-specific evidence at the October cutoff",
+              "path": "book/chapters/22-frameworks/sections/06.tex",
+              "label": null,
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C22.7",
+          "title": "A conformance suite before performance ranking",
+          "path": "book/chapters/22-frameworks/sections/07.tex",
+          "label": "sec:C22:conformance",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C22.8",
+          "title": "From public API to executable control path",
+          "path": "book/chapters/22-frameworks/sections/08.tex",
+          "label": "sec:C22:codepaths",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/22-frameworks/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/22-frameworks/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/22-frameworks/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/22-frameworks/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/22-frameworks/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/22-frameworks/sections/catalog.tex",
+          "role": "catalog"
+        },
+        {
+          "path": "book/chapters/22-frameworks/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/22-frameworks/sections/07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/22-frameworks/sections/08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C23",
+      "number": 23,
+      "title": "Repository, Terminal, and Computer-Use Agents",
+      "slug": "coding",
+      "path": "book/chapters/23-coding/chapter.tex",
+      "directory": "book/chapters/23-coding",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "TerminalHorizon v2, pinned execution-loop accounting, current coding interfaces, and AgentHorizon grading boundaries.",
+      "technical_output": "Artifact attestations, grader-mixture identification, serial cost-overshoot limits, and geometric click-margin conditions.",
+      "prerequisites": [
+        "C10",
+        "C18",
+        "C20",
+        "C22"
+      ],
+      "sections": [
+        {
+          "id": "C23.1",
+          "title": "Repository state as an executable environment",
+          "path": "book/chapters/23-coding/sections/01.tex",
+          "label": "sec:C23:repository",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C23.2",
+          "title": "Specifications tests and evaluator blind spots",
+          "path": "book/chapters/23-coding/sections/02.tex",
+          "label": "sec:C23:specification",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C23.3",
+          "title": "Terminal trajectories and learned execution policies",
+          "path": "book/chapters/23-coding/sections/03.tex",
+          "label": "sec:C23:terminal",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C23.4",
+          "title": "Computer use grounding and hidden state",
+          "path": "book/chapters/23-coding/sections/04.tex",
+          "label": "sec:C23:computeruse",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C23.5",
+          "title": "Coding product families and observable tests",
+          "path": "book/chapters/23-coding/sections/05.tex",
+          "label": "sec:C23:catalog",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C23.6",
+          "title": "A budget-matched evaluation protocol",
+          "path": "book/chapters/23-coding/sections/06.tex",
+          "label": "sec:C23:experiments",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C23.7",
+          "title": "Artifact authority and reviewable completion",
+          "path": "book/chapters/23-coding/sections/07.tex",
+          "label": "sec:C23:completion",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C23.8",
+          "title": "A concrete grading failure and its discriminating controls",
+          "path": "book/chapters/23-coding/sections/08.tex",
+          "label": "sec:C23:gradingcase",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/23-coding/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/23-coding/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/23-coding/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/23-coding/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/23-coding/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/23-coding/sections/catalog.tex",
+          "role": "catalog"
+        },
+        {
+          "path": "book/chapters/23-coding/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/23-coding/sections/07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/23-coding/sections/08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C24",
+      "number": 24,
+      "title": "Research, Enterprise, and Domain-Specific Agent Systems",
+      "slug": "products",
+      "path": "book/chapters/24-products/chapter.tex",
+      "directory": "book/chapters/24-products",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "Knowledge Activation, ALE and biological-agent evidence distinguish reported perceptions, benchmark outcomes and closed-loop empirical validation.",
+      "technical_output": "Domain-specific grounding, state, review, and operational evidence.",
+      "prerequisites": [
+        "C16",
+        "C20",
+        "C21",
+        "C22"
+      ],
+      "sections": [
+        {
+          "id": "C24.1",
+          "title": "Research as evidence acquisition and revision",
+          "path": "book/chapters/24-products/sections/01.tex",
+          "label": "sec:C24:research",
+          "subsections": [
+            "Biological agents: executable methods and empirical feedback",
+            "An October closed-loop result and its attribution limits",
+            "Replay laboratories, digital twins and live measurements"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C24.1.1",
+              "title": "Biological agents: executable methods and empirical feedback",
+              "path": "book/chapters/24-products/sections/01.tex",
+              "label": "sec:C24:biology",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            },
+            {
+              "id": "C24.1.2",
+              "title": "An October closed-loop result and its attribution limits",
+              "path": "book/chapters/24-products/sections/01.tex",
+              "label": null,
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            },
+            {
+              "id": "C24.1.3",
+              "title": "Replay laboratories, digital twins and live measurements",
+              "path": "book/chapters/24-products/sections/01.tex",
+              "label": null,
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C24.2",
+          "title": "Enterprise grounding and permission propagation",
+          "path": "book/chapters/24-products/sections/02.tex",
+          "label": "sec:C24:enterprise",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C24.3",
+          "title": "Memory engines are distinct policy components",
+          "path": "book/chapters/24-products/sections/03.tex",
+          "label": "sec:C24:memoryproducts",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C24.4",
+          "title": "Work-product and vertical-system inventory",
+          "path": "book/chapters/24-products/sections/04.tex",
+          "label": "sec:C24:catalog",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C24.5",
+          "title": "Causal evidence for organizational benefit",
+          "path": "book/chapters/24-products/sections/05.tex",
+          "label": "sec:C24:benefit",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C24.6",
+          "title": "Professional benchmarks and economic interpretation",
+          "path": "book/chapters/24-products/sections/06.tex",
+          "label": "sec:C24:professional",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C24.7",
+          "title": "A reproducible evidence-review transaction",
+          "path": "book/chapters/24-products/sections/07.tex",
+          "label": "sec:C24:transaction",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C24.8",
+          "title": "A changing-policy case in a shared knowledge workspace",
+          "path": "book/chapters/24-products/sections/08.tex",
+          "label": "sec:C24:policycase",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/24-products/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/24-products/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/24-products/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/24-products/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/24-products/sections/catalog.tex",
+          "role": "catalog"
+        },
+        {
+          "path": "book/chapters/24-products/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/24-products/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/24-products/sections/07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/24-products/sections/08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C25",
+      "number": 25,
+      "title": "Model Inspection, Executable Verification, and Evaluator Reliability",
+      "slug": "verification",
+      "path": "book/chapters/25-verification/chapter.tex",
+      "directory": "book/chapters/25-verification",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "TestJack, AgentHorizon, and current inspector/verifier failure cases.",
+      "technical_output": "Conditional verifier utility, adaptive inspection estimands, and scoped assurance claims.",
+      "prerequisites": [
+        "C03",
+        "C09",
+        "C20"
+      ],
+      "sections": [
+        {
+          "id": "C25.1",
+          "title": "Properties observations and assurance boundaries",
+          "path": "book/chapters/25-verification/sections/01.tex",
+          "label": "sec:C25:properties",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C25.2",
+          "title": "Causal interventions in model computation",
+          "path": "book/chapters/25-verification/sections/02.tex",
+          "label": "sec:C25:interventions",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C25.3",
+          "title": "Sparse features and their evaluation",
+          "path": "book/chapters/25-verification/sections/03.tex",
+          "label": "sec:C25:sparse",
+          "subsections": [
+            "The 2026 monitorability boundary"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C25.3.1",
+              "title": "The 2026 monitorability boundary",
+              "path": "book/chapters/25-verification/sections/03.tex",
+              "label": "sec:C25:monitorability2026",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C25.4",
+          "title": "Quality gates as fallible classifiers",
+          "path": "book/chapters/25-verification/sections/04.tex",
+          "label": "sec:C25:gates",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C25.5",
+          "title": "Dynamic tests and requirement-grounded witnesses",
+          "path": "book/chapters/25-verification/sections/05.tex",
+          "label": "sec:C25:testjack",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C25.6",
+          "title": "Judging long multimodal trajectories",
+          "path": "book/chapters/25-verification/sections/06.tex",
+          "label": "sec:C25:judges",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C25.7",
+          "title": "Verification experiments and implementation traceability",
+          "path": "book/chapters/25-verification/sections/07.tex",
+          "label": "sec:C25:experiments",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C25.8",
+          "title": "A worked gate analysis with adaptive selection",
+          "path": "book/chapters/25-verification/sections/08.tex",
+          "label": "sec:C25:workedgate",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/25-verification/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/25-verification/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/25-verification/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/25-verification/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/25-verification/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/25-verification/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/25-verification/sections/07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/25-verification/sections/08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C26",
+      "number": 26,
+      "title": "Evaluation Harnesses, Contamination, and Statistical Validity",
+      "slug": "evaluation",
+      "path": "book/chapters/26-evaluation/chapter.tex",
+      "directory": "book/chapters/26-evaluation",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "2026 evaluation findings and versioned harness implementations.",
+      "technical_output": "Population and denominator contracts, task-mixture reliability estimands, and restricted adaptive-reuse evidence.",
+      "prerequisites": [
+        "C02",
+        "C20",
+        "C23",
+        "C25"
+      ],
+      "sections": [
+        {
+          "id": "C26.1",
+          "title": "Define the estimand before the leaderboard",
+          "path": "book/chapters/26-evaluation/sections/01.tex",
+          "label": "sec:C26:estimand",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C26.2",
+          "title": "Harness construction and artifact identity",
+          "path": "book/chapters/26-evaluation/sections/02.tex",
+          "label": "sec:C26:construction",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C26.3",
+          "title": "Attempts reliability and selection",
+          "path": "book/chapters/26-evaluation/sections/03.tex",
+          "label": "sec:C26:attempts",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C26.4",
+          "title": "Contamination information leakage and task lineage",
+          "path": "book/chapters/26-evaluation/sections/04.tex",
+          "label": "sec:C26:contamination",
+          "subsections": [
+            "Interference through persistent state"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C26.4.1",
+              "title": "Interference through persistent state",
+              "path": "book/chapters/26-evaluation/sections/04.tex",
+              "label": "sec:C26:stateinterference",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C26.5",
+          "title": "Uncertainty paired designs and dependence",
+          "path": "book/chapters/26-evaluation/sections/05.tex",
+          "label": "sec:C26:uncertainty",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C26.6",
+          "title": "Ablations and causal mechanism claims",
+          "path": "book/chapters/26-evaluation/sections/06.tex",
+          "label": "sec:C26:ablations",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C26.7",
+          "title": "Evaluator audits and reproducible reporting",
+          "path": "book/chapters/26-evaluation/sections/07.tex",
+          "label": "sec:C26:audit",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C26.8",
+          "title": "A concrete audit of a paired repository comparison",
+          "path": "book/chapters/26-evaluation/sections/08.tex",
+          "label": "sec:C26:pairedcase",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/26-evaluation/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/26-evaluation/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/26-evaluation/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/26-evaluation/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/26-evaluation/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/26-evaluation/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/26-evaluation/sections/07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/26-evaluation/sections/08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C27",
+      "number": 27,
+      "title": "Longitudinal Evaluation of Memory, Adaptation, and Recovery",
+      "slug": "longitudinal",
+      "path": "book/chapters/27-longitudinal/chapter.tex",
+      "directory": "book/chapters/27-longitudinal",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "InMind, MemCalib v3, fragility v2, survival and carryover controls.",
+      "technical_output": "A stream-level adaptation/recovery estimand and independent uncertainty unit.",
+      "prerequisites": [
+        "C13",
+        "C14",
+        "C15",
+        "C17",
+        "C26"
+      ],
+      "sections": [
+        {
+          "id": "C27.1",
+          "title": "Define horizon and the unit of continuity",
+          "path": "book/chapters/27-longitudinal/sections/01.tex",
+          "label": "sec:C27:horizon",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C27.2",
+          "title": "Factor the memory pipeline",
+          "path": "book/chapters/27-longitudinal/sections/02.tex",
+          "label": "sec:C27:pipeline",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C27.3",
+          "title": "Implicit relevance and appropriate influence",
+          "path": "book/chapters/27-longitudinal/sections/03.tex",
+          "label": "sec:C27:influence",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C27.4",
+          "title": "Task order adaptation and hidden curricula",
+          "path": "book/chapters/27-longitudinal/sections/04.tex",
+          "label": "sec:C27:order",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C27.5",
+          "title": "Temporal change deletion and migration",
+          "path": "book/chapters/27-longitudinal/sections/05.tex",
+          "label": "sec:C27:change",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C27.6",
+          "title": "Horizon-dependent reliability and survival",
+          "path": "book/chapters/27-longitudinal/sections/06.tex",
+          "label": "sec:C27:survival",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C27.7",
+          "title": "A longitudinal implementation and reporting contract",
+          "path": "book/chapters/27-longitudinal/sections/07.tex",
+          "label": "sec:C27:implementation",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C27.8",
+          "title": "A counterfactual session-stream experiment",
+          "path": "book/chapters/27-longitudinal/sections/08.tex",
+          "label": "sec:C27:streamcase",
+          "subsections": [
+            "What a counterfactual replay can identify"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C27.8.1",
+              "title": "What a counterfactual replay can identify",
+              "path": "book/chapters/27-longitudinal/sections/08.tex",
+              "label": "sec:C27:counterfactualreplay",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/27-longitudinal/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/27-longitudinal/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/27-longitudinal/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/27-longitudinal/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/27-longitudinal/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/27-longitudinal/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/27-longitudinal/sections/07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/27-longitudinal/sections/08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C28",
+      "number": 28,
+      "title": "Stateful Agent Security: Red-Team and Blue-Team Mechanisms",
+      "slug": "security",
+      "path": "book/chapters/28-security/chapter.tex",
+      "directory": "book/chapters/28-security",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "DTap, ExploitGym, CyberGym-E2E, and versioned privilege enforcement.",
+      "technical_output": "An explicit adversary, attack surface, defense, and residual-risk evaluation.",
+      "prerequisites": [
+        "C17",
+        "C18",
+        "C19",
+        "C20",
+        "C25",
+        "C26"
+      ],
+      "sections": [
+        {
+          "id": "C28.1",
+          "title": "Threat models and attacker capabilities",
+          "path": "book/chapters/28-security/sections/01.tex",
+          "label": "sec:C28:threatmodel",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C28.2",
+          "title": "Injection across context tools and persistent memory",
+          "path": "book/chapters/28-security/sections/02.tex",
+          "label": "sec:C28:injection",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C28.3",
+          "title": "Least privilege and symbolic action controls",
+          "path": "book/chapters/28-security/sections/03.tex",
+          "label": "sec:C28:privilege",
+          "subsections": [
+            "Open privilege can remain invisible to executed attacks"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C28.3.1",
+              "title": "Open privilege can remain invisible to executed attacks",
+              "path": "book/chapters/28-security/sections/03.tex",
+              "label": "sec:C28:ajar",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C28.4",
+          "title": "Controlled red-team platforms and judge validity",
+          "path": "book/chapters/28-security/sections/04.tex",
+          "label": "sec:C28:platforms",
+          "subsections": [
+            "Attacker--defender self-play changes the data distribution",
+            "A modular adversarial interface is a measurement contract"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C28.4.1",
+              "title": "Attacker--defender self-play changes the data distribution",
+              "path": "book/chapters/28-security/sections/04.tex",
+              "label": "sec:C28:selfplay",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            },
+            {
+              "id": "C28.4.2",
+              "title": "A modular adversarial interface is a measurement contract",
+              "path": "book/chapters/28-security/sections/04.tex",
+              "label": "sec:C28:superred",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C28.5",
+          "title": "Cyber capability is not agent compromise",
+          "path": "book/chapters/28-security/sections/05.tex",
+          "label": "sec:C28:cybercapability",
+          "subsections": [
+            "Symbolic search, fuzzing, and static analysis have different oracles"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C28.5.1",
+              "title": "Symbolic search, fuzzing, and static analysis have different oracles",
+              "path": "book/chapters/28-security/sections/05.tex",
+              "label": "sec:C28:lineage",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C28.6",
+          "title": "Blue-team detection containment and recovery",
+          "path": "book/chapters/28-security/sections/06.tex",
+          "label": "sec:C28:blueteam",
+          "subsections": [
+            "Detection must precede the relevant commitment"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C28.6.1",
+              "title": "Detection must precede the relevant commitment",
+              "path": "book/chapters/28-security/sections/06.tex",
+              "label": "sec:C28:precommitalert",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C28.7",
+          "title": "Security metrics and evidence interpretation",
+          "path": "book/chapters/28-security/sections/07.tex",
+          "label": "sec:C28:metrics",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C28.8",
+          "title": "A bounded policy-expansion and memory-poisoning case",
+          "path": "book/chapters/28-security/sections/08.tex",
+          "label": "sec:C28:case",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/28-security/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/28-security/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/28-security/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/28-security/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/28-security/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/28-security/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/28-security/sections/07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/28-security/sections/08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C29",
+      "number": 29,
+      "title": "Alignment, Authorization, and Constrained Autonomy",
+      "slug": "alignment",
+      "path": "book/chapters/29-alignment/chapter.tex",
+      "directory": "book/chapters/29-alignment",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "Current authority and approval semantics; model preferences are separated from enforcement.",
+      "technical_output": "Expected-versus-enforced constraints, conservative grants, and commit-time authorization boundaries.",
+      "prerequisites": [
+        "C08",
+        "C18",
+        "C20",
+        "C25",
+        "C28"
+      ],
+      "sections": [
+        {
+          "id": "C29.1",
+          "title": "Objectives proxies and constrained policies",
+          "path": "book/chapters/29-alignment/sections/01.tex",
+          "label": "sec:C29:objectives",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C29.2",
+          "title": "Instruction hierarchy and authority-bearing records",
+          "path": "book/chapters/29-alignment/sections/02.tex",
+          "label": "sec:C29:hierarchy",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C29.3",
+          "title": "Constitutional and preference-based alignment",
+          "path": "book/chapters/29-alignment/sections/03.tex",
+          "label": "sec:C29:training",
+          "subsections": [
+            "Automated safety adaptation and independent confirmation"
+          ],
+          "subsection_entries": [
+            {
+              "id": "C29.3.1",
+              "title": "Automated safety adaptation and independent confirmation",
+              "path": "book/chapters/29-alignment/sections/03.tex",
+              "label": "sec:C29:automatedalignment2026",
+              "outline_level": 2,
+              "subsections": [],
+              "subsection_entries": []
+            }
+          ],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C29.4",
+          "title": "Human review and the semantics of approval",
+          "path": "book/chapters/29-alignment/sections/04.tex",
+          "label": "sec:C29:review",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C29.5",
+          "title": "Privacy purpose and the lifecycle of memory",
+          "path": "book/chapters/29-alignment/sections/05.tex",
+          "label": "sec:C29:privacy",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C29.6",
+          "title": "Operational constraints and residual risk",
+          "path": "book/chapters/29-alignment/sections/06.tex",
+          "label": "sec:C29:operations",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C29.7",
+          "title": "Evaluation of authority and aligned behavior",
+          "path": "book/chapters/29-alignment/sections/07.tex",
+          "label": "sec:C29:evaluation",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C29.8",
+          "title": "A governed model-and-harness update",
+          "path": "book/chapters/29-alignment/sections/08.tex",
+          "label": "sec:C29:updatecase",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/29-alignment/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/29-alignment/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/29-alignment/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/29-alignment/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/29-alignment/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/29-alignment/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/29-alignment/sections/07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/29-alignment/sections/08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C30",
+      "number": 30,
+      "title": "Continual Adaptation and the Evidence for Recursive Self-Improvement",
+      "slug": "improvement",
+      "path": "book/chapters/30-improvement/chapter.tex",
+      "directory": "book/chapters/30-improvement",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "RRSI v3, Harness^2, AIDE^2, MASS, Self-HPO and Terminal-RSI v2.",
+      "technical_output": "Separate executor and improver estimands, restricted-feedback promotion, and frozen-pair compatibility versus training effects.",
+      "prerequisites": [
+        "C08",
+        "C15",
+        "C17",
+        "C25",
+        "C26",
+        "C27",
+        "C29"
+      ],
+      "sections": [
+        {
+          "id": "C30.1",
+          "title": "What changes when an agent improves",
+          "path": "book/chapters/30-improvement/sections/01.tex",
+          "label": "sec:C30:01",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C30.2",
+          "title": "Selection pressure and finite-feedback overfitting",
+          "path": "book/chapters/30-improvement/sections/02.tex",
+          "label": "sec:C30:02",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C30.3",
+          "title": "Task-local recursion and reusable improvement memory",
+          "path": "book/chapters/30-improvement/sections/03.tex",
+          "label": "sec:C30:03",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C30.4",
+          "title": "Policy and harness co-adaptation",
+          "path": "book/chapters/30-improvement/sections/04.tex",
+          "label": "sec:C30:04",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C30.5",
+          "title": "Continual memory maintenance as controlled adaptation",
+          "path": "book/chapters/30-improvement/sections/05.tex",
+          "label": "sec:C30:05",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C30.6",
+          "title": "Testing the improver rather than its selected artifact",
+          "path": "book/chapters/30-improvement/sections/06.tex",
+          "label": "sec:C30:06",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C30.7",
+          "title": "Bounds on claims and conditions for deployment",
+          "path": "book/chapters/30-improvement/sections/07.tex",
+          "label": "sec:C30:07",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/30-improvement/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/30-improvement/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/30-improvement/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/30-improvement/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/30-improvement/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/30-improvement/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/30-improvement/sections/07.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C31",
+      "number": 31,
+      "title": "Agentic Inference: Scheduling, Speculation, and Tiered State",
+      "slug": "serving",
+      "path": "book/chapters/31-serving/chapter.tex",
+      "directory": "book/chapters/31-serving",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "2026 tiered vLLM state, hybrid cache semantics, and agentic serving workloads.",
+      "technical_output": "Workload-conditional throughput and latency analysis, retry/queueing assumptions, and valid cache-state reuse.",
+      "prerequisites": [
+        "C04",
+        "C12",
+        "C20"
+      ],
+      "sections": [
+        {
+          "id": "C31.1",
+          "title": "The workload is a sequence of interrupted computations",
+          "path": "book/chapters/31-serving/sections/01.tex",
+          "label": "sec:C31:01",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C31.2",
+          "title": "A complete capacity calculation",
+          "path": "book/chapters/31-serving/sections/02.tex",
+          "label": "sec:C31:02",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C31.3",
+          "title": "Bandwidth arithmetic and the decode bottleneck",
+          "path": "book/chapters/31-serving/sections/03.tex",
+          "label": "sec:C31:03",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C31.4",
+          "title": "Exact reuse, partial reuse, and cache identity",
+          "path": "book/chapters/31-serving/sections/04.tex",
+          "label": "sec:C31:04",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C31.5",
+          "title": "Quantization speculation and structured action outputs",
+          "path": "book/chapters/31-serving/sections/05.tex",
+          "label": "sec:C31:05",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C31.6",
+          "title": "Memory-conditioned speculation and exact verification",
+          "path": "book/chapters/31-serving/sections/06.tex",
+          "label": "sec:C31:memoryspeculation",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C31.7",
+          "title": "Scheduling disaggregation and queueing",
+          "path": "book/chapters/31-serving/sections/07.tex",
+          "label": "sec:C31:07",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        },
+        {
+          "id": "C31.8",
+          "title": "A reproducible serving experiment",
+          "path": "book/chapters/31-serving/sections/08.tex",
+          "label": "sec:C31:08",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 8
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/31-serving/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/31-serving/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/31-serving/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/31-serving/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/31-serving/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/31-serving/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/31-serving/sections/07.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/31-serving/sections/08.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C32",
+      "number": 32,
+      "title": "Operational Assurance: Monitoring, Migration, Rollback, and Recovery",
+      "slug": "operations",
+      "path": "book/chapters/32-operations/chapter.tex",
+      "directory": "book/chapters/32-operations",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "October session/runtime interfaces and compatibility-aware release/recovery analysis.",
+      "technical_output": "A release compatibility closure, decoder-aware manifests, and bounded local recovery separated from eventual effect resolution.",
+      "prerequisites": [
+        "C13",
+        "C17",
+        "C20",
+        "C25",
+        "C26",
+        "C28",
+        "C29",
+        "C31"
+      ],
+      "sections": [
+        {
+          "id": "C32.1",
+          "title": "A release is a state-compatible system configuration",
+          "path": "book/chapters/32-operations/sections/01.tex",
+          "label": "sec:C32:01",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C32.2",
+          "title": "Observability must reconstruct decisions and effects",
+          "path": "book/chapters/32-operations/sections/02.tex",
+          "label": "sec:C32:02",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C32.3",
+          "title": "Canaries with persistent state and delayed outcomes",
+          "path": "book/chapters/32-operations/sections/03.tex",
+          "label": "sec:C32:03",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C32.4",
+          "title": "Rollback and compensation are different operations",
+          "path": "book/chapters/32-operations/sections/04.tex",
+          "label": "sec:C32:04",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C32.5",
+          "title": "Failure detectors and bounded recovery policies",
+          "path": "book/chapters/32-operations/sections/05.tex",
+          "label": "sec:C32:05",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C32.6",
+          "title": "Service objectives and incident learning",
+          "path": "book/chapters/32-operations/sections/06.tex",
+          "label": "sec:C32:06",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C32.7",
+          "title": "A compatibility-first deployment procedure",
+          "path": "book/chapters/32-operations/sections/07.tex",
+          "label": "sec:C32:07",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/32-operations/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/32-operations/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/32-operations/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/32-operations/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/32-operations/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/32-operations/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/32-operations/sections/07.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C33",
+      "number": 33,
+      "title": "Cross-Layer Causal Analyses and Compositional System Designs",
+      "slug": "case_studies",
+      "path": "book/chapters/33-case_studies/chapter.tex",
+      "directory": "book/chapters/33-case_studies",
+      "target_pages": 11,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "Joint analysis of current memory, harness, evaluator, and cache mechanisms through explicit cases.",
+      "technical_output": "Constructed cross-layer cases, finish-first selection risk, and experiments that test contract composition.",
+      "prerequisites": [
+        "C17",
+        "C20",
+        "C21",
+        "C25",
+        "C26",
+        "C27",
+        "C30",
+        "C31",
+        "C32"
+      ],
+      "sections": [
+        {
+          "id": "C33.1",
+          "title": "Composition changes the claim being tested",
+          "path": "book/chapters/33-case_studies/sections/01.tex",
+          "label": "sec:C33:01",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C33.2",
+          "title": "Case one: a repository repair with bounded side effects",
+          "path": "book/chapters/33-case_studies/sections/02.tex",
+          "label": "sec:C33:02",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C33.3",
+          "title": "Parallel repair branches and cache-aware orchestration",
+          "path": "book/chapters/33-case_studies/sections/03.tex",
+          "label": "sec:C33:03",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C33.4",
+          "title": "Case two: a persistent enterprise research assistant",
+          "path": "book/chapters/33-case_studies/sections/04.tex",
+          "label": "sec:C33:04",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C33.5",
+          "title": "Testing relevance and influence rather than retrieval alone",
+          "path": "book/chapters/33-case_studies/sections/05.tex",
+          "label": "sec:C33:05",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C33.6",
+          "title": "Case three: an agent that modifies its own research harness",
+          "path": "book/chapters/33-case_studies/sections/06.tex",
+          "label": "sec:C33:06",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C33.7",
+          "title": "A unified acceptance record and discriminating interventions",
+          "path": "book/chapters/33-case_studies/sections/07.tex",
+          "label": "sec:C33:07",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/33-case_studies/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/33-case_studies/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/33-case_studies/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/33-case_studies/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/33-case_studies/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/33-case_studies/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/33-case_studies/sections/07.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    },
+    {
+      "id": "C34",
+      "number": 34,
+      "title": "Synthesis: Consistency Contracts and Discriminating Research Questions",
+      "slug": "synthesis",
+      "path": "book/chapters/34-synthesis/chapter.tex",
+      "directory": "book/chapters/34-synthesis",
+      "target_pages": 8,
+      "status": "complete_technical_review_edition",
+      "frontier_anchor": "Evidence-bounded synthesis and falsifiable cross-layer hypotheses, not an AGI forecast.",
+      "technical_output": "Prespecified resource-bounded improver estimands, compatibility limits, and supporting, ruling-out or inconclusive evidence.",
+      "prerequisites": [
+        "C26",
+        "C27",
+        "C28",
+        "C29",
+        "C30",
+        "C33"
+      ],
+      "sections": [
+        {
+          "id": "C34.1",
+          "title": "What the October 2026 evidence supports",
+          "path": "book/chapters/34-synthesis/sections/01.tex",
+          "label": "sec:C34:01",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 1
+        },
+        {
+          "id": "C34.2",
+          "title": "Decision-preserving memory as an experimental target",
+          "path": "book/chapters/34-synthesis/sections/02.tex",
+          "label": "sec:C34:02",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 2
+        },
+        {
+          "id": "C34.3",
+          "title": "Conditioning under joint adaptation",
+          "path": "book/chapters/34-synthesis/sections/03.tex",
+          "label": "sec:C34:03",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 3
+        },
+        {
+          "id": "C34.4",
+          "title": "Verification whose errors are measured independently",
+          "path": "book/chapters/34-synthesis/sections/04.tex",
+          "label": "sec:C34:04",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 4
+        },
+        {
+          "id": "C34.5",
+          "title": "World models and representations must face action tests",
+          "path": "book/chapters/34-synthesis/sections/05.tex",
+          "label": "sec:C34:05",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 5
+        },
+        {
+          "id": "C34.6",
+          "title": "A research program for reliable improvement",
+          "path": "book/chapters/34-synthesis/sections/06.tex",
+          "label": "sec:C34:06",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 6
+        },
+        {
+          "id": "C34.7",
+          "title": "The remaining systems boundary",
+          "path": "book/chapters/34-synthesis/sections/07.tex",
+          "label": "sec:C34:07",
+          "subsections": [],
+          "subsection_entries": [],
+          "outline_level": 1,
+          "include_order": 7
+        }
+      ],
+      "included_modules": [
+        {
+          "path": "book/chapters/34-synthesis/sections/01.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/34-synthesis/sections/02.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/34-synthesis/sections/03.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/34-synthesis/sections/04.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/34-synthesis/sections/05.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/34-synthesis/sections/06.tex",
+          "role": "included_module"
+        },
+        {
+          "path": "book/chapters/34-synthesis/sections/07.tex",
+          "role": "included_module"
+        }
+      ],
+      "literature_cutoff": "2026-10-29",
+      "last_source_review": "2026-10-29",
+      "source_review_status": "complete",
+      "illustration_validation_status": "complete",
+      "final_pdf_validation_status": "complete"
+    }
+  ],
+  "organizing_contribution": "A cross-layer analysis of conditioning consistency, authority preservation, and effect reconstruction, with explicit implementation/evidence contracts and discriminating interventions. This is an original synthesis and analysis, not a claim of a new empirically validated AGI architecture.",
+  "retrieval_interval": [
+    "2026-10-28",
+    "2026-10-29"
+  ],
+  "last_source_review": "2026-10-29",
+  "source_review_status": "complete",
+  "illustration_validation_status": "complete",
+  "final_pdf_validation_status": "complete",
+  "status": "complete_technical_review_edition",
+  "actual_pagination_status": "complete"
+}

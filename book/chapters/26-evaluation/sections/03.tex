@@ -1,0 +1,20 @@
+\section{Attempts reliability and selection}\label{sec:C26:attempts}
+Finding one successful answer among several attempts differs from succeeding reliably on repeated execution. Under independent identical success probability $p$, the former is $1-(1-p)^k$ and the latter is $p^k$. These formulas are illustrative models, not general laws for agent systems. Attempts can share task difficulty, memory, environment state, or sampling behavior, making their joint distribution substantially different.
+
+For $n$ sampled candidates with $c$ successes, the familiar combinatorial pass-at-$k$ estimator is $1-\binom{n-c}{k}/\binom{n}{k}$ when the sampling and interpretation conditions apply~\cite{chen2021codeeval}. The domain is $1\leq k\leq n$ and $0\leq c\leq n$, all integers, with $\binom{n-c}{k}=0$ when $k>n-c$. It estimates discovery of a success among selected candidates, not a deployable selector's performance. An actual system needs a gate that identifies a valid candidate without access to hidden labels. Selector false acceptance and false rejection belong inside end-to-end evaluation.
+
+For a fixed realized candidate set, that expression is exactly the fraction of uniformly chosen size-$k$ subsets containing a success. Its interpretation as an unbiased estimate of fresh $k$-attempt discovery additionally needs the corresponding exchangeable sampling model; adaptive revisions are not automatically such samples. Task heterogeneity introduces a separate distinction. If attempts are independent conditional on task $q$ with success probability $p(q)$, then
+\begin{equation}
+ \theta_{\mathrm{any},k}=\mathbb E_q[1-(1-p(q))^k],\qquad
+ \theta_{\mathrm{all},k}=\mathbb E_q[p(q)^k].
+\end{equation}
+For integer $k\geq1$ and $\bar p=\mathbb E_q[p(q)]$, Jensen's inequality gives $\theta_{\mathrm{any},k}\leq1-(1-\bar p)^k$ and $\theta_{\mathrm{all},k}\geq\bar p^k$. Thus even conditional independence does not justify raising a pooled mean to a power. These are analytical comparisons under the stated model, not estimates of any cited benchmark's reliability.
+
+Attempt budgets should count failed parsing, tool errors, and abandoned generations where they consume resources. The mini-swe-agent accounting change discussed in Chapter~\ref{ch:C23} illustrates why this is implementation-sensitive. Equal nominal attempts can hide unequal token use or paid failed calls. Report measured cost and consumed resources rather than only configured maxima.
+
+Repeated-run reliability should retain the benchmark's exact definition. Some protocols ask whether every repetition succeeds; others measure average success or consistency of a required constraint. A paper using one definition cannot be compared directly with another merely because both use a superscript or similar label. State the aggregation rule in ordinary language and provide the underlying per-task outcomes when possible.
+
+Adaptive selection increases the effective search budget. A system that repeatedly revises prompts, harnesses, or memory using benchmark feedback has used the benchmark as an optimization resource. RRSI explicitly addresses overfitting in harness evolution~\cite{rrsi2026}. The evaluation should preserve an untouched assessment set and record candidate counts, rejected changes, and evaluator access. Frozen weights do not imply absence of learning from test feedback.
+
+An untouched confirmation set is one design; certified reuse requires a different protocol. REUSE permits feedback-adaptive proposals only through promotion decisions from an initially independent evaluation sample and allocates error across all possible promotion histories~\cite{ch02_reuse2026}. Returning detailed scores or failure traces to the proposer breaks that theorem's decision-only restriction unless the extra transcript is accounted for. A generic confidence sequence protects optional stopping under its assumptions; it does not erase information already leaked into candidate construction. The public report should therefore describe the feedback channel as precisely as the tested artifact.
+

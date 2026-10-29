@@ -1,0 +1,16 @@
+\section{Independence diversity and correlated error}\label{sec:C21:dependence}
+Independent samples and collaborating agents answer different questions. If each independent attempt succeeds with probability $p$, then the chance that at least one of $n$ attempts succeeds is $1-(1-p)^n$. This expression assumes independence and an oracle that identifies a valid attempt. A practical selector can reject the successful attempt or accept a plausible failure. Therefore the expression is headroom under a stated model, not an end-to-end reliability prediction.
+
+For averaging, positive pairwise correlation inflates variance under a fixed marginal model. For $n\geq2$ Bernoulli outcomes $X_i\in\{0,1\}$ with common success probability $p\in(0,1)$, sample mean $\bar X=n^{-1}\sum_{i=1}^nX_i$, and feasible common pairwise correlation $\rho$, the variance of their mean is
+\begin{equation}
+ \operatorname{Var}(\bar X)=\frac{p(1-p)}{n}
+ \left[1+(n-1)\rho\right].
+\end{equation}
+The expression follows by expanding the covariance sum; it does not require full joint independence. When $1+(n-1)\rho>0$, the variance-equivalent effective sample size is $n/[1+(n-1)\rho]$. A zero bracket is a degenerate zero-variance case for which that finite effective-size interpretation is undefined. It is only a variance equivalence, not a complete description of team success. Two joint distributions can share pairwise correlations while differing in the probability of all agents failing together.
+
+Assigning different role names does not guarantee low correlation. Workers can share training data, model family, prompt assumptions, retrieval sources, and tool failures. A critic primed with the original answer may anchor on it even when told to be independent. A more meaningful diversity intervention varies information access, initial hypothesis, retrieval strategy, or verification method, then measures whether these changes reduce harmful dependence. Diversity that increases disagreement without improving error detection is not automatically useful.
+
+Communication can destroy independence. Once workers see a popular hypothesis, later agreement may reflect copying rather than independent confirmation. An evidence protocol can preserve initial private assessments before discussion. Record each worker's claim, confidence interpretation, supporting observations, and falsification test; then permit exchange. Comparing pre-discussion and post-discussion judgments reveals whether communication corrects errors or amplifies consensus. The process remains an experiment rather than a proof that private reasoning is always preferable.
+
+The causal baseline should spend the same total budget on a single agent, independent samples, and communicating teams. Equal call counts are insufficient when prompts, tool actions, and verifier work differ. Also report wall-clock under a declared concurrency limit. A team may reduce elapsed time while increasing total cost, which can be appropriate for time-critical work. The conclusion should state that tradeoff rather than describe parallelism as cost reduction.
+

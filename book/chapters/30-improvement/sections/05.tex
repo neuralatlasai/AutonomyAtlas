@@ -1,0 +1,17 @@
+\section{Continual memory maintenance as controlled adaptation}\label{sec:C30:05}
+Persistent memory creates adaptation even without gradient updates. A skill bank can change the prior over plans, the documents selected into context, and the interpretation of future observations. Its utility depends on the task stream. A procedure repeatedly useful in one order may interfere with a later distribution or conceal a rare exception. The relevant evaluation unit is therefore an evolving trajectory of tasks, not only isolated queries with a preconstructed memory.
+
+HyperSkill illustrates the coupling between representation, retrieval, and maintenance. Its hypergraph connects subtask and skill nodes through trajectory-level hyperedges; dual-path retrieval and co-occurrence-based ranking use this structure, while periodic maintenance prunes or merges entries. The experiment does not isolate a pure graph-format effect when a no-hypergraph baseline also changes the access pipeline. A fixed task order and reliance on gold feedback in the main setting further constrain causal and deployment interpretations~\cite{xu2026hyperskill}.
+
+A minimal maintenance objective makes these tensions explicit. Let $D_t$ be newly available, permission-filtered evidence and $M_{t+1}=U(M_t,D_t)$ the updated bank:
+\begin{equation}
+ \max_U\ \mathbb E_{q\sim\mathcal D_{t+1}}
+ [J(\pi,M_{t+1};q)]
+ -\lambda_s|M_{t+1}|-\lambda_u C(U),
+\end{equation}
+subject to provenance, authorization, and deletion constraints. Here $|M_{t+1}|$ is declared storage size, $C(U)$ the update cost, and nonnegative coefficients $\lambda_s,\lambda_u$ convert those quantities into the utility units of $J$. The next-task distribution $\mathcal D_{t+1}$ is unknown. Estimating it from recent tasks favors recency; estimating it from all history favors retention. Neither choice guarantees that a rare future instruction survives. A practical system can retain raw evidence under its retention policy while maintaining a smaller derived index, but archival retention and usable retrieval remain separate properties. Immutability of an audit record is not permission to retain prohibited content indefinitely.
+
+Forgetting also requires a distinction between utility pruning and revocation. A low-utility procedure may remain authorized but rarely relevant. A revoked credential or instruction must cease to influence execution even if it would improve task success. A memory optimizer that removes entries only according to observed reward cannot implement that requirement. Authorization metadata must constrain reads, derived summaries, cached contexts, and reconstructed skills across concurrent sessions.
+
+Feedback provenance is equally important. A skill extracted from a trajectory judged successful may encode a workaround that bypassed the intended requirement. Store the tested outcome and its verifier scope, not an unqualified assertion that the procedure is correct. When later evidence contradicts the procedure, the update should preserve the conflict and the affected dependency closure rather than silently overwrite history. Continual adaptation needs a mechanism for learning that an earlier lesson was wrong.
+

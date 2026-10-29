@@ -1,0 +1,21 @@
+\section{Selection before abstraction}\label{sec:C12:selection}
+Selection retains some records verbatim; abstraction constructs a new record that represents several old ones. These operations have different error modes. Selection can omit a decisive source while faithfully preserving everything selected. Abstraction can include the right sources but misstate their contents, merge incompatible claims, or remove a qualification. A practical pipeline should make the two stages separately inspectable instead of treating a single generated summary as an opaque transformation.
+
+Suppose records $r_i$ have token costs $c_i$, and $F(S)$ is the task-dependent utility of retaining the records indexed by $S$. A simple selection model is a budgeted set problem:
+\begin{equation}
+ \max_{S\subseteq\{1,\ldots,n\}}F(S)
+ \quad\text{subject to}\quad\sum_{i\in S}c_i\leq W.
+\end{equation}
+If $F$ is monotone submodular, marginal-gain heuristics have useful theoretical properties under suitable assumptions. Agent evidence does not generally satisfy those assumptions. Two individually useless records can jointly identify a contradiction, while one new correction can invalidate many older records. Utility may be complementary or nonmonotone. Using a greedy score can still be an engineering heuristic, but its approximation guarantees do not transfer without verifying the required structure.
+
+Abstraction introduces a different optimization target. Let $z=s(R)$ be a summary of records $R$ and let $\mathcal D_R$ be a specified conditional distribution over future requests $q$ and targets $Y$ given that source record. Define distortion through paired decision losses rather than textual similarity:
+\begin{equation}
+ d(R,z)=\mathbb E_{(q,Y)\sim\mathcal D_R}
+ \left[\ell\{\pi(q,z),Y\}-\ell\{\pi(q,R),Y\}\right].
+\end{equation}
+This is a proposed operational distortion measure. Both conditions receive the same request--target draw; a stochastic policy's internal sampling is also included in the expectation. The controller observes $R$ and the current request, not the evaluation target $Y$. Distortion can be negative when abstraction removes distraction, and it depends on the evaluated policy. It is not a mathematical distance. Holding $\mathcal D_R$ fixed prevents a change in the future-question distribution from being misreported as better preservation.
+
+Preserving exact text is especially valuable for identifiers, numeric requirements, authorization, and claims requiring attribution. A summary may safely paraphrase a search strategy while retaining an exact test failure or contract clause as a quoted evidence object. The representation can combine concise state with evidence pointers rather than forcing every item into the same compression format. Token allocation should reflect the cost of a mistaken abstraction, not only the record's length.
+
+An implementation can maintain an immutable source layer, a typed decision-state layer, and a generated narrative layer. Each narrative assertion should link to one or more source objects or be marked as an inference. Contradictions remain separate objects until resolved by an explicit rule. This architecture makes it possible to regenerate a summary after a correction without pretending that the first summary was an authoritative replacement for the evidence.
+

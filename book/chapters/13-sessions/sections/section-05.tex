@@ -1,0 +1,20 @@
+\section{Concurrency ownership and session forks}\label{sec:C13:concurrency}
+Parallel workers can advance the same objective while holding different views of its state. One worker may discover a requirement while another modifies the artifact that requirement constrains. If both publish free-form summaries into a shared record, the last writer can erase the first worker's evidence. A shared session therefore needs concurrency semantics, not merely a shared context window.
+
+An optimistic transaction can read state version $v$, compute a proposal, and commit only if the relevant base version remains unchanged. This prevents a stale proposal from silently overwriting intervening updates. The relevant version need not be the entire session: an artifact, plan node, or authority record can have its own version. Finer granularity improves concurrency but requires an accurate dependency set. If a worker reads an unrecorded constraint, the commit validator cannot know that its proposal became stale.
+
+For a precise local commit rule, let $R$ be the recorded read set, $v_r$ the version read for object $r$, and $v(r)$ its current version. Let $\Delta$ be the proposed update and $C(\Delta)$ a declared invariant check. A candidate can commit to the local transaction only if
+\begin{equation}
+ \operatorname{admit}(\Delta)=
+ \mathbf1\{\forall r\in R:v(r)=v_r\}\,\mathbf1\{C(\Delta)=1\}.
+\end{equation}
+This prevents stale-read acceptance only when $R$ contains every relevant dependency and validation is atomic with the local write. It does not certify the semantic truth of the read values. A remote dispatcher additionally needs a service-recognized fencing or version condition if another worker can supersede ownership between local validation and the effect. Merely placing a monotonically increasing token in a prompt does not fence an old worker.
+
+Not every concurrent write is a conflict. Appending independent observations can be safe when each retains provenance and source identity. Replacing a shared completion predicate or deleting a task obligation is more sensitive. Commutativity should be established for the operation's semantics rather than guessed from data format. Two JSON patches that touch different fields can still conflict if one changes the meaning of the other. For example, changing a tool target while another update broadens a permission can create an unintended combination.
+
+Forking a session creates a branch of reasoning and action history. The branch should record its common ancestor and any inherited authority. A branch used for simulation should not be mistaken for a branch whose actions affected the real environment. Merging branches requires comparing effects and evidence, not concatenating their final narratives. If two workers both report that a document was published, the merger must inspect operation identifiers to determine whether there was one shared effect, two effects, or merely two plans.
+
+Authority also needs version-aware propagation. A user correction that narrows scope should invalidate pending proposals whose admissibility depended on the older scope. Canceling those workers does not prove that in-flight effects were prevented. The system must distinguish cancellation of local computation from revocation enforced at the effect boundary. An authoritative check immediately before dispatch is stronger than a permission check performed only when the worker started.
+
+A proposed test uses two workers with controlled scheduling: one receives a correction, the other attempts a previously permitted action. Vary the point at which the correction becomes visible and inspect whether the monitor, context assembler, and effect dispatcher use the same authority version. This exposes races that ordinary task-success benchmarks rarely exercise. No empirical outcome is implied by the test design; its value is the explicit causal sequence it makes observable.
+

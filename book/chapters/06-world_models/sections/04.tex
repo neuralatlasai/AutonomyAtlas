@@ -1,0 +1,18 @@
+\section{Diffusion as a conditional generative mechanism}
+\label{sec:C06:diffusion}
+Denoising diffusion models learn a reverse process associated with a prescribed noising process. For a declared schedule $0<\beta_t<1$, the standard Gaussian forward transition is $q(x_t\mid x_{t-1})=\mathcal N(\sqrt{1-\beta_t}x_{t-1},\beta_t I)$. Writing $\alpha_t=1-\beta_t$ and $\bar\alpha_t=\prod_{s=1}^t\alpha_s$ gives the directly sampled marginal
+\begin{equation}
+ x_t=\sqrt{\bar\alpha_t}x_0+
+ \sqrt{1-\bar\alpha_t}\,\epsilon,
+ \qquad\epsilon\sim\mathcal N(0,I).
+\end{equation}
+A network can be trained to predict the injected noise under a timestep-conditioned squared-error objective. The reverse parameterization, variance choices, and sampling procedure determine how that prediction is used~\cite{ho2020ddpm}.
+
+For an agent, conditioning can include previous observations, actions, goals, or structured state. The resulting generator models a distribution of possible future observations under the training data's conditional relationships. It does not become a causal simulator merely because actions appear in the prompt. The action labels must correspond to actual interventions, and the training data must identify the relevant effects. Otherwise the generator may produce what usually follows a textual description rather than what the external system would do. Visual realism can make this error harder to detect because the imagined outcome appears coherent.
+
+Sampling cost is important when generation enters a planning loop. If a candidate trajectory requires $K$ denoising evaluations and the planner evaluates $B$ candidates over multiple rounds, model-call count can grow with both $K$ and $B$. Batching can improve throughput while increasing peak memory. Reusing conditional features can save work but must respect changing actions and state. A comparison with a direct policy should include all generative sampling and scoring costs, not only the final chosen trajectory. A method that plans better with a much larger budget answers a different question from one that allocates equal computation more effectively.
+
+Latent diffusion moves generation into a compressed representation produced by an encoder and decoded back into observations~\cite{rombach2021latentdiffusion}. The compression reduces the dimensionality of the denoising computation, while introducing an information bottleneck and decoder distortion. If a safety-relevant indicator disappears in the latent representation, the diffusion process cannot reliably preserve it. A control-oriented latent generator should therefore be evaluated on exact state properties as well as perceptual quality. A small average image error can coexist with a wrong text label, object count, or action affordance.
+
+Diffusion Transformers replace the denoising backbone with a Transformer-based architecture and study its scaling properties~\cite{peebles2022dit}. Architectural scaling results from image synthesis should not be promoted into evidence of reliable agent planning without a control experiment. The relevant bridge is whether action-conditioned generated trajectories improve verified decisions relative to matched alternatives. A generator can be useful for training diversity, counterfactual hypothesis generation, or visualization while remaining unsuitable as the authoritative source of environment state.
+

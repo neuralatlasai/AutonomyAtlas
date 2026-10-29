@@ -1,0 +1,17 @@
+\section{Objectives proxies and constrained policies}\label{sec:C29:objectives}
+A sequential objective can maximize expected discounted task reward, but the reward is a representation of intent rather than intent itself. Outcome labels may omit constraints, reward models may favor presentation, and benchmark graders may accept shortcuts. An agent optimized against such feedback can improve the measured objective while worsening the underlying task. This is a specification and evaluation problem as well as a learning problem.
+
+Let $r_t$ denote task reward and $c_{j,t}$ a cost or constraint-violation signal. A constrained formulation is
+\begin{equation}
+ \max_{\pi}\;\mathbb E_\pi\sum_t\gamma^t r_t,
+ \qquad
+ \mathbb E_\pi\sum_t\gamma^t c_{j,t}\leq d_j.
+\end{equation}
+For this infinite-horizon expression, $t\in\mathbb N_0$, $\gamma\in[0,1)$, $j\in\{1,\ldots,J\}$ indexes a finite set of constraints, $d_j\geq0$ are thresholds, and rewards and nonnegative costs are bounded. A finite-horizon study instead truncates both sums at its declared stopping time. The constraints remain meaningful only if the signals and thresholds represent the desired properties. A positive expected-cost budget can permit rare severe violations. An exactly zero expectation of nonnegative costs would exclude positive costs almost surely at positively weighted times under the modeled law, but a finite sample of zero observed costs does not establish that premise; $\gamma=0$ does not constrain later times at all. An authorization requirement may instead demand that every dispatched action belong to the current allowed set. That property should be enforced at the effect boundary rather than traded against reward through an arbitrary finite penalty.
+
+Reward shaping and refusal training can reduce undesirable proposals, but they do not establish complete mediation. A model can encounter a novel representation or be placed inside a harness that grants broader tools. Conversely, a runtime policy can block unauthorized effects even when the model proposes them. Evaluate proposal behavior and executed behavior separately so a successful control layer is visible without misrepresenting the model's alignment.
+
+Preference learning introduces population and context questions. Whose preferences are represented, under what task, and with which exceptions? A user preference stored months earlier may conflict with a current instruction or an organizational rule. Treating all preferences as timeless facts creates predictable errors. A policy should represent scope, provenance and update authority rather than simply weight the most frequently retrieved statement.
+
+The practical implication is to separate hard constraints, uncertain judgments and optimization objectives. Hard constraints require application-enforced checks where possible. Uncertain judgments require calibrated evidence and review. Objectives guide useful behavior within those boundaries. Collapsing the three into a single textual instruction or scalar reward makes it harder to identify which mechanism failed.
+

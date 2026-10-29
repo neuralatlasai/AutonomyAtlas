@@ -1,0 +1,16 @@
+---
+import Shell from '../layouts/Shell.astro';
+import Icon from '../components/Icon.astro';
+import { book, groups, chapterHref } from '../lib/book';
+---
+<Shell title="The complete book" active="book">
+  <main id="main" class="site-width"><header class="page-intro" id="top"><span class="eyebrow">34 CHAPTERS · ONE CONNECTED ARGUMENT</span><h1>The complete book.</h1><p>Begin with system boundaries, follow a reading path, or go directly to the mechanism you are investigating.</p></header>
+    <div class="catalog-controls"><label><span class="sr-only">Filter chapters</span><input class="filter-input" type="search" placeholder="Find a chapter or technical topic…" data-filter-chapters /></label><span class="eyebrow" role="status" aria-live="polite" data-chapter-count>34 CHAPTERS · 266 SECTIONS</span></div>
+    {groups.map(group => <section class="catalog-section" id={`group-${group.range[0]}`}><header><Icon name={group.icon} size={23} /><h2>{group.name}</h2><small>CHAPTERS {group.range[0]}–{group.range[1]}</small></header>{book.chapters.filter(c=>c.number>=group.range[0]&&c.number<=group.range[1]).map(chapter => <a class="chapter-row" href={chapterHref(chapter.slug)} data-chapter-search={`${chapter.title} ${chapter.sections.map(s=>s.title).join(' ')}`.toLowerCase()}><span>{String(chapter.number).padStart(2,'0')}</span><div><h3>{chapter.title}</h3><p>{chapter.sections.filter(s=>s.level===1).slice(0,3).map(s=>s.title).join(' · ')}</p><div class="row-meta"><span>{chapter.sections.filter(s=>s.level===1).length} sections</span><span>{chapter.references.length} cited sources</span><span>{chapter.figures.length} {chapter.figures.length===1?'figure':'figures'}</span></div></div><Icon name="arrow" size={20} /></a>)}</section>)}
+    <p class="catalog-empty" hidden data-chapter-empty>No chapters match. Try a broader term or use full-text search.</p>
+  </main>
+  <script>
+    const input=document.querySelector<HTMLInputElement>('[data-filter-chapters]');
+    input?.addEventListener('input',()=>{const terms=input.value.toLowerCase().trim().split(/\s+/).filter(Boolean);let total=0;document.querySelectorAll<HTMLElement>('[data-chapter-search]').forEach(row=>{row.hidden=!terms.every(term=>row.dataset.chapterSearch?.includes(term));if(!row.hidden)total++;});document.querySelectorAll<HTMLElement>('.catalog-section').forEach(section=>{section.hidden=!Array.from(section.querySelectorAll<HTMLElement>('[data-chapter-search]')).some(row=>!row.hidden);});const empty=document.querySelector<HTMLElement>('[data-chapter-empty]');if(empty)empty.hidden=total>0;const count=document.querySelector('[data-chapter-count]');if(count)count.textContent=`${total} ${total===1?'CHAPTER':'CHAPTERS'}`;});
+  </script>
+</Shell>

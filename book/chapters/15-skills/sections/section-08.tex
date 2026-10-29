@@ -1,0 +1,27 @@
+\section{Consolidation as controlled hypothesis revision}\label{sec:C15:synthesis}
+The most useful interpretation of a skill bank is a collection of procedural hypotheses with evidence, rather than a set of permanently true rules. A new episode can support, narrow, contradict, or leave unchanged a procedure's applicability. Consolidation should preserve those possibilities. Automatically rewriting every new outcome into a confident lesson makes the bank vulnerable to noise, evaluator error, and shifting environments.
+
+One proposed evaluation separates selection from revision. Freeze the initial bank and measure which skills are retrieved on held-out tasks. Then allow extraction while keeping retrieval fixed. Finally enable maintenance. This sequence identifies whether improvements arise from better access, new content, or pruning and merging. Charge the full cost at each stage and keep the same task order for the paired comparison, then repeat across randomized orders. This is a design for causal diagnosis, not a claim that every effect can be independently identified with a small experiment.
+
+For a candidate merge, retain the original nodes as an experimental control. Evaluate the merged procedure on tasks where each original should apply and on tasks where their preconditions differ. If merging improves average performance but causes violations in the distinguishing cases, the abstraction has traded specificity for coverage. That tradeoff should be reported explicitly. A compact graph with fewer nodes can be easier to serve while preserving a less useful decision boundary.
+
+Harness$^2$ illustrates a neighboring improvement target: task-level harness adaptation and reuse of experience about such adaptations~\cite{corpus261014224}. Its bounded task experiments differ from HyperSkill's explicit procedural-memory organization. Both can alter future behavior around a model without establishing an improvement in the model's own learning algorithm. The relevant comparison is what gets updated, which feedback selects it, how much extra execution is used, and whether held-out gains survive. Labels such as ``self-evolving'' do not settle those questions.
+
+An original cross-layer deduction follows. The lifetime of a skill should be constrained by the lifetime of its assumptions. Tool version, environment behavior, model interpretation, and authorization can each invalidate a procedure without making its original episode false. This suggests expiring reusable status separately from deleting historical evidence. A later agent can still study why the skill once worked while being prevented from applying it automatically under changed conditions.
+
+Trajectory multiplicity creates a distinct ranking sensitivity. Suppose a bank retains $k$ additional, separately identified copies of a retrieved trajectory containing skill $s$, and those copies survive candidate selection. The count rule above becomes $\kappa'(s)=\kappa(s)+k$ even though no independent experience was added. A competing skill absent from that trajectory receives no corresponding increment. This construction is conditional on retaining and retrieving the copies; it does not assert that the inspected implementation necessarily admits a particular duplicate. It identifies a test for exposure concentration: duplicate an episode's representation without changing its factual content and inspect ranking and downstream behavior. Grouping evidence by source lineage or normalizing trajectory contributions are possible interventions, whose effects on rare useful experience would also need measurement. Co-occurrence, independent support, and causal utility remain different quantities.
+
+Conditional skill evidence can compose only under retained preconditions. Suppose a workflow has $K$ stages and $F_j$ is failure at stage $j$. If, for every reachable preceding success history under the evaluated configuration,
+\begin{equation}
+ P(F_j\mid F_1^c,\ldots,F_{j-1}^c)\leq\epsilon_j,
+ \qquad 0\leq\epsilon_j\leq1,
+\end{equation}
+then the chain rule gives
+\begin{equation}
+ P\!\left(\bigcup_{j=1}^{K}F_j\right)
+ \leq1-\prod_{j=1}^{K}(1-\epsilon_j)
+ \leq\sum_{j=1}^{K}\epsilon_j.
+\end{equation}
+No independence assumption is required, but the conditional bounds must hold for the composed workflow, not merely for each skill on its original marginal task distribution. A tool migration, shared memory update, or changed predecessor can invalidate that premise. Finite test estimates need their own uncertainty bounds; a stored utility scalar is not such a certificate. Mandatory authorization remains a separate enforced precondition.
+
+Procedural memory thus connects representation, retrieval, control, and governance. Its promise is selective reuse of experience; its central risk is selective reuse of an abstraction whose scope was never established. The rigorous engineering response is not to avoid skill banks, but to make their preconditions, evidence, revisions, costs, and failures part of the technical object being evaluated. Retrieval in Chapter~\ref{ch:C16} determines which of these hypotheses reaches the next decision.

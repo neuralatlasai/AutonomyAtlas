@@ -1,0 +1,44 @@
+\section{A concrete audit of a paired repository comparison}\label{sec:C26:pairedcase}
+Consider two coding systems evaluated on the same repository-task manifest. The manifest names the base commit, issue description, dependency environment, required tests, and allowed resource envelope. Each system produces one primary attempt and optional additional attempts under a separately declared budget. The experiment's primary question is deadline-constrained verified completion, not whether a successful patch can eventually be found with unlimited retries. Defining this question before execution determines how timeouts and infrastructure problems enter the analysis.
+
+The harness first constructs an isolated environment and records its identity. The system receives the task and permitted tools, but not the reference patch or hidden evaluator. At termination, the harness freezes the produced artifact, records its digest, and runs the evaluator against that digest. If the artifact changes during evaluation, the run is invalid and must be diagnosed rather than scored against a moving target. This sequence is directly auditable in the task construction, execution and scoring code paths.
+
+The inspected SWE-bench execution module exposes \path{run_instance} and \path{run_instances}; the language-model evaluation harness exposes \path{simple_evaluate} and \texttt{evaluate}. These names identify concrete entry points for examining how tasks become outcomes\cite{jimenez2023swebench,repo_lm_eval}. Their presence does not establish that a custom adapter passes the intended arguments or that an experiment used the inspected revision. The ledger must connect the callable to actual configuration and recorded execution before calling the result reproduced.
+
+Table~\ref{tab:C26:ledger} specifies the evidence needed at each boundary. The table contains no measured outcome. It is a testable contract for distinguishing model errors from deterministic evaluation defects.
+\begingroup\setlength{\tabcolsep}{3pt}\small
+\begin{longtable}{L{24mm}L{41mm}L{43mm}}
+\caption{Evidence boundaries in a repository evaluation.}\label{tab:C26:ledger}\\
+\toprule Boundary & Required identity or observation & Failure to expose \\
+\midrule\endfirsthead
+\toprule Boundary & Required identity or observation & Failure to expose \\
+\midrule\endhead
+Task construction & Task ID, base commit, dependency manifest, reset policy. & A reused checkout contains a previous answer or a changed dependency. \\
+Model context & Prompt digest, tool schemas, accessible history and memory scope. & One arm receives additional solution-bearing context. \\
+Execution & Attempt ID, tool calls, costs, timeouts and environment events. & Failed paid calls disappear from the budget record. \\
+Artifact freeze & Patch or commit digest and creation time. & Tests run on a different artifact from the submitted one. \\
+Grading & Evaluator revision, selected tests, raw verdict and error status. & Evaluator failure is interpreted as an ordinary negative result or omitted. \\
+Aggregation & Eligibility denominator, pairing and missing-outcome policy. & Difficult failed runs are excluded after their outcomes are known. \\
+Confirmation & Untouched tasks and fixed final configuration. & Repeated holdout tuning is reported as independent assessment. \\
+\bottomrule\end{longtable}
+\endgroup
+
+Suppose some outcomes remain unresolved because the evaluator failed after execution. A success rate computed only over resolved runs is a conditional quantity. Without assumptions about missingness, it cannot identify the overall task success rate. If there are $N$ eligible runs, $s$ confirmed successes and $u$ unresolved outcomes, a simple identification interval is $[s/N,(s+u)/N]$ when all other outcomes are confirmed failures. The interval expresses missing information; it is not a confidence interval for task sampling.
+
+This distinction matters when systems fail differently. One system may generate patches that stress the evaluator and cause more unresolved runs. Excluding them can make it appear better even if they are concentrated among difficult cases. Conversely, scoring every evaluator crash as a model failure mixes infrastructure and policy behavior. Report the overall operational outcome and a cause-stratified analysis, while retaining a sensitivity analysis for unresolved cases. Do not choose the classification after seeing which ordering it favors.
+
+For paired comparison, preserve the outcome pair for each task. Tasks where both systems succeed contribute differently from tasks where only one succeeds. A test based on discordant pairs can be useful under its assumptions, but repository clustering or persistent memory can violate independence between pairs. A cluster-aware bootstrap or hierarchical analysis should then follow the declared task-generation structure. More attempts on the same repository do not create independent evidence about new repositories.
+
+Resource matching requires another audit. If system A retries malformed outputs while system B stops, equal configured call limits can conceal different paid usage. Record actual model and tool consumption. If one arm receives more wall-clock because its environment starts faster, decide whether startup is part of the deployment comparison or a nuisance variable to control. Both choices can be legitimate; silently switching between them cannot. A complete report shows configured ceilings and realized consumption.
+
+The evaluator should also inspect null and reference conditions. The unmodified repository reveals whether the benchmark's tests already pass without a fix. The reference patch reveals whether the intended environment can represent the benchmark's declared solution. A null pass can indicate inadequate tests; a reference failure can indicate environment drift or benchmark defects. Neither result should be attributed to the evaluated agent. These controls establish whether the instrument can distinguish the states it is intended to score.
+
+Finally, add an independent audit of accepted patches. Dynamic witness tests can expose behavior missing from the fixed suite, while requirement review prevents incidental reference choices from becoming new obligations. Keep the original and audited scores separate, identify the sampled passing-trial population, and cluster uncertainty by task. A revised acceptance criterion changes the estimand; documenting that change makes the evidence more useful rather than less impressive. The result is a comparison whose limitations are concrete enough to guide the next experiment.
+
+An additional distinction concerns cost per successful task. Dividing total cost by confirmed successes can be operationally informative, but it is unstable when success is rare and can hide differences in task mix. Report total eligible tasks, confirmed successes, unresolved outcomes and aggregate cost alongside the ratio. If a system fails quickly on hard tasks, it may have low average cost per attempt without being efficient at useful work. If it spends heavily to rescue difficult cases, its average attempt cost can rise while its cost per accepted deliverable improves. The relevant conclusion depends on which work the deployment must complete, not on whichever denominator yields the smaller number.
+
+The benchmark should preserve outcome severity as well as success. A task that returns no patch, a patch that fails tests, and a patch that passes tests while changing access controls all count differently in an operational loss model. The primary benchmark can retain a binary completion definition for comparability, but a secondary failure taxonomy should record those distinctions. Severity weights require domain justification and sensitivity analysis. They should not be tuned to favor the preferred system after the failures are known. This analysis is particularly important when moving from isolated coding containers to tools that can affect external users.
+
+Releasing the comparison also requires attention to provenance and confidentiality. A trace can contain credentials, private code, personal data or hidden evaluator material. Redaction should preserve event identity, timing, error categories and the evidence needed to reconstruct the score while removing content that cannot be shared. If redaction removes decisive evidence, state the resulting reproduction limit explicitly. A public summary and a private complete audit are different evidence products. Neither should be represented as the other. The scientific requirement is an honest account of which claims an independent reader can actually check from the released artifacts.
+
+A signed manifest can bind the released task list, artifact digests and scoring configuration, reducing ambiguity about which experimental objects a later reproduction attempts to reconstruct.

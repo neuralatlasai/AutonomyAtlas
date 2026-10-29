@@ -1,0 +1,17 @@
+\section{Security metrics and evidence interpretation}\label{sec:C28:metrics}
+Attack success requires a clear denominator. Per-payload, per-task, per-attacker-budget and per-session rates answer different questions. A red team allowed many attempts can have a high probability of finding one failure even when most attempts fail. A defender that abandons the benign task can reduce observed attack success while destroying utility. Report both attacker outcomes and legitimate-task outcomes under the same protocol.
+
+Deployment risk also includes exposure and non-adversarial failures. For a declared operational violation $V\in\{0,1\}$ and encounter with a specified attack channel $E\in\{0,1\}$, the same deployment law obeys
+\begin{equation}
+ \Pr(V=1)=\Pr(E=1)\Pr(V=1\mid E=1)
+ +\Pr(E=0)\Pr(V=1\mid E=0).
+\end{equation}
+Terms with zero encounter probability are interpreted through their zero joint contribution. A benchmark attack-success rate estimates neither the exposure probability nor, without transport assumptions, the deployment conditional rate. Moreover, faulty task interpretation or stale permissions can cause violations when $E=0$. Report adversarial resistance, benign utility, and non-adversarial constraint failures separately instead of converting a stress-test rate directly into an operational breach forecast.
+
+Severity and reach also matter. Attempted access to a synthetic forbidden record, actual controlled disclosure, persistent policy corruption and cross-tenant effects are different outcomes. Do not reduce them to one binary score without retaining categories. If severity weights are used, justify them and show sensitivity. A small average improvement can coexist with a serious regression in a rare but consequential class.
+
+Statistical units follow the threat model. Multiple payloads generated from one template are not independent attack families. Several attacks against one workflow share environment and policy structure. Confidence intervals and holdouts should preserve these dependencies. Transfer to new tools, tasks and model versions needs direct testing rather than extrapolation from the number of attempted strings.
+
+An implementation ledger connects attack surface, defender boundary, policy decision, actual effect and judge verdict. A failure is especially informative when counterfactual replay shows that changing one boundary prevents the violation while preserving the task. This is stronger than a screenshot of a harmful output because it identifies a mechanism. The ledger also supports regression testing after SDK or tool updates.
+
+The resulting conclusions should remain conditional. A passing suite establishes resistance to tested adversaries under the recorded budget and environment. A successful attack identifies at least one failure in that setting. Neither result alone determines deployment risk across all users and tasks. Security research becomes actionable when it identifies enforceable boundaries, concrete bypass conditions, and measured utility costs without inflating finite evidence into universal assurance.

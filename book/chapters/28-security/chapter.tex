@@ -1,0 +1,15 @@
+\chapter{Stateful Agent Security: Red-Team and Blue-Team Mechanisms}\label{ch:C28}
+DTap, ExploitGym, and CyberGym E2E evaluate different 2026 adversarial objects: simulated tool-mediated interactions, agent-assisted exploitation tasks under deliberately permissive research conditions, and memory-safety vulnerability reproduction and repair~\cite{corpus260504808,corpus260511086,corpus260604460}. A result in one object does not estimate attack prevalence or compromise probability in another. Progent's revised symbolic confinement mechanism addresses a different question again: which proposed tool effects can cross an enforced policy boundary~\cite{corpus250411703}. These cases determine the threat model and observation boundary before any security comparison is meaningful.
+
+Agent security concerns what a system can be induced to do across model, context, memory, tools and infrastructure boundaries. A harmful answer and an unauthorized external effect are different events. A model can resist a malicious instruction while a tool adapter leaks credentials, or produce an unsafe proposal that an application policy correctly blocks. Evaluation must observe the complete path from adversarial influence to actual effect.
+
+This chapter treats red teaming as bounded adversarial evaluation and blue teaming as prevention, detection, containment and recovery. The focus is defensive research in controlled environments. Capability benchmarks, prompt-injection benchmarks and operational incident studies provide different kinds of evidence; their results should not be converted into one universal security score.
+
+\input{book/chapters/28-security/sections/01.tex}
+\input{book/chapters/28-security/sections/02.tex}
+\input{book/chapters/28-security/sections/03.tex}
+\input{book/chapters/28-security/sections/04.tex}
+\input{book/chapters/28-security/sections/05.tex}
+\input{book/chapters/28-security/sections/06.tex}
+\input{book/chapters/28-security/sections/07.tex}
+\input{book/chapters/28-security/sections/08.tex}

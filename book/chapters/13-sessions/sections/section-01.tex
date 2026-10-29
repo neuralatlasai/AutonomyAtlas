@@ -1,0 +1,15 @@
+\section{Session identity is a semantic boundary}\label{sec:C13:identity}
+A session is a bounded continuity relationship among an actor, an objective, a sequence of observations, and the authority under which actions occur. It is not identical to one model request, one browser tab, or one transcript. A task can span several model calls and tool processes; one user session can contain several tasks; a durable agent can serve many sessions while maintaining selected cross-session memory. Conflating these identities makes it difficult to determine what should survive interruption and what information may legitimately transfer to a new interaction.
+
+Use separate identifiers for tenant, user or principal, session, task, run, model call, and external effect. A run is a particular attempt to advance a task under a chosen configuration. Retrying a run does not create a new user objective, and creating a new session does not automatically revoke or inherit every earlier authorization. These relationships should be explicit data rather than inferred from a conversational summary. Otherwise, a model may treat an old permission as current merely because both appear in the same retrieved context.
+
+A useful state decomposition is
+\begin{equation}
+ S_t=(I_t,G_t,A_t,P_t,E_t,V_t),
+\end{equation}
+where $I_t$ contains identities and scope, $G_t$ the goal and completion predicate, $A_t$ authorization, $P_t$ progress and pending work, $E_t$ evidence and effect receipts, and $V_t$ version references. The decomposition is a proposed systems specification. It does not claim that a tuple of these fields is a universally sufficient control state. Its purpose is to prevent model-visible history from being the only place in which operational commitments exist.
+
+Session termination also needs a definition. A session can be paused, abandoned, completed, or closed for retention purposes. Those states have different consequences. Pausing should preserve pending work without implying that an external operation has been canceled. Completing a task should identify which success predicates were checked. Closing a session may remove active context while retaining legally or operationally required effect records. Memory consolidation can occur after closure, but only under the applicable retention and sharing policy.
+
+Managed agent documentation and persistence frameworks expose concrete session and checkpoint mechanisms~\cite{openai2026agents,langgraph2026docs}. These interfaces support implementation, but they do not establish the semantic correctness of a resumed task. A checkpoint can faithfully restore an obsolete plan. A session service can preserve every message while allowing a stale authorization to influence a new run. The application must define which state is authoritative and which transformations are permitted at each boundary.
+

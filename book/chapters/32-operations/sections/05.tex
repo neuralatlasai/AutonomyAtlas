@@ -1,0 +1,21 @@
+\section{Failure detectors and bounded recovery policies}\label{sec:C32:05}
+Agent failures include model errors, invalid tool calls, stale observations, context loss, memory poisoning, authorization mistakes, service outages, evaluator failures, and infrastructure faults. The same outward symptom can have several causes. A missing artifact may result from no attempted write, a permission rejection, a transport failure, a successful write in the wrong workspace, or a stale listing. Diagnosis should use discriminating observations rather than repeatedly asking the model to try harder.
+
+A recovery policy is a decision rule over failure evidence and remaining budget. Let $r$ be a recovery action with expected task value $V_r$, expected resource cost $C_r$, and specified risk $Q_r$. Define the admissible set
+\begin{equation}
+ \mathcal R_q(S)=\{r\in\mathcal R(S):Q_r\leq q_{\max}\},
+\end{equation}
+where $\mathcal R(S)$ excludes actions without current authority or required state, and $q_{\max}$ is a declared risk limit in the units of $Q_r$. For a nonempty finite set and $\lambda\geq0$, one possible decision rule is
+\begin{equation}
+ r^*\in\argmax_{r\in\mathcal R_q(S)}[V_r-\lambda C_r].
+\end{equation}
+The coefficient $\lambda$ converts resource cost to the utility units of $V_r$; ties require a declared selection rule. For general infinite action sets, attainment needs additional assumptions. An empty admissible set means that this optimization supplies no recovery action; cancellation or escalation is available only if separately admissible. Estimated values and risks remain uncertain. Conservative policies can prefer reconciliation when effect status is unknown. A retry count is not a substitute for a recovery model, because repeated identical attempts can be positively correlated and can worsen overload.
+
+Budget exhaustion should produce a typed terminal state. Distinguish completed, failed, cancelled, waiting for external input, and outcome unknown. A model-generated success statement does not override the runtime's effect ledger. Conversely, a timed-out worker may have produced a valid artifact that can be recovered and verified. The termination protocol should specify which partial outputs are retained, who may resume them, and whether their authority or evidence has expired.
+
+Bounded local recovery does not imply bounded external resolution. A timeout cannot by itself distinguish a failed remote service from a delayed one. If receipts remain unavailable, the runtime can stop spending its local budget and durably return an unresolved outcome, but cannot manufacture evidence that the effect is absent. An eventual-resolution claim requires explicit assumptions about service recovery, message delivery, identity retention and continued reconciliation access. Test those premises separately from restart success. In particular, expiring credentials can make a previously available status query inadmissible; escalation must then obtain current authority rather than replay the old grant.
+
+Failure injection tests these claims directly. Crash immediately before submission, after submission, after remote commit, after local reconciliation, and during derived-memory updates. Introduce delayed duplicate responses, stale index replicas, broken validators, schema changes, and worker partitions. Check invariants about duplicate effects, unauthorized operations, lost writes, and eventual terminal state. These tests should run against controlled fixtures or isolated services; a successful test supports the tested contract, not an unrestricted guarantee.
+
+The proposed instrumentation should record recovery-induced changes in the policy distribution. Offloading a failed tool output, replacing a summary, or retrieving a different skill can change the model's next decision. A recovery that eventually succeeds may have introduced a hidden regression in a rare constraint. Evaluate the complete recovered trajectory rather than treating recovery as an infrastructure event independent of cognition.
+

@@ -1,0 +1,27 @@
+\section{Plan contracts and compositional verification}
+\label{sec:C10:contracts}
+For deterministic transitions, a local action contract can be expressed as $\{P_i\}\,a_i\,\{Q_i\}$: if precondition $P_i$ holds and the action terminates according to its specification, postcondition $Q_i$ holds. A sequence is compositionally valid when each postcondition establishes the next precondition and the invariant remains true. The proof is induction over steps. This is a precise reason to represent preconditions and observed postconditions explicitly rather than relying on a fluent plan whose steps merely sound compatible.
+
+The weakest precondition for a deterministic action $a$ and desired postcondition $Q$ is the set of initial states from which executing $a$ guarantees $Q$, under the action's semantics. Backward reasoning through a plan can reveal missing assumptions. If nontermination is possible, a weakest precondition for total correctness includes termination; a weakest liberal precondition describes partial correctness and does not require it. A planning contract must declare which claim is intended. For example, an update operation may require that a record exists, the version matches, and the user is authorized. A prior search that merely found a similar record does not establish those predicates. Natural-language planning can propose the chain, while executable checks verify the conditions at the actual boundary.
+
+Stochastic actions require probabilistic contracts or conservative feasible sets. Suppose step $i$ preserves the required conditions with conditional failure probability at most $\delta_i$, given that previous steps have succeeded. A union-bound argument gives total failure probability at most $\sum_i\delta_i$, without requiring independent failures. The conditional qualification is essential. An average failure rate measured on unrelated states does not supply a bound for a planner-selected action. If authorization is a hard constraint rather than a statistical reliability target, it should be checked deterministically where the system has authoritative state.
+
+{\small\setlength{\tabcolsep}{3pt}
+\begin{table}[!htbp]
+\centering
+\caption{Plan artifacts and the evidence they require.}\label{tab:C10:contracts}
+\begin{tabular}{L{28mm}L{38mm}L{40mm}}
+
+\toprule Artifact & Required semantics & Typical failure\\\midrule
+Goal predicate & Verified desired external state & Fluent completion claim without effect.\\
+Action precondition & Current state and authority & Stale record version or revoked access.\\
+Postcondition & Observed outcome after execution & Treating intended result as observed.\\
+Invariant & Preserved constraint across steps & A locally useful but forbidden action.\\
+Recovery branch & Defined partial-failure response & Blind retry of a committed operation.\\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+
+Contracts remain partial specifications. A schema checker can establish argument shape, not task relevance. A unit test can establish behavior for selected cases, not every possible input. A proof can establish a formal statement while leaving the translation from user intent wrong. Compositional verification is strongest when those boundaries are explicit: combine local guarantees with independent checks of the overall acceptance condition, and retain uncertainty where the available specification does not decide the matter.
+

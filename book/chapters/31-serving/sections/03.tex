@@ -1,0 +1,22 @@
+\section{Bandwidth arithmetic and the decode bottleneck}\label{sec:C31:03}
+A forward pass through dense parameter matrices costs roughly $2P$ FLOPs per generated token before attention and other corrections. For a batch of $B$ sequences with retained length $T$, a useful first-order decode estimate is
+\begin{equation}
+ F_{\rm step}\simeq B(2P+4LTd).
+\end{equation}
+The attention term counts query-key products and weighted value accumulation for all query heads; KV-head sharing reduces storage but not that entire arithmetic term. Kernels, sparsity, precision, and architecture alter the actual executed work. MoE accounting must distinguish activated parameter work from total expert storage and communication.
+
+If each weight is streamed once per batch step and all retained KV data is read once, an approximate HBM traffic demand is
+\begin{equation}
+ D_{\rm step}\simeq Pb_w+B\,2LTh_{\rm KV}d_hb_{\rm KV}.
+\end{equation}
+This assumes reuse of weights across the batch and ignores additional writes and workspaces. It can underestimate traffic when kernels reload data, and overestimate it when relevant data remain in on-chip caches. Given sustainable bandwidth $\mathcal B$ and sustainable compute $\mathcal F$,
+\begin{equation}
+ T_{\rm step}\geq\max\{D_{\rm step}/\mathcal B,
+ F_{\rm step}/\mathcal F\}.
+\end{equation}
+This roofline-style inequality is conditional on the stipulated work and streaming-traffic model, not a hardware-independent latency guarantee. If $D_{\rm step}$ overcounts traffic eliminated by on-chip reuse, the resulting quotient is not a lower bound for that implementation. Actual indispensable work and traffic would provide a lower bound; the approximations here provide a diagnostic floor for the declared streaming scenario. Launch overhead, synchronization, communication, imbalance, and queueing can increase measured time substantially.
+
+For the hypothetical fourteen-sequence configuration above, assume 2.0 TB/s sustainable bandwidth and 120 TFLOP/s sustainable compute. Reading the 16 GB weights and fourteen 4-GiB caches demands approximately 76.13 GB per step. Its bandwidth lower bound is approximately 38.1 ms. The compute estimate is approximately 464.5 GFLOPs, giving a 3.87-ms compute lower bound. Under these assumptions the bandwidth bound dominates. Quantizing weights alone removes only part of the dominant traffic; reducing KV bytes or retained length can matter more at long contexts. These are deductions from a specified model, not empirical speedups.
+
+Batching trades weight amortization against KV traffic and latency. Increasing $B$ reduces weight bytes per output token but increases total state and can delay individual sequences. A scheduler optimized for aggregate tokens per second can worsen the time until a particular tool call is issued. For agents whose next action unlocks external work, the cost of that delay can propagate through an entire workflow. Performance should therefore include per-session interactivity and task-critical latency, not only engine utilization.
+

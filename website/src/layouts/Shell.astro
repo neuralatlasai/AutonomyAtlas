@@ -1,0 +1,85 @@
+---
+import '../styles/global.css';
+import '@fontsource-variable/inter/index.css';
+import '@fontsource-variable/source-serif-4/index.css';
+import '@fontsource-variable/source-serif-4/wght-italic.css';
+import 'katex/dist/katex.min.css';
+import Search from '../components/Search';
+import Icon from '../components/Icon.astro';
+import { book, base, href, chapterHref, groups } from '../lib/book';
+interface Props { title?: string; description?: string; active?: string; reader?: boolean; }
+const { title = 'Agentic State', description = 'Context, Memory, and Control in Adaptive AI. A complete technical monograph for researchers.', active = '', reader = false } = Astro.props;
+const nav = [{label:'The book',path:'book/',id:'book'}, {label:'Reading paths',path:'reading-paths/',id:'paths'}, {label:'Figures',path:'figures/',id:'figures'}, {label:'References',path:'references/',id:'references'}];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#faf9f5" />
+    <link rel="icon" type="image/png" href={href('brand/agent-mark.png')} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, 'https://neuralatlasai.github.io')} />
+    <meta property="og:title" content={`${title} — Agentic State`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <title>{title === 'Agentic State' ? 'Agentic State — Context, Memory, and Control' : `${title} — Agentic State`}</title>
+    <script is:inline>
+      try { document.documentElement.dataset.theme = localStorage.getItem('agentic-theme') || 'light'; } catch {}
+    </script>
+  </head>
+  <body class:list={{'is-reader': reader}}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href={base} aria-label="Agentic State home">
+        <img src={href('brand/agent-mark.png')} width="46" height="46" alt="" />
+        <span>Agentic <em>State</em><small>AUTONOMY ATLAS</small></span>
+      </a>
+      <nav class="primary-nav" aria-label="Main navigation">
+        {nav.map(item => <a href={href(item.path)} aria-current={active === item.id ? 'page' : undefined}>{item.label}</a>)}
+      </nav>
+      <div class="header-actions">
+        <button class="search-trigger" data-open-search aria-label="Search the book"><Icon name="search" /><span>Search</span><kbd>Ctrl K</kbd></button>
+        <button class="icon-button theme-toggle" aria-label="Switch color theme" title="Switch color theme"><Icon name="moon" /></button>
+        <button class="icon-button contents-trigger" data-open-contents aria-label="Open book contents"><Icon name="menu" /></button>
+      </div>
+    </header>
+    <slot />
+    <footer class="site-footer">
+      <div><a class="footer-title" href={base}>Agentic State</a><p>Context, Memory, and Control in Adaptive AI</p></div>
+      <nav aria-label="Publication links">
+        <a href={href('about/')}>About this edition</a>
+        <a href={href('downloads/agentic-state.pdf')}>Download PDF <Icon name="download" size={16} /></a>
+        <a href="https://github.com/neuralatlasai/AutonomyAtlas">Source repository <Icon name="arrow" size={16} /></a>
+      </nav>
+      <div class="footer-bottom"><span>29 OCTOBER 2026 EDITION</span><span>34 chapters · 356 references</span><a href="#top">Back to top</a></div>
+    </footer>
+    <dialog class="contents-dialog" aria-labelledby="contents-title">
+      <div class="contents-dialog-head"><span class="eyebrow">THE COMPLETE MONOGRAPH</span><button class="icon-button" data-close-contents aria-label="Close contents"><Icon name="close" /></button></div>
+      <h2 id="contents-title">Explore the book</h2>
+      <p class="muted">From model foundations to persistent, adaptive systems.</p>
+      <nav class="drawer-links" aria-label="Publication navigation">{nav.map(item => <a href={href(item.path)}>{item.label}</a>)}</nav>
+      <nav aria-label="All chapters">{groups.map(group => <section><h3>{group.name}</h3><ol>{book.chapters.filter(c => c.number >= group.range[0] && c.number <= group.range[1]).map(c => <li><a href={chapterHref(c.slug)}><span>{String(c.number).padStart(2,'0')}</span>{c.title}</a></li>)}</ol></section>)}</nav>
+    </dialog>
+    <Search base={base} client:load />
+    <script>
+      const dialog = document.querySelector<HTMLDialogElement>('.contents-dialog');
+      let contentsOpener: HTMLElement | null = null;
+      document.querySelectorAll<HTMLButtonElement>('[data-open-contents]').forEach(button => button.addEventListener('click', () => { contentsOpener = button; dialog?.showModal(); }));
+      document.querySelector('[data-close-contents]')?.addEventListener('click', () => dialog?.close());
+      dialog?.addEventListener('close', () => contentsOpener?.focus());
+      dialog?.addEventListener('click', event => { if (event.target === dialog) { const r=dialog.getBoundingClientRect(); if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom) dialog.close(); } });
+      document.querySelectorAll('[data-open-search]').forEach(button => button.addEventListener('click', () => {const searchDialog=document.querySelector<HTMLElement>('.search-dialog');if(searchDialog&&searchDialog.dataset.searchReady!=='true')searchDialog.dataset.searchRequested='true';window.dispatchEvent(new Event('agentic:search'));}));
+      const themeButton=document.querySelector('.theme-toggle');
+      const labelTheme=()=>themeButton?.setAttribute('aria-label',`Switch to ${document.documentElement.dataset.theme==='dark'?'light':'dark'} theme`);
+      labelTheme();
+      themeButton?.addEventListener('click', () => { const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = theme;labelTheme(); try {localStorage.setItem('agentic-theme',theme);} catch {} });
+      const tocLinks = document.querySelectorAll<HTMLAnchorElement>('.on-this-page a');
+      const headings = Array.from(tocLinks).map(a=>document.getElementById(decodeURIComponent(a.hash.slice(1)))).filter((h):h is HTMLElement=>h!==null);
+      const observer = new IntersectionObserver(entries => { for(const entry of entries){if(entry.isIntersecting){tocLinks.forEach(a=>a.classList.toggle('is-current',decodeURIComponent(a.hash.slice(1))===entry.target.id));}} }, {rootMargin:'-10% 0px -75% 0px'});
+      headings.forEach(h=>observer.observe(h));
+      const progress=document.querySelector<HTMLElement>('.reading-progress');
+      if(progress){const update=()=>{const height=document.documentElement.scrollHeight-innerHeight;progress.style.width=`${height>0?Math.min(100,scrollY/height*100):0}%`;};addEventListener('scroll',update,{passive:true});update();}
+    </script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+\section{Scaling laws under an explicit compute model}
+\label{sec:C07:scaling}
+An empirical scaling fit can organize model and data allocation. Consider $L(N,D)=E+A N^{-\alpha}+B D^{-\beta}$ with positive coefficients, where $N$ is parameter count and $D$ training tokens. Under the approximate constraint $C=\kappa ND$, substitute $D=C/(\kappa N)$ and differentiate with respect to $N$. The stationary condition is
+\begin{equation}
+ N^{\alpha+\beta}=\frac{\alpha A}{\beta B}
+ \left(\frac C\kappa\right)^\beta.
+\end{equation}
+Thus $N\propto C^{\beta/(\alpha+\beta)}$ and $D\propto C^{\alpha/(\alpha+\beta)}$ within this model. Equal exponents imply equal power-law scaling of model size and tokens. The derivation is algebraic; whether the fitted loss form extrapolates is empirical.
+
+The Chinchilla study compares allocation strategies under training compute and reports a 70-billion-parameter model trained on 1.4 trillion tokens, against Gopher's 280 billion parameters and 300 billion tokens in its comparison table~\cite{hoffmann2022chinchilla}. These are author-reported configurations, not a universal prescription for later architectures. The fitted frontier depends on data quality, tokenizer, optimization, context length, and the compute accounting convention. Inference cost also changes the economic objective: a model served repeatedly can justify more training to reduce per-query cost, even when that choice is not optimal for one fixed pretraining-FLOP budget.
+
+For agents, the downstream objective further complicates allocation. A lower average next-token loss need not improve rare tool syntax, permission handling, or multi-step recovery in the same proportion. A model can improve on common text while remaining poorly calibrated on long action histories. Scaling studies should therefore include held-out interactive diagnostics whose exposure is controlled. These diagnostics should not be repeatedly tuned into the training mixture without retaining an untouched evaluation set. Otherwise the apparent relation between scale and agent competence can become a relation between scale and benchmark-specific data engineering.
+
+The approximation $C\approx6ND$ is useful for dense Transformer training under particular forward/backward accounting assumptions. It omits or simplifies attention's length-dependent contribution, embeddings, sparsity, recomputation, and communication. A long-context training run can depart materially from this estimate. Mixture-of-experts training must distinguish total stored parameters from activated parameters, while routing and all-to-all communication introduce additional costs. Report estimated mathematical FLOPs separately from hardware utilization and wall-clock time. Calling a run compute-matched because parameter count times tokens matches can conceal substantial differences in the actual computation.
+

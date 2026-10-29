@@ -1,0 +1,25 @@
+\section{Modern MCP declares versions on every request}\label{sec:C19:versioning}
+MCP 2026-07-28 uses per-request version and capability metadata, without a negotiation handshake. The server accepts or rejects each request independently. Servers implement \path{server/discover}; clients may call it to obtain supported versions, capabilities, and identity, but may also send another request directly and handle an unsupported-version error~\cite{mcp2026compat,mcp2026discover}. This is the current behavior, not a renamed form of the legacy initialization sequence.
+
+The base protocol requires the protocol-version and client-capabilities fields in request \path{_meta}; client identity is recommended but not universally required~\cite{mcp2026base}. The tool page's prefatory example note groups identity with required metadata, whereas the base requirements and \texttt{RequestMetaObject} make it optional. Requiredness here follows those explicit base and schema definitions~\cite{mcp2026tools,mcp2026schema}. A discovery request can be described as a typed record without conflating its wire encoding with its semantic identities. Let $\mathcal Q,\mathcal I,\mathcal M$, and $\mathcal P$ be the admissible RPC versions, correlation identifiers, methods, and parameter records. A constructed request is
+\begin{equation}
+\begin{aligned}
+ r_d&=(\rho_2,i_d,m_d,p_d)
+       \in\mathcal Q\times\mathcal I\times\mathcal M\times\mathcal P,\\
+ p_d&=\langle\mu_d\rangle,\qquad
+ \mu_d=(v_\star,C_d),\qquad C_d=\varnothing.
+\end{aligned}
+\label{eq:C19:discovery_request_record}
+\end{equation}
+The first four coordinates encode the \path{jsonrpc}, \path{id}, \path{method}, and \path{params} fields. The constant $\rho_2$ denotes JSON-RPC 2.0, $i_d$ an arbitrary request-correlation identifier, and $m_d$ the \path{server/discover} method. Inside the parameter record, $\mu_d$ encodes \path{_meta}; $v_\star$ is the 2026-07-28 revision carried by \path{io.modelcontextprotocol/protocolVersion}, and $C_d$ is the capability-declaration map carried by \path{io.modelcontextprotocol/clientCapabilities}. The empty map declares no client capabilities. These coordinates do not identify a durable task, conversational session, or external-effect key.
+
+Equation~\ref{eq:C19:discovery_request_record} is a constructed schema-level record, not a trace from a tested server or a complete JSON serialization. On Streamable HTTP, the declared version is also represented in the protocol-version header under the transport's rules. A mismatch must be treated according to that binding rather than silently guessing which version the peer intended.
+
+The same revision makes result interpretation explicit through \texttt{resultType}. Core values distinguish \texttt{complete} from \path{input_required}; a value unrecognized by both the core and agreed extensions is invalid, while an absent field from an earlier server is treated as complete for compatibility~\cite{mcp2026base}. An input-required result is neither a completed tool effect nor a generic transport error. It can carry input requests, opaque continuation state, or both; continuation state alone need not mean that a user form is missing. A resubmission follows that continuation contract, uses a new RPC correlation identifier, and preserves the application operation identity where applicable. The continuation token is not itself a grant or proof of effect completion. This spelling and message role also differ from A2A's interrupted task state: translating between the protocols requires a semantic mapping, not replacement of one status string by another.
+
+An unsupported-version response lists supported versions, allowing the client to retry with a mutually supported choice or surface incompatibility~\cite{mcp2026compat}. The retry should preserve the application operation's identity while respecting that a protocol retry and an effect retry are different concepts. A rejected version normally precedes application execution, but clients should not generalize that ordering to arbitrary transport failures or tool timeouts.
+
+Self-contained requests reduce reliance on connection-local negotiation state. They do not mean that the server cannot maintain application data. Persistent state must be referenced explicitly rather than inferred from a shared socket or process. This supports multiplexing unrelated tasks while making the application responsible for its own session and authorization identifiers. Reusing a connection does not create a shared conversational memory contract.
+
+Legacy revisions through 2025-11-25 establish a session through initialization. A dual-era implementation can support both modern and legacy behavior, using the transport-specific fallback rules~\cite{mcp2026compat}. A recognized modern error should not be mistaken for evidence that the peer is legacy. An indiscriminate fallback can hide a real version or capability error and accidentally select weaker semantics. Compatibility testing should therefore exercise explicit modern rejection, genuine legacy behavior, and a peer supporting both eras.
+

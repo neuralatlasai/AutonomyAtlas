@@ -1,0 +1,17 @@
+\section{Execution state and semantic commitments}\label{sec:C20:state}
+An execution record needs more than messages. A useful state is
+\begin{equation}
+ S_t=(H_t,C_t,M_t,J_t,A_t,V_t,B_t),
+\end{equation}
+where $J_t$ is an operation journal, $A_t$ authorization state, $V_t$ the compatibility tuple, and $B_t$ the remaining budget. The environment is observed through versioned evidence rather than assumed to be fully contained in $S_t$. An email service, remote repository, or browser session can change independently. Storing an observation is not locking the corresponding external object.
+
+The journal distinguishes intent, dispatch, observation, and reconciliation. An intent says what the application authorized. Dispatch records that a request crossed a boundary. Observation records the response or the absence of one. Reconciliation establishes what external state now exists. These states must remain distinct because a timeout after dispatch is observational uncertainty, not proof of failure. Retrying an uncertain operation without examining its effect can duplicate it.
+
+Three invariants make this distinction operational. First, every effectful request refers to an authorized intent whose argument hash and policy epoch match the request. Second, every committed result identifies the exact intent and the evidence used to accept it. Third, resumption does not infer completion from an optimistic natural-language summary. It consults the journal and, when necessary, the authoritative service. A summary may help the model reason about the result, but it cannot replace the result record.
+
+Typed states also prevent a subtle category error: task completion and runtime completion are different predicates. Let $T(S)$ mean the user task is satisfied, $Q(S)$ mean required checks passed, and $R(S)$ mean no operation remains unresolved. A defensible terminal condition is $T(S)\land Q(S)\land R(S)$ under the declared specification. A model-generated ``done'' token establishes only that the inference process proposed termination. A quality gate may still misclassify the output, so even this terminal condition is relative to the validators' coverage.
+
+Application frameworks expose parts of these distinctions. The inspected LangGraph persistence documentation separates thread checkpoints from cross-thread stores~\cite{langgraph2026docs}. That distinction should not be collapsed into a claim that a checkpoint already implements semantic memory. Checkpoints support restoration of declared graph state. Cross-thread stores retain application records. Neither feature independently establishes truth, relevance, authorization, or successful external-effect recovery.
+
+The practical design choice is to make semantic commitments inspectable. A tool receipt should include object identifiers, version or timestamp, effective principal, argument digest, and verification status. Where a remote service exposes no stable receipt, record that limitation explicitly. It may justify requiring review before a consequential retry. The runtime must not manufacture transactional guarantees that the connected service does not provide.
+

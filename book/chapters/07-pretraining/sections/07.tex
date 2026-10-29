@@ -1,0 +1,25 @@
+\section{A worked training-budget calculation}
+\label{sec:C07:budget}
+Consider a hypothetical dense model with $N=7\times10^9$ parameters trained on $D=10^{11}$ tokens. Under the approximate $6ND$ convention, the arithmetic budget is $4.2\times10^{21}$ FLOPs. Suppose 64 accelerators each sustain $10^{14}$ FLOPs per second continuously on the accounted work. The ideal duration is 656,250 seconds, or about 7.60 days. This is an arithmetic scenario with deliberately specified effective rates, not a measured training run. Data loading, checkpointing, failures, utilization variation, attention corrections, and additional objectives can increase time or change the accounted FLOPs.
+
+The example permits useful sensitivity analysis. Halving sustained compute doubles the ideal arithmetic time. Doubling the training-token budget doubles this approximation but may change the optimum model size under the scaling fit. Increasing context length at fixed token count can increase attention work even though $ND$ is unchanged. Adding activation recomputation increases executed arithmetic without changing the nominal training-token count. A resource report should therefore retain both the analytic estimate and measured device or profiler evidence. Their discrepancy is a diagnostic, not a reason to silently redefine utilization after the run.
+
+For an agent developer, training cost must be amortized over the intended use. A larger model can reduce retries or tool calls, while a smaller extensively trained model can reduce serving cost. The expected total cost is training plus the sum of inference, tools, storage, and operation costs over the deployment workload. The optimum depends on expected volume and quality constraints. A pretraining configuration cannot be selected from a public loss curve alone when its intended task requires expensive external actions and long-lived sessions. End-to-end cost should be compared at a specified success and risk level.
+
+{\small\setlength{\tabcolsep}{3pt}
+\begin{table}[!htbp]
+\centering
+\caption{Training comparisons require explicit accounting boundaries.}\label{tab:C07:comparison}
+\begin{tabular}{L{31mm}L{34mm}L{41mm}}
+
+\toprule Claimed advantage & Necessary matched condition & Important confound\\\midrule
+Better scaling & Data and compute convention & Tokenizer and data quality.\\
+Lower memory & Precision and peak phase & Transient gathers and activations.\\
+Faster training & Target loss and workload & Different kernels or sequence lengths.\\
+Better agent behavior & Interface and task exposure & Trace leakage and benchmark tuning.\\
+Reliable recovery & Complete state snapshot & Changed rank layout or data position.\\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+

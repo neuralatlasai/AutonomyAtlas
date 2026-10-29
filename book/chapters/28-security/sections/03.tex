@@ -1,0 +1,22 @@
+\section{Least privilege and symbolic action controls}\label{sec:C28:privilege}
+Least privilege constrains the actions needed for the current task rather than relying on the model to avoid every tempting alternative. A permission policy should apply at the tool boundary, where names, arguments, principal and effect scope are explicit. The model can propose actions and request policy changes, but an application-controlled procedure decides which proposals become executable.
+
+Progent represents privileges using symbolic rules over tool names and arguments, checks calls deterministically, and distinguishes policy narrowing from expansion~\cite{corpus250411703}. Its monotonic-confinement idea is precise: absent the required approval, the allowed action set should not grow. The guarantee depends on complete mediation and the semantics of the policy language. Effects outside the checked tool interface remain outside that guarantee.
+
+Let $\mathcal A(P)$ be the actions permitted by policy $P$. A proposed update from $P$ to $P'$ is a narrowing when $\mathcal A(P')\subseteq\mathcal A(P)$. Establishing this relation requires reasoning over the policy's argument domain and predicates. A solver can decide it only within the supported formalization. Ambiguous natural-language intent, hidden tool effects and incomplete schemas are not solved merely by placing an SMT solver in the loop.
+
+Approval of an expansion must bind to the proposed change and current context. A generic yes from an earlier session should not authorize a different argument set after a model or tool update. Record the principal, operation scope, expiry and policy epoch. Recheck the grant at dispatch, especially after interruptions. This prevents a stale permission record in memory from silently becoming current authority.
+
+The utility-security tradeoff must be measured. An overly narrow policy can block legitimate work; an overly broad policy can preserve completion while failing containment. Compare policy generation, deterministic enforcement, and approval mechanisms separately. Include benign tasks and adversarial variants, and report blocked legitimate calls, completed violations, unresolved requests and review burden. A low attack-success rate achieved by refusing all tools is not sufficient evidence of a useful defense.
+
+\subsection{Open privilege can remain invisible to executed attacks}\label{sec:C28:ajar}
+Ajar's September 2026 method probes defenses with candidate calls unnecessary for a benign task, at states reached by replaying its reference solution~\cite{sharma2026ajar}. This measures permission left available even when an agent never proposes the corresponding call. It therefore adds an axis that observed attack success cannot identify. Its scope remains conditional: candidate generation samples environment-derived values, and most labels depend on the audit's own judgment rather than an existing benchmark predicate. A useful alternative plan involving a tool absent from the reference can be labeled excess. These limitations prevent the score from becoming a universal measure of least privilege.
+
+Let $\mathcal Q$ be a declared finite set of state--call probes, $w_q\geq0$ severity weights, $a(q)\in\{0,1\}$ defense acceptance, and $e(q)\in\{0,1\}$ an excess-call label. When the excess-weight denominator is positive, a diagnostic leakage rate is
+\begin{equation}
+ \Lambda(\mathcal Q)=
+ \frac{\sum_{q\in\mathcal Q}w_qe(q)a(q)}
+ {\sum_{q\in\mathcal Q}w_qe(q)}.
+\end{equation}
+This is an explicit sampled-set statistic, not the size of the entire reachable privilege space. Report sensitivity to labels, probe sampling and risk weights alongside false denial of entitled calls. Tightening a policy is useful only when the retained action set still supports legitimate work.
+

@@ -1,0 +1,32 @@
+\section{WorldEvolver and memory conditioned foresight}
+\label{sec:C10:worldevolver}
+WorldEvolver's September 2026 revision holds model parameters and the downstream agent fixed while revising world-model context through episodic transitions, semantic rules, and selective foresight. Its protocol permits five trials, with memory persistence affecting later attempts. Table 12 reports ScienceWorld ReAct results with Gemma-4-26B-A4B; the best-of-five and first-trial point estimates can move in opposite directions~\cite{rewrite_worldevolver2026}. The overlapping task-level intervals are not a paired difference test, and the point estimates alone do not establish population-level superiority. These are author-reported results, not independent reproductions.
+
+{\small\setlength{\tabcolsep}{3pt}
+\begin{table}[!htbp]
+\centering
+\caption{WorldEvolver v2, Table 12: ScienceWorld ReAct success percentages. Brackets give the authors' task-level 95 percent bootstrap interval for best-of-five success.}\label{tab:C10:reported}
+\begin{tabular}{L{40mm}L{37mm}L{29mm}}
+
+\toprule Condition & Best of five [CI] & First trial\\\midrule
+No world model & 44.4 [34, 56] & 28.9\\
+WorldEvolver, unfiltered & 46.7 [37, 57] & 24.4\\
+WorldEvolver, filtered & 52.2 [42, 62] & 36.7\\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+
+The implementation chain is identifiable. The inspected \path{src/world_model/episodic_semantic.py} defines \path{WMEpisodicSemantic.predict}, \texttt{update}, and reset/checkpoint methods. The \path{SelectiveForesightGate.apply} path is in \path{src/world_model/modules/selective_foresight.py}, while \path{src/agents/wm_react_agent.py} registers \path{WMReactAgent} as a composition of the foresight mixin and the ReAct agent~\cite{rewrite_worldevolver_repo}. This permits a reproduction to inspect when a prediction is shown, when observed mismatches update memory, and which state persists across trials. Those timings determine whether an evaluation measures fresh-task planning or adaptation from earlier attempts.
+
+The gate uses the geometric mean token probability of the predicted observation when log probabilities are available; that quantity is not a calibrated probability of transition correctness~\cite{rewrite_worldevolver2026}. In the pinned \path{SelectiveForesightGate.apply}, an enabled gate falls back to passing the forecast when mean log probability is unavailable, recording \path{open_no_logprobs} and a warning~\cite{rewrite_worldevolver_repo}. Enabling filtering in configuration therefore does not establish that filtering operated on every request; retain the per-call gate state and score availability. The source also selects thresholds on Word2World prediction-test confidence--quality curves before transferring them unchanged to AgentBoard~\cite{rewrite_worldevolver2026}. This preserves a separate planning evaluation, but the prediction test used for threshold selection is no longer an untouched confirmatory sample for that selected gate. Test its discrimination and calibration against observed transitions, stratified by action type, output length, and environment shift. A useful gate can improve control by withholding harmful forecasts even if the underlying predictor is unchanged. Establish whether a forecast changes the action and whether the changed action improves the verified transition under a matched resource budget. Compare with a no-world-model baseline receiving equal opportunities to query or reflect.
+
+Reset controls are essential when memory evolves. Clear state before every task to measure within-task adaptation; retain it across tasks to measure cross-task transfer; and separately reset between attempts if the objective is fresh-run reliability. Randomize task order and record the exact reset semantics. A best-of-five score under persistent memory is a valid outcome for a particular adaptive workflow, but it cannot be presented as the probability that one newly deployed run succeeds. The distinction matters directly for users who expect a system to complete a consequential task once.
+
+For binary trial success $Y_t$, let $F_0=\Omega$ and $F_t=\bigcap_{i=1}^{t}\{Y_i=0\}$ under the specified reset and adaptation policy. On a positive-probability failure prefix, define $p_t=P(Y_t=1\mid F_{t-1})$; when $P(F_{t-1})=0$, set $p_t=0$. Once a failure prefix is null, an earlier factor in the survival product is already zero, so this extension does not change the following chain-rule identity:
+\begin{equation}
+ P\!\left(\bigcup_{t=1}^{k}\{Y_t=1\}\right)
+ =1-\prod_{t=1}^{k}(1-p_t).
+\end{equation}
+No independence assumption is required. Replacing every $p_t$ by one common success rate requires an additional stationarity claim that persistent memory can violate. Estimate trial-indexed hazards and paired task outcomes to distinguish improvement from prior attempts, repeated sampling, and task-mixture effects. This is a proposed diagnostic, not an explanation established for the reported point differences.
+

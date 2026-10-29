@@ -1,0 +1,19 @@
+\section{Specifications tests and evaluator blind spots}\label{sec:C23:specification}
+Let $\mathcal R$ be the intended requirement set and $\mathcal T$ the executable test set. Passing $\mathcal T$ supports correctness only for the behaviors it covers under the tested environment. It does not imply satisfaction of every element of $\mathcal R$. The gap can arise from missing tests, ambiguous requirements, faulty reference solutions, nondeterministic infrastructure, or a grader that observes the wrong artifact.
+
+A verification gate therefore needs two error rates: false acceptance of a defective artifact and false rejection of a valid artifact. Both depend on the distribution of candidate patches. An evaluator calibrated on ordinary human patches may behave differently on agent-generated solutions that exploit unusual shortcuts. Adaptive optimization against the same visible tests increases this risk because the agent can learn the evaluator's blind spots rather than the task's intended semantics.
+
+For a declared candidate population, let $C\in\{0,1\}$ denote requirement correctness after adjudication and $G\in\{0,1\}$ the grader's acceptance. Write $\pi=P(C=1)$, $s=P(G=1\mid C=1)$, $f=P(G=1\mid C=0)$, and $q=P(G=1)$, assuming both correctness classes have positive probability. The law of total probability gives
+\begin{equation}
+ q=s\pi+f(1-\pi),\qquad
+ \pi=\frac{q-f}{s-f}\quad(s\ne f).
+ \label{eq:C23:grader_acceptance_mixture}
+\end{equation}
+Thus accepted fraction is not identified with correct fraction. If $s=f$, this grader's acceptance carries no information about correctness prevalence in that population. The same decomposition yields $|q-\pi|\leq\max\{f,1-s\}$. These are population identities, not a correction obtained by importing a false-acceptance rate from a different benchmark. Estimation requires an independently adjudicated sample of the same candidate process, with uncertainty propagated jointly through $q,s,f$; a small $|s-f|$ makes inversion unstable. Changing agents, search budgets or visible-test exposure can change both conditional error rates. Stress fixtures establish sensitivity to their seeded defects and need not estimate the natural population rates.
+
+SWE-Bench Pro increases task complexity and uses public, held-out, and commercial repository groups~\cite{corpus250916941}. Its access structure is important evidence about reproducibility: independently auditing public tasks is not equivalent to reproducing results on unavailable proprietary tasks. A contamination-resistant design also does not prove absence of prior exposure. The survey should preserve those distinctions when comparing numbers across benchmark versions and scaffolds.
+
+A concrete failure case is a patch that handles the sample input but fails on a boundary condition implied by the specification. Another modifies a serialization path correctly while breaking a related caller absent from the visible tests. A third passes locally but depends on an undeclared environment variable. These cases require different interventions: requirement-derived tests, integration coverage, and environment capture. More chain-of-thought tokens do not directly repair an evaluator that never checks the failing behavior.
+
+Reference implementations are useful but fallible. A differential test that distinguishes a candidate from a reference detects disagreement; it establishes a defect only if the reference behavior follows the requirement. Human or model interpretation of that requirement can still err. Report the adjudication procedure and unresolved ambiguity rather than treating reference agreement as mathematical truth. Chapter~\ref{ch:C25} develops this verification boundary further.
+

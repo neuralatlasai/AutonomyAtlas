@@ -1,0 +1,11 @@
+\section{Instruction hierarchy and authority-bearing records}\label{sec:C29:hierarchy}
+An instruction hierarchy organizes competing directives by source and scope. Its implementation must distinguish an authorized user request, application policy, tool metadata, external evidence and model-generated plans. Text that describes a rule is not automatically an authoritative rule. A retrieved document can quote an instruction without being allowed to change the agent's task or permissions.
+
+Authority-bearing records should identify the principal, action scope, affected objects, validity interval and policy epoch. An approval to edit a draft does not authorize sending it to an external recipient. Approval of one argument set does not authorize a later modified request. The runtime should bind approval to the exact operation or to a clearly specified capability envelope, then revalidate at dispatch.
+
+Historical authority and current authority differ. Session logs preserve what was requested or granted earlier; the authorization service determines what is allowed now. Restoring a checkpoint should not resurrect expired or revoked grants. This separation can be enforced structurally even when the model's context contains the old instruction. The tool boundary should consult current authority independently of the model's interpretation.
+
+The same principle applies to delegation. A manager may delegate reasoning without delegating every tool capability or every source document. Workers should receive the minimum context and authority needed for their subtask. A handoff must preserve restrictions and identify who remains responsible for the final effect. Internal agent messages should not become a privileged channel for promoting untrusted content.
+
+Instruction-hierarchy evaluation should include conflicting but plausible directives, ambiguous provenance, changed permissions and resumed sessions. Measure whether the system identifies the governing source, requests clarification when necessary, and prevents unauthorized effects. A benchmark consisting only of obvious malicious strings tests a narrower capability. It cannot establish correct authority reasoning in ordinary multi-party workflows.
+

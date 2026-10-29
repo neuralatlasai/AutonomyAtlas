@@ -1,0 +1,46 @@
+\section{A bounded policy-expansion and memory-poisoning case}\label{sec:C28:case}
+Consider a controlled document-assistant fixture. The legitimate task is to summarize two approved project documents and save an internal report. The attacker can modify one retrieved document but cannot change the user's request, the authorization service, or the tool implementation. The fixture contains a synthetic restricted record and a controlled output sink. The prohibited event is access to that record or disclosure beyond the permitted audience. No real credentials, users or services are involved.
+
+The attacker-controlled document may attempt to redefine the task or persuade the agent that broader access is needed. The defensive question is not whether the model recognizes the text as suspicious in isolation. It is whether the complete system can continue the legitimate task while preventing unauthorized effects and contamination of persistent memory. This preserves the utility requirement and the stateful attack surface that a simple refusal benchmark omits.
+
+The initial policy permits reads of the two approved document identifiers and creation of one report in the authorized workspace. A proposed update $P'$ is checked against the current policy $P$. A symbolic expansion test searches for an action $a$ satisfying $P'(a)\land\neg P(a)$. A satisfying assignment exhibits a newly allowed call. Unsatisfiability supports narrowing only within the encoded domain and solver assumptions. A timeout or unknown solver result is not evidence that the update is safe.
+
+This formulation makes the policy boundary auditable. The application can record the candidate update, solver query, result, counterexample where available, and approval decision. The model may help propose the policy but does not decide whether the formal check succeeded. Progent's policy comparison supplies a primary mechanism for this style of confinement~\cite{corpus250411703}. Its guarantee should remain tied to the mediated call set rather than be expanded into a claim about every possible downstream effect.
+
+The fixture should include a wrapper whose apparent document-read interface can reach another resource. This tests whether top-level policy enforcement matches downstream effect semantics, rather than assuming the schema exhausts the tool's behavior.
+
+Bind approval to an object version or revalidate it at dispatch. A revocation injected after proposal but before execution tests whether a paused worker can improperly restore an old authorization epoch.
+
+Now extend the fixture across sessions. Suppose the memory writer extracts a procedure from the attacker-controlled document and stores it as a helpful workflow. The immediate task may complete without a violation, yet the persistent record can influence a later task. The attack outcome must therefore include delayed effects and attempted promotion into trusted memory. A one-turn security score can miss this route entirely.
+
+Quarantine must apply to derivative summaries and skills as well as the injected source; subsequent semantic search should not bypass the promotion decision.
+
+Table~\ref{tab:C28:trace} identifies the observable chain in the fixture. Each row is independently testable and prevents a successful final artifact from hiding an earlier boundary violation.
+\begingroup\setlength{\tabcolsep}{3pt}\small
+\begin{longtable}{L{24mm}L{40mm}L{44mm}}
+\caption{A defensive trace for a controlled stateful injection test.}\label{tab:C28:trace}\\
+\toprule Stage & Trusted observation & Required distinction \\
+\midrule\endfirsthead
+\toprule Stage & Trusted observation & Required distinction \\
+\midrule\endhead
+Acquisition & Source ID, version and attacker-controlled fields. & Useful document evidence versus task authority. \\
+Context construction & Serialized roles, provenance and active policy epoch. & Quoted content versus application instructions. \\
+Policy update & Candidate rule set, solver verdict and approval record. & Narrowing, expansion and unresolved comparison. \\
+Tool dispatch & Principal, exact arguments and resulting fixture state. & Proposed violation, blocked attempt and completed effect. \\
+Memory write & Record type, source lineage and promotion status. & Untrusted observation versus reusable approved procedure. \\
+Later retrieval & Retrieved records, validity and reader context. & Immediate containment versus delayed influence. \\
+Recovery & Revocation, quarantine and derivative invalidation. & Local rollback versus residual external effects. \\
+\bottomrule\end{longtable}
+\endgroup
+
+The ablation design compares model-only guidance, deterministic tool policy, memory provenance controls, and their combination. Keep the benign task, model, tools and attack budget fixed. A separate adaptive phase lets the attacker observe a declared subset of feedback and search within the same controlled scope. Hold out document styles, workflow structures or later-session tasks for transfer assessment. Otherwise a defense can learn the specific fixture while remaining vulnerable at the same semantic boundary elsewhere.
+
+The primary outcomes are legitimate report completion, attempted and completed prohibited effects, unsafe memory promotion, delayed violations, false alarms, and review cost. A blocked malicious call is evidence of enforcement even if the model proposed it. A final benign answer is insufficient if an unauthorized read already occurred. A quarantined record is useful containment but may still require an incident response if it was previously shared. These distinctions make the score reflect actual effect semantics.
+
+Validate the judge against authoritative fixture state and explicit positive, negative and unresolved controls. The defender's narration is not independent evidence of containment.
+
+Recovery tests should inspect pending effects and downstream artifacts after revocation and clean-state restoration. A local rollback cannot retract a disclosure already received by the controlled sink.
+
+The case supports a bounded scientific conclusion. If the policy layer prevents every tested expansion and the memory layer prevents delayed promotion under the declared attacks, those boundaries performed as specified in the fixture. The result does not establish immunity to attacker-controlled tools, compromised infrastructure, unseen action channels or a different policy language. The value of the experiment lies in identifying which assumptions were enforced, which were merely trusted, and which failures remain outside the observed boundary.
+
+The capability benchmarks illustrate a parallel observation boundary. CyberGym and CyberGym-E2E focus on memory-safety issues in C/C++ projects and use sanitizer-based evidence; that scope does not cover every vulnerability class~\cite{corpus250602548,corpus260604460}. ExploitGym separates evidence of unauthorized code execution from a judge's assessment that the result targets the supplied vulnerability~\cite{corpus260511086}. The first stage can be strongly instrumented while the second retains model-judgment uncertainty. Reporting both stages prevents a concrete runtime effect from lending unwarranted certainty to its causal attribution. A defensive evaluation should make the same separation between an observed prohibited effect and the claim about which adversarial channel caused it. Counterfactual replay and independent adjudication strengthen that attribution but remain conditional on the fixture and observation coverage.

@@ -1,0 +1,51 @@
+\section{A compatibility-first deployment procedure}\label{sec:C32:07}
+A defensible deployment sequence begins by freezing the candidate manifest and enumerating its dependency closure. Validate state migrations and authority handling in an isolated replay environment. Run deterministic contract tests and stochastic task evaluations with matched baselines. Include long histories, memory conflicts, interrupted sessions, concurrent writers, tool schema drift, and previously observed incidents. Record both improvements and regressions rather than selecting a favorable subset of tasks.
+
+Next, deploy to an isolated canary population with declared state-sharing rules and stopping criteria. Monitor task outcomes, constraint violations, latency distributions, resource consumption, and unknown external effects. A rollback rehearsal must demonstrate that the retained state can actually be read by the previous release or converted safely. Rehearsing only a container restart does not test restoration of policy-compatible memory.
+
+Let $\nu_\star$ be the frozen candidate manifest and $G=(V,E)$ its dependency graph. If $V_\Delta$ contains the changed components, the affected closure is $D_\star=V_\Delta\cup\operatorname{Reach}_G(V_\Delta)$, explicitly including the changed components themselves. Define Boolean migration, current-authority, and deletion predicates $\mathsf M$, $\mathsf A$, and $\mathsf D$. For initial retained state $S_0$ and authority epoch $\alpha_0$,
+\begin{equation}
+\label{eq:C32:release-preconditions}
+\begin{aligned}
+ q_\star&=\mathsf M(\nu_\star,S_0)\,
+          \mathsf A(\nu_\star,S_0;\alpha_0)\,
+          \mathsf D(\nu_\star,S_0),\\
+ R_\star&=\begin{cases}
+ \mathcal T(\nu_\star,S_0,D_\star),&q_\star=1,\\
+ \bot,&q_\star=0,
+ \end{cases}\\
+ \chi_\star&=\begin{cases}
+ \mathsf J(R_\star),&q_\star=1,\\
+ 0,&q_\star=0.
+ \end{cases}
+\end{aligned}
+\end{equation}
+The operator $\mathcal T$ runs the isolated regression and fault tests; $R_\star$ retains every outcome and known limit. The marker $\bot$ means that failed preconditions prevented this test stage. The predeclared release predicate $\mathsf J$ does not inspect a selected favorable subset. The manifest, closure, predicate outcomes, results, and limits are appended to the release journal before any canary decision.
+
+Only when $\chi_\star=1$ is the candidate eligible for an isolated canary assignment $Z$. A migration predicate does not execute a migration: the canary initializer must construct $S_0^{\mathrm c}=\psi_{\mathrm c}(S_0)$ and check the compatibility relation $\mathsf C(\nu_\star,S_0^{\mathrm c})=1$ before admission. Here $\psi_{\mathrm c}$ is the tested conversion into the candidate's isolated state namespace; failure prevents admission. Let $K_{\nu_\star,Z}$ be the canary transition kernel and $\mathcal H_t$ the observations available to monitoring by time $t$. A predeclared adapted stopping rule $\mathsf B$ defines
+\begin{equation}
+\label{eq:C32:canary-stopping}
+\begin{aligned}
+ S_{t+1}^{\mathrm c}&\sim K_{\nu_\star,Z}(\,\cdot\mid S_t^{\mathrm c}),\qquad t<\tau,\\
+ \tau&=\inf\{t\geq0:\mathsf B(\mathcal H_t)=1\},\\
+ \lambda_\tau^{+}
+ &=\mathcal R(\lambda_\tau,\mathcal E_\tau),\qquad \tau<\infty.
+\end{aligned}
+\end{equation}
+The convention $\inf\varnothing=\infty$ leaves monitoring incomplete rather than inventing a terminal outcome. The reconciliation operator $\mathcal R$ uses external-service evidence $\mathcal E_\tau$ to update the release-relevant effect ledger $\lambda_\tau$, including relevant production and canary operation identities; unsuccessful reconciliation preserves uncertainty. The kernel's namespace isolation and the stopping rule's information restrictions are implementation obligations, not properties established by their notation.
+
+At a finite stopping time, let $d_\tau\in\{-1,0,1\}$ denote the recorded decision to roll back, hold, or promote, and let $\nu_0$ be the rollback target. Obtain a fresh production snapshot $P_\tau=(\nu_\tau^{\mathrm p},S_\tau^{\mathrm p},\upsilon_\tau)$, containing its manifest, retained state, and concurrency version. With separately checked guards $G_+$ and $G_-$, the admissible transition request is
+\begin{equation}
+\label{eq:C32:release-transition}
+ r_\tau=
+ \begin{cases}
+ (P_\tau,\nu_\star,\psi_+),&d_\tau=1,\ G_+(P_\tau,\lambda_\tau^{+};\alpha_\tau)=1,\\
+ (P_\tau,\nu_0,\psi_-),&d_\tau=-1,\ G_-(P_\tau,\lambda_\tau^{+};\alpha_\tau)=1,\\
+ \bot,&\text{otherwise}.
+ \end{cases}
+\end{equation}
+The guards require current authority, deletion compliance, and reconciled effect status acceptable under the declared transition contract. The maps $\psi_+$ and $\psi_-$ are declared retained-state conversions with compatible outputs, respectively $\mathsf C(\nu_\star,\psi_+(S_\tau^{\mathrm p}))=1$ and $\mathsf C(\nu_0,\psi_-(S_\tau^{\mathrm p}))=1$. The rollback conversion follows Section~\ref{sec:C32:04}; a target that starts but cannot interpret the state is inadmissible. These guards inspect production state, not the isolated canary snapshot.
+
+The request $r_\tau$ neither migrates state nor activates a manifest. Its implementation must revalidate the production concurrency version, authority epoch, effect-ledger freshness, and transition guards when committing the state conversion and manifest activation. A changed precondition requires a hold and renewed validation. Atomicity within the deployment state store does not supply atomicity for external services. Failed admission, incomplete monitoring, or a rejected request supplies no promotion. The equations specify evidence order and admissibility, not a guarantee that a named deployment platform satisfies the contract.
+
+The procedure is an original implementation contract, not a claim that any named product performs these steps automatically. Its purpose is to make deployment assertions testable. A system can expose excellent components and still fail at their boundaries. Monitoring, rollback, and recovery become part of agent intelligence when they determine what the policy knows, which effects are possible, and whether learned state remains meaningful after change.

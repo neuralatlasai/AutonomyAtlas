@@ -1,0 +1,15 @@
+\chapter{Agent Development Frameworks, SDKs, and Managed Runtimes}\label{ch:C22}
+The October 2026 SDK releases expose failures that a framework comparison must represent. OpenAI Agents Python v0.24.0 defers automatic compaction while approvals are pending and preserves completed tool outputs when a sibling tool fails; Google ADK v2.13.0 marks its MongoDB session and memory services experimental~\cite{executionrelease02,executionrelease03}. These are version-specific documented changes, not guarantees inferred from a brand. They motivate comparing the exact interruption, publication, and compatibility semantics of a framework before counting its integrations.
+
+An agent framework is a set of choices about where control resides. Its most consequential properties are not the number of model adapters or the expressiveness of a demonstration, but the semantics of state, effects, interruption, authorization, and observation. A framework can make those semantics explicit, hide them behind convenience interfaces, or delegate them to another service. These alternatives impose different experimental and operational obligations.
+
+The comparison in this chapter begins with role rather than rank. A graph runtime, a typed model SDK, an opinionated harness, a workflow builder, and a managed execution platform occupy different boundaries. They can compose within one application and should not be treated as mutually exclusive competitors. The official-source inventory is interpreted as documentation of interfaces available for inspection on the literature cutoff, not as an independently stress-tested feature leaderboard.
+
+\input{book/chapters/22-frameworks/sections/01.tex}
+\input{book/chapters/22-frameworks/sections/02.tex}
+\input{book/chapters/22-frameworks/sections/03.tex}
+\input{book/chapters/22-frameworks/sections/04.tex}
+\input{book/chapters/22-frameworks/sections/05.tex}
+\input{book/chapters/22-frameworks/sections/06.tex}
+\input{book/chapters/22-frameworks/sections/07.tex}
+\input{book/chapters/22-frameworks/sections/08.tex}

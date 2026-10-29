@@ -1,0 +1,30 @@
+\section{KV growth and the difference between storage and knowledge}
+\label{sec:C04:kv}
+In a decoder, previously computed keys and values can be retained so that each new token need not recompute every previous projection. For homogeneous layers with equal key and value width $d_h$, unsharded storage is
+\begin{equation}
+ M_{\mathrm{KV}}=2Lh_{\mathrm{KV}}d_hb\sum_{j=1}^{N}T_j
+ \quad\text{bytes},
+\end{equation}
+where $L$ is layer count, $h_{\mathrm{KV}}$ the number of KV heads, $b$ bytes per element, and $T_j$ retained tokens for sequence $j$. The factor two counts keys and values. This formula excludes allocation slack, indexing, quantization metadata, communication buffers, and replication. Tensor-parallel sharding changes local storage only when the implementation actually partitions the relevant heads or dimensions.
+
+The following numbers are calculated examples for hypothetical layouts, not measurements of named models. With $L=80$, $h_{\mathrm{KV}}=8$, $d_h=128$, $b=2$, and $T=131{,}072$, one sequence requires exactly 40 GiB before overhead. Eight such sequences require 320 GiB. If there are 64 KV heads instead, one sequence requires 320 GiB. Sharing KV heads therefore has a large and directly calculable storage effect. Whether the corresponding architecture retains equal task quality is a separate empirical question. Grouped-query attention explicitly studies this tradeoff rather than making storage reduction synonymous with intelligence~\cite{ainslie2023gqa}.
+
+{\small\setlength{\tabcolsep}{3pt}
+\begin{table}[!htbp]
+\centering
+\caption{Calculated KV footprints for hypothetical two-byte caches.}\label{tab:C04:kv}
+\begin{tabular}{L{33mm}L{34mm}L{39mm}}
+
+\toprule Layers and KV heads & Retained tokens & Unsharded footprint\\\midrule
+32 layers, 8 heads & 32,768, one sequence & 4 GiB\\
+80 layers, 8 heads & 131,072, one sequence & 40 GiB\\
+80 layers, 64 heads & 131,072, one sequence & 320 GiB\\
+80 layers, 8 heads & 4,096, one sequence & 1.25 GiB\\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+
+The cache is computational state tied to a particular model computation. It is not an independently meaningful semantic archive. A durable conversation log can survive a model upgrade while its old keys and values become unusable. A context summary can preserve the intended task while changing every downstream hidden representation. Conversely, retaining an enormous cache does not ensure that the model will attend to a decisive constraint. The system should therefore distinguish three questions: whether source events are stored, whether their computation can be reused exactly, and whether their information affects the correct action.
+
+Long sessions introduce an allocation problem even when the per-token formula is simple. Each tool result can increase retained length; branches can share a common prefix before diverging; abandoned runs can leave caches resident until cleanup. A serving system must define ownership and reclamation for each block. Cancellation is not complete until resources are released or transferred to an explicit resumable state. A session identifier alone does not prove that the cache is durable, and a durable cache does not prove that the external tool state can be replayed. These are independent recovery contracts.

@@ -1,0 +1,18 @@
+\section{Horizon-dependent reliability and survival}\label{sec:C27:survival}
+Long tasks can be analyzed through time to a defined failure event. Let $T$ be the first step at which a required invariant is violated and $S(h)=\Pr(T>h)$ the survival probability through horizon $h$. The hazard at step $t$ is $\lambda_t=\Pr(T=t\mid T\geq t)$. Then $S(h)=\prod_{t=1}^{h}(1-\lambda_t)$ under the corresponding discrete-time definitions. Here $T\in\mathbb N_{>0}\cup\{\infty\}$, $h\in\mathbb N_0$, the empty product is one, and $\lambda_t$ is defined only while $\Pr(T\geq t)>0$. The identity does not assume a constant hazard.
+
+This representation distinguishes cumulative exposure from worsening policy. A system with constant small per-step risk can have declining long-horizon success without becoming less competent at each step. Conversely, memory contamination or context loss can make the hazard increase over time. Stratify failures by cause and inspect their relationship to compaction, retrieval, updates, and interruptions. A single final completion rate cannot distinguish these explanations.
+
+Censoring requires care. If a run ends because the budget expires before failure or completion, the censoring mechanism may depend on task difficulty. Standard survival estimators require assumptions about that dependence. Report budget exhaustion explicitly and avoid treating censored trajectories as successful survivors indefinitely. Competing events, such as authorization failure, evaluator outage, and task completion, may require cause-specific analysis rather than one undifferentiated stopping time.
+
+In particular, successful completion removes a run from exposure to further task actions. To distinguish this event from failure, let $U$ be the first absorbing stopping time under the study protocol and $J$ its cause. For each cause $j$, define $\lambda_j(t)=\Pr(U=t,J=j\mid U\geq t)$ while the risk set is nonempty. Then
+\begin{equation}
+ S_U(h)=\prod_{t=1}^{h}\left(1-\sum_j\lambda_j(t)\right),\qquad
+ F_j(h)=\sum_{t=1}^{h}S_U(t-1)\lambda_j(t).
+\end{equation}
+Here the causes are mutually exclusive, $\sum_j\lambda_j(t)\leq1$, and $F_j(h)=\Pr(U\leq h,J=j)$ is the cumulative incidence of that stopping cause. Treating completed tasks as ordinary independent censoring can instead estimate a hypothetical continued-exposure process. Faster completion and lower failure hazard are different interventions; report completion incidence, failure incidence, and unresolved budget stops separately. The identity is a probability decomposition, not a claim that a particular survival estimator is justified for the available logs.
+
+Recovery changes the event definition. A transient tool failure that is correctly reconciled may not count as task failure, while an undetected duplicate effect may violate an invariant even if the final artifact looks correct. Declare whether the study measures first fault, unrecovered fault, constraint violation, or final failure. Each is useful, but they answer different operational questions.
+
+Uncertainty should cluster by longitudinal unit, not by step. Thousands of steps from one evolving bank do not provide thousands of independent observations about population reliability. Report the number of independent users, sessions, task streams, and bank constructions. Where the data are limited, present the observed trajectories and conditional conclusions rather than fitting an elaborate hazard model whose parameters are weakly identified.
+

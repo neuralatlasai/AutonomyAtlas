@@ -1,0 +1,10 @@
+# Preserve the exact reviewed source bytes used by the content provenance audit.
+book/** -text
+config/** -text
+bibliography/** -text
+monograph.tex -text
+website/tools/compile_book.py -text
+website/src/generated/book.json -text
+*.png binary
+*.pdf binary
+*.zip binary

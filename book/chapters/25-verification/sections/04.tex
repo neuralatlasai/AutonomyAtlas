@@ -1,0 +1,20 @@
+\section{Quality gates as fallible classifiers}\label{sec:C25:gates}
+Let $Y=1$ mean a candidate satisfies the required property and $G=1$ mean a gate accepts it. Define sensitivity $s=\Pr(G=1\mid Y=1)$, false acceptance $f=\Pr(G=1\mid Y=0)$, and prevalence $\pi=\Pr(Y=1)$. Then
+\begin{equation}
+ \Pr(Y=1\mid G=1)=
+ \frac{s\pi}{s\pi+f(1-\pi)}.
+\end{equation}
+Here $Y,G\in\{0,1\}$, $s,f\in[0,1]$, and $\pi\in(0,1)$ so both class-conditional gate rates are defined; acceptance also requires $s\pi+f(1-\pi)>0$. Degenerate single-class populations need their own conditional interpretation. The identity follows from Bayes' rule. It shows why an apparently accurate gate can produce unreliable accepted outputs when valid candidates are rare. It also shows why calibration measured on one candidate population cannot be transferred uncritically to another.
+
+Repeated search changes that population. If an optimizer generates many candidates and retains one that passes, it increases exposure to the gate's blind spots. Under an illustrative independent-invalid-candidate model, the probability of at least one false acceptance among $n$ candidates is $1-(1-f)^n$. Independence rarely holds exactly, but the expression identifies the selection pressure. A gate evaluated only on ordinary samples can fail after adaptive optimization.
+
+Adding another gate does not automatically multiply reliability. If gates share a model, prompt assumptions, or evidence source, their errors can be correlated. The joint false-acceptance rate is
+\begin{equation}
+ f_{12}=\Pr(G_1=1,G_2=1\mid Y=0).
+\end{equation}
+It equals the product of the two class-conditional marginal rates only when conditional independence is justified. Diversity of implementation and observation can reduce shared failure modes, but that effect requires measurement.
+
+An unresolved verdict is operationally useful. It allows the system to distinguish lack of evidence from detected failure. However, unresolved cases must remain in reporting denominators. A gate can achieve high precision by accepting almost nothing; whether that is useful depends on coverage and task consequences. Report accepted precision, valid-candidate recall, unresolved rate, cost, and residual failure severity together.
+
+Gate evaluation should include adversarially selected candidates and naturally occurring failures. Seeded faults establish sensitivity to known defect classes; natural audits reveal unanticipated classes. Neither alone estimates deployment risk. The candidate generator, gate, and final adjudicator should have separate evaluation splits where possible. Otherwise the same held-out examples can leak into both optimization and assessment, creating an appearance of independent verification without actual independence.
+

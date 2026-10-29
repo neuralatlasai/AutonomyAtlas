@@ -1,0 +1,65 @@
+\section{Implementation and controlled comparison}
+\label{sec:C05:implementation}
+The I-JEPA and V-JEPA repositories provide concrete encoders, predictors, masking pipelines, and training configurations~\cite{repo_ijepa,repo_vjepa}. A reproduction should identify the exact snapshot and trace the target update, stop-gradient boundary, mask construction, positional embeddings, preprocessing, and downstream adaptation. A learned checkpoint can be incompatible with a changed resize or normalization policy even when tensor shapes match. The implementation record must bind preprocessing, weights, and evaluation.
+
+An abstract training step separates observation visibility, gradient flow, optimization, and target maintenance. Let $(x_t,p_t)\sim\mathcal D_A$ be a permitted training example with provenance $p_t$. Let $(C_t,B_t)\sim\mu_t(\cdot\mid x_t)$ select context and target positions from the example's index set. Their admissibility and possible overlap are determined by the chosen JEPA variant. The view $x_{t,C_t}$ carries the selected observations together with their original position indices for the encoder's positional embeddings. Using the encoder and predictor notation of Section~\ref{sec:C05:jepa},
+\begin{equation}
+\begin{aligned}
+ z_{C,t}&=f_{\phi_t}(x_{t,C_t}),\\
+ z_t^\star&=\operatorname{sg}\!\left[
+ \overline f_{\bar\phi_t}(x_t)_{B_t}\right],\\
+ \widehat z_t&=q_{\psi_t}(z_{C,t},B_t).
+\end{aligned}
+\label{eq:C05:trainingvisibility}
+\end{equation}
+Here $\ell_t$ is the declared prediction loss on the selected target representation. The operator $\operatorname{sg}$ preserves its argument's value while assigning zero derivative through the target branch. Write $w=(\phi,\psi)$, with current value $w_t=(\phi_t,\psi_t)$, and let $s_t$ be optimizer state. A fresh gradient and the declared stateful optimizer update are
+\begin{equation}
+\begin{aligned}
+ \mathcal L_t(w)&=\ell_t\!\left(
+ q_\psi(f_\phi(x_{t,C_t}),B_t),z_t^\star\right),\\
+ g_t&=\nabla_w\mathcal L_t(w_t),\\
+ (w_{t+1},s_{t+1})&=\mathcal U_t(w_t,s_t,g_t).
+\end{aligned}
+\label{eq:C05:trainingupdate}
+\end{equation}
+The gradient contains no residual accumulation from the preceding step; optimizer state is retained according to $\mathcal U_t$. For the exponential-moving-average target update considered here,
+\begin{equation}
+ \bar\phi_{t+1}=\tau_t\bar\phi_t+(1-\tau_t)\phi_{t+1},
+ \qquad 0\leq\tau_t\leq1.
+\label{eq:C05:targetmaintenance}
+\end{equation}
+The order uses the updated online encoder, while the current loss uses the previous target. At $\tau_t=1$ the target is unchanged for that update. Mask construction, loss, optimizer, and target schedule must match the inspected variant; these equations do not assert one universal JEPA recipe.
+
+For I-JEPA, the paper's Section 3 prediction loss is implemented through \path{forward_target}, \path{forward_context}, and \path{loss_fn} inside \path{src/train.py}; spatial target construction is exposed by \texttt{MaskCollator} in \path{src/masks/multiblock.py}. The pinned V-JEPA repository has corresponding training functions in \path{app/vjepa/train.py} and a \texttt{VisionTransformerPredictor} in \path{src/models/predictor.py}. These checked code locations allow a reproduction to inspect where the target is detached, which positions are predicted, and whether a mask includes information that should have been hidden. A mask bug can make representation loss excellent while destroying the intended predictive task. The inspected I-JEPA \path{loss_fn} calls \path{F.smooth_l1_loss}; the V-JEPA 2.1 path instead exposes an absolute-error power, per-target masking and optional distance weights. Its \path{forward_target} normalizes selected intermediate feature groups separately before concatenating them~\cite{repo_ijepa,rewrite_vjepa2_repo}. The exponent, normalization axes, target positions and weighting schedule are therefore objective-defining variables, even when both implementations are called predictive representation learning.
+
+The I-JEPA paper's Table 7 reports 66.9 percent versus 40.7 percent for target-encoder versus pixel targets in a ViT-L/16 low-shot linear evaluation using one percent of ImageNet-1K labels. The corresponding pretraining budgets are 500 and 800 epochs~\cite{assran2023ijepa}. Those reported values support a useful target-space comparison in the authors' setup; the unequal training budgets preclude describing the difference as a perfectly compute-matched causal estimate. An agent-specific follow-up should hold preprocessing, training compute, policy, and observation access fixed, then test exact small-text distinctions and action success rather than assuming the classification advantage transfers unchanged.
+
+For a controlled agent study, compare a frozen contrastive encoder, a frozen predictive encoder, a fine-tuned version of each, and a raw-observation or structured-state oracle where available. Keep the language policy, tool budget, and action interface fixed when attributing a representation effect. Include a separate end-to-end comparison that permits each method's best supported integration, but label it as a system comparison. Report training data exposure and adaptation compute: a method that uses action-labeled trajectories has a different information advantage from one trained only on passive images.
+
+{\small\setlength{\tabcolsep}{3pt}
+\begin{table}[!htbp]
+\centering
+\caption{Comparison axes for agent perception.}\label{tab:C05:axes}
+\begin{tabular}{L{29mm}L{36mm}L{41mm}}
+
+\toprule Axis & Controlled intervention & Diagnostic outcome\\\midrule
+Spatial detail & Resolution and crop policy & Exact text and target localization.\\
+Temporal coverage & Frame spacing and refresh & Missed transient events and staleness.\\
+Representation objective & Contrastive or predictive & Transfer under action-relevant shifts.\\
+Policy adaptation & Frozen or fine-tuned encoder & Benefit relative to added supervision.\\
+Grounding channel & Pixels or structured state & Executed target correctness.\\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+
+Task construction should include counterfactual visual pairs, temporal reorderings, altered themes, multilingual text, unseen layouts, and concurrent state changes. Split by application or environment lineage when template reuse could inflate transfer. Exact action outcomes should be verified through the environment rather than judged only from the model's explanation. Human or model judgments can still assess ambiguous semantics, but their uncertainty and disagreement need reporting. A visually plausible explanation should never substitute for evidence that the intended external effect occurred.
+
+Multimodal resource accounting should identify where compression occurs. If $v$ visual tokens are inserted into a language sequence of length $n$, the unmasked pair-count increment is $2nv+v^2$. Causal attention changes constants and visibility patterns but retains the interaction between old language context and new visual evidence. The vision encoder has a separate cost, and cross-attention architectures use a different accounting expression. Reporting only the final language-token count can conceal an expensive image encoder or multiple high-resolution crops. Reporting only image resolution can conceal aggressive visual compression before the language policy sees the result.
+
+Persistent multimodal memory adds another choice: retain raw observations, retain encoder features, or retain textual interpretations. Raw observations permit later re-encoding after a model update but consume storage and may carry sensitive information. Features are compact but tied to an encoder and preprocessing version. Textual interpretations can be searchable and cheap to condition on, while irreversibly losing visual details that were not described. A memory system should preserve the distinction between an observed fact and an interpretation derived from an image. When an agent later needs a detail absent from the interpretation, confidence in the summary cannot restore the missing evidence.
+
+A useful ablation fixes storage bytes rather than the number of stored items. Compare raw thumbnails, cropped evidence regions, latent features, and textual summaries under that envelope. Measure retrieval of action-relevant facts, successful re-grounding after interface changes, and the cost of re-encoding or additional observation. Include an encoder-upgrade condition to expose representation-version dependence. The outcome may favor different storage forms for different timescales; there is no reason to expect one universal visual-memory format. Keeping the original evidence for selected high-value events can be worthwhile even when most routine observations are summarized.
+
+Finally, visual confidence should be calibrated after fusion, not inherited from one channel. A high image-text similarity, an OCR confidence, and a language-model token probability refer to different events and sample spaces. Multiplying them assumes a probabilistic model and dependence structure that usually has not been established. A decision-level calibrator can instead be trained and assessed against verified target selection or task outcomes, with separate evaluation under appearance and temporal shifts. Calibration then supports an explicit refresh or abstention policy rather than decorating an uncertain action with an unjustified numerical score.
+

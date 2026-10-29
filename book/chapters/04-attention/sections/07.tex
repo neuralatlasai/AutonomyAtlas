@@ -1,0 +1,37 @@
+\section{Implementation verification and workload design}
+\label{sec:C04:implementation}
+The FlashAttention and vLLM repositories provide identifiable implementations, with immutable snapshots recorded separately from their associated papers~\cite{repo_flashattention,repo_vllm}. A current repository snapshot is not assumed to be the code used for an older paper's measurements. The implementation audit should trace public interfaces to kernel dispatch, supported dtypes, head dimensions, mask conventions, block tables, and cache update logic. It should record fallback paths: an unsupported shape can silently invoke a slower implementation, changing the interpretation of a benchmark that purports to compare kernels.
+
+Operator tests should compare forward outputs and gradients against a high-precision reference over a matrix of lengths, masks, offsets, and head dimensions. Include empty sequences, partially filled pages, shared-prefix divergence, and cancellation during allocation. For inference, compare fresh prefill with resumed-cache computation under identical inputs. For context edits, deliberately modify an early token and confirm that any claimed reuse matches a recomputed reference within declared tolerances. Numerical tolerance should reflect dtype and operation length, but a permissive tolerance must not conceal an incorrect visibility mask.
+
+A concrete implementation chain connects Section 3.1 of the first FlashAttention paper to the public \path{flash_attn/flash_attn_interface.py} interface and its \path{_flash_attn_forward} dispatch. The Hopper snapshot additionally exposes \path{flash_attn_func} through \path{hopper/flash_attn_interface.py}. These names were checked in the pinned repository; they identify interfaces, not a claim that the Python wrapper itself implements the tiled CUDA arithmetic. For a hypothetical single head with $n=16{,}384$, $d_h=128$, and two-byte inputs, each of $Q,K,V$ occupies 4 MiB, whereas one fully materialized FP32 score matrix occupies 1 GiB. Two FP32 running statistics per row occupy only 128 KiB. This arithmetic illustrates the memory mechanism without assigning an invented device runtime.
+
+A numerical implementation constraint is visible in the pinned Blackwell path itself. In \path{FlashAttentionForwardSm100.softmax_loop}, the probability scale offset $a$ and permitted running-maximum lag $r$ are checked against the largest finite probability-storage value $f_{\max}$:
+\begin{equation}
+ a+r<\log_2 f_{\max}.
+\end{equation}
+This is a finite-range condition for the scaled probabilities before the value product, not an attention-quality bound. The corresponding \path{correction_loop} restores the scale when forming the output~\cite{repo_flashattention}. A wide accumulator cannot repair a probability that already saturated during a narrower cast: the normalizer and the value product would then represent different masses. A useful stress test varies logit maxima, dtype and head dimension while checking the actual dispatched path against a reference; changing only an average tensor tolerance can conceal this failure. The inspected code establishes the guard and dataflow, not a new runtime or accuracy measurement.
+
+At the allocation layer, Section 4.2 of the PagedAttention paper can be compared with the pinned vLLM module \path{vllm/v1/core/kv_cache_manager.py}, whose \texttt{KVCacheManager} exposes \path{get_computed_blocks}, \path{allocate_slots}, and \texttt{free}. This later V1 implementation is not the original paper's code version. A falsifiable integration check allocates two requests with the same eligible prefix, verifies their shared complete physical blocks, extends one request, and confirms that the other request's logical sequence remains unchanged. It then frees both requests and checks that the allocator's accounting returns to the initial state. This tests ownership and reuse independently of language-model quality.
+
+{\small\setlength{\tabcolsep}{3pt}
+\begin{table}[!htbp]
+\centering
+\caption{Attention optimizations require different correctness claims.}\label{tab:C04:claims}
+\begin{tabular}{L{27mm}L{39mm}L{40mm}}
+
+\toprule Mechanism & Preserved target & Distinct failure test\\\midrule
+Tiled exact kernel & Same attention operator & Masks, numerical error, gradients.\\
+Paged allocation & Same logical cache & Mapping, ownership, copy-on-write.\\
+KV quantization & Approximate tensors & Distribution drift and rare constraints.\\
+Cache eviction & Restricted evidence & Queries requiring removed positions.\\
+Prefix reuse & Identical computation prefix & Version, position, and edit invalidation.\\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+
+The complete serving experiment should combine short and long prefills, varying output lengths, repeated prefixes, branching, tool pauses, and aborted sessions. Use a fixed workload trace for paired comparisons and a separate stress workload for overload. Warm and cold cache conditions need separate runs. Report accelerator count, available memory, precision, kernel versions, host-link characteristics, queue policy, and tenant isolation settings. Include allocation failures and recovery time in the outcome set. Throughput improvements are meaningful only when quality, admission, and latency conditions remain comparable.
+
+The practical conclusion is a separation of obligations. Kernels must compute the intended operator; allocators must preserve logical state and ownership; approximation methods must justify their error; schedulers must satisfy service objectives; and the agent must use retained evidence correctly. Progress at one layer can enable progress at another, but cannot establish it by implication. This separation permits precise attribution while retaining the central interaction: a context policy that changes historical visibility also changes cache validity, resource demand, and the distribution on which the action policy operates.
+

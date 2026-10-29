@@ -1,0 +1,6 @@
+---
+import Shell from '../layouts/Shell.astro';
+import Icon from '../components/Icon.astro';
+import { book, paths, chapterHref } from '../lib/book';
+---
+<Shell title="Reading paths" active="paths"><main id="main" class="site-width"><header class="page-intro" id="top"><span class="eyebrow">CHOOSE A QUESTION, THEN TRACE ITS DEPENDENCIES</span><h1>Reading paths.</h1><p>The book is sequential, but its questions cross chapter boundaries. These routes connect the relevant foundations, mechanisms, and evidence.</p></header>{paths.map(path=><section class="catalog-section"><header><Icon name={path.icon} size={23} /><h2>{path.title}</h2></header><p class="muted" style="max-width:650px;margin-top:18px">{path.summary}</p>{path.chapters.map(n=>{const c=book.chapters[n-1];return <a class="chapter-row" href={chapterHref(c.slug)}><span>{String(n).padStart(2,'0')}</span><div><h3>{c.title}</h3><p>{c.sections.filter(s=>s.level===1).slice(0,2).map(s=>s.title).join(' · ')}</p></div><Icon name="arrow" size={20} /></a>;})}</section>)}</main></Shell>

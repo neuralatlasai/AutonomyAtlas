@@ -1,0 +1,32 @@
+\section{Likelihood ratios require support and the right history}\label{sec:C17:likelihood}
+Suppose a target deployed policy $\pi_{\theta,\delta}$ is evaluated on actions sampled by $q$. At a fixed recorded information state $c_t$, a one-step importance ratio is
+\begin{equation}
+ w_t=\frac{\pi_{\theta,\delta}(a_t\mid c_t)}{q(a_t\mid c_t)}.
+\end{equation}
+The denominator is the probability under the actual sampling procedure, including temperature, truncation, and any constrained decoding. Recomputing a base-model softmax without those operations does not necessarily recover $q$. If behavior used a top-$k$ support restriction, the target must be absolutely continuous with respect to that support for unbiased off-policy reweighting over the same state distribution.
+
+Changing $c_t$ is not an innocuous implementation shortcut. A denominator evaluated on a reconstructed context $\tilde c_t$ describes a different conditional experiment. Even if the model weights are identical, $\pi_{\theta_b,\delta_b}(a_t\mid\tilde c_t)$ need not equal the probability that generated $a_t$. A ratio formed with that value is not the original importance ratio. Clipping it can stabilize an optimizer while leaving the conditioning error conceptually unresolved.
+
+For a full trajectory with fixed environment dynamics and compatible histories, the likelihood ratio includes a product of action-probability ratios. Long horizons can produce high variance because several modest deviations multiply. If memory or harness versions also differ, the trajectory law includes those transition policies as well. Reweighting only language-model tokens does not automatically correct a changed memory admission rule or a changed tool router. The estimated objective must identify which parts of the generative process are being corrected.
+
+Make that boundary explicit by recording both a context-control action $u_t$ and a task action $a_t$. Let $s_t$ be the complete recorded information state before $u_t$; behavior uses $\mu_b(u_t\mid s_t)$ and $\pi_b(a_t\mid c_t)$, while the target uses $\mu(u_t\mid s_t)$ and $\pi(a_t\mid c_t)$. If both processes share the initial law, deterministic assembly $c_t=g(s_t,u_t)$, and environment transition kernel, then on common support
+\begin{equation}
+ \frac{dP_{\mu,\pi}}{dP_{\mu_b,\pi_b}}(\tau)
+ =\prod_{t=0}^{T-1}
+ \frac{\mu(u_t\mid s_t)}{\mu_b(u_t\mid s_t)}
+ \frac{\pi(a_t\mid c_t)}{\pi_b(a_t\mid c_t)}.
+\end{equation}
+The common factors cancel; stochastic memory writes require additional factors unless their kernels are shared. An editor that deterministically retains a span in behavior but deterministically deletes it under the target can violate trajectory support. A token ratio computed after deletion does not create the missing editing transition. If assembly itself changes, it must be represented in the state or transition law rather than silently treated as the same $g$. This identifies exactly when an LM-only correction is incomplete without implying that an empirical approximation is unusable.
+
+The support condition is particularly important after tool-schema changes. A new tool action may have zero probability under the old behavior policy because the tool did not exist or its arguments were forbidden. No finite weight can recover samples of that action from an old dataset. Additional exploration or a different estimand is required. Calling the update ``off-policy corrected'' does not remove missing support.
+
+Privileged training information creates another boundary. A teacher can condition on a successful solution or an oracle skill that the deployed policy does not receive. Distillation can transfer useful behavior, but the training conditional is intentionally different. That should be described as teacher-guided learning, not exact replay of the deployment process. The question becomes whether the student generalizes under its actual information state, with contamination and privilege leakage controlled.
+
+These are mathematical deductions from conditional probability and change of measure. They do not imply that every approximate training pipeline fails in practice. They identify what an exact claim would require and why empirical success alone does not validate an incorrect likelihood interpretation. The appropriate experiment records behavior probabilities, reconstructs views, checks support, and reports the sensitivity of outcomes to the approximation.
+
+A numerical construction illustrates why the wrong history cannot be repaired by a ratio computed more precisely. Suppose a binary observation $o$ is equally likely to be zero or one. The behavior policy selects $a=1$ with probability $0.9$ when $o=1$ and $0.1$ when $o=0$. After the observation is removed, the marginal probability of $a=1$ is $0.5$. For a sampled pair with $o=1,a=1$, the actual denominator is $0.9$, not $0.5$. Using the marginal denominator inflates a target probability of $0.9$ from an exact ratio of one to a spurious ratio of $1.8$. No floating-point improvement fixes that conditioning substitution. These values define a hypothetical probability model; they are not measured model outputs.
+
+If the target policy genuinely does not observe $o$, its numerator should use the target's restricted information state. The trajectory estimator must still account for how the data were collected and what quantity is being estimated. One cannot silently replace both numerator and denominator with a new marginal experiment and claim equivalence to the original conditional objective. The distinction is especially consequential when outcome or advantage estimates also depend on the missing observation.
+
+The same construction can be implemented as a controlled rollout test with a visible bit, an edit, and a later tool decision. Record the generated action probability before editing, then compare replay under the live view, the final compacted view, and the full log. The expected ordering follows from the constructed distributions only if the model actually learns those distributions; an empirical study must measure rather than assume that condition. This separates a mathematical counterexample from a claim about how a particular language model behaves.
+

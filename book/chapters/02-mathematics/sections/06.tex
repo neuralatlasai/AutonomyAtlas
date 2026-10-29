@@ -1,0 +1,60 @@
+\section{Statistical comparison and adaptive selection}\label{sec:C02:06}
+Let $Y_{im}$ be the outcome for task $i$ under method $m$. A paired comparison uses differences $D_i=Y_{i1}-Y_{i0}$ so that task difficulty is controlled. If multiple trials share a user, repository, or persistent memory trajectory, those trials are not independent samples merely because they have different random seeds. The resampling unit should preserve the dependence structure. A bootstrap over individual messages can produce narrow intervals that ignore the variation between whole task sequences.
+
+For independent Bernoulli outcomes with probability $p$, finding at least one success in $k$ attempts has probability $1-(1-p)^k$, while all $k$ attempts succeeding has probability $p^k$. At the hypothetical value $p=0.8$ and $k=3$, these are $0.992$ and $0.512$. These are analytical illustrations under independence, not benchmark measurements. Real attempts can be correlated through shared prompts, retrieved memories, or common tool failures. Reported pass metrics must use the exact benchmark definition rather than inherit this toy model.
+
+Adaptive method selection introduces another source of optimism. If many harnesses are evaluated on the same finite task set and the best is retained, the retained score is selected partly for favorable noise. A held-out set used repeatedly to decide which candidate to keep has become part of the selection process. The required separation is operational: an evaluator cannot remain an untouched test merely because its file is named test. RRSI regularizes harness proposals and selection, but its cost/novelty shaping can admit candidates within a noise band; this is not simultaneous certification of promotions~\cite{rrsi2026,ch02_rrsi_code2026}.
+
+Repeated looks at a fixed estimand and adaptive benchmark reuse are distinct. A confidence sequence supports optional stopping under its conditional stochastic assumptions~\cite{ch02_confseq2021}; it does not make candidates selected using the same task feedback independent of that feedback. REUSE instead proves simultaneous promotion control under an initially independent iid evaluation set, decision-only feedback, and error allocation over all possible promotion histories~\cite{ch02_reuse2026}. With $t$ the round, $p$ the number of earlier promotions, $K$ tested candidates per history, and nonnegative weights predeclared before evaluation feedback and satisfying $\sum_t w_t\leq1$ and $\sum_p v_p\leq1$, its allocation is
+\begin{equation}
+ \eta_{t,p}=\frac{\alpha w_t v_p}{\binom{t-1}{p}K^{p+1}}.
+\end{equation}
+There are $\binom{t-1}{p}K^p$ possible promotion histories and $K$ candidates at each, so the error budget summed over those tests is at most $\alpha$. Revealing arbitrary scores or traces violates the decision-only feedback premise. The reported experiment concerns classification-pipeline search on Covertype, not coding-agent or post-training validation. A theorem for that protocol is not a general guarantee for benchmark-guided self-improvement.
+
+\subsection{Simultaneous evidence for fixed candidates}\label{sec:C02:simultaneous}
+Let $B_i\in\{0,1\}$ mark a declared, observable contract failure in a fixed evaluation configuration. If the trials are independent and identically distributed with failure probability $p$, zero failures in a predeclared sample of size $n$ gives the exact one-sided upper bound
+\begin{equation}
+ p\leq1-\zeta^{1/n}
+ \quad\text{at confidence }1-\zeta,\qquad 0<\zeta<1.
+\end{equation}
+This follows by inverting $\Pr_p(B_1=\cdots=B_n=0)=(1-p)^n$. It is neither a proof that $p=0$ nor an authorization decision. If the checker can miss a true failure, the bound concerns detected failures unless its miss rate is independently bounded.
+
+Repeated inspection and adaptive candidate selection need simultaneous coverage. One elementary construction uses fresh validation data for each candidate $j\geq1$, fixes that candidate throughout its evaluation, and assigns
+\begin{equation}
+\begin{aligned}
+ \zeta_{j,n}&=\frac{36\zeta}{\pi^4j^2n^2},\qquad
+ r_{j,n}=\sqrt{\frac{\log(2/\zeta_{j,n})}{2n}},\\
+ C_{j,n}&=[\widehat p_{j,n}-r_{j,n},\widehat p_{j,n}+r_{j,n}]\cap[0,1].
+\end{aligned}
+\end{equation}
+Conditional on the information used to create candidate $j$, its validation trials must be independent Bernoulli observations with fixed mean $p_j$. Hoeffding's inequality~\cite{ch02_hoeffding1963} and $\sum_{j,n}\zeta_{j,n}=\zeta$ imply
+\begin{equation}
+ \Pr\{p_j\in C_{j,n}\text{ for every }j,n\}\geq1-\zeta.
+\end{equation}
+Thus choosing a candidate or stopping on these intervals preserves the stated coverage. The construction is conservative and is not a state-of-the-art confidence sequence. Reusing the same exposed holdout for adaptively constructed candidates violates the fresh-data premise. Continuing memory updates during validation also changes the estimand; treating the resulting sequence as trials of one fixed $p_j$ is unjustified. An unresolved contract verdict must be reported separately or counted as an admission failure under a declared rule, not silently dropped.
+
+For the proposal contract, paired sampled actions are not automatically a test of total variation. Under a known complete alphabet of size $K$, predeclared sample sizes and independent draws within each law, a simple subset-union bound gives, with probability at least $1-\zeta$,
+\begin{equation}
+\begin{aligned}
+ \operatorname{TV}(p,q)
+ &\leq\min\{1,\operatorname{TV}(\widehat p_n,\widehat q_m)+r_n+r_m\},\\
+ r_k&=\sqrt{\frac{(K+2)\log2+\log(1/\zeta)}{2k}}.
+\end{aligned}
+\end{equation}
+Indeed, apply Hoeffding to every subset of the $K$ outcomes, to both laws, and then use the triangle inequality. Large action alphabets make this bound weak. Coarsening an unbounded action space tests only the coarsened law and cannot upper-bound the original total variation without further assumptions. Authority and ledger equality can instead be checked exactly when their finite trusted sets and records are available; sampling their failures establishes only a distribution-scoped rate.
+
+\begin{table}[!htbp]
+\centering
+\caption{Comparison questions and the controls needed to identify their effects.}\label{tab:C02:controls}
+\begin{tabular}{L{0.26\linewidth}L{0.60\linewidth}}
+
+\toprule Comparison question & Required control\\\midrule
+Does memory help? & Matched policy and tools; declared persistence; task-order randomization; construction and retrieval costs included.\\
+Does a team help? & Matched total inference and tool budget; independent-sample baseline; communication and judge access controlled.\\
+Does compaction preserve decisions? & Same histories; rare constraints and changed facts; subsequent action and violation measurements.\\
+Does an evolved harness transfer? & Independent environments and graders; frozen evaluation configuration; all candidate-search costs disclosed.\\
+Does serving optimization help tasks? & Matched quality and offered load; warm/cold cache distinction; end-to-end tails and failures retained.\\
+\bottomrule
+\end{tabular}
+\end{table}
+

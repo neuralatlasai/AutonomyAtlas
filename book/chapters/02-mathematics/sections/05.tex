@@ -1,0 +1,19 @@
+\section{Risk calibration and constrained decisions}\label{sec:C02:05}
+An agent often needs to estimate whether an answer is correct, whether retrieved evidence remains valid, or whether an operation will violate a constraint. For a predicted probability $\hat p$ and binary outcome $Y$, calibration requires that events with predicted probability $p$ occur at frequency $p$ under the evaluated distribution. In conditional-expectation form, $\mathbb E[Y\mid\widehat p]=\widehat p$ almost surely under that law~\cite{ch02_calibration2017}. This score-level statement is weaker than identifying the full decision-information posterior $P(Y=1\mid\mathcal G_t)$. Calibration does not imply discrimination: a model that always predicts the base rate can be calibrated while failing to distinguish easy from hard cases. Ranking quality, probability calibration, and operational utility require separate evaluation.
+
+Suppose executing an action yields known gain $g>0$ if correct and known loss $\ell>0$ if incorrect, while abstention has zero utility. If $p=P(Y=1\mid\mathcal G_t)$ is the correctness probability conditional on the decision information, execution is preferable when
+\begin{equation}
+ pg-(1-p)\ell>0
+ \quad\Longleftrightarrow\quad p>\frac{\ell}{g+\ell}.
+\end{equation}
+The threshold changes with consequence severity. Ordinary marginal calibration of a score is insufficient when errors or consequences vary with additional decision covariates; those covariates must be included or the utility evaluated within the appropriate strata. A confidence score calibrated on benign tool calls need not be calibrated on adversarially selected calls. Human escalation also has cost and delay, and may itself be fallible. Its value should be measured relative to a defined review process rather than treated as an infallible terminal action.
+
+Chance constraints express a different objective. Let $Y_H\in\{0,1\}$ indicate whether a declared violation occurs within the finite horizon $H$:
+\begin{equation}
+ \max_\pi\mathbb E[R]\quad\text{subject to}\quad
+ P_\pi(Y_H=1)\leq\alpha.
+\end{equation}
+Estimating a small $\alpha$ requires enough independent evidence about rare failures. Observing no violations in a small sample does not prove the probability is zero. Dependence across repeated sessions, shared memory, or common model failures reduces the information in nominal trial counts. A risk bound must identify both the sampling assumptions and the operational event being bounded.
+
+Hard constraints can be enforced by a shield or validator that restricts the action set, but the guarantee is limited to the property that the validator actually checks. A schema validator can reject malformed arguments while accepting a well-formed unauthorized destination. A permission policy can restrict destinations while failing to detect false content. Composing controls requires examining whether their assumptions are compatible and whether one control changes the distribution seen by another.
+
